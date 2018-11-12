@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表达式和运算符</title>
+	<link rel="stylesheet" href="base.css">
+</head>
+<body>
+	<dl>
+		<dt>1.表达式</dt>
+		<dd>javascript的一个短语，js解析器会将其计算出结果,变量名是一种简单的表达式，原始表达式（常量，直接量，关键字，变量）
+			<br/>this关键字经常在面向对象编程中出现
+		</dd>
+		<dt>2.对象和数组的初始化表达式</dt>
+		<dd>对象和数组初始化表达式实际上是一个新创建的对象和数组</dd>
+		<dt>3.函数定义的表达式</dt>
+		<dd>函数定义表达式定义一个javascript函数</dd>
+		<dt>4.属性访问表达式</dt>
+		<dd>expression.attr或者expression[attr]</dd>
+		<dt>5.调用表达式</dt>
+		<dd>javascript中的调用表达式是一种调用函数方法的语法表示eg:方法名()
+		<br/>当对调用表达式进行求值得时候会先计算函数表达式然后计算表达式的参数得到一组参数值然后执行函数体 return返回结果
+		<br/>如果表达式是一个属性访问的表达式那么这个调用称为方法调用，在方法调用中执行函数体的时候,作为属性访问主题的对象
+		<br/>和数组便是其调用的方法内this的指向
+		</dd>
+		<dt>6.对象创建表达式</dt>
+		<dd>对象创建表达式创建一个对象并调用一个函数（构造函数）初始化新对象的属性.  new 关键字</dd>
+		<dt>7.运算符概括</dt>
+		<dd>算数运算符，比较运算符，逻辑表达式，赋值表达式
+		<br/> 关键字运算符和标点符号所表示的运算符一样都是正规的运算符,它们非常简易.
+		<br/>delect 删除属性，instanceof 测试对象类，~位数求反，void：返回undefined，>>>无符号右移,in测试属性是否存在,^按位异或,
+		</dd>
+		<dt>7.1操作数的个数</dt>
+		<dd>运算符可以根据其操作数个数进行分类，三元表达式：boolean?a:b</dd>
+		<dt>7.2操作数类型和结果类型</dt>
+		<dt>7.3左值</dt>
+		<dd>表达式只能出现在赋值运算符的左侧</dd>
+		<dt>7.4运算符的副作用</dt>
+		<dd>一些表达式运算会相互影响称为副作用</dd>
+		<dt>7.5运算符优先级</dt>
+		<dd>typeof 是优先级最高的运算符之一</dd>
+		<dt>7.6运算符的结合性</dt>
+		<dd>从右到左运算的例子:x=~-y,w=x=y=c,q=a?b:c?d:e?f:g</dd>
+		<dt>7.7运算的顺序</dt>
+		<dt>8.算数表达式</dt>
+		<dd>+，-，*，、，%</dd>
+		<dt>8.1 +运算符</dt>
+		<dd>注意加法运算符转成字符串方法</dd>
+		<dt>8.2一元算术运算符</dt>
+		<dd>一元算数运算符作用于一个单独的操作数，并产生一个新值(++,--)</dd>
+		<dt>8.3位数算符</dt>
+		<dd>位数运算可以对由数字表示的二进制数据进行更低层级的按位运算(&位与,|位或,^异或,~非，<<左移,>>右移,>>>无符号右移)</dd>
+		<dt>9.关系表达式</dt>
+		<dd>in和installof 看例子</dd>
+		<dt>9.1相等和不等运算符号</dt>
+		<dd>==(比较值),===(比较数据类型，比较值),!=(不等),！==（不相等）</dd>
+		<dt>9.2比较运算符</dt>
+		<dd><（小于），>(大于),<=,>=  如果两个操作数是字符串他会依照字母表的顺序进行比较
+		<br/>String.localeCompare（）方法获取去更多字符串比较的相关信息,String.toLowerCase()和String.toUpperCase()大小写转换
+		</dd>
+		<dt>9.3in运算符</dt>
+		<dd>in运算符希望它的左操作数是一个字符串或可以转换为字符串，右操作数是一个对象-- 例子9.3</dd>
+		<dt>9.4 instanceof运算符</dt>
+		<dd>希望左操作数是对象，右操作是标识对象的类,检测父类，当左操作数不是对象就直接返回false
+		<br/>instanceof 工作原理：原型链(prototype),原型链作为javascript的继承机制,javascript首先计算f.prototype然后再原型链中找o
+		如果找到o是f的父类就返回true对象o是隐藏的成员，这个成员指向其父原型
+		</dd>
+		<dt>10.逻辑表达式</dt>
+		<dd>&&(短路且),||,!</dd>
+		<dt>11.赋值表达式</dt>
+		<dd>=,+=,/=,-=,&=,*=^=,|=,>>>=,>>=,<<=，%=</dd>
+		<dt>12.表达式计算</dt>
+		<dd>javascript源代码组成字符串并产生一个值，javascript通过全局的eval()完成工作
+			<br/>eval 是函数也是运算符
+		</dd>
+		<dt>12.1 eval()</dt>
+		<dd>eval()只是一个参数需要传入字符串
+		<br/>工作原理传入字符串,进行编译，如果编译失败抛错误，成功执行这段代码并返回字符串中最后一个表达式或者语句的值，如果最后的表达式没值就返回undefined（注意：它使用了调用它的变量作用域环境，意思：它查找变量的值和定义新变量和函数的操作和局部作用域中的代码一样）
+		</dd>
+		<dt>12.2全局eval()</dt>
+		<dd>eval()具有更改局部变量的能力，这个对javascript优化器来说是一个很大问题</dd>
+		<dt>12.3严格eval()</dt>
+		<dd>eval函数的行为施加更多的限制甚至对标识符eval的使用也施加了限制，严格模式下eval执行的代码段可以查询或更改局部变量</dd>
+		<dt>13.其他运算符</dt>
+		<dd>三元运行符?:  typeof 一元运算符  检测数据类型  delete</dd>
+
+</body>
+<script type="text/javascript">
+	console.log("4.属性访问----");
+	var o={x:1,y:{z:3}};
+	var a=[o,4,[5,6],undefined,null];
+	console.log("o={x:1,y:{z:3}}");
+	console.log("a=[o,4,[5,6],undefined,null]");
+	console.log("o.x:"+o.x);
+	console.log("o.y.z:"+o.y.z);
+	console.log("o['x']:"+o['x']);
+	console.log("a[1]:"+a[1]);
+	console.log("a[2]['1']:"+a[2]['1']);
+	console.log(a[0].x);
+	console.log("a[3]:"+a[3]);
+	console.log("a[4]:"+a[4]);
+	console.log("9.2-------------------比较运算符");
+	var str='李四';
+	var str01='abc';
+	var str02='AbC';
+	console.log('String.localeCompare()假设相等的字符串返回0，假设目标字符串在比较字符串的字母在前面返回-1,假设目标字符串在比较字符串后面返回1')
+	console.log("str.localeCompare('张三'):"+str.localeCompare(''));
+	console.log("str.localeCompare('尼玛'):"+str.localeCompare('尼玛'));
+	console.log("abc.toUpperCase():"+str01.toUpperCase());
+	console.log("AbC.toLowerCase():"+str01.toLowerCase());
+	console.log("9.3in-------------------使用");
+	var point={"x":1,"y":2};
+	var arr=[1,2,3];
+	console.log("'z' in point:"+("z" in point));
+	console.log("'y' in point:"+("y" in point));
+	console.log("'0' in arr:"+('0' in arr));
+	console.log("1 in arr:"+(1 in arr));
+	console.log("5 in arr:"+(5 in arr));
+	console.log("9.4instanceof-------------------使用");	
+	var d=new String();
+	console.log('var d=new String();');
+	console.log("d instanceof Date:"+(d instanceof Date));
+	console.log("d instanceof Object:"+(d instanceof Object));
+	console.log("d instanceof Number:"+(d instanceof Number));	
+	console.log("d instanceof String:"+(d instanceof String));
+	console.log("d instanceof RegExp:"+(d instanceof RegExp));
+	console.log("d instanceof Array:"+(d instanceof Array));
+	console.log("12.2eval()-------------------使用");	
+	var geval=eval;
+	var x='global',y='global';
+	function f(){
+		var x= 'local';
+		eval("x+='changed';");
+		return x;
+	}
+	function g(){
+		var y= 'local';
+		geval("y+='changed';");
+		return y;
+	}
+	console.log(f());//localchanged
+	console.log(g());//local
+	console.log(f(),x);//localchanged global
+	console.log(g(),y);//local globalchangedchanged
+	console.log("13.deect-------------------使用");
+	console.log("delete point.x:"+delete point.x);
+	console.log("delete point.z:"+delete point.z);
+	console.log('point.x:'+(point.x));
+	console.log('point.y:'+(point.y));
+	console.log("arr.length:"+arr.length);
+	console.log("delete arr[1]:"+(delete arr[1]));
+	console.log("arr.length:"+arr.length);
+	console.log("arr[1]:"+arr[1]);
+	console.log("13.-------------------使用");	
+	var x=0.3-0.2;
+	var y=0.2-0.1;
+	console.log(x==y);
+</script>
+</html>

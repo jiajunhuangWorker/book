@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head>
+	<meta charset="UTF-8">
+	<title>类型，值，变量</title>
+	<link rel="stylesheet" href="base.css">
+</head>
+<body>
+	<dl>
+		<dt>1.javascript是什么?</dt>
+		<dd>1、JavaScript是面向web的编程语言</dd>
+		<dd>2、javscript适合面向对象和函数式的编程风格</dd>
+		<dd>3、JavaScript是高端，动态，弱类型的编程语言</dd>
+		<dt>2.JavaScript语言核心？</dt>
+		<dd>文本,数组，日期和正则表达式</dd>	
+		<dt>3.宿主环境</dt>
+		<dd>宿主环境：web浏览器(浏览器包含javascript解析器)</dd>
+		<dt>4.数据类型</dt>
+		<dd>对象和数组</dd>
+		<dt>5.语句和表达式</dt>
+		<dd>语句：以分号结束叫语句,语句并不包含一个值但它改变运行的状态 表达式：仅仅计算出一个值但并不作任何操作它并不改变程序运行状态</dd>
+		<dt>6.函数和方法</dt>
+		<dd>函数：带有名称的和参数的JavaScript代码段 方法：当函数和对象一起使用叫做方法（所有javascript对象都包含方法）</dd>
+		<dt>7.this</dt>
+		<dd>this关键字是定义方法</dd>
+	</dl>
+	<dl>
+		<dt>1.数据类型</dt>
+		<dd>在编程中，能够表示并操作的值的类型叫数据类型</dd>
+		<dt>2.变量</dt>
+		<dd>变量是一个值的符号名可以通过名称获取对值的引用</dd>
+		<dt>3.javascript数据类型分为原始数据类型和对象类型</dt>
+		<dd>原始数据类型：数字，字符串，布尔，两个特殊的原始值：null（空）和undefined（未定义） 对象object 是属性的集合，对象是键值对,
+		<br/>javascript对象是命名值的无序集合，javascript同样定义了一种特殊的对象-数组有序集合，另外一种特殊对象是函数,而使用new是创建对象
+		</dd>
+		<dt>4.javascript语义核心</dt>
+		<dd>日期，正则，错误</dd>
+		<dt>5.回收机制</dt>
+		<dd>javascript解释器有自己的内存管理机制，可以自动对内存进行垃圾回收（不必要担心内存的销毁和内存回收问题，当没有任何引用
+			指向一个对象，解析器会自动回收这个对象）</dd>
+		<dt>6.javascript是面向对象的语言</dt>
+		<dd>这说明数据类型本身可以定义方法使用值，而不需要全局定义函数,类可以看做是对象类型的子类型.</dd>
+		<dt>7.原始数据类型和对象类型</dt>
+		<dd>原始数据类型和对象类型也可以拥有方法的类型和不能拥有方法的类型,同样可分为可变类型和不可变类型，在javascript中字符串是不可变的字符串是
+		<br/>可以看成由字符组成的数组，javascript是可以自由进行数据类型转换。 
+		</dd>
+		<dt>8.事件处理程序</dt>
+		<dd>var 声明变量，javascript是采用词法作用域，不在函数内声明的变量称为全局变量，在函数内声明的变量具有作用域并且函数内可见</dd>
+		<dt>14.模式匹配</dt>
+		<dd>Regexp()构造函数,表示创建文本匹配模式的对象.这些模式称为正则表达式,javascript采用perl的正则表达式语法
+		<br/>string和regExp对象均定义了利用正则表达式进行匹配和查找与替换的函数
+		<br/>布尔值包含tostring方法因此可以使用这个方法将字符串转换为true或false但是他不包含其他有用的方法
+		</dd>
+		<dt>15.undefined和null</dt>
+		<dd>null是属于object，它是特殊的对象,未定义的值表示更深层次的空值如果查询对象属性或者数组元素的值返回undefined
+		<br/>则说明这个属性或元素不存在，如果函数没有返回任何值就会返回undefined，引用没有提供实参的函数形参的值也会返回undefined
+		<br/>null是程序级传入函数，赋值给变量或者属性最佳选择null
+		</dd>
+		<dt>16.全局对象</dt>
+		<dd>全局对象的属性是全局定义的符号，javascript程序可以直接使用当javascript解析器启动时它将创建一个新的全局对象
+		<br/>全局属性:undefined,Infinity和NAN等
+		<br/>全局函数 isNaN(),parseInt(),eval()
+		<br/>构造函数 Date(),RegExp(),String(),Object(),Array()
+		<br/>全局对象Math,JSON
+		<br/>任何函数内的javascript代码可以使用this来引用全局对象
+		<br/>window对象充当全局对象，window对象有一个属性window引用其自身它可以替代this来引用全局的对象这个特殊对象同样包含
+		<br/>了为程序定义的全局值
+		</dd>
+		<dt>17.包装对象</dt>
+		<dd>javascript对象是一种复合值，它是属性或者已命名值得集合
+		<br/>通过“.”符号引用属性值，当属性值是一个函数的时候称其为方法
+		<br/>字符串不是对象，只要引用了字符串的变量，javascript会将字符串值通过new String（）转为对象这个对象继承了字符串的方法
+		<br/>并被用来处理属性的引用，一旦属性引用结束就会销毁,例子17都是创建临时的变量，所以创建后即刻被销毁（s.len 也是undefined ）临时的变量
+		<br/>存取字符串,数字,布尔值的属性值的属性时创建的临时对象称为包装对象
+		</dd>
+		<dt>18.不可变的原始值和可变的对象引用</dt>
+		<dd>
+			原始值:不可更改的，javascript禁止通过索引来修改字符串中的字符，每次使用字符串的方法后就会返回新的字符串，原始值得比较是值得比较
+			<br/>
+			对象:是可修改的,对象比较是索引值得比较，也叫引用的比较因此两个数组不等，对象称为引用类型，
+		</dd>
+		<dt>19.类型的转换</dt>
+		<dd>null:0--true:1--false:0--"":0--"one":NAN--</dd>
+		<dt>19.1转换和相等性</dt>
+		<dd>一个值转换为另外一个值并不意味着两个值相等</dd>
+		<dt>19.2显示转换类型</dt>
+		<dd>var str=对象(原始数据类型)
+		<br/>除了null和undefined之外任何值都具有toString()方法
+		<br/>toFixed():根据小数点后的指定位数转换为字符串，toExponential()使用指数记数法将数字转换为指数形式的字符串
+		<br/>toPrecision()根据指定有效数字位数将数字转换成字符串
+		<br/>Number的转换：parseInt()和parseFloat()---parseInt对2的倍数和10特别敏感		
+		</dd>
+		<dt>19.3对象转换为原始值</dt>
+		<dd>对象-布尔值：所有的对象都是true而包装对象new Boolean(false)
+		<br/>对象-字符串和对象-数字 调用待转换对象
+		<br/>所有的对象都继承了toString方法和valueOf,默认的valueOf方法返回对象本身
+		</dd>
+		<dt>19.4变量声明</dt>
+		<dd>初始值是undefined,重复声明不报错但是会初始化，遗漏声明在严格模式下会报未定义</dd>
+		<dt>20.1变量作用域</dt>
+		<dd>一个变量的作用域是程序源代码中定义这个变量的区域.全局变量拥有全局作用域，而在函数里面声明的叫局部变量或者函数参数
+			<br/>作用域是局部性的，函数参数也是局部变量 （在函数体内局部变量优先于全局变量，如果全局和局部的同名变量，全局变量的值将被局部变量给覆盖）
+			<br/>函数的定义是可以嵌套的
+		</dd>
+		<dt>20.2函数作用域和声明提前</dt>
+		<dd>花括号内的每一段代码都具有各自的作用域而且变量在声明他们的代码之外是不可见的：块级作用域
+			<br/>函数作用域是指在函数内声明的所有变量在函数体内始终是可见的，变量在声明之前已经可用.这种称为声明提前
+			<br/>函数作用域的特征局部变量在整个函数体始终是有定义的
+		</dd>
+		<dt>20.3作为属性的变量</dt>
+		<dd><声明全局变量，实际是定义了全局对象的一个属性,实际上定义了全局的一个属性,这个变量无法通过delect运算符删除
+		<br/>javscript全局变量是全局对象的属性，而局部变量没这个规定
+		</dd>
+		<dt>20.4作用域链</dt>
+		<dd>作用域链由一个全局对象组成，作用域链上有两个对象，一个是定义函数参数和局部变量对象另外一个是全局对象</dd>
+	</dl>	
+</body>
+<script type="text/javascript">	
+		
+		console.log("17.属性的引用-------------------");
+		var s="test";
+			s.len=4;
+			var t=s.len;
+			console.log("s.len:"+s.len);
+			console.log("t:"+t);
+		console.log("18.不可变的原始值和可变的对象引用");
+		var a=[];
+		var b=a;
+		b[0]=1;
+		console.log("a[0]:"+a[0]);
+		console.log("a===b:"+(a===b));
+		console.log("18.数组的比较----");
+		function arrayCompany(arr,arr1){
+			if(arr.length!=arr1.length) return false;
+			for(var i=0;i<arr.length;i++){
+				if(arr[i]!=arr1[i]) return false;
+
+			}
+			return true;
+		}
+		console.log("19.1.属性的引用-------------------");
+		console.log("undefined==false:"+(undefined==false))
+		console.log("19.2.转换-------------------");
+		console.log("parseInt('077',10):"+parseInt("077",10));//(7*10)+7
+		console.log("parseInt('077',6):"+parseInt("077",6));//0
+		console.log("parseInt('077',8):"+parseInt("077",8));//7*8+7
+		console.log("19.3对象转换为原始值-------------------valueOf");
+		console.log("new Date().valueOf() 返回时间戳:"+new Date().valueOf());
+		console.log("20.1变量作用域-------------------");
+		var str="123";
+		function strs(){
+			var str=456;
+			return str;
+		}
+		console.log("typeof str()："+typeof strs());
+		console.log("20.2test方法--------------------------------");
+		test(5);
+		function test(o){
+			var k=0;
+
+			if(typeof o=="number"){
+				var j=0;
+				for (var i = 10; i >= 0; i--) {
+					console.log("for里面的k:"+i);
+				}
+				console.log("for外面的k:"+i);
+			}
+			console.log("if外面的j:"+j);
+		}
+	console.log("20.3test方法--------------------------------");
+		var date=666;
+		function dates(){
+			console.log("---date:"+date);
+			var date=888;
+			console.log("date---:"+date);
+		}
+		dates();
+
+
+		var h=document.getElementById("html");
+		console.log(h.fin)
+	</script>
+</html>
