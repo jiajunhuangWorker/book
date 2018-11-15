@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>对象</title>
+		<link rel="stylesheet" href="base.css">
+	</head>
+	<body>
+		<dl>
+			<dt>1.对象</dt>
+			<dd>1、对象是javascript的基本数据类型,对象是一种复合值，它将很多值聚合在一起,通过名字访问这些值，对象也可以看做是属性的无序集合，每个属性都是键值对，可以看做从字符串到值得映射，可以叫他散列，散列表，字典，关联数组
+			<br/>javascript对象可以从一个称为原型的对象继承属性，对象的方法通常是继承的属性，也叫原形式继承是javascript的核心特征
+			<br/>javascript对象是动态的可以新增属性也可以删除属性但它们常用来模拟静态对象以及静态类型语言中的结构体
+			除了原始数据类型之外其余都是对象
+			<br/>对象最常见的用法是创建，设置，查找，删除，检测和枚举它的属性
+			<br/>属性名可以是空字符串和任意字符串,对象中不存在同名属性,值可以是任意javascript值或者(ecmascript5中)可以是一个getter或者setter函数，
+			除了名字和值之外每个属性还有一些与之相关的值叫做属性特征
+			<br/>属性特征：<br/>可写(表明是否可以设置属性值)，可枚举(表明是否可以通过for/in循环返回该属性),可配置(表明是否可以删除或修改该属性)
+			<br/>对象特征: <br/>
+			对象的原型(prototype):指向另外一个对象,本对象的属性继承自它的原型对象,对象的类(class):是一个标识对象类型的字符串,对象的扩展标记:是否可以向该对象添加新属性
+			<br/>内置对象:<br>
+			是由ECMAScript规范定义的对象或类.例如数组,函数，日期和正则表达式都是内置对象
+			<br>宿主对象<br>
+			javascript解析器所嵌入的宿主环境（web浏览器前）定义的.客户端javascript中表示页面结构的htmlElement对象均是宿主对象。既然宿主环境定义的方法可以当成普通的javascript函数对象,那么宿主对象也可以当成内置对象
+			<br>自定义对象<br>
+			是由运行中的javascript代码创建的对象
+			<br>自有属性<br>
+			直接在对象中定义的属性
+			<br>继承属性<br>
+			在对象的原型对象中定义的属性
+			</dd>					
+			<dt>2.创建对象</dt>			
+			<dd>可以通过对象直接量,关键字new 和Object.create()函数来创建对象.</dd>	
+			<dt>2.1对象直接量</dt>
+			<dd>创建对象最简单的方式就是在javascript代码中使用对象直接量.对象直接量是若干名/值对组成的映射表 eg： var s={}</dd>
+			<dt>2.2通过new创建对象</dt>
+			<dd>new运算符创建并初始化一个新对象.关键字new 后跟随一个函数调用，这个函数称为构造函数 eg： var obj=new Object()</dd>
+			<dt>2.3原型</dt>
+			<dd>每一个javascript对象(null除外)都和另一个对象相关联,每一个对象都从原型继承属性
+			<br>所有通过对象直接量创建的对象都具有同一个原型对象	,并可以通过javascript代码Object.prototype获取对原型对象的引用。通过关键字new和构造函数调用创建的对象的原型就是构造函数的prototype属性的值。
+			<br>
+			没有原型对象的有：Object.prototype,它不继承任何属性,其他原型对象都是普通对象,普通对象都具有原型
+			<br>所有内置构造函数都具有一个继承自Object.prototype的原型，Date.prototype是继承于Object.prototype，因此在创建new Date()的时候Date对象继承了Date.prototype和Object.prototype这一系列链接的原型对象就是所谓的原型链			
+			</dd>
+			<dt>2.4Object.create</dt>
+			<dd>Object.create是一个静态的函数而不是方法
+			<br>这种创建方法不继承任何东西包括toString方法,可以通过任意原型创建新对象，任意的对象可继承
+			<br>inherit 方法是防止了库函数无意间（非恶意）的修改，那些不是我能控制的到的
+			</dd>
+			<dt>3.属性的查询和设置</dt>
+			<dd>关键字和保留字不能当做是属性名使用</dd>
+			<dt>3.1作为关联数组的对象</dt>
+			<dd>.和[]进行属性的访问,使用数组写法和用字符串表达式来访问对象属性灵活性好
+				<br/>类型分为三种,无类型，强类型,弱类型
+				<br>无类型：不检测，甚至不区分指令和数据
+				<br>弱类型：检测很弱，仅能严格地区分指令和数据
+				<br>强类型：严格的在编辑期间进行检测
+			</dd>
+			<dt>3.2继承</dt>
+			<dd>javascript对象具有自有属性,也有一些属性是原型对象继承而来的
+			<br>属性赋值操作首先检测原型链，以此判定是否允许赋值操作
+			<br>在javascript只有在查询的时候才会体现到继承的存在，设置属性则和继承无关，这个特征可以使程序员选择覆盖继承的属性
+			</dd>
+			<dt>3.3属性访问错误</dt>
+			<dd>问题1.属性名不存在问题2.对象不存在3.有一些对象不允许新增属性Onject.prototype=0不允许</dd>
+			<dt>4.删除属性</dt>
+			<dd>delect运算符可以删除对象属性.  delect只能删除自有的属性不能删除继承的属性，可以通过原型来进行删除但是可能出现内存泄漏
+			<br>全局属性不能被删去，函数不能被删去
+			</dd>
+			<dt>5.检测属性</dt>
+			<dd>in来检测属性中存在这个对象不  hasOwnProperty(检测对象里面存不存在某个属性) < propertyIsEnumerable(检测对象里面存不存在某个属性和检测属性的可枚举性)</dd>
+			<dt>6.枚举属性</dt>
+			<dd>遍历对象:for/in:自由属性和继承属性，把属性名称赋值给循环变量，对象继承的内置方法不可枚举
+			自定义extend函数实现
+			<br>Object定义了两个用以枚举属性名称的函数第一个是Object.keys(),返回一个数组,这个数组对象中可枚举自有属性的名称组成，它的工作原理和keys函数一样			
+			</dd>
+			<dt>7.属性getter和setter</dt>
+			<dd>对象属性是由名字，值和一组特性构成的，在ecma5中属性值可以用getter和setter方法来进行存取器属性
+			<br>getter：当程序查询存取器属性的值时javascript调用getter方法 返回存储属性的值.
+			<br>setter：当设置存储属性的值时.set方法主要是用来检测的时候使用到了！！！！！！！如果不合法的时候就会报错
+			<br>存储属性和属性属性区分：存取器属性不具有可写性，如果属性具有getter/setter方法时那么它具有读/写属性			
+			<br>笛卡尔坐标系就是直角坐标系和斜角坐标系的统称.相交于原点的两条数轴,构成了平面放射坐标
+			</dd>
+			<dt>8.属性的特征</dt>
+			<dd>除了包括名字和值之外，属性还包括了一些标识符，可写，可枚举，可配置的特征
+			<br>一个属性包含一个名字和4个特征（值（存取器属性不包含value特性），可写性，可枚举，可配置属性）（读，取，写，可枚举，可配置性）
+			Ecma5定义了属性描述符，属性描述符对象的属性(value,writable,enumerable,configurable)它们都是布尔类型的存储器属性描述符(get，set替代了value和writable)set和get是函数值
+			<br>Object.getOwnPropertyDescriptor()可以获得某个对象属性的属性描述符(只能获取到自有属性的描述符，如果想获取继承属性的特征需要遍历原型链)《Object.getPrototypeOf》
+			<br>Object.defineProperty():设置属性的特性，或者想让新建属性具有某种特性，传入的修改对象，要创建或修改的属性的名称以及属性描述的对象
+			<br>Object.defineProperties():修改或者创建多条属性（第一个参数是要修改的独享，第二个参数是要映射的表）
+			</dd>
+			<dt>9.对象的三个属性</dt>
+			<dd>每一个对象都有和它相似的原型，类和可扩展性</dd>			
+			<dt>9.1原型属性</dt>
+			<dd>对象的原型属性是用来继承属性的，原型属性是在实例对象创建之初就设置好了
+			Object.getPrototypeOf()可以查询它的原型,通过new表达式创建的对象会继承一个constructor属性
+			<br>constructor属性:这个属性就会指代创建这个对象的构造函数
+			constructor.prototype:这个构造函数时new 创建的对象的真正原型 <br>
+			isPrototypeOf():检测一个对象是另一个对象的原型(或处于原型链中)；
+			</dd>
+			<dt>9.2类属性</dt>
+			<dd>对象的类属性表示一个字符串，用以表示对象的类型信息.
+			<br>classof函数：可以传入任何类型的参数
+			</dd>
+			<dt>9.3可扩展</dt>
+			<dd>对象的可扩展性是表示是否可以给对象添加新的属性.所有的内置对象和自定义的对象都是显示可扩展的，宿主对象的可扩展是由javascript引擎定义的
+			<br>Object.esExtensible()：判断对象是否可扩展
+			<br>Object.preventExtensions():将可扩展的对象变成不可扩展属性
+			<br>注意：一旦将对象转换为不可扩展，就无法再将其转换回克扩展，preventExtensions()只会影响对象本身，如果给一个不可扩展的对象添加属性，这个不可扩展的对象同样会继承这些新的属性
+			<br>Object.seal()和Objecy.preventExtensions类似，Object.seal除了能够将对象设置为不可扩展之外还可以将对象的所有的属性都设置为不可扩展
+			<br>Object.isSealed（）来检测对象是否封闭
+			<br>Object.freeze（）将更严格地锁定对象
+			<br>Object.isFrozen（）检测是否被冻结
+			</dd>
+			<dt>10.序列化对象</dt>
+			<dd>对象的序列化就是将对象转换为字符串，或者将字符串转换为对象
+			<br>
+			JSON（JAVASCRIPT OBJECT NOTATION）
+			<br>
+			JSON.stringify()：只能序列化对象可枚举的自有，对于不能序列化的属性来说将会被忽略
+
+			<br>
+			JSON.parse()
+			</dd>
+			<dt>11.对象方法</dt>
+			<dd>toString()</dd>
+			<dd>toLocaleString():这个对象本地化字符串</dd>
+			<dd>toJSON(),JSON.stringify调用了toSJON()方法</dd>
+			<dt>11.1valueOf:</dt>
+			<dd>需要将对象转换为某种原始值而非字符串的时候才用到它尤其是转换为数字的时候</dd>
+
+		</dl>		
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.log('2.2证明数组,字符串,时间都属于对象----------------');
+	var date=new Date();
+	var str=new String();
+	var rex=new RegExp();
+
+	console.log("Date instanceof Object:"+(date instanceof Object));
+	console.log("string instanceof Object:"+(str instanceof Object));
+	console.log("ReExp instanceof Object:"+(rex instanceof Object));
+	console.log('2.4Object.create----------------');
+	var obj=Object.create({x:1,y:2});
+	var obj1=Object.create(Object.prototype);
+	console.log("obj.x:"+obj.x);
+	console.log("Object.prototype:"+obj1);
+	console.log("JSON.stringify(obj1):"+JSON.stringify(obj1));
+	console.log('2.4通过原型继承创建一个新得对象----------------');
+	function inherit(val){
+		if(val==null||val==undefined) throw new Error("不能为null/undefined");
+		if(Object.create){
+			return Object.create(val);
+		}else{
+			var t =typeof val;
+			if(t !=='Object' && t !== 'function'){
+				function f(){};
+			}
+			f.prototype=val;
+		}
+		return new f();
+	}
+	console.log(inherit(new String()));
+	console.log('3.1作为关联数组的对象----------------');
+	// function arr(name){
+	// 	for(var i=0;i<4;i++){
+	// 		var addr+=customer['name'+i];
+	// 	}
+	// }
+	console.log('3.3继承----------------');
+	var a={};
+		a.a=1;
+		var b=inherit(a);
+		b.b=2;
+		var c=inherit(b);
+		c.c=666;
+		var d=c.toString();
+		console.log("3.3JSON:"+JSON.stringify(d));//
+		console.log("c.b+c.a:"+(c.b+c.a));
+		a.a=123;//这里是覆盖了a.a属性
+		console.log("c.b+c.a:"+(c.b+c.a));
+		var unit={r:1};
+		var date=inherit(unit);
+		unit.x=666;unit.y=777;
+		date.r=999;
+		console.log("unit.r:"+unit.r);
+		console.log("date.r:"+date.r);
+	
+	console.log('5.检测属性----------------');
+	var val={x:1,y:2};
+	console.log("{x:1,y:2}");
+	console.log("val.hasOwnPreperty('x'):"+val.hasOwnProperty('x'));
+	console.log("val.hasOwnPreperty('z'):"+val.hasOwnProperty('z'));
+	console.log('val.hasOwnProperty("toString"):'+val.hasOwnProperty('toString'));//证明了不能检测父级原型
+	console.log("val.propertyIsEnumerable('x'):"+val.propertyIsEnumerable('x'));
+	console.log("val.propertyIsEnumerable('z'):"+val.propertyIsEnumerable('z'));
+	console.log('val.propertyIsEnumerable("toString"):'+val.propertyIsEnumerable('toString'));
+	console.log('Object.prototype:'+Object.prototype);
+	console.log('6.枚举属性----------------extend');
+	function extend(o,p){
+		for(prop in p){
+			o[prop]=p[prop];
+		}
+		return o;
+	}
+	console.log('6.枚举属性----------------keys');
+	function keys(o){
+		if(typeof o !=='object') throw TypeError();
+		var result=[];
+		for(var prop in o){
+			if(o.hasOwnProperty(prop))
+				result.push(prop);
+		}
+		return result;
+	}
+	console.log('7.属性getter和setter----------------');
+	var p={
+		x:0,
+		y:0,
+		get r(){						
+			return this.x+this.y;
+		},
+		set r(n){			
+			debugger;			
+			if(this.x<5){
+				throw new Error("x不能少于5");
+			}
+		},
+		get thera(){
+			//atan2是表示x轴到点x，y之间的角度
+			return Math.atan2(this.y,this.x);
+		}
+	}
+	var q=inherit(p);	
+	q.x=2,q.y=3;
+	console.log("get:q.r:"+q.r);	
+	console.log("q.thera:"+q.thera);
+	console.log('7.1设置当前的序列号-----------------------');
+	var serialnum={
+		//$符号暗示这回属性是一个私有的属性
+		$n:6,
+		get next(){
+			return ++this.$n;
+		},
+		set next(n){				
+			if(n>=this.$n){				
+				this.$n=n;				
+			}else{
+				throw new Error("传入的值不够大："+n+"至少传入6");
+			}
+		}
+	}
+	var s=inherit(serialnum);
+	console.log("set:s.next:"+(s.next=10)+"<br/>");
+	console.log(s.next);
+	console.log('7.2随机对象-----------------------');
+	var radom={
+		get octet(){return Math.floor(Math.random()*256);},
+		get octet2(){return Math.floor(Math.random()*65536);},
+		get octet3(){return Math.floor(Math.random()*65536)-32768;}
+	}
+	console.log(radom.octet);
+	console.log(radom.octet2);
+	console.log(radom.octet3);
+	console.log("");
+	console.log('8.Object.getOwnPropertyDescriptor()-----------------------');
+	console.log("Object.getOwnPropertyDescriptor({x:1,y:2},'y'):"+(Object.getOwnPropertyDescriptor({x:1,y:2},"y")));
+	console.log("Object.getOwnPropertyDescriptor({},'x'):"+Object.getOwnPropertyDescriptor({},"x"));//没有这个属性
+	console.log("Object.getOwnPropertyDescriptor({},'toString'):"+Object.getOwnPropertyDescriptor({},"toString"));//继承属性
+	console.log('8.1 Object.defineProperty（）-----------------------');
+	var o={};
+	Object.defineProperty(o,"x",{value:'666',writable:true,enumerable:false,configurable:true});
+	console.log("o.x:"+o.x);
+	console.log("Object.keys(o):"+Object.keys(o));//不可枚举
+	Object.defineProperty(o,"x",{writable:false});
+	o.x=888;
+	console.log("o.x:"+o.x);//不能够修改属性值
+	Object.defineProperty(o,"x",{value:"999"});
+	console.log("o.x:"+o.x);//修改属性值
+	//将数据属性修改为存储属性
+	Object.defineProperty(o,"x",{get:function(){
+		return o;
+	}})
+		console.log('8.2  Object.defineProperties()-----------------------');
+		var p =Object.defineProperties({},{
+			x:{value:'666',writable:true,enumerable:false,configurable:true},
+			y:{value:'777',writable:true,enumerable:false,configurable:true},
+			r:{
+				get:function(){
+					return 666
+				},enumerable:false,configurable:true
+			},
+		})
+		console.log("p.x:"+p.x);
+		console.log("p.y:"+p.y);
+		console.log("");
+		console.log('9.1isPrototypeOf()-----------------------');
+		var s={x:1};//定义一个原型对象
+		var p=Object.create(s);//使用这个原型创建一个对象
+		console.log("s.isPrototypeOf(p):"+s.isPrototypeOf(p));//p继承自s
+		console.log("Object.prototype.isPrototypeOf(p):"+Object.prototype.isPrototypeOf(p));//p自称自Object.peototype
+		console.log('10.序列化-----------------------');
+		var o={a:1,b:{c:[false,'true']}};
+		var s=JSON.stringify(o);
+		console.log("JSON.stringify(o):"+JSON.stringify(o));//对象转字符串
+		console.log("typeof JSON.stringify(o):"+typeof JSON.stringify(o));
+		console.log("JSON.stringify(o):"+JSON.parse(s));//字符串转对象
+		console.log("typeof JSON.stringify(o):"+typeof JSON.parse(s));
+	</script>
+</html>
