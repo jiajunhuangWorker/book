@@ -7,11 +7,129 @@
 	</head>
 	<body>
 		<dl>
-			<dt></dt>
-			<dd></dd>
+			<dt>3.1数字</dt>
+			<dd>javascript不区分整数和浮点,javscript所有数字都是浮点型,ieee 754标准</dd>
+			<dt>3.1.1整形直接量</dt>
+			<dd>0x或0X为前缀都是十六进制的直接量</dd>
+			<dt>3.1.2浮点型直接量</dt>
+			<dd>浮点型直接量可以含有小数</dd>
+			<dt>3.1.3javascriptzhong算术的运算</dt>
+			<dd>算术运算符溢出,下溢,或被零整除不报错。会出现无穷大值 （正/负无穷大）</dd>
+			<dd>NaN(no a number)它和任何值都不相等,包括自身</dd>
+			<dt>3.1.4二进制浮点数和四舍五入错误</dt>
+			<dd>精度问题</dd>
+			<dt>3.1.5日期和时间</dt>			
+			<dd>Date()构造函数,</dd>
+			<dt>3.2文本</dt>
+			<dd>字符串时一组由16位值组成的不可变得有序序列每个字符都是雷子unicode字符集</dd>
+			<dt>3.2.1字符串直接量</dt>
+			<dd>使用单引号或者双引号括住的内容是字符串直接量</dd>
+			<dt>3.2.2转义符</dt>
+			<dd>反斜杆：\</dd>
+			<dt>3.2.3字符串使用</dt>
+			<dd>连接符号 +</dd>
+			<dt>3.2.4模式匹配</dt>
+			<dd>RegExp()是强大的文本处理工具</dd>
 		</dl>	
 	</body>
 	<script type="text/javascript">	
-	
+		/* 将16进制转10进制 */
+		console.info(0xaa)//10*16+10 171
+		console.info(0Xab)//10*16+11 171
+		console.info(0xff)//15*16+15 255
+		/*将8进制转10进制*/
+		console.info(0377)//3*64+7*8+7
+		console.info(01)//1 1
+		console.info(011)//9 1+1*8 9
+		console.info(0111)//73 1+8*9
+		console.info('------------------------------math------------------------------')
+		console.log('Math:',Math)
+		console.info('Math.pow(2,3)//2的3次方:',Math.pow(2,3))
+		console.info('Math.round(.4)//四舍五入:',Math.round(.4))
+		console.info('Math.ceil(.4)//向上取整:',Math.ceil(.4))
+		console.info('Math.floor(.7)//向下取整:',Math.floor(.7))
+		console.info('Math.abs(-3)//绝对值:',Math.abs(-3))
+		console.info('Math.maxl(a,b,c,d,e)//最大值:',Math.max(3,'44',55,22,'1999','1999.3'))//如果传入字符串返回NAN
+		console.info('Math.min(a,b,c,d,e)//最小值:',Math.min(3,'44',55,22,'1999','1999.3'))
+		console.info('Math.random()//0~1随机数:',Math.random())
+		console.info('Math.PI//圆周率:',Math.PI)
+		console.info('Math.E//自然对数的底数:',Math.E)
+		console.info('Math.sqrt(9)//9的平方根:',Math.sqrt(9))
+		console.info('Math.pow(9,1/3)//3的立方根:',Math.pow(9,1/3))
+		console.info('Math.sin(0)//三角函数(Math.cos,Math.atan等):',Math.sin(0))
+		console.info('Math.log(10)//10的自然对数:',Math.log(10))
+		console.log('Math.log(100)/Math.LN10//以10为底100的对数:')
+		console.info(Math.log(100)/Math.LN10)
+		console.log('Math.log(512)/Math.LN2//以2为底数512的对数:')
+		console.info(Math.log(512)/Math.LN2)
+		console.info('Math.exp(3)//e的三次幂:',Math.exp(3))
+		console.info('------------------------------number(3.1.2浮点型直接量)------------------------------')
+		console.info('Number',Number);
+		console.info('0/0:',0/0);
+		console.info('1/0:',1/0);
+		console.info('-1/0:',-1/0);
+		console.log('Number.POSITIVE_INFINITY//只读:',Number.POSITIVE_INFINITY);
+		console.log('Number.MAX_VALUE+1//只读:',Number.MAX_VALUE+1);
+		console.log('Number.MIN_VALUE/2//发生下溢:',Number.MIN_VALUE/2);
+		console.log('-Number.MIN_VALUE/2//负零:',-Number.MIN_VALUE/2);
+		console.log('-1/Infinity//负零:',-1/Infinity);
+
+		console.info('------------------------------method(3.1.3javascriptzhong算术的运算)------------------------------')
+		console.info('isNaN(NaN)',isNaN(NaN));
+		console.info('isNaN("666")',isNaN("666"));
+		console.info('isNaN("我是中文")',isNaN("我是中文"));
+		console.info('isFinite合法的数值返回true')
+		console.info('isFinite("我是中文")',isFinite("我是中文"));
+		console.info('isFinite("666")',isFinite("666"));
+		console.info('isFinite("NaN")',isFinite(NaN));
+		console.info('isFinite(Number.POSITIVE_INFINITY)',isFinite(Number.POSITIVE_INFINITY));
+		console.info('isFinite(-Number.POSITIVE_INFINITY)',isFinite(-Number.POSITIVE_INFINITY));
+		console.info('------------------------------精度验证(3.1.4二进制浮点数和四舍五入错误)------------------------------')
+		console.info('.3-.2:',.3-.2);
+		console.info('.4-.3:',.4-.3);
+		console.log('.3-.2==.4-.3',.3-.2==.4-.3);
+		console.info('------------------------------精度验证(3.1.5日期和时间)------------------------------')
+		console.info('Date',Date);
+		console.info('typeof:'+typeof new Date() ,'time:'+ new Date())
+		console.info('1秒等于1000毫秒 计算毫秒差:',new Date(2018,11,18) - new Date(2018,11,17))
+		console.info('获取年:',new Date().getFullYear());
+		console.info('获取月（1月是表示0）:',new Date().getMonth());
+		console.info('计算几号:',new Date().getDate());
+		console.info('计算星期几（星期天表示0）:',new Date().getDay());
+		console.info('计算时间:',new Date().getHours());
+		console.info('计算UTC小时,基于时区:',new Date().getUTCHours());
+		console.info('------------------------------字符串(3.2.2转义符)------------------------------')
+		console.info('版权符号:','\xA9');
+		console.info('π：','\u03c0');
+		console.info('NUL字符\o：','\o');
+		console.info('退格符\b：','\b 222');
+		console.info('水平制表符\t：','\t 2222');
+		console.info('换行符\n：','\n 222');
+		console.info('垂直制表符\v：','\v 222');
+		console.info('换页符\f：','\f222');
+		console.info('回车符\r：','\r222');
+		console.info('双引号\u0022：','\u0022');
+		console.info('撇号或单引号：','\u0027');
+		console.info('反斜线：','\\');
+		console.info('两位十六进制数XX指定的是Latin-1字符\x01(不能是中文只能是数字)：','\x01');
+		console.info('由4位十六进制数XXXX代表unicode\u1111(不能是中文只能是数字)：','\x1111');
+		console.info('------------------------------字符串(3.2.3字符串使用)------------------------------')
+		console.info("'你好啊'.length",'你好啊'.length)
+		console.info('nihaoa.chartAt(2)','nihaoa'.charAt(2))
+		console.info("'nihaoa'.chartAt('nihaoa'.length-1)",'nihaoa'.charAt('nihaoa'.length-1))
+		console.info("'nihaoa'.substring(1,3)//下标0开始计算末尾不包含值关系",'nihaoa'.substring(1,3))
+		console.info("'nihaoa'.slice(1,3)//下标0开始计算末尾不包含值关系",'nihaoa'.slice(1,3))
+		console.info("'nihaoa'.slice(-3)//最后三个字符串",'nihaoa'.slice(-3))
+		console.info("'nihaoa'.indexOf('a')//匹配字符串中是否存在a字符，如果存在将返回非-1的小标值",'nihaoa'.indexOf('a'))
+		console.info("'nihaoa'.lastindexOf('a')",'nihaoa'.lastIndexOf('a'))
+		console.info("'nihaoa'.index('a',4)//从第四个字符开始寻找a",'nihaoa'.indexOf('a',4))
+		console.info("'n，iha，o，a'.split(',')//按照规则进行分割成子字符串以数组返回",'n,iha,o,a'.split(','))
+		console.info("'nihaoa'.replace('a','fuck')//返回一个新的字符串",'nihaoa'.replace('a','fuck'))
+		console.info("'nihaoa'.toUpperCase()//返回一个新的字符串",'nihaoa'.toUpperCase())
+		console.info('------------------------------正则表达式(3.2.4模式匹配)------------------------------')
+		console.info('/^HTML/:匹配以html开始的字符串',/^HTML/)
+		console.info('/[1-9][0-9]*/:匹配一个非0数字后面是任意个数字',/[1-9][0-9]*/)
+		console.info('/\bjavascript\b/i:匹配单词"javascript"忽略大小写',/\bjavascript\b/i)
+		
 	</script>
 </html>
