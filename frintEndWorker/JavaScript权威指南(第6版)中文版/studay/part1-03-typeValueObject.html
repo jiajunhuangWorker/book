@@ -30,6 +30,12 @@
 			<dd>连接符号 +</dd>
 			<dt>3.2.4模式匹配</dt>
 			<dd>RegExp()是强大的文本处理工具</dd>
+			<dt>3.3布尔值</dt>
+			<dd>布尔值通常用于JavaScript中控制结构中</dd>
+			<dd>!==,==,&&,||,!</dd>
+			<dt>3.4null和undifined</dt>
+			<dt>3.5全局对象</dt>
+			<dd></dd>
 		</dl>	
 	</body>
 	<script type="text/javascript">	
@@ -49,7 +55,7 @@
 		console.info('Math.ceil(.4)//向上取整:',Math.ceil(.4))
 		console.info('Math.floor(.7)//向下取整:',Math.floor(.7))
 		console.info('Math.abs(-3)//绝对值:',Math.abs(-3))
-		console.info('Math.maxl(a,b,c,d,e)//最大值:',Math.max(3,'44',55,22,'1999','1999.3'))//如果传入字符串返回NAN
+		console.info('Math.max(a,b,c,d,e)//最大值:',Math.max(3,'44',55,22,'1999','1999.3'))//如果传入字符串返回NAN
 		console.info('Math.min(a,b,c,d,e)//最小值:',Math.min(3,'44',55,22,'1999','1999.3'))
 		console.info('Math.random()//0~1随机数:',Math.random())
 		console.info('Math.PI//圆周率:',Math.PI)
@@ -129,7 +135,20 @@
 		console.info('------------------------------正则表达式(3.2.4模式匹配)------------------------------')
 		console.info('/^HTML/:匹配以html开始的字符串',/^HTML/)
 		console.info('/[1-9][0-9]*/:匹配一个非0数字后面是任意个数字',/[1-9][0-9]*/)
-		console.info('/\bjavascript\b/i:匹配单词"javascript"忽略大小写',/\bjavascript\b/i)
-		
+		console.info('/\bjavascript\b/i:匹配单词"javascript"忽略大小写',/\bjavascript\b/i);
+		var text='testing: 1,22,3,77';
+		var pattern=/\d+/g //匹配所有包含一个或多个数字的实例
+		console.info('pattern.test(text)//返回boolean类型',pattern.test(text));
+		console.info('text.search(pattern)//返回number,首次匹配成功的下标位置',text.search(pattern));
+		console.info('text.match(pattern)//返回array,所有符合的组成数组',text.match(pattern));
+		console.info('text.replace(pattern,\'#\')//返回新的对象 替换符号',text.replace(pattern,'#'));
+		console.info('text.split(/\D+/)//返回数组用非数字字符截取字符串',text.split(/\D+/));
+		console.info('------------------------------正则表达式(3.4null和undefined)------------------------------')
+		console.info('typeof undefined:',typeof undefined)
+		console.info('typeof null:',typeof null)
+		var str={};
+		str.null=null;
+		str.undefined=undefined;
+		console.info(str)
 	</script>
 </html>
