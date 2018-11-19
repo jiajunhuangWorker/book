@@ -35,19 +35,40 @@
 			<dd>!==,==,&&,||,!</dd>
 			<dt>3.4null和undifined</dt>
 			<dt>3.5全局对象</dt>
-			<dd></dd>
+			<dd>原始类型和原始值,对象类型-对象、数组和函数!</dd>
+			<dd>全局属性:undefined,Infinity和NAN</dd>
+			<dd>全局函数:isNaN(),parseInt(),eval()</dd>
+			<dd>构造函数：Data(),RegExp(),String(),Object(),Array()</dd>
+			<dd>全局对象:Math,JSON</dd>
+			<dt>3.6包装对象</dt>
+			<dd>javascript对象是一种复合值,它是属性或已命名的集合，存取字符串、数字或布尔值得属性时创建的临时对象称为包装对象</dd>
+			<dt>3.7不可变得原始值和可变的对象引用</dt>
+			<dd>原始值:undefined,null,boolean,number,string,object</dd>
+			<dd>对象是可变的属性是可以发生改变的,两个相同属性以及相同的值他们是等的！因为索引值不同</dd>
+			<dd>对象的比较都是引用的比较</dd>
+			<dt>3.8类型转换</dt>
+			<dt>3.8.1转换和相等性</dt>
+			<dt>3.8.2显式类型转换</dt>
+			<dd>parseInt(nuumber),parseFloat(nuumber)</dd>
+			<dt>对象转换原始值</dt>
+			<dd>对象继承了toString()方法</dd>
+			<dt>3.9声明变量</dt>
+			<dd>var，传入值前是undifined</dd>
+			<dt>3.10变量作用域</dt>
+			<dt>3.10.2作为属性的变量</dt>
+			<dt>3.10.3作为域链</dt>
 		</dl>	
 	</body>
 	<script type="text/javascript">	
 		/* 将16进制转10进制 */
-		console.info(0xaa)//10*16+10 171
-		console.info(0Xab)//10*16+11 171
-		console.info(0xff)//15*16+15 255
+		console.info('0xaa:',0xaa,'result:10*16+10 171')//10*16+10 171
+		console.info('0xab:',0Xab,'result:10*16+11 171')//10*16+11 171
+		console.info('0xff:',0xff,'result:15*16+15 255')//15*16+15 255
 		/*将8进制转10进制*/
-		console.info(0377)//3*64+7*8+7
-		console.info(01)//1 1
-		console.info(011)//9 1+1*8 9
-		console.info(0111)//73 1+8*9
+		console.info('0377:',0377,'result:3*64+7*8+7')//3*64+7*8+7
+		console.info('01:',01,'result:1')//1 1
+		console.info('011:',011,'result:1+1*8 9')//9 1+1*8 9
+		console.info('0111:',0111,'result:1+8*9')//73 1+8*9
 		console.info('------------------------------math------------------------------')
 		console.log('Math:',Math)
 		console.info('Math.pow(2,3)//2的3次方:',Math.pow(2,3))
@@ -97,13 +118,13 @@
 		console.info('------------------------------精度验证(3.1.5日期和时间)------------------------------')
 		console.info('Date',Date);
 		console.info('typeof:'+typeof new Date() ,'time:'+ new Date())
-		console.info('1秒等于1000毫秒 计算毫秒差:',new Date(2018,11,18) - new Date(2018,11,17))
-		console.info('获取年:',new Date().getFullYear());
-		console.info('获取月（1月是表示0）:',new Date().getMonth());
-		console.info('计算几号:',new Date().getDate());
-		console.info('计算星期几（星期天表示0）:',new Date().getDay());
-		console.info('计算时间:',new Date().getHours());
-		console.info('计算UTC小时,基于时区:',new Date().getUTCHours());
+		console.info('1秒等于1000毫秒 计算毫秒差new Date(2018,11,18) - new Date(2018,11,17):',new Date(2018,11,18) - new Date(2018,11,17))
+		console.info('获取年new Date().getFullYear():',new Date().getFullYear());
+		console.info('获取月（1月是表示0）new Date().getMonth():',new Date().getMonth());
+		console.info('计算几号:new Date().getDate()',new Date().getDate());
+		console.info('计算星期几（星期天表示0）new Date().getDay():',new Date().getDay());
+		console.info('计算时间:new Date().getHours()',new Date().getHours());
+		console.info('计算UTC小时,基于时区:new Date().getUTCHours()',new Date().getUTCHours());
 		console.info('------------------------------字符串(3.2.2转义符)------------------------------')
 		console.info('版权符号:','\xA9');
 		console.info('π：','\u03c0');
@@ -150,5 +171,82 @@
 		str.null=null;
 		str.undefined=undefined;
 		console.info(str)
-	</script>
+		console.info('------------------------------全局对象(3.5全局对象)------------------------------')
+		console.info('this',this)
+		console.info('window',window)
+		console.info('window==this//证明this引用了全局对象',window==this);
+		console.info('------------------------------包装对象(3.6包装对象)------------------------------')
+		console.info('"hellow!lucas".substring(1,5):',"hellow!lucas".substring(1,5));
+		var str='test';
+			console.log('str',str)
+			str.len=4;
+			console.log('str.len://因为临时字符串对象,并给其len属性赋值4,随即销毁这个临时对象',str.len)
+		var getStr=str.len;
+			console.log('getStr://通过原始的字符串值创建一个新字符串对象,尝试读取len属性,但是len不存在所以报undefined',getStr)
+			var str='test',num=1,bool=true;
+			console.log('typeof str//未包装后的字符串',typeof str);
+			str=new String(str);
+			console.log('typeof str //包装后的字符串',typeof str);
+			num=new Number(num);
+			bool=new Boolean(bool);
+		console.info('------------------------------3.7不可变得原始值和可变的对象引用------------------------------')
+			console.info('--原始值--');
+		var str='lucas!hellow!'
+			str.toUpperCase();
+			console.info('str使用了toUpperCase方法！但是str 没变成大写证明原始数据类型没发生改变',str);
+			console.info('--对象--');
+			var val={x:1};
+			val.x=2,val.y=3;
+			var vals=[1,2,3];
+			vals[0]=0;
+			vals[3]=4;
+			console.info('--索引值--');
+			var array=[],array1=[];
+			console.info('array===array1',array===array1);
+			console.info('array==array1',array==array1);
+			console.info('--更改引用值--');
+			var a=[];
+			var b=a;
+			b[0]=666;
+			console.info('a[0]',a[0]);
+			console.info('a===b:',a===b);
+			console.info(new Array())
+			console.info('--copy Array--');
+			var arrs=[2,43,1,2,44,55,66],arr01=[];
+			for( i in arrs){
+				if(typeof arrs[i] != 'function'){
+					arr01.push(arrs[i]);
+				}
+			}
+			console.info('null==undefined',null==undefined)
+			console.info('"0"==0',"0"==0)
+			console.info('false==0',"0"==false)
+			console.info('false==0',0==false)
+			console.info('------------------------------3.8.2显式类型转换------------------------------')
+			var n=12345.678;
+			console.info('n.toFixed(0)',n.toFixed(0))
+			console.info('n.toFixed(2)',n.toFixed(2))
+			console.info('n.toFixed(5)',n.toFixed(5))
+			console.info('n.toExponential(3)',n.toExponential(3))
+			console.info('n.toExponential(3)',n.toExponential(3))
+			console.info('------------------------------3.8.3对象------------------------------')
+			console.info('--toString()--');			
+			console.log('{a:1,b:2,b:2}.toString()',{a:1,b:2}.toString());
+			console.log('[2,35,334].toString()',[2,35,334].toString());
+			console.log('(function(x){f(x);}).toString()',(function(x){f(x);}).toString());
+			console.log('new Date().toString()',new Date().toString());
+			console.info('--valueOf() 对象转为原始值--');
+			console.info('new Date().valueOf()',new Date().valueOf())
+			console.info('------------------------------3.10变量作用域------------------------------')
+			var a='global script';
+			function check(){
+				var a='global script check';
+				function check02(){
+					var a='global333 script222 check000003';
+					return a;
+				}
+				return check02()
+			}
+			console.info(check());
+	</script>	
 </html>
