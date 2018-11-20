@@ -238,6 +238,7 @@
 			console.info('--valueOf() 对象转为原始值--');
 			console.info('new Date().valueOf()',new Date().valueOf())
 			console.info('------------------------------3.10变量作用域------------------------------')
+			console.info('--DemoOne-嵌套作用域--');			
 			var a='global script';
 			function check(){
 				var a='global script check';
@@ -248,5 +249,27 @@
 				return check02()
 			}
 			console.info(check());
+			console.info('--DemoTwo-全局变量--');
+			var global='val';
+			function getVal(){
+				global='localhost';
+				myscope='localString';
+				console.info('getVal:',[global,myscope]);
+				return [global,myscope];
+			}
+			getVal();
+			console.info('------------------------------3.10.1函数作用域和声明提前------------------------------')
+			function test(o){
+				var i=o;
+				if(typeof o=='object'){
+					var j=o;
+					for(var k=0;k<10;k++){
+						console.info('k:',k);
+					}
+					console.info('k:',k);
+				}
+				console.info('j:',j);
+			}
+			test(new Number(1));
 	</script>	
 </html>
