@@ -34,44 +34,47 @@
 		</dd>
 		<dt>4.7.1操作数的个数</dt>
 		<dd>运算符可以根据其操作数个数进行分类，三元表达式：boolean?a:b</dd>
-		<dt>7.2操作数类型和结果类型</dt>
-		<dt>7.3左值</dt>
+		<dt>4.7.2操作数类型和结果类型</dt>
+		<dt>4.7.3左值</dt>
 		<dd>表达式只能出现在赋值运算符的左侧</dd>
-		<dt>7.4运算符的副作用</dt>
+		<dt>4.7.4运算符的副作用</dt>
 		<dd>一些表达式运算会相互影响称为副作用</dd>
-		<dt>7.5运算符优先级</dt>
+		<dt>4.7.5运算符优先级</dt>
 		<dd>typeof 是优先级最高的运算符之一</dd>
-		<dt>7.6运算符的结合性</dt>
+		<dt>4.7.6运算符的结合性</dt>
 		<dd>从右到左运算的例子:x=~-y,w=x=y=c,q=a?b:c?d:e?f:g</dd>
-		<dt>7.7运算的顺序</dt>
-		<dt>8.算数表达式</dt>
+		<dt>4.7.7运算的顺序</dt>
+		<dt>4.8.算数表达式</dt>
 		<dd>+，-，*，、，%</dd>
-		<dt>8.1 +运算符</dt>
+		<dt>4.8.1 +运算符</dt>
 		<dd>注意加法运算符转成字符串方法</dd>
-		<dt>8.2一元算术运算符</dt>
+		<dt>4.8.2一元算术运算符</dt>
 		<dd>一元算数运算符作用于一个单独的操作数，并产生一个新值(++,--)</dd>
-		<dt>8.3位数算符</dt>
+		<dt>4.8.3位数算符</dt>
 		<dd>位数运算可以对由数字表示的二进制数据进行更低层级的按位运算(&位与,|位或,^异或,~非，<<左移,>>右移,>>>无符号右移)</dd>
-		<dt>9.关系表达式</dt>
+		<dt>4.9.关系表达式</dt>
 		<dd>in和installof 看例子</dd>
-		<dt>9.1相等和不等运算符号</dt>
+		<dt>4.9.1相等和不等运算符号</dt>
 		<dd>==(比较值),===(比较数据类型，比较值),!=(不等),！==（不相等）</dd>
-		<dt>9.2比较运算符</dt>
+		<dt>4.9.2比较运算符</dt>
 		<dd><（小于），>(大于),<=,>=  如果两个操作数是字符串他会依照字母表的顺序进行比较
 		<br/>String.localeCompare（）方法获取去更多字符串比较的相关信息,String.toLowerCase()和String.toUpperCase()大小写转换
 		</dd>
-		<dt>9.3in运算符</dt>
+		<dt>4.9.3in运算符</dt>
 		<dd>in运算符希望它的左操作数是一个字符串或可以转换为字符串，右操作数是一个对象-- 例子9.3</dd>
-		<dt>9.4 instanceof运算符</dt>
+		<dt>4.9.4 instanceof运算符</dt>
 		<dd>希望左操作数是对象，右操作是标识对象的类,检测父类，当左操作数不是对象就直接返回false
 		<br/>instanceof 工作原理：原型链(prototype),原型链作为javascript的继承机制,javascript首先计算f.prototype然后再原型链中找o
 		如果找到o是f的父类就返回true对象o是隐藏的成员，这个成员指向其父原型
 		</dd>
-		<dt>10.逻辑表达式</dt>
+		<dt>4.10.逻辑表达式</dt>
 		<dd>&&(短路且),||,!</dd>
-		<dt>11.赋值表达式</dt>
+		<dt>4.10.1逻辑与&&</dt>
+		<dt>4.10.2逻辑或||</dt>
+		<dt>4.10.2逻辑非!</dt>
+		<dt>4.11.赋值表达式</dt>
 		<dd>=,+=,/=,-=,&=,*=^=,|=,>>>=,>>=,<<=，%=</dd>
-		<dt>12.表达式计算</dt>
+		<dt>4.12.表达式计算</dt>
 		<dd>javascript源代码组成字符串并产生一个值，javascript通过全局的eval()完成工作
 			<br/>eval 是函数也是运算符
 		</dd>
@@ -108,33 +111,52 @@
 	console.log("a[3]:",a[3]);
 	console.log("a[4]:",a[4]);
 
-	console.log("------------------------------4.2对象和数组的初始化表达式------------------------------");
-
-	// var str='李四';
-	// var str01='abc';
-	// var str02='AbC';
-	// console.log('String.localeCompare()假设相等的字符串返回0，假设目标字符串在比较字符串的字母在前面返回-1,假设目标字符串在比较字符串后面返回1')
-	// console.log("str.localeCompare('张三'):"+str.localeCompare(''));
-	// console.log("str.localeCompare('尼玛'):"+str.localeCompare('尼玛'));
-	// console.log("abc.toUpperCase():"+str01.toUpperCase());
-	// console.log("AbC.toLowerCase():"+str01.toLowerCase());
-	// console.log("9.3in-------------------使用");
-	// var point={"x":1,"y":2};
-	// var arr=[1,2,3];
-	// console.log("'z' in point:"+("z" in point));
-	// console.log("'y' in point:"+("y" in point));
-	// console.log("'0' in arr:"+('0' in arr));
-	// console.log("1 in arr:"+(1 in arr));
-	// console.log("5 in arr:"+(5 in arr));
-	// console.log("9.4instanceof-------------------使用");	
-	// var d=new String();
-	// console.log('var d=new String();');
-	// console.log("d instanceof Date:"+(d instanceof Date));
-	// console.log("d instanceof Object:"+(d instanceof Object));
-	// console.log("d instanceof Number:"+(d instanceof Number));	
-	// console.log("d instanceof String:"+(d instanceof String));
-	// console.log("d instanceof RegExp:"+(d instanceof RegExp));
-	// console.log("d instanceof Array:"+(d instanceof Array));
+	console.log("------------------------------4.7.4对象和数组的初始化表达式------------------------------");
+	var str={a:1,b:2,c:3};
+	delete str.a;
+	console.info('str.a',str.a)
+	console.info('str',str)
+	console.log("------------------------------4.8.算数表达式------------------------------");
+	var num=1;
+	var b=(num++)+num;
+	console.info(b);
+	console.log("------------------------------4.8.1 +运算符------------------------------");
+	console.info("typeof '1'.valueOf()+'777'",typeof '1'.valueOf()+'777');
+	console.info('2+undefined:',2+undefined);
+	console.log("------------------------------4.9.关系表达式------------------------------");
+	var str='李四';
+	var str01='abc';
+	var str02='AbC';
+	console.log('String.localeCompare()假设相等的字符串返回0，假设目标字符串在比较字符串的字母在前面返回-1,假设目标字符串在比较字符串后面返回1')
+	console.log("str.localeCompare('张三'):"+str.localeCompare(''));
+	console.log("str.localeCompare('尼玛'):"+str.localeCompare('尼玛'));
+	console.log("------------------------------4.9.2比较运算符------------------------------");
+	console.log("abc.toUpperCase():"+str01.toUpperCase());
+	console.log("AbC.toLowerCase():"+str01.toLowerCase())
+	console.log("Number('eqweqw222dasd')",Number('eqweqw222dasd'))
+	var obj={a:66,b:'111dsa',c:true};
+	console.info(obj.valueOf());
+	console.info('1==true','1'==true)
+	console.info('"one"<3',"one"<3)
+	console.log("------------------------------4.9.3 in运算符------------------------------");
+	var point={"x":1,"y":2};
+	var arr=[1,2,3];
+	console.info('object.attr in object //判断对象里面存不存在该属性')
+	console.log("'z' in point:"+("z" in point));
+	console.log("'y' in point:"+("y" in point));
+	console.log("'0' in arr:"+('0' in arr));
+	console.log("1 in arr:"+(1 in arr));
+	console.log("5 in arr:"+(5 in arr));
+	console.log("toString in point://所有对象都包含toString和valueOf方法",'toString' in point);
+	console.log("------------------------------4.9.4 instanceof运算符------------------------------");
+	var d=new String();
+	console.log('var d=new String();');
+	console.log("d instanceof Date:"+(d instanceof Date));
+	console.log("d instanceof Object:"+(d instanceof Object));
+	console.log("d instanceof Number:"+(d instanceof Number));	
+	console.log("d instanceof String:"+(d instanceof String));
+	console.log("d instanceof RegExp:"+(d instanceof RegExp));
+	console.log("d instanceof Array:"+(d instanceof Array));
 	// console.log("12.2eval()-------------------使用");	
 	// var geval=eval;
 	// var x='global',y='global';
