@@ -77,18 +77,28 @@
 		<dt>4.12.表达式计算</dt>
 		<dd>javascript源代码组成字符串并产生一个值，javascript通过全局的eval()完成工作
 			<br/>eval 是函数也是运算符
+
 		</dd>
-		<dt>12.1 eval()</dt>
+		<dt>4.12.1 eval()</dt>
 		<dd>eval()只是一个参数需要传入字符串
 		<br/>工作原理传入字符串,进行编译，如果编译失败抛错误，成功执行这段代码并返回字符串中最后一个表达式或者语句的值，如果最后的表达式没值就返回undefined（注意：它使用了调用它的变量作用域环境，意思：它查找变量的值和定义新变量和函数的操作和局部作用域中的代码一样）
 		</dd>
-		<dt>12.2全局eval()</dt>
+		<dt>4.12.2全局eval()</dt>
 		<dd>eval()具有更改局部变量的能力，这个对javascript优化器来说是一个很大问题</dd>
-		<dt>12.3严格eval()</dt>
+		<dt>4.12.3严格eval()</dt>
 		<dd>eval函数的行为施加更多的限制甚至对标识符eval的使用也施加了限制，严格模式下eval执行的代码段可以查询或更改局部变量</dd>
-		<dt>13.其他运算符</dt>
+		<dt>4.13其他运算符</dt>
 		<dd>三元运行符?:  typeof 一元运算符  检测数据类型  delete</dd>
-
+		<dt>4.13.1条件运算符</dt>
+		<dd>boolean?true:false</dd>
+		<dt>4.13.2 typeof运算符</dt>
+		<dd>typeof type</dd>
+		<dt>4.13.3 delete运算符</dt>
+		<dd>delete array/object</dd>
+		<dt>4.13.4 void运算符</dt>
+		<dd>它出现在操作数之前,操作数可以是任意的类型</dd>
+		<dt>4.13.5 逗号运算符</dt>
+		<dd></dd>
 </body>
 <script type="text/javascript">
 	console.info('------------------------------4.1原始表达式------------------------------')
@@ -157,33 +167,51 @@
 	console.log("d instanceof String:"+(d instanceof String));
 	console.log("d instanceof RegExp:"+(d instanceof RegExp));
 	console.log("d instanceof Array:"+(d instanceof Array));
-	// console.log("12.2eval()-------------------使用");	
-	// var geval=eval;
-	// var x='global',y='global';
-	// function f(){
-	// 	var x= 'local';
-	// 	eval("x+='changed';");
-	// 	return x;
-	// }
-	// function g(){
-	// 	var y= 'local';
-	// 	geval("y+='changed';");
-	// 	return y;
-	// }
-	// console.log(f());//localchanged
-	// console.log(g());//local
-	// console.log(f(),x);//localchanged global
-	// console.log(g(),y);//local globalchangedchanged
-	// console.log("13.deect-------------------使用");
-	// console.log("delete point.x:"+delete point.x);
-	// console.log("delete point.z:"+delete point.z);
-	// console.log('point.x:'+(point.x));
-	// console.log('point.y:'+(point.y));
-	// console.log("arr.length:"+arr.length);
-	// console.log("delete arr[1]:"+(delete arr[1]));
-	// console.log("arr.length:"+arr.length);
-	// console.log("arr[1]:"+arr[1]);
-	// console.log("13.-------------------使用");	
+	console.log("------------------------------4.12.表达式计算------------------------------");	
+	console.info('全局函数eval("2*8")',eval('2*8'));
+	var geval=eval;
+	var x=1;
+	// var eval=eval('function f(x){return x+1;}');
+	// console.info(f(1));	//这里将eval改写了！ 需要按照规则去玩耍方法
+	console.info('typeof eval()',typeof eval());
+	console.log("------------------------------4.12.2全局eval()----------------------------");	
+	//function val(){console.info(111)};//不能随便重写eval()否则容易报错
+	var geval=eval;
+	var x='global',y='global';
+
+	function f(){
+		var x= 'local';
+		eval("x+='-changed';");
+		return x;
+	}
+	function g(){
+		var y= 'local';
+		geval("y+='-changed2';");
+		return y;
+	}
+	// window.print();调起打印模式
+	console.log('f():',f());//localchanged
+	console.log('g():',g());//local
+	console.log('f(),x:',f(),x);//localchanged global
+	console.log('g(),y:',g(),y);//local globalchangedchanged	
+	console.log("------------------------------4.12.3严格eval()----------------------------");
+	console.log("------------------------------4.13其他运算符----------------------------");
+	console.log("------------------------------4.13.1条件运算符----------------------------");
+	console.info('true?"yes":"false"',true?"yes":"false");
+	console.log("------------------------------4.13.2typeof运算符----------------------------");
+	console.info(typeof null);
+	console.log("------------------------------4.13.3 delete运算符----------------------------")	
+	var points={"x":1,"y":2,s:'666'};
+	var delete_arr=[1,2,3,4,5];
+	console.info(points);
+	console.log("delete points.x:"+delete points.x,'points:',points);
+	console.log("delete points.z:"+delete points.z,'points:',points);
+	console.info('----['+ delete_arr +']----')
+	console.log("delete_arr.length:"+delete_arr.length);
+	console.log("delete delete_arr[1]:"+(delete delete_arr[1]),'delete_arr:',delete_arr,"delete_arr.length:"+delete_arr.length);		
+	console.log("------------------------------4.13.4 void运算符----------------------------");	
+	console.info('<a href="javascript:void window.open()"></a>');
+	console.log("------------------------------4.13.5 逗号运算符----------------------------");	
 	// var x=0.3-0.2;
 	// var y=0.2-0.1;
 	// console.log(x==y);
