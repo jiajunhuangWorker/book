@@ -30,7 +30,7 @@
 		<dt>4.7.运算符概括</dt>
 		<dd>算数运算符，比较运算符，逻辑表达式，赋值表达式
 		<br/> 关键字运算符和标点符号所表示的运算符一样都是正规的运算符,它们非常简易.
-		<br/>delect 删除属性，instanceof 测试对象类，~位数求反，void：返回undefined，>>>无符号右移,in测试属性是否存在,^按位异或,
+		<br/>delete 删除属性，instanceof 测试对象类，~位数求反，void：返回undefined，>>>无符号右移,in测试属性是否存在,^按位异或,
 		</dd>
 		<dt>4.7.1操作数的个数</dt>
 		<dd>运算符可以根据其操作数个数进行分类，三元表达式：boolean?a:b</dd>
@@ -107,7 +107,7 @@
 	console.info('------------------------------4.2对象和数组的初始化表达式------------------------------')
 	var arrs=[1,,,,5];
 	console.info('[1,,,,5]',arrs);
-	console.info('arrs=[1,,,,5]',arrs[1]);
+	console.info('arrs=[1,,,,5],arrs[1]',arrs[1]);
 	console.info('--对象--');
 	var o={x:1,y:{z:3}};
 	var a=[o,4,[5,6],undefined,null];
@@ -212,8 +212,5 @@
 	console.log("------------------------------4.13.4 void运算符----------------------------");	
 	console.info('<a href="javascript:void window.open()"></a>');
 	console.log("------------------------------4.13.5 逗号运算符----------------------------");	
-	// var x=0.3-0.2;
-	// var y=0.2-0.1;
-	// console.log(x==y);
 </script>
 </html>

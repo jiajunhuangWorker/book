@@ -1,3 +1,25 @@
+1.全局函数?
+isNaN(),isFinite(),eval()
+,parseInt(),typeof,window
+,document,global,parseFloat()，geval()
+2.全局属性?
+undefined,nan,infinity
+3.全局对象
+Math,JSON
+4.构造函数/包装对象?
+new Date(),new RegExp(),new String()
+,new Object(),new Array(),new Number()
+,new Error(),new Boolean()
+-----------------------------
+4.原始类型?
+boolean,String,Number，
+5.对象类型?
+array,object,函数(new name()),<拥有valueOf和toString方法,键值对,delete,对象 instanceof 对象的类,字符串 in 对象  //判断对象里面存不存在该属性>
+6.原始表达式
+常量,直接量,关键字,变量
+
+
+
 第一章
 1.什么是宿主环境和宿主对象?
 	宿主对象:
@@ -18,3 +40,7 @@ LN2:
 LN2 属性就是 loge2，即 2 的自然对数，其值近似于 0.69314718055994528623
 LN10：
 LN10 属性就是 loge10，即 10 的自然对数，其值近似于 2.3025850929940459011。
+
+第四章
+
+第五章

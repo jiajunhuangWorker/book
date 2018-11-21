@@ -112,19 +112,21 @@
 </body>
 <script type="text/javascript">	
 		
-		console.log("17.属性的引用-------------------");
+		console.log("1.属性的引用-------------------");
 		var s="test";
+			console.info('typeof new String():',typeof new String())
 			s.len=4;
 			var t=s.len;
 			console.log("s.len:"+s.len);
 			console.log("t:"+t);
-		console.log("18.不可变的原始值和可变的对象引用");
+			console.log("s:"+s);
+			console.log("2.不可变的原始值和可变的对象引用");
 		var a=[];
 		var b=a;
-		b[0]=1;
+			b[0]=1;
 		console.log("a[0]:"+a[0]);
-		console.log("a===b:"+(a===b));
-		console.log("18.数组的比较----");
+		console.log("a===b:相同的索引所以数据类型和数组都是相同的"+(a===b));
+		console.log("2.数组的比较----");
 		function arrayCompany(arr,arr1){
 			if(arr.length!=arr1.length) return false;
 			for(var i=0;i<arr.length;i++){
@@ -133,36 +135,36 @@
 			}
 			return true;
 		}
-		console.log("19.1.属性的引用-------------------");
+		console.info('arrayCompany([2,"dsad",true,false,3.2],[2,false,3.2222])',arrayCompany([2,"dsad",true,false,3.2],[2,false,3.2222]))
+		console.log("3.属性的引用-------------------");
 		console.log("undefined==false:"+(undefined==false))
-		console.log("19.2.转换-------------------");
+		console.log("4.转换-------------------");
 		console.log("parseInt('077',10):"+parseInt("077",10));//(7*10)+7
 		console.log("parseInt('077',6):"+parseInt("077",6));//0
 		console.log("parseInt('077',8):"+parseInt("077",8));//7*8+7
-		console.log("19.3对象转换为原始值-------------------valueOf");
+		console.log("5.对象转换为原始值-------------------valueOf");
 		console.log("new Date().valueOf() 返回时间戳:"+new Date().valueOf());
-		console.log("20.1变量作用域-------------------");
+		console.log("6.变量作用域-------------------");
 		var str="123";
 		function strs(){
 			var str=456;
 			return str;
 		}
 		console.log("typeof str()："+typeof strs());
-		console.log("20.2test方法--------------------------------");
+		console.log("7.test方法--------------------------------");
 		test(5);
 		function test(o){
 			var k=0;
-
 			if(typeof o=="number"){
 				var j=0;
 				for (var i = 10; i >= 0; i--) {
 					console.log("for里面的k:"+i);
 				}
-				console.log("for外面的k:"+i);
+				console.log("for外面的k----:"+i);
 			}
 			console.log("if外面的j:"+j);
 		}
-	console.log("20.3test方法--------------------------------");
+	console.log("8.test方法--------------------------------");
 		var date=666;
 		function dates(){
 			console.log("---date:"+date);
@@ -170,8 +172,6 @@
 			console.log("date---:"+date);
 		}
 		dates();
-
-
 		var h=document.getElementById("html");
 		console.log(h.fin)
 	</script>
