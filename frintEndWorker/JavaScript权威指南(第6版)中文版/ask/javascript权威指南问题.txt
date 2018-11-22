@@ -12,7 +12,7 @@ new Date(),new RegExp(),new String()
 ,new Error(),new Boolean()
 -----------------------------
 4.原始类型?
-boolean,String,Number，
+boolean,String,Number
 5.对象类型?
 array,object,函数(new name()),<拥有valueOf和toString方法,键值对,delete,对象 instanceof 对象的类,字符串 in 对象  //判断对象里面存不存在该属性>
 6.原始表达式
@@ -50,3 +50,7 @@ with语句的作用是将代码的作用域设置到一个特定的作用域中
 问题
 1.性能问题
 2.语义不明，调试困难
+
+第六章
+内置对象:
+array,function,date,RegExp
