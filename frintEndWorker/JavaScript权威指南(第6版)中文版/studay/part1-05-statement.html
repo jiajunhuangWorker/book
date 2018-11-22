@@ -84,27 +84,35 @@
 			throw(抛出异常  try/catch/finally)
 			</dd>
 			<dt>5.6.1标签语句</dt>
-			<dd>语句是可以加标签的，标签是由语句前的标识符和冒号组成，定义语句块时才能使用和break或者continue配合使用,不能是保留字，语句标签只能在它所起的语句</dd>
-			<dt>6.2break</dt>
+			<dd>
+				identifer:statement,标识符号一般是在循环体重声明
+			<br>
+			语句是可以加标签的，标签是由语句前的标识符和冒号组成,定义语句块时才能使用和break或者continue配合使用,不能是保留字，语句标签只能在它所起的语句</dd>
+			<dt>5.6.2break</dt>
 			<dd>立即退出最内层的循环</dd>
 			<dt>6.3continue</dt>
 			<dd>continue在for或者while循环中如果在循环体里面进行判断当遇到错误的时候就跳过循环</dd>
-			<dt>6.4return</dt>
+			<dt>5.6.4return</dt>
 			<dd>return 返回一个结果，只能出现在函数体</dd>
-			<dt>6.5throw语句</dt>
+			<dt>5.6.5throw语句</dt>
 			<dd>抛出错误信息,捕获异常是指处理这个信号，采用必要的手段进行恢复 try/catch/finally语句捕获异常</dd>
-			<dt>6.6try/catch/finally语句</dt>
+			<dt>5.6.6try/catch/finally语句</dt>
 			<dd>try/catch/finally语句是javascript的异常处理机制，try从句定义了需要处理的异常代码块,catch从句是在try后当try出现异常时调用catch内的代码逻辑,finally块后者放置清理代码，finally块必须会执行的</dd>
-			<dt>7.其他语句</dt>
-			<dd>width,debugger,use strict</dd>
-			<dt>7.1witch</dt>
-			<dd>作用链:一个按序检索的对象列表，通过它可以进行变量名解析
-				<br/>with语句用于临时扩展作用域，在严格模式下禁止使用witch
-				<br/>缺点：with 语句不好优化，with性能低
-			</dd>
-			<dt>7.2debugger</dt>
+			<dt>5.7其他语句</dt>
+			<dd>with,debugger,use strict</dd>
+			<dt>5.7.1 with</dt>
+				<dd>
+					作用链:一个按序检索的对象列表，通过它可以进行变量名解析
+					<br/>with语句用于临时扩展作用域，在严格模式下禁止使用witch
+					<br/>缺点：with 语句不好优化，with性能低
+				</dd>
+			<form>
+				<input type="text" name="name" placeholder="try with">
+			</form>
+				
+			<dt>5.7.2 debugger</dt>
 			<dd>debugger通常什么也不做，当调试程序可以运行时,javascript解析器将会以调试模式运行，这种语句产生断点,</dd>
-			<dt>7.3 use strict</dt>
+			<dt>5.7.3 use strict</dt>
 			<dd>use strict 是ecmaScript5引入的一条指令。
 				<br/>指令和普通的语句之间两个重要区别
 				它不包含任何语言的关键字，它是一个特殊字符串直接量的表达式可以使用单引号或者双引号，它代表着脚本的开始或者函数的开始
@@ -124,10 +132,8 @@
 				<br/>11.在严格模式中是不允许使用八进制整数直接量非严格可以
 				<br/>12.严格:eval和arguments当做关键字,他们的值不能修改不能给标识符赋值，也不能给他们声明变量，用做函数名，用做函数参数或者用做catch块的标识符
 				<br/>13.严格模式中失去了调用栈的检查能力在严格模式函数中，caller，arguments，arguments.caller会抛出一个类型错误异常.当访问两个属性时将抛出类型错误异常
-				.
-
-
 			</dd>
+			<dt>5.8 javascript 语句小结</dt>
 		</dl>		
 	</body>
 	<script type="text/javascript">
@@ -191,46 +197,44 @@
 		console.info('------------------------------5.6 跳转------------------------------')
 		console.log('------------------------------5.6.1标签语句------------------------------');
 		function myWay(n){
-			if(n>0){
-				// runloop:if(n!=0){
-				// 	console.log(n);
-				// }
-				runloop:while(n>=0){
-				if(n%2==0){
-						console.log(n);							
-						
-					}else{
+			loop:for(;n>0;n--){
+
+				if(n>4){
+					console.info('n>4,看看当n大于4的时候不会执行n>0 code',n);
+					continue loop;
+				}	
+				if(n>0){
+					console.info('n>0',n);
 						n--;
-						continue runloop;
-					}
-					n--;
-				}
+				}			
 			}
 		}
-			myWay(6);
-		console.log('6.2break跳出循环---------------------------');
-		var sum=0,success=false,val=[10,20,30],row=new Array();
+		console.info('myWay(6)',myWay(6));
+		console.log('------------------------------5.6.2break语句------------------------------');
+		var sum=0,success=false,val=[10,'我是中文',20,30],row=new Array();
 		com:if(val){
 			for(var i=0;i<val.length;i++){
 				row.push(val[i]);
-				console.log('row:'+row);
+				console.log('row:',row);
 				if(!row) break com;
 				for(var y=0;y<row.length;y++){
 					var cell=row[y];
 					console.log('cell:'+cell);
-					if(isNaN(cell)) break com;
+					if(isFinite(cell)) break com;
 					sum+=cell;
 					console.log("sum:"+sum);
 				}
 			}
 		}
-		console.log('6.5throw语句---------------------------');
+		console.log('------------------------------5.6.3continue语句------------------------------');
+		console.log('------------------------------5.6.4return语句------------------------------');
+		console.log('------------------------------5.6.5throw语句------------------------------');
 		function errors(x){
 			if(x<0) throw new Error('x不能为负数');
 			console.log("x:"+x);
 		}
-		errors(5);
-		console.log('6.6try/catch/finally语句---------------------------');
+		console.info('errors(5)//假设入参是-5就会在console 抛出错误',errors(5));
+		console.log('------------------------------5.6.6 try/catch/finally语句------------------------------');
 		function trys(n){
 			try{
 				loop:while(n>0){
@@ -247,17 +251,16 @@
 				console.log("finally被执行了");
 			}
 		}
-		trys(1);
-		console.log('7.1witch---------------------------');
+		console.info('trys(1)',trys(1));	
+		console.log('------------------------------5.7其他语句类型------------------------------');	
+		console.log('------------------------------5.7.1 with----------------------------------');
 		//添加至作用域链的顶层，这种方法减少大量的输入不需要每个属性都添加document.forms  document.form[0].address.value
-		// with(document.forms[0]){
-		// 	name.value="";
-		// 	address.value="";
-		// 	email.value="";
-		// }
-		// var f=document.forms[0];
-		// console.log(f.name.value);
-		console.log('7.2debugger---------------------------');
+		console.info('window:',window);
+		with(window){
+			var arr=[23,3233,23,323,3];
+		}
+		console.info('with change window://影响到了global window attr',window);
+		console.log('------------------------------5.7.2 debugger----------------------------------');
 		function f(o){
 			if(o>0){
 				// debugger;
@@ -265,5 +268,7 @@
 			}
 		}
 		f(1);
+		console.log('------------------------------5.7.3 user static----------------------------------');
+		console.log('------------------------------5.8 javascript 语句小结----------------------------------');
 	</script>
 </html>
