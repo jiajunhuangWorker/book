@@ -8,49 +8,56 @@
 <body>
 	<dl>
 		<dt>1.javascript是什么?</dt>
-		<dd>1、JavaScript是面向web的编程语言</dd>
-		<dd>2、javscript适合面向对象和函数式的编程风格</dd>
-		<dd>3、JavaScript是高端，动态，弱类型的编程语言</dd>
+		<dd>JavaScript是面向web的编程语言</dd>
+		<dd>javscript适合面向对象和函数式的编程风格</dd>
+		<dd>JavaScript是高端，动态，弱类型的编程语言</dd>
 		
 		<dt>2.JavaScript语言核心？</dt>
-		<dd>文本,数组，日期和正则表达式，错误</dd>	
+		<dd>string,array,date,error,RegExp</dd>	
 		
 		<dt>3.宿主环境</dt>
 		<dd>宿主环境：web浏览器(浏览器包含javascript解析器)</dd>
-		<dd>宿主对象:页面,所有的dom和bom,ecmaScript对象未定义的对象</dd>
+		<dd>宿主对象:所有非本地对象都是宿主对象（host object），即由 ECMAScript 实现的宿主环境提供的对象
+		</dd>
 
 		<dt>4.数据类型</dt>
-		<dd>对象和数组，在编程中，能够表示并操作的值的类型叫数据类型,javascript数据类型分为原始数据类型和对象类型</dd>
-
+		<dd>数据类型在数据结构中的定义是一个值的集合以及定义在这个值集上的一组操作</dd>
+		<dd>在编程中能够表示并操作的值的类型叫数据类型
+		</dd>
+		<dd>javascript数据类型分为原始数据类型(String,Number,boolean,Undefined,Null)和对象类型(内置对象,宿主对象,本地对象)</dd>
+		<dd>本地对象<new String(),new Number(),new Object()></dd>
+		<dd>，内置对象<开发者不必明确实例化内置对象，它已被实例化了,Window,Document,Math等></dd>
+		<dd>，宿主对象<所有非本地对象都是宿主对象（host object），即由 ECMAScript 实现的宿主环境提供的对象></dd>
+		<dd>对象补充说明:对象是键值对
+		<br/>javascript对象是命名值的无序集合，javascript同样定义了一种特殊的对象-数组有序集合，另外一种特殊对象是函数,而使用new是创建对象</dd>
 		<dt>5.语句和表达式</dt>
-		<dd>语句：以分号结束叫语句,语句并不包含一个值但它改变运行的状态 表达式：仅仅计算出一个值但并不作任何操作它并不改变程序运行状态</dd>
+		<dd>语句：以分号结束叫语句,语句并不包含一个值但它改变运行的状态 </dd>
+		<dd>表达式：仅仅计算出一个值但并不作任何操作它并不改变程序运行状态</dd>
 		
 		<dt>6.函数和方法</dt>
-		<dd>函数：带有名称的和参数的JavaScript代码段 方法：当函数和对象一起使用叫做方法（所有javascript对象都包含方法）</dd>
+		<dd>函数：带有名称的和参数的JavaScript代码段 </dd>
+		<dd>方法：当函数和对象一起使用叫做方法（所有javascript对象都包含方法）</dd>
 		
 		<dt>7.this</dt>
-		<dd>this关键字是定义方法</dd>
+		<dd>this关键字是在不同的作用起到了指向当前作用域里面的元素</dd>
+
 		<dt>8.回收机制</dt>
 		<dd>javascript解释器有自己的内存管理机制，可以自动对内存进行垃圾回收（不必要担心内存的销毁和内存回收问题，当没有任何引用
-			指向一个对象，解析器会自动回收这个对象）</dd>
+			指向一个对象，解析器会自动回收这个对象）
+		</dd>
 	</dl>
 	<dl>
 		<dt>1.变量</dt>
 		<dd>变量是一个值的符号名可以通过名称获取对值的引用</dd>
-		<dt>2.原始数据类型:</dt>
-		<dd>原始数据类型：数字，字符串，布尔，两个特殊的原始值：null（空）和undefined（未定义） 对象object 是属性的集合，对象是键值对
-		<br/>javascript对象是命名值的无序集合，javascript同样定义了一种特殊的对象-数组有序集合，另外一种特殊对象是函数,而使用new是创建对象
+		
+		<dt>2.模式匹配</dt>
+		<dd>RegExp()构造函数,表示创建文本匹配模式的对象.这些模式称为正则表达式,javascript采用perl的正则表达式语法		
 		</dd>
-		<dt>3.模式匹配</dt>
-		<dd>Regexp()构造函数,表示创建文本匹配模式的对象.这些模式称为正则表达式,javascript采用perl的正则表达式语法
-		<br/>string和regExp对象均定义了利用正则表达式进行匹配和查找与替换的函数
-		<br/>布尔值包含tostring方法因此可以使用这个方法将字符串转换为true或false但是他不包含其他有用的方法
-		</dd>
-		<dt>4.undefined和null</dt>
-		<dd>null是属于object，它是特殊的对象,未定义的值表示更深层次的空值如果查询对象属性或者数组元素的值返回undefined
-		<br/>则说明这个属性或元素不存在，如果函数没有返回任何值就会返回undefined，引用没有提供实参的函数形参的值也会返回undefined
-		<br/>null是程序级传入函数，赋值给变量或者属性最佳选择null
-		</dd>
+		<dd>string和RegExp对象均定义了利用正则表达式进行匹配和查找与替换的函数</dd>
+
+		<dt>3.undefined和null</dt>
+		<dd>null是属于object,它是特殊的对象,null是程序级传入函数，赋值给变量或者属性最佳选择null</dd>
+		<dd>未定义的值表示更深层次的空值如果查询对象属性或者数组元素的值返回undefined,未声明的变量,引用没有提供实参的函数 则说明这个属性或元素不存在</dd>
 		<dt>4.全局对象</dt>
 		<dd>全局对象的属性是全局定义的符号，javascript程序可以直接使用当javascript解析器启动时它将创建一个新的全局对象
 		<br/>全局属性:undefined,Infinity和NAN等
