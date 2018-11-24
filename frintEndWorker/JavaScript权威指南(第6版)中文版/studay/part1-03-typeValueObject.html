@@ -32,56 +32,123 @@
 			<dd>以数字0作为开头,在严格模式下禁止八进制直接量</dd>
 
 			<dt>3.1.2浮点型直接量</dt>
-			<dd>浮点型直接量可以含有小数,可以使用指数记数法表示浮点型直接量</dd>
+			<dd>浮点型直接量可以含有小数,可以使用指数记数法表示浮点型直接量,</dd>
 
 			<dt>3.1.3javascriptzhong算术的运算</dt>
-			<dd>算术运算符溢出,下溢,或被零整除不报错。会出现无穷大值 （正/负无穷大）</dd>
+			<dd>javascript程序是使用语言本身提供算术运算符来进行数字运算的</dd>
+			<dd>+,-,*,/,%</dd>
+			<dd>溢出,下溢,或被零整除不报错</dd>
+			<dd>上溢/下溢:正/负无穷大,Infinity/-Infinity</dd>
 			<dd>NaN(no a number)它和任何值都不相等,包括自身</dd>
-			
+
 			<dt>3.1.4二进制浮点数和四舍五入错误</dt>
-			<dd>精度问题</dd>
+			<dd>javascript通过浮点数的形式只能表示其中有限个数因此会出现精度问题</dd>
+
 			<dt>3.1.5日期和时间</dt>			
-			<dd>Date()构造函数,</dd>
+			<dd>javascript语言核心包括Date()构造函数用来创建日期</dd>
+			
 			<dt>3.2文本</dt>
-			<dd>字符串时一组由16位值组成的不可变得有序序列每个字符都是雷子unicode字符集</dd>
+			<dd>字符串是一组由16位值组成的不可变得有序序列每个字符都是雷子unicode字符集</dd>
+			<dd>javascript采用UTF-16编码的Unicode字符集,javascript字符是由一组无符号的16位值组成的序列</dd>
+			<dd>不能表示16位的unicode字符则遵循utf-16编码规则</dd>
+			
 			<dt>3.2.1字符串直接量</dt>
-			<dd>使用单引号或者双引号括住的内容是字符串直接量</dd>
+			<dd>单引号或者双引号括住的内容是字符串直接量</dd>
+			<dd>example:'name="myName"'</dd>
+			<dd>字符串直接量可以拆分成数行每行\结束，反斜杆和行结束符都不算是字符串直接量的内容</dd>
+			<dd>注意单引号使用example: can't   应该写成'can\'t'</dd>	
+
 			<dt>3.2.2转义符</dt>
 			<dd>反斜杆：\</dd>
+			
 			<dt>3.2.3字符串使用</dt>
 			<dd>连接符号 +</dd>
+			<dd>javascript中字符四固定不变的,类似replace,toUpperCase()的方法都返回一个新的字符串,原字符串没发生改变</dd>
+			<dd>字符串可以当做读书组因此可以有chartAt方法</dd>
+
 			<dt>3.2.4模式匹配</dt>
-			<dd>RegExp()是强大的文本处理工具</dd>
+			<dd>RegExp()构造函数,用来创建表示文本匹配模式的对象</dd>
+			<dd>RegExp()是一种强大和常用的文本处理工具</dd>
+			<dd>StringheRegExp对象均定义了利用正则表达进行匹配和查找替换的函数</dd>
+
 			<dt>3.3布尔值</dt>
-			<dd>布尔值通常用于JavaScript中控制结构中</dd>
+			<dd>布尔值通常用于JavaScript中控制结构中,true/false</dd>
 			<dd>!==,==,&&,||,!</dd>
+			<dd>转为false:undefined,null,0,-0,NaN,''</dd>
+			
 			<dt>3.4null和undifined</dt>
+			<dd>null是关键字表示空值,nil,表示程序级错误</dd>
+			<dd>undefined:空缺表示深层次的空值,表示没有初始化,元素不存在,不是关键字,表示系统级的</dd>
+			<dd>.和[]不能存null和undifined</dd>
+			
 			<dt>3.5全局对象</dt>
-			<dd>原始类型和原始值,对象类型-对象、数组和函数!</dd>
+			<dd>当javascript解析器启动时它就会创建一个新的全局对象并初始化全局属性,全局函数,构造函数,全局对象</dd>
 			<dd>全局属性:undefined,Infinity和NAN</dd>
 			<dd>全局函数:isNaN(),parseInt(),eval(),in,等</dd>
 			<dd>构造函数：Data(),RegExp(),String(),Object(),Array(),Number()</dd>
 			<dd>全局对象:Math,JSON</dd>
+			<dd>全局对象要以保留字来对待</dd>
+			<dd>window对象定义了核心全局属性,它针对web浏览器和客户端</dd>
+
 			<dt>3.6包装对象</dt>
-			<dd>javascript对象是一种复合值,它是属性或已命名的集合，存取字符串、数字或布尔值得属性时创建的临时对象称为包装对象</dd>
+			<dd>javascript对象是一种复合值,它是属性或已命名的集合，存取字符串、数字或布尔值得属性时创建的临时对象称为包装对象具体看问题本</dd>
+			
 			<dt>3.7不可变得原始值和可变的对象引用</dt>
 			<dd>原始值:undefined,null,boolean,number,string,object</dd>
 			<dd>对象是可变的属性是可以发生改变的,两个相同属性以及相同的值他们是等的！因为索引值不同</dd>
 			<dd>对象的比较都是引用的比较</dd>
+			<dd>原始值和对象区别:</dd>
+			<dd>原始值无法更改,没有索引值,没有键值对,值比较而不是索引比较</dd>
+			<dd>对象:键值对,索引比较而不是值比较,存在索引</dd>
+
 			<dt>3.8类型转换</dt>
-			<dd>隐式转换</dd>
+			<dd>javascript期望使用一个布尔值得时候你可以使用各种类型的值来进行转为boolean 例如undifined,0,'',null，nan</dd>
+			<dd>如果转换没有意义就会返回nan</dd>
+			
 			<dt>3.8.1转换和相等性</dt>
+			<dd>由于javascript可以灵活的类型转换,其==相等运算符也随相等的含义灵活多变</dd>
+
 			<dt>3.8.2显式类型转换</dt>
-			<dd>parseInt(nuumber),parseFloat(nuumber)</dd>
-			<dt>对象转换原始值</dt>
-			<dd>对象继承了toString()方法</dd>
+			<dd>parseInt(nuumber),parseFloat(nuumber),Boolean(),Number(),String(),Object()</dd>
+			<dd>除了null和undefined之外的任何对象都具有toString()</dd>
+			<dd>null和undefined不能转为对象</dd>
+			
+			<dt>3.8.3对象转换为原始值</dt>
+			<dd>对象继承了toString()方法和valueOf方法</dd>
+			
 			<dt>3.9声明变量</dt>
-			<dd>var，传入值前是undifined</dd>
+			<dd>var(使用变量之前需要声明)</dd>
+			<dd>在严格模式下如果不声明var 会报undifined</dd>
+			<dd>编程语言分为动态和静态语言</dd>
+			<dd>动态语言：运行期间才去做数据类型检测的语言，example:Python,Ruby,javascript</dd>
+			<dd>静态语言：它的数据类型是在编译期间检查的，写程序时要声明所有变量的数据类型 example:c#,java</dd>
+			<dd>重复声明和遗漏声明</dd>
+			<dd>var重复声明变量会出现重新初始化</dd>	
+			<dd>遗漏声明会再严格模式出现报错的</dd>
+
 			<dt>3.10变量作用域</dt>
+			<dd>一个变量的作用域是程序源代码中的定义这个变量的区域</dd>
+			<dd>global变量拥有全局作用域,在javascript代码中的任何地方都存在意义</dd>
+			<dd>局部变量的优先级高于同名的全局变量</dd>
+
+			<dt>3.10.1函数作用域和声明提前</dt>
+			<dd>花括号内的每一段代码都具有各自的作用域,变量声明它们的代码之外不可见的我们称之为块级作用域</dd>
+			<dd>而在javascript只有函数去取代块级作用域</dd>
+			<dd>javascript的函数作用域是指在函数内声明的所有变量在函数体内始终可见,在声明之前就可以调用这是javascript的声明提前</dd>
+			<dd>声明提前在javascript引擎的预编译</dd>
+
 			<dt>3.10.2作为属性的变量</dt>
+			<dd>javascript全局变量是全局对象的属性mdn做实验测试过该花</dd>
+			<dd>this关键字引用到全局对象</dd>
+
 			<dt>3.10.3作为域链</dt>
+			<dd>当查找变量的时候，会先从当前上下文的变量对象中查找，如果没有找到，就会从父级(词法层面上的父级)执行上下文的变量对象中查找，一直找到全局上下文的变量对象，也就是全局对象。这样由多个执行上下文的变量对象构成的链表就叫做作用域链</dd>
+			<dd>javascript是基于词法作用域的语言</dd>
 			<dd>作用域链是一个对象列表或链表,这组对象定定义了这段代码作用域中的变量,通过属性查找值叫做变量解析</dd>
 			<dd>javscript是基于词法作用域的语言,通过阅读包含变量定义在内的数行源码就知道变量作用域</dd>
+			<dd>javascript在查找的时候是属于变量解析</dd>
+			<dd>作用域内有两个对象,第一个是全局对象，第二个是局部对象</dd>
+			<dd>每次调用外部函数的时候,作用域链都不同</dd>
 		</dl>	
 	</body>
 	<script type="text/javascript">	
@@ -98,7 +165,36 @@
 		console.info('01:',01,'result:1')//1 1
 		console.info('011:',011,'result:1+1*8 9')//9 1+1*8 9
 		console.info('0111:',0111,'result:1+8*9')//73 1+8*9
-		console.info('------------------------------math------------------------------')
+		
+		
+		console.info('------------------------------3.1.2浮点型直接量------------------------------')
+		console.info('1.47E-32//1.47*10的-32次方',1.47E-32);
+		console.info('1.47e32//1.47*1011的-32次方',1.47e32);
+
+		console.info('------------------------------3.1.3javascriptzhong算术的运算------------------------------')
+		console.info('Infinity',Infinity);
+		console.info('Number',Number);
+		console.info('0/0:',0/0);
+		console.info('1/0:',1/0);
+		console.info('-1/0:',-1/0);
+		console.info('Number.NaN',Number.NaN);
+		console.info('NaN',NaN);
+		console.info('NaN==Number.NaN',NaN==Number.NaN);
+		console.log('Number.POSITIVE_INFINITY//只读:',Number.POSITIVE_INFINITY);
+		console.log('Number.MAX_VALUE+1//只读:',Number.MAX_VALUE+1);
+		console.log('Number.MIN_VALUE/2//发生下溢:',Number.MIN_VALUE/2);
+		console.log('-Number.MIN_VALUE/2//负零:',-Number.MIN_VALUE/2);
+		console.log('-1/Infinity//负零:',-1/Infinity);
+		console.info('isNaN(NaN)',isNaN(NaN));
+		console.info('isNaN("666")',isNaN("666"));
+		console.info('isNaN("我是中文")',isNaN("我是中文"));
+		console.info('isFinite合法的数值返回true')
+		console.info('isFinite("我是中文")',isFinite("我是中文"));
+		console.info('isFinite("666")',isFinite("666"));
+		console.info('isFinite("NaN")',isFinite(NaN));
+		console.info('Number.POSITIVE_INFINITY',Number.POSITIVE_INFINITY);
+		console.info('isFinite(Number.POSITIVE_INFINITY)',isFinite(Number.POSITIVE_INFINITY));
+		console.info('isFinite(-Number.POSITIVE_INFINITY)',isFinite(-Number.POSITIVE_INFINITY));
 		console.log('Math:',Math)
 		console.info('Math.pow(2,3)//2的3次方:',Math.pow(2,3))
 		console.info('Math.round(.4)//四舍五入:',Math.round(.4))
@@ -119,32 +215,12 @@
 		console.log('Math.log(512)/Math.LN2//以2为底数512的对数:')
 		console.info(Math.log(512)/Math.LN2)
 		console.info('Math.exp(3)//e的三次幂:',Math.exp(3))
-		console.info('------------------------------number(3.1.2浮点型直接量)------------------------------')
-		console.info('Number',Number);
-		console.info('0/0:',0/0);
-		console.info('1/0:',1/0);
-		console.info('-1/0:',-1/0);
-		console.log('Number.POSITIVE_INFINITY//只读:',Number.POSITIVE_INFINITY);
-		console.log('Number.MAX_VALUE+1//只读:',Number.MAX_VALUE+1);
-		console.log('Number.MIN_VALUE/2//发生下溢:',Number.MIN_VALUE/2);
-		console.log('-Number.MIN_VALUE/2//负零:',-Number.MIN_VALUE/2);
-		console.log('-1/Infinity//负零:',-1/Infinity);
-
-		console.info('------------------------------method(3.1.3javascriptzhong算术的运算)------------------------------')
-		console.info('isNaN(NaN)',isNaN(NaN));
-		console.info('isNaN("666")',isNaN("666"));
-		console.info('isNaN("我是中文")',isNaN("我是中文"));
-		console.info('isFinite合法的数值返回true')
-		console.info('isFinite("我是中文")',isFinite("我是中文"));
-		console.info('isFinite("666")',isFinite("666"));
-		console.info('isFinite("NaN")',isFinite(NaN));
-		console.info('isFinite(Number.POSITIVE_INFINITY)',isFinite(Number.POSITIVE_INFINITY));
-		console.info('isFinite(-Number.POSITIVE_INFINITY)',isFinite(-Number.POSITIVE_INFINITY));
-		console.info('------------------------------精度验证(3.1.4二进制浮点数和四舍五入错误)------------------------------')
+		console.info('------------------------------3.1.4二进制浮点数和四舍五入错误------------------------------')
 		console.info('.3-.2:',.3-.2);
 		console.info('.4-.3:',.4-.3);
 		console.log('.3-.2==.4-.3',.3-.2==.4-.3);
-		console.info('------------------------------精度验证(3.1.5日期和时间)------------------------------')
+
+		console.info('------------------------------3.1.5日期和时间------------------------------')
 		console.info('Date',Date);
 		console.info('typeof:'+typeof new Date() ,'time:'+ new Date())
 		console.info('1秒等于1000毫秒 计算毫秒差new Date(2018,11,18) - new Date(2018,11,17):',new Date(2018,11,18) - new Date(2018,11,17))
@@ -154,7 +230,14 @@
 		console.info('计算星期几（星期天表示0）new Date().getDay():',new Date().getDay());
 		console.info('计算时间:new Date().getHours()',new Date().getHours());
 		console.info('计算UTC小时,基于时区:new Date().getUTCHours()',new Date().getUTCHours());
-		console.info('------------------------------字符串(3.2.2转义符)------------------------------')
+
+		console.info('------------------------------3.2文本------------------------------')
+
+		console.info('------------------------------3.2.1字符串直接量------------------------------')
+		console.info('two\nLine');
+		console.info('can\'t')
+
+		console.info('------------------------------3.2.2转义符------------------------------')
 		console.info('版权符号:','\xA9');
 		console.info('π：','\u03c0');
 		console.info('NUL字符\o：','\o');
@@ -169,7 +252,8 @@
 		console.info('反斜线：','\\');
 		console.info('两位十六进制数XX指定的是Latin-1字符\x01(不能是中文只能是数字)：','\x01');
 		console.info('由4位十六进制数XXXX代表unicode\u1111(不能是中文只能是数字)：','\x1111');
-		console.info('------------------------------字符串(3.2.3字符串使用)------------------------------')
+
+		console.info('------------------------------3.2.3字符串使用------------------------------')
 		console.info("'你好啊'.length",'你好啊'.length)
 		console.info('nihaoa.chartAt(2)','nihaoa'.charAt(2))
 		console.info("'nihaoa'.chartAt('nihaoa'.length-1)",'nihaoa'.charAt('nihaoa'.length-1))
@@ -178,22 +262,28 @@
 		console.info("'nihaoa'.slice(-3)//最后三个字符串",'nihaoa'.slice(-3))
 		console.info("'nihaoa'.indexOf('a')//匹配字符串中是否存在a字符，如果存在将返回非-1的小标值",'nihaoa'.indexOf('a'))
 		console.info("'nihaoa'.lastindexOf('a')",'nihaoa'.lastIndexOf('a'))
-		console.info("'nihaoa'.index('a',4)//从第四个字符开始寻找a",'nihaoa'.indexOf('a',4))
+		console.info("'nihaoa'.indexOf('a',4)//从第四个字符开始寻找a",'nihaoa'.indexOf('a',4))
 		console.info("'n，iha，o，a'.split(',')//按照规则进行分割成子字符串以数组返回",'n,iha,o,a'.split(','))
 		console.info("'nihaoa'.replace('a','fuck')//返回一个新的字符串",'nihaoa'.replace('a','fuck'))
 		console.info("'nihaoa'.toUpperCase()//返回一个新的字符串",'nihaoa'.toUpperCase())
-		console.info('------------------------------正则表达式(3.2.4模式匹配)------------------------------')
+		console.info("nihaoa'[2]//返回2，从0开始读取",'nihaoa'[2])
+		console.info("'nihaoa'['nihaoa'.length-1]//返回a",'nihaoa'['nihaoa'.length-1])
+
+		console.info('------------------------------3.2.4模式匹配------------------------------')
 		console.info('/^HTML/:匹配以html开始的字符串',/^HTML/)
 		console.info('/[1-9][0-9]*/:匹配一个非0数字后面是任意个数字',/[1-9][0-9]*/)
 		console.info('/\bjavascript\b/i:匹配单词"javascript"忽略大小写',/\bjavascript\b/i);
-		var text='testing: 1,22,3,77';
+		var text='t11es2ti33ng: 1,22,3,77';
 		var pattern=/\d+/g //匹配所有包含一个或多个数字的实例
 		console.info('pattern.test(text)//返回boolean类型',pattern.test(text));
 		console.info('text.search(pattern)//返回number,首次匹配成功的下标位置',text.search(pattern));
 		console.info('text.match(pattern)//返回array,所有符合的组成数组',text.match(pattern));
 		console.info('text.replace(pattern,\'#\')//返回新的对象 替换符号',text.replace(pattern,'#'));
 		console.info('text.split(/\D+/)//返回数组用非数字字符截取字符串',text.split(/\D+/));
-		console.info('------------------------------正则表达式(3.4null和undefined)------------------------------')
+
+		console.info('------------------------------3.3布尔值------------------------------')
+
+		console.info('------------------------------3.4null和undefined------------------------------')
 		console.info('typeof undefined:',typeof undefined)
 		console.info('typeof null:',typeof null)
 		var str={};
@@ -218,6 +308,7 @@
 			console.log('typeof str //包装后的字符串',typeof str);
 			num=new Number(num);
 			bool=new Boolean(bool);
+
 		console.info('------------------------------3.7不可变得原始值和可变的对象引用------------------------------')
 			console.info('--原始值--');
 		var str='lucas!hellow!'
@@ -251,14 +342,30 @@
 			console.info('"0"==0',"0"==0)
 			console.info('false==0',"0"==false)
 			console.info('false==0',0==false)
+
+			console.info('------------------------------3.8类型转换------------------------------')			
+			console.info('数字转字符串:10+"object":',10+"object",'   typeof 10+"object":', typeof (10+"object"));
+			console.info('字符串转数字:"10"+"20":',"10"+"20",'   typeof "10"+"20":', typeof ("10"+"20"));
+			console.info('NaN:n=1-"x":',n=1-"x",'   typeof var n=1-"x":', typeof (n=1-"x"));
+			console.info('NaN:n=1-"x":',n=1-"x",'   typeof var n=1-"x":', typeof (n=1-"x"));
+			
+			console.info('------------------------------3.8.1转换和相等性------------------------------')
+			console.info('null==undefined',null==undefined)
+			console.info('0=="0"',0=='0')
+			console.info('0==false',0==false)
+			console.info('"0"==false',"0"==false)
+			console.info('undefined==false',undefined==false)
+
 			console.info('------------------------------3.8.2显式类型转换------------------------------')
+			console.info(new Number())
+			console.info('Object(undefined)',Object(undefined))
+			console.info('String(undefined)',String(undefined))
 			var n=12345.678;
-			console.info('n.toFixed(0)',n.toFixed(0))
 			console.info('n.toFixed(2)',n.toFixed(2))
-			console.info('n.toFixed(5)',n.toFixed(5))
-			console.info('n.toExponential(3)',n.toExponential(3))
-			console.info('n.toExponential(3)',n.toExponential(3))
-			console.info('------------------------------3.8.3对象------------------------------')
+			console.info('n.toExponential(2)',n.toExponential(2))
+			console.info('n.toPrecision(2)',n.toPrecision(2))
+
+			console.info('------------------------------3.8.3对象转换为原始值------------------------------')
 			console.info('--toString()--');			
 			console.log('{a:1,b:2,b:2}.toString()',{a:1,b:2}.toString());
 			console.log('[2,35,334].toString()',[2,35,334].toString());
@@ -266,39 +373,53 @@
 			console.log('new Date().toString()',new Date().toString());
 			console.info('--valueOf() 对象转为原始值--');
 			console.info('new Date().valueOf()',new Date().valueOf())
+
+			console.info('------------------------------3.9变量声明------------------------------')
+
 			console.info('------------------------------3.10变量作用域------------------------------')
-			console.info('--DemoOne-嵌套作用域--');			
-			var a='global script';
-			function check(){
-				var a='global script check';
-				function check02(){
-					var a='global333 script222 check000003';
-					return a;
+			var val='global script';
+			var scopeName=function scope(){
+				var val='scope script';
+				return val;
+			}
+			console.info('方法名:',scopeName,'\n全局value:',val,'\n方法调用',scopeName(),'变量就近原则');	
+				val02='global script222';
+			var scopeName02=function scope(){
+				var val='scope script scope script';
+				var val02='scope script 值2';
+				return [val,val02];
+			}
+
+			console.info('方法名:',scopeName02,'\n全局value:',val02,'\n方法调用',scopeName02(),'没发生异常');	
+			var scopeName03=function scope(){
+				var val='scope script local';
+				function son(){
+					var val='scope script nested';
+					return val;
 				}
-				return check02()
+				return son();
 			}
-			console.info(check());
-			console.info('--DemoTwo-全局变量--');
-			var global='val';
-			function getVal(){
-				global='localhost';
-				myscope='localString';
-				console.info('getVal:',[global,myscope]);
-				return [global,myscope];
-			}
-			getVal();
+			console.info('方法名:',scopeName03,'\n全局value:',val,'\n方法调用',scopeName03(),'嵌套作用域');	
+
 			console.info('------------------------------3.10.1函数作用域和声明提前------------------------------')
-			function test(o){
-				var i=o;
-				if(typeof o=='object'){
-					var j=o;
+			var scopeName04=function scope(o){
+				var i=0;
+				if(typeof o=="object"){
+					var j=666;
 					for(var k=0;k<10;k++){
-						console.info('k:',k);
+						console.info('内部的k:',k)
 					}
-					console.info('k:',k);
+					console.info('外部的k:',k)
 				}
-				console.info('j:',j);
+				console.log('假设o成立之后就会获取内部的j')
 			}
-			test(new Number(1));
+			console.info('方法名:',scopeName04,'\n方法调用',scopeName04(Object()));
+
+			function scope(){
+				alert(val)
+			}
+			console.info('window.scope()证明已经被提前声明了函数已经扔到scope中',window.scope())
+			console.info('------------------------------3.10.2作为属性的变量------------------------------')
+
 	</script>	
 </html>
