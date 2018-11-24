@@ -2,20 +2,42 @@
 	<html lang="en" id="html">
 	<head>
 		<meta charset="UTF-8">
-		<title>3.类型、值和变量</title>
+		<title>第三章.类型、值和变量</title>
 		<link rel="stylesheet" href="../../../globalBase.css">
 	</head>
 	<body>
 		<dl>
+			<dt>3.概括</dt>
+			<dd>计算机程序运行需要对值,进行操作,在编程中能够表示操作的值称为数据类型(第一章又提到)</dd>
+			<dd>变量是一个值得符号名称,通过名称获取引用</dd>
+			<dd>null和undefined属于特殊原始值</dd>
+			<dd>对象是键值对的</dd>
+			<dd>特殊对象:global object</dd>
+			<dd>普通的javascript对象是命名值得无序集合</dd>
+			<dd>特殊对象函数,如果函数用来初始化使用new运算符我们称为构造函数</dd>
+			<dd>构造函数定义了一类对象</dd>
+			<dd>类可以看做事对象类型的子类型</dd>
+			<dd>javascript可以自由的进行数据类型转换</dd>
+			<dd>变量是无类型的var </dd>
+
+
 			<dt>3.1数字</dt>
-			<dd>javascript不区分整数和浮点,javscript所有数字都是浮点型,ieee 754标准</dd>
+			<dd>javascript不区分整数和浮点,javscript所有数字都是浮点型,ieee 754标准定义的64位浮点格式(-2的53次方和2的53次方)</dd>
+
 			<dt>3.1.1整形直接量</dt>
+			<dd>十六进制</dd>
 			<dd>0x或0X为前缀都是十六进制的直接量</dd>
+			<dd>A~F在16进制中表示10~15</dd>
+			<dd>八进制</dd>
+			<dd>以数字0作为开头,在严格模式下禁止八进制直接量</dd>
+
 			<dt>3.1.2浮点型直接量</dt>
-			<dd>浮点型直接量可以含有小数</dd>
+			<dd>浮点型直接量可以含有小数,可以使用指数记数法表示浮点型直接量</dd>
+
 			<dt>3.1.3javascriptzhong算术的运算</dt>
 			<dd>算术运算符溢出,下溢,或被零整除不报错。会出现无穷大值 （正/负无穷大）</dd>
 			<dd>NaN(no a number)它和任何值都不相等,包括自身</dd>
+			
 			<dt>3.1.4二进制浮点数和四舍五入错误</dt>
 			<dd>精度问题</dd>
 			<dt>3.1.5日期和时间</dt>			
@@ -63,7 +85,11 @@
 		</dl>	
 	</body>
 	<script type="text/javascript">	
+		/*全局对象*/
+		var creatglobalObject='1222';
+		console.log('creatglobalObject===window.creatglobalObject',creatglobalObject===window.creatglobalObject);
 		/* 将16进制转10进制 */
+		console.info('------------------------------3.1.1整形直接量------------------------------')//10*16+10 171
 		console.info('0xaa:',0xaa,'result:10*16+10 171')//10*16+10 171
 		console.info('0xab:',0Xab,'result:10*16+11 171')//10*16+11 171
 		console.info('0xff:',0xff,'result:15*16+15 255')//15*16+15 255
