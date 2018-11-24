@@ -144,11 +144,23 @@
 			<dt>3.10.3作为域链</dt>
 			<dd>当查找变量的时候，会先从当前上下文的变量对象中查找，如果没有找到，就会从父级(词法层面上的父级)执行上下文的变量对象中查找，一直找到全局上下文的变量对象，也就是全局对象。这样由多个执行上下文的变量对象构成的链表就叫做作用域链</dd>
 			<dd>javascript是基于词法作用域的语言</dd>
+			
+			
 			<dd>作用域链是一个对象列表或链表,这组对象定定义了这段代码作用域中的变量,通过属性查找值叫做变量解析</dd>
 			<dd>javscript是基于词法作用域的语言,通过阅读包含变量定义在内的数行源码就知道变量作用域</dd>
 			<dd>javascript在查找的时候是属于变量解析</dd>
 			<dd>作用域内有两个对象,第一个是全局对象，第二个是局部对象</dd>
 			<dd>每次调用外部函数的时候,作用域链都不同</dd>
+			<dd>函数的执行用到了作用域链，这个作用域链是在函数定义的时候创建的。嵌套的函数 f() 定义在这个作用域链里，其中的变量 scope 一定是局部变量，不管何时何地执行函数 f()，这种绑定在执行 f() 时依然有效</dd>
+			
+			<dt>作用域链补充说明1</dt>
+			<dd>作用域分为静态作用域(词法作用域)和动态作用域</dd>
+			<dd>词法作用域:函数的作用域是根据函数的定义来决定的</dd>
+			<dd>动态作用域:函数的作用域是在函数调用的时候决定的</dd>
+			
+			<dt>作用域链补充说明2</dt>
+			<dd>作用域链上有三个对象,全局对象,定义函数的参数,局部变量对象</dd>
+			<dd>当定义一个函数时实际上就保存一个作用域链,当调用函数时它会创建一个新的对象来存储它的局部变量，并将对象保存到作用域链上，因此每次调用外部作用域它的内部作用域都会重新定义一遍,因为每次调用外部作用域的时候作用域链都发生了一次改变</dd>
 		</dl>	
 	</body>
 	<script type="text/javascript">	
@@ -413,13 +425,45 @@
 				}
 				console.log('假设o成立之后就会获取内部的j')
 			}
-			console.info('方法名:',scopeName04,'\n方法调用',scopeName04(Object()));
+			console.info('方法名:',scopeName04,'\n方法调用',scopeName04(Object()),'嵌套作用域');
+
 
 			function scope(){
 				alert(val)
 			}
-			console.info('window.scope()证明已经被提前声明了函数已经扔到scope中',window.scope())
-			console.info('------------------------------3.10.2作为属性的变量------------------------------')
+			//console.info('window.scope()证明已经被提前声明了函数已经扔到scope中',window.scope(),'证明了scope在注册的时候已经在window中注册了')
+			console.info('------------------------------3.10.2作为属性的变量------------------------------')			
+			console.info('--静态作用域--')			
+			var creatglobalObjects = 'foo里面的value';
+			function foo() {			    
+			      console.log('bar调用了foo然后输出了全局变量creatglobalObjects里面的值:',creatglobalObjects);
+			      return creatglobalObjects
+			}
 
+			var bar=function bar() {
+			    var creatglobalObjects = 222222;
+			    foo();
+			    return creatglobalObjects;
+			}
+			console.info('方法名:',bar,'\n全局value:',creatglobalObject,'\n方法调用',bar());
+
+			var scope = "global scope";
+			var checkscope=function checkscope(){
+			    var scope = "local scope111";
+			    function f(){
+			        return scope;
+			    }
+			    return f();
+			}			
+			console.info('方法名:',checkscope,'\n全局value:',scope,'\n方法调用',checkscope());
+			var checkscope01=function checkscope(){
+			    var scope = "local scope222";
+			    function f(){
+			        return scope;
+			    }
+			    return f;
+			}
+			console.info('方法名:',checkscope01,'\n全局value:',scope,'\n方法调用',checkscope01()());
+			
 	</script>	
 </html>

@@ -1,7 +1,14 @@
 1.全局函数?
-isNaN(),isFinite(),eval()
-,parseInt(),typeof,window
-,document,global,parseFloat()，geval()
+isNaN()
+isFinite(),
+eval(),
+parseInt(),
+global,
+parseFloat(),
+typeof,
+window,
+document,
+geval()
 2.全局属性?
 undefined,nan,infinity
 3.全局对象
@@ -17,7 +24,10 @@ boolean,String,Number
 array,object,函数(new name()),<拥有valueOf和toString方法,键值对,delete,对象 instanceof 对象的类,字符串 in 对象  //判断对象里面存不存在该属性>
 6.原始表达式
 常量,直接量,关键字,变量
-
+7.全局变量
+Infinity,NaN
+Number
+toFixed()
 
 
 第一章
@@ -41,6 +51,23 @@ LN2 属性就是 loge2，即 2 的自然对数，其值近似于 0.6931471805599
 LN10：
 LN10 属性就是 loge10，即 10 的自然对数，其值近似于 2.3025850929940459011。
 
+3.特殊对象 global object 
+MDN web docs 解析说在一个全局对象就是存在全局范围内的对象,全局范围的意思是不存放在函数，汉法内的,例如window object 就是global 对象
+
+4.包装对象
+原始数据类型直接使用了对象方法,其实是因为javascript对其进行了包装然后当执行完了对象方法后就对其包装进行销毁
+原始数据类型有string，number,boolean,null，undifined 
+包装类意思是 'hellow!lucas'.indexOf('lucas');
+程序执行过程
+new String('hellow!lucas').indexOf('lucas');
+属性用完之后就立即销毁那个new String();
+
+5.词法作用域
+动态作用域和静态作用域
+静态作用域
+静态作用域又叫做词法作用域，采用词法作用域的变量叫词法变量。词法变量有一个在编译时静态确定的作用域。词法变量的作用域可以是一个函数或一段代码，该变量在这段代码区域内可见（visibility）；在这段区域以外该变量不可见（或无法访问）。词法作用域里，取变量的值时，会检查函数定义时的文本环境，捕捉函数定义时对该变量的绑定。
+动态作用域
+采用动态作用域的变量叫做动态变量。只要程序正在执行定义了动态变量的代码段，那么在这段时间内，该变量一直存在；代码段执行结束，该变量便消失。
 第四章
 
 第五章
