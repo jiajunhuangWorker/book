@@ -2,24 +2,31 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>第五章_语句</title>
+		<title>第五章 语句</title>
 		<link rel="stylesheet" href="../../../globalBase.css">
 	</head>
 	<body>
 		<dl>
-			<dt>5.语句</dt>
-			<dd>表达式在javascript中是短语,那么语句就是javascript整句或命令
-			<br/>javascript程序无非就是一系列可执行语句的集合（条件语句(if switch)，循环语句(do-while，while,for，for/in)，跳转语句（break,continue,throw））
-			</dd>						
+			<dt>5语句</dt>
+			<dd>表达式在javascript中是短语,那么语句就是javascript整句或命令</dd>
+			<dd>javascript程序无非就是一系列可执行语句的集合（条件语句(if switch)，循环语句(do-while，while,for，for/in)，跳转语句（break,continue,throw））</dd>
+
 			<dt>5.1表达式语句</dt>
-			<dd>具有副作用的表达式是javascript中最简单的语句.</dd>
+			<dd>具有副作用的表达式是javascript中最简单的语句</dd>
+
 			<dt>5.2复合语句和空语句</dt>
-			<dd>可以用逗号运算符将几个表达式链接在一起，形成一个表达式，同样javascript中还可以将多条语句联合在一起，形成复合语句.只须用多条语句包括起来即可
-			<br/>语句块需要注意：1.语句块结尾不需要使用分号,语句块内的语句必须用分号结尾2.javascript中没有块级作用域
-			<br/>复合语句：多条语句被当做一条语句使用时使用复合语句来替换
+			<dd>可以用逗号运算符将几个表达式链接在一起，形成一个表达式，同样javascript中还可以将多条语句联合在一起，形成复合语句.只须用多条语句包括起来即可</dd>
+			<dd>
+			语句块需要注意：
 			</dd>
+			<dd>1.语句块结尾不需要使用分号,语句块内的语句必须用分号结尾</dd>
+			<dd>2.javascript中没有块级作用域</dd>
+			<dd></dd>
+			<dd>复合语句：多条语句被当做一条语句使用时使用复合语句来替换</dd>
+
 			<dt>5.3声明语句</dt>
 			<dd>var 和function都是声明语句它们声明或者定义变量或函数.</dd>
+			
 			<dt>5.3.1 var</dt>
 			<dd>var语句用来声明一个或多个变量,var在函数体内将成为局部变量作用于函数中</dd>
 			<dt>5.3.2function</dt>
@@ -138,8 +145,9 @@
 	</body>
 	<script type="text/javascript">
 		console.info('------------------------------5语句------------------------------');
+
 		console.info('------------------------------5.1表达式语句------------------------------');
-		// window.close();//关闭你的当前窗口ss
+		
 		console.info('------------------------------5.2复合语句和空语句------------------------------')
 		var x=6;
 		{
@@ -147,7 +155,9 @@
 			var x=Math.PI;
 			console.log("块级内的x:"+x);
 		};
+		
 		console.info('------------------------------5.3声明语句------------------------------')
+		
 		console.info('------------------------------5.3.1 var------------------------------')
 
 		console.info('------------------------------5.3.2 function------------------------------')

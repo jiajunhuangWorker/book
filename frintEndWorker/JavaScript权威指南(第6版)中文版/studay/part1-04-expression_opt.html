@@ -8,107 +8,182 @@
 <body>
 	<dl>
 		<dt>4.表达式</dt>
-		<dd>javascript的一个短语，js解析器会将其计算出结果,变量名是一种简单的表达式，
-			<br/>this关键字经常在面向对象编程中出现
-		</dd>
+		<dd>javascript的一个短语，js解析器会将其计算出一个结果,变量名是一种简单的表达式</dd>
+		<dd>程序中的常量是最简单的一类表达式</dd>
+		<dd>this关键字经常在面向对象编程中出现</dd>
+		
 		<dt>4.1原始表达式</dt>
-		<dd>原始表达式（常量，直接量，关键字，变量）</dd>
+		<dd>最简单的表达式是原始表达式,原始表达式（常量，直接量，关键字，变量</dd>
+		<dd>this在不同的作用域指代的属性都不一样</dd>
+
 		<dt>4.2对象和数组的初始化表达式</dt>
 		<dd>对象和数组初始化表达式实际上是一个新创建的对象和数组</dd>
+		<dd>对象直接量和数组直接量</dd>
+		
 		<dt>4.3函数定义的表达式</dt>
 		<dd>函数定义表达式定义一个javascript函数</dd>
+		<dd>函数直接量</dd>
+
 		<dt>4.4属性访问表达式</dt>
 		<dd>expression.attr或者expression[attr]</dd>
+		<dd>不管怎么访问对象里面的谁能够在.和[]之前的表达式总是会首先计算</dd>
+		<dd>计算结果是null和undefined会报错!</dd>
+
 		<dt>4.5调用表达式</dt>
-		<dd>javascript中的调用表达式是一种调用函数方法的语法表示eg:方法名()
-		<br/>当对调用表达式进行求值得时候会先计算函数表达式然后计算表达式的参数得到一组参数值然后执行函数体 return返回结果
-		<br/>如果表达式是一个属性访问的表达式那么这个调用称为方法调用，在方法调用中执行函数体的时候,作为属性访问主题的对象
-		<br/>和数组便是其调用的方法内this的指向
-		</dd>
-		<dt>4.6.对象创建表达式</dt>
-		<dd>对象创建表达式创建一个对象并调用一个函数（构造函数）初始化新对象的属性.  new 关键字</dd>
-		<dt>4.7.运算符概括</dt>
-		<dd>算数运算符，比较运算符，逻辑表达式，赋值表达式
-		<br/> 关键字运算符和标点符号所表示的运算符一样都是正规的运算符,它们非常简易.
-		<br/>delete 删除属性，instanceof 测试对象类，~位数求反，void：返回undefined，>>>无符号右移,in测试属性是否存在,^按位异或,
-		</dd>
+		<dd>javascript中的调用表达式是一种调用函数方法的语法表示</dd>
+		<dd>example:方法名()</dd>
+		<dd>当对调用表达式进行求值得时候会先计算函数表达式然后计算表达式的参数得到一组参数值然后执行函数体 return返回结果 这里涉及到了实参和形参的说法</dd>
+		<dd>如果表达式是一个属性访问的表达式那么这个调用称为方法调用</dd>
+		<dd>对象和数组调用方法内可以使用this来获取当前对像里面的属性</dd>
+		
+		<dt>4.6对象创建表达式</dt>
+		<dd>对象创建表达式创建一个对象并调用一个函数（构造函数）初始化新对象的属性</dd>
+		<dd>创建对象方法 new Object(),{},Object()</dd>
+		
+		<dt>4.7运算符概述</dt>
+		<dd>算数运算符，比较运算符，逻辑表达式，赋值表达式</dd>
+		<dd>关键字运算符 delete 和 instanceof</dd>
+		
 		<dt>4.7.1操作数的个数</dt>
-		<dd>运算符可以根据其操作数个数进行分类，三元表达式：boolean?a:b</dd>
+		<dd>运算符可以根据其操作数个数进行分类</dd>
+		<dd>一个二元运算符将两个表达式合并成为校尉的表达式</dd>
+		<dd>三元运算符boolean?true:false</dd>
+
 		<dt>4.7.2操作数类型和结果类型</dt>
+		<dd>一些运算操作符可以作用于任何数据类型,但仍然希望它们操作数十指定类型的数据</dd>
+
 		<dt>4.7.3左值</dt>
 		<dd>表达式只能出现在赋值运算符的左侧</dd>
+		<dd>变量、对象属性和数组元素均是左值</dd>
+	
 		<dt>4.7.4运算符的副作用</dt>
-		<dd>一些表达式运算会相互影响称为副作用</dd>
+		<dd>计算一个简单的表达式不会对程序的运行状态造成任何影响，程序后续执行的计算也不会受到该计算的影响</dd>
+		<dd>有一些表达式则存在副作用</dd>
+		<dd>example: delete 删除运算符删除了某个属性后悔留下undefined</dd>
+			
 		<dt>4.7.5运算符优先级</dt>
 		<dd>typeof 是优先级最高的运算符之一</dd>
+
 		<dt>4.7.6运算符的结合性</dt>
 		<dd>从右到左运算的例子:x=~-y,w=x=y=c,q=a?b:c?d:e?f:g</dd>
-		<dt>4.7.7运算的顺序</dt>
-		<dt>4.8.算数表达式</dt>
-		<dd>+，-，*，、，%</dd>
-		<dt>4.8.1 +运算符</dt>
-		<dd>注意加法运算符转成字符串方法</dd>
-		<dt>4.8.2一元算术运算符</dt>
-		<dd>一元算数运算符作用于一个单独的操作数，并产生一个新值(++,--)</dd>
-		<dt>4.8.3位数算符</dt>
-		<dd>位数运算可以对由数字表示的二进制数据进行更低层级的按位运算(&位与,|位或,^异或,~非，<<左移,>>右移,>>>无符号右移)</dd>
-		<dt>4.9.关系表达式</dt>
-		<dd>in和installof 看例子</dd>
-		<dt>4.9.1相等和不等运算符号</dt>
-		<dd>==(比较值),===(比较数据类型，比较值),!=(不等),！==（不相等）</dd>
-		<dt>4.9.2比较运算符</dt>
-		<dd><（小于），>(大于),<=,>=  如果两个操作数是字符串他会依照字母表的顺序进行比较
-		<br/>String.localeCompare（）方法获取去更多字符串比较的相关信息,String.toLowerCase()和String.toUpperCase()大小写转换
-		</dd>
-		<dt>4.9.3in运算符</dt>
-		<dd>in运算符希望它的左操作数是一个字符串或可以转换为字符串，右操作数是一个对象-- 例子9.3</dd>
-		<dt>4.9.4 instanceof运算符</dt>
-		<dd>希望左操作数是对象，右操作是标识对象的类,检测父类，当左操作数不是对象就直接返回false
-		<br/>instanceof 工作原理：原型链(prototype),原型链作为javascript的继承机制,javascript首先计算f.prototype然后再原型链中找o
-		如果找到o是f的父类就返回true对象o是隐藏的成员，这个成员指向其父原型
-		</dd>
-		<dt>4.10.逻辑表达式</dt>
-		<dd>&&(短路且),||,!</dd>
-		<dt>4.10.1逻辑与&&</dt>
-		<dt>4.10.2逻辑或||</dt>
-		<dt>4.10.2逻辑非!</dt>
-		<dt>4.11.赋值表达式</dt>
-		<dd>=,+=,/=,-=,&=,*=^=,|=,>>>=,>>=,<<=，%=</dd>
-		<dt>4.12.表达式计算</dt>
-		<dd>javascript源代码组成字符串并产生一个值，javascript通过全局的eval()完成工作
-			<br/>eval 是函数也是运算符
+		
+		<dt>4.7.7运算顺序</dt>
+		<dd>运算符的优先级和结合性规定了它们在复杂的表达式中的运算顺序,但并没有规定子表达的计算过程中的运算顺序</dd>
 
-		</dd>
-		<dt>4.12.1 eval()</dt>
-		<dd>eval()只是一个参数需要传入字符串
-		<br/>工作原理传入字符串,进行编译，如果编译失败抛错误，成功执行这段代码并返回字符串中最后一个表达式或者语句的值，如果最后的表达式没值就返回undefined（注意：它使用了调用它的变量作用域环境，意思：它查找变量的值和定义新变量和函数的操作和局部作用域中的代码一样）
-		</dd>
+		<dt>4.8算数表达式</dt>
+		<dd>+，-，*，/，%</dd>
+		<dd>+运算符可以以字符串连接操作或者数字相加</dd>
+
+		<dt>4.8.1 +运算符</dt>		
+		<dd>二次运算符可以当做两个数字相加或者字符串连接操作</dd>
+
+		<dt>4.8.2一元算术运算符</dt>
+		<dd>一元算数运算符作用于一个单独的操作数，并产生一个新值(++,--,+,-)</dd>
+		<dd>一元加法+</dd>
+		<dd>一元加法运算符把操作数转换为数字</dd>
+		<dd>一元减法-</dd>
+		<dd>一元减法运算符把操作数转换为数字</dd>
+		<dd>递增++</dd>
+		<dd>递减--</dd>
+
+		<dt>4.8.3位运算符</dt>
+		<dd>位数运算可以对由数字表示的二进制数据进行更低层级的按位运算</dd>
+		<dd>(&位与,|位或,^异或,~非，<<左移,>>右移,>>>无符号右移)</dd>
+		
+		<dt>4.9关系表达式</dt>
+		<dd>in和installof根据关系是否存在返回true和false</dd>
+
+		<dt>4.9.1相等和不相等运算符</dt>
+		<dd>==(比较值),===(比较数据类型，比较值),!=(不等),！==（不相等）</dd>
+		<dd>===说明</dd>
+		<dd>number===string false</dd>
+		<dd>null===undefined false</dd>
+		<dd>ture===true true false===false true</dd>
+		<dd>NaN===NaN false(索引问题)</dd>
+		<dd>0 === -0 true</dd>
+		<dd>'String' === 'String' true</dd>
+
+		<dt>4.9.2比较运算符</dt>
+		<dd><（小于），>(大于),<=,>= </dd>
+		<dd>两个操作数是字符串他会依照字母表的顺序进行比较
+		String.localeCompare（）方法获取去更多字符串比较的相关信息</dd>
+		<dd>String.toLowerCase()和String.toUpperCase()大小写转换</dd>
+		<dd>javascript字符串是一个由16位证书值组成的序列，字符串的比较也之时两个字符串的字符数值比较</dd>
+		<dd>所有的大写ASCll字符都小于小写的ASCll</dd>
+
+		<dt>4.9.3in运算符</dt>
+		<dd>in运算符希望它的String in Object</dd>
+		
+		<dt>4.9.4instanceof运算符</dt>
+		<dd>instanceof运算符希望它 Object instanceof Object</dd>
+		<dd>检测两个类的关系是否存在父子关系</dd>
+		<dd>左操作数不是对象就直接返回false</dd>
+		<dd>原型链作为JavaScript的继承机制</dd>
+		<dd>instanceof 工作原理：原型链(prototype),原型链作为javascript的继承机制,javascript首先计算f.prototype然后再原型链中找o
+		如果找到o是f的父类就返回true对象o是隐藏的成员，这个成员指向其父原型</dd>
+
+		<dt>4.10逻辑表达式</dt>
+		<dd>&&(短路且),||,!</dd>
+		
+		<dt>4.10.1逻辑与&&</dt>
+		<dd>一层理解 boolean && boolean</dd>
+		<dd>二层理解 0 && boolean</dd>
+		<dd>三层理解 以短路与去进行理解</dd>
+
+		<dt>4.10.2逻辑或||</dt>
+
+		<dt>4.10.3逻辑非!</dt>
+		
+		<dt>4.11赋值表达式</dt>
+		<dd>=,+=,/=,-=,&=,*=^=,|=,>>>=,>>=,<<=，%=</dd>
+		
+		<dt>4.12表达式计算</dt>
+		<dd>javascript同样可以解析运行由javas源代码组成的字符串,并产生一个值</dd>
+		<dd>javascript通过全局的eval()完成工作eval 是函数也是运算符</dd>
+
+		<dt>4.12.1eval()</dt>
+		<dd>eval()只是一个参数需要传入字符串</dd>
+		<dd>工作原理传入字符串,进行编译，如果编译失败抛错误，成功执行这段代码并返回字符串中最后一个表达式或者语句的值，如果最后的表达式没值就返回undefined（注意：它使用了调用它的变量作用域环境，意思：它查找变量的值和定义新变量和函数的操作和局部作用域中的代码一样</dd>
+
 		<dt>4.12.2全局eval()</dt>
 		<dd>eval()具有更改局部变量的能力，这个对javascript优化器来说是一个很大问题</dd>
+		
 		<dt>4.12.3严格eval()</dt>
 		<dd>eval函数的行为施加更多的限制甚至对标识符eval的使用也施加了限制，严格模式下eval执行的代码段可以查询或更改局部变量</dd>
+
 		<dt>4.13其他运算符</dt>
 		<dd>三元运行符?:  typeof 一元运算符  检测数据类型  delete</dd>
+		
 		<dt>4.13.1条件运算符</dt>
 		<dd>boolean?true:false</dd>
+		
 		<dt>4.13.2 typeof运算符</dt>
 		<dd>typeof type</dd>
+
 		<dt>4.13.3 delete运算符</dt>
 		<dd>delete array/object</dd>
+
 		<dt>4.13.4 void运算符</dt>
 		<dd>它出现在操作数之前,操作数可以是任意的类型</dd>
+
 		<dt>4.13.5 逗号运算符</dt>
-		<dd></dd>
+		
 </body>
 <script type="text/javascript">
 	console.info('------------------------------4.1原始表达式------------------------------')
 
 	console.info('this是根据作用于而获取当前的数值,它在不同的语境中返回的值不同',this)
+	
 	console.info('------------------------------4.2对象和数组的初始化表达式------------------------------')
 	var arrs=[1,,,,5];
 	console.info('[1,,,,5]',arrs);
-	console.info('arrs=[1,,,,5],arrs[1]',arrs[1]);
-	console.info('--对象--');
+	console.info('arrs=[1,,,,5],arrs[1]',arrs[1]);	
+
+	console.info('------------------------------4.3函数定义表达式------------------------------')
+	var fun=function(x){return x;}
+	console.log('这就是函数',fun);
+
+	console.info('------------------------------4.4属性访问表达式------------------------------')
 	var o={x:1,y:{z:3}};
 	var a=[o,4,[5,6],undefined,null];
 	console.log("o对象:o={x:1,y:{z:3}}",o);
@@ -120,26 +195,60 @@
 	console.log("a[2]['1']:",a[2]['1']);	
 	console.log("a[3]:",a[3]);
 	console.log("a[4]:",a[4]);
+	
+	console.info('------------------------------4.5调用表达式------------------------------')
 
-	console.log("------------------------------4.7.4对象和数组的初始化表达式------------------------------");
+	console.info('------------------------------4.6对象创建表达式------------------------------')
+
+	console.info('------------------------------4.7运算符概述------------------------------')
+
+	console.info('------------------------------4.7.1操作数的个数------------------------------')
+
+	console.info('------------------------------4.7.2操作数类型和结果类型------------------------------')
+
+	console.info('------------------------------4.7.3左值------------------------------')
+
+	console.info('------------------------------4.7.4运算符的副作用------------------------------')
 	var str={a:1,b:2,c:3};
 	delete str.a;
 	console.info('str.a',str.a)
 	console.info('str',str)
-	console.log("------------------------------4.8.算数表达式------------------------------");
+	console.info('------------------------------4.7.5运算符优先级------------------------------')
+
+	console.info('------------------------------4.7.6运算符的结合性------------------------------')
+
+	console.log("------------------------------4.7.7运算顺序------------------------------");
+	
+	console.log("------------------------------4.8算数表达式------------------------------");
 	var num=1;
 	var b=(num++)+num;
-	console.info(b);
+	console.info('(1++)+1=',b);
+
 	console.log("------------------------------4.8.1 +运算符------------------------------");
 	console.info("typeof '1'.valueOf()+'777'",typeof '1'.valueOf()+'777');
-	console.info('2+undefined:',2+undefined);
-	console.log("------------------------------4.9.关系表达式------------------------------");
+	console.info('2+undefined:',2+undefined);	
+	console.info("1+2+'build'",1+2+'build');
+	console.info("1+(2+'build')",1+(2+'build'));	
+	
+	console.log("------------------------------4.8.2一元算术运算符------------------------------");
+	var option=1,j=++option;
+	console.info('j=++option',j);
+
+	var option2=1,j2=option2++;
+	console.info('j2=option2++',j2);
+	
+	console.log("------------------------------4.8.3位运算符------------------------------");
+
+	console.log("------------------------------4.9关系表达式------------------------------");
 	var str='李四';
 	var str01='abc';
 	var str02='AbC';
 	console.log('String.localeCompare()假设相等的字符串返回0，假设目标字符串在比较字符串的字母在前面返回-1,假设目标字符串在比较字符串后面返回1')
 	console.log("str.localeCompare('张三'):"+str.localeCompare(''));
 	console.log("str.localeCompare('尼玛'):"+str.localeCompare('尼玛'));
+
+	console.log("------------------------------4.9.1相等和不相等运算符------------------------------");
+	
 	console.log("------------------------------4.9.2比较运算符------------------------------");
 	console.log("abc.toUpperCase():"+str01.toUpperCase());
 	console.log("AbC.toLowerCase():"+str01.toLowerCase())
@@ -148,7 +257,8 @@
 	console.info(obj.valueOf());
 	console.info('1==true','1'==true)
 	console.info('"one"<3',"one"<3)
-	console.log("------------------------------4.9.3 in运算符------------------------------");
+
+	console.log("------------------------------4.9.3in运算符------------------------------");
 	var point={"x":1,"y":2};
 	var arr=[1,2,3];
 	console.info('object.attr in object //判断对象里面存不存在该属性')
@@ -158,7 +268,8 @@
 	console.log("1 in arr:"+(1 in arr));
 	console.log("5 in arr:"+(5 in arr));
 	console.log("toString in point://所有对象都包含toString和valueOf方法",'toString' in point);
-	console.log("------------------------------4.9.4 instanceof运算符------------------------------");
+
+	console.log("------------------------------4.9.4instanceof运算符------------------------------");
 	var d=new String();
 	console.log('var d=new String();');
 	console.log("d instanceof Date:"+(d instanceof Date));
@@ -167,13 +278,32 @@
 	console.log("d instanceof String:"+(d instanceof String));
 	console.log("d instanceof RegExp:"+(d instanceof RegExp));
 	console.log("d instanceof Array:"+(d instanceof Array));
-	console.log("------------------------------4.12.表达式计算------------------------------");	
+
+	console.log("------------------------------4.10逻辑表达式------------------------------");
+
+	console.log("------------------------------4.10.1逻辑与&&------------------------------");
+	console.log("false&&true:"+(false&&true));
+	console.log("------------------------------4.10.2逻辑或||------------------------------");
+	console.log("false||true:"+(false||true));	
+	console.log("------------------------------4.10.3逻辑非!------------------------------");
+	console.log("!0:"+(!0));	
+	console.log("------------------------------4.11赋值表达式------------------------------");
+	console.log("i=k=j=0"+(i=k=j=0));
+	
+	console.log('var num=2:',num=2);
+	console.log('num+=1:',num+=1);
+	console.log('num=num+1 == num+=1');
+
+	console.log("------------------------------4.12表达式计算------------------------------");	
 	console.info('全局函数eval("2*8")',eval('2*8'));
 	var geval=eval;
 	var x=1;
 	// var eval=eval('function f(x){return x+1;}');
 	// console.info(f(1));	//这里将eval改写了！ 需要按照规则去玩耍方法
-	console.info('typeof eval()',typeof eval());
+	console.info('typeof eval()//undifined',typeof eval());
+	
+	console.log("------------------------------4.12.1eval()----------------------------");	
+
 	console.log("------------------------------4.12.2全局eval()----------------------------");	
 	//function val(){console.info(111)};//不能随便重写eval()否则容易报错
 	var geval=eval;
@@ -194,12 +324,15 @@
 	console.log('g():',g());//local
 	console.log('f(),x:',f(),x);//localchanged global
 	console.log('g(),y:',g(),y);//local globalchangedchanged	
+
 	console.log("------------------------------4.12.3严格eval()----------------------------");
 	console.log("------------------------------4.13其他运算符----------------------------");
 	console.log("------------------------------4.13.1条件运算符----------------------------");
 	console.info('true?"yes":"false"',true?"yes":"false");
+
 	console.log("------------------------------4.13.2typeof运算符----------------------------");
 	console.info(typeof null);
+	
 	console.log("------------------------------4.13.3 delete运算符----------------------------")	
 	var points={"x":1,"y":2,s:'666'};
 	var delete_arr=[1,2,3,4,5];
@@ -211,6 +344,7 @@
 	console.log("delete delete_arr[1]:"+(delete delete_arr[1]),'delete_arr:',delete_arr,"delete_arr.length:"+delete_arr.length);		
 	console.log("------------------------------4.13.4 void运算符----------------------------");	
 	console.info('<a href="javascript:void window.open()"></a>');
+	
 	console.log("------------------------------4.13.5 逗号运算符----------------------------");	
 </script>
 </html>
