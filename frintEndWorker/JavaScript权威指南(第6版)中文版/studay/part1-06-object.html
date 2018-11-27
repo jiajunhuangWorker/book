@@ -98,9 +98,19 @@
 			<dd>遍历对象:for/in可以遍历对象中的所有课枚举的属性(自有属性和继承属性)</dd>
 			<dd>对象继承的内置方法不可枚举,代码中给对象添加的属性时可枚举的</dd>
 			<dd>Object.prototype添加了新的方法和属性,这些方法和属性可以被所有对象继承使用,ECMAScript5标准前这些新添加的方法是不能定义为不可枚举的，for/in需要过滤返回的属性</dd>
-			
+			<dd>Object.keys()//枚举属性名称返回array</dd>
+			<dd>Object.getOwnpropertyNames()//返回对象自有属性的名称</dd>
 
-			<dt>7.属性getter和setter</dt>
+			<dt>6.6属性getter和setter</dt>
+			<dd>对象属性是由名字,值和一组特性构成的</dd>
+			<dd>属性可以用getter和setter来定义,这种属性称为存取器属性</dd>
+			<dd>当程序查询存取属性的值时调用getter方法,这个方法回来的方法将复制表达式右侧的值当做参数的传入setter</dd>
+			<dd>setter方法是只写属性的</dd>
+
+
+
+
+
 			<dd>对象属性是由名字，值和一组特性构成的，在ecma5中属性值可以用getter和setter方法来进行存取器属性
 			<br>getter：当程序查询存取器属性的值时javascript调用getter方法 返回存储属性的值.
 			<br>setter：当设置存储属性的值时.set方法主要是用来检测的时候使用到了！！！！！！！如果不合法的时候就会报错
@@ -291,17 +301,80 @@
 
 	console.info('------------------------------6.5枚举属性------------------------------')
 	var for_inObj={x:1,y:2,c:3};
-	for_inObj.propertyIsEnumerable('toString');
+	for_inObj.propertyIsEnumerable('toString');//返回false 不能枚举
 	for(p in for_inObj){
 		console.info('p',p)
 	}
 
-	//过滤
-	for(p in for_inObj){
-		if(!for_inObj){
-			
+	//过滤器
+	var filtration=function (){
+		for(p in for_inObj){
+			if(!for_inObj.hasOwnProperty(p)) continue;//跳过继承的属性
+		}
+		for(p in for_inObj){
+			if(typeof for_inObj[p] === 'function') continue;//跳过方法
 		}
 	}
+	console.info('过滤属性和方法',filtration);
+
+	var extend=function extend(o,p){
+		/*
+			工具函数来操控对象的属性extend()函数
+			把P中的可美剧属性赋值到o中并返回o
+			如果o和p中含有同名属性则覆盖o中的属性
+			这个函数并不处理getter和setter以及复制属性
+		*/
+		//弥补了IE中一些bug
+		for(prop in p){
+			o[prop]=p[prop];
+		}
+		return o;
+	}
+	console.info('将p中的所有属性都整合到o中\n',extend);
+	var extend2=function extend(o,p){
+		/*
+			工具函数来操控对象的属性extend()函数
+			把P中的可美剧属性赋值到o中并返回o
+			如果o和p中含有同名属性则覆盖o中的属性
+			这个函数并不处理getter和setter以及复制属性
+		*/
+		//弥补了IE中一些bug
+		for(prop in p){
+			if(o.hasOwnProperty[prop]) continue; 
+			o[prop]=p[prop];
+		}
+		return o;
+	}
+	console.info('过滤掉已经存在o中存在的属性\n',extend2);
+
+	var deleteData=function restrict(o,p){
+		/*
+			工具函数来操控对象的属性extend()函数
+			把P中的可美剧属性赋值到o中并返回o
+			如果o和p中含有同名属性则覆盖o中的属性
+			这个函数并不处理getter和setter以及复制属性
+		*/
+		for(prop in p){
+			if(!(prop in o)) delete o[prop];
+		}
+		return o;
+	}
+	console.info('过滤掉p中存在的属性\n',deleteData);
+
+	var key=function key(o){
+		/*
+			返回一个数组,数组包含的是o中可美剧的自有属性的名字
+		*/
+		if(typeof o!=='object') throw TypeError();
+		var result=[];
+		for(var prop in o){
+			if(o.hasOwnProperty(prop)){//判断是否自有属性
+				result.push(prop)
+			}
+			return result;
+		}
+	}
+	console.info('数组包含的是o中可美剧的自有属性的名字\n',key);
 	// console.log('6.枚举属性----------------extend');
 	// function extend(o,p){
 	// 	for(prop in p){

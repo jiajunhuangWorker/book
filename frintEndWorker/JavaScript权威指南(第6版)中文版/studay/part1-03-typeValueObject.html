@@ -94,7 +94,7 @@
 			<dd>javascript对象是一种复合值,它是属性或已命名的集合，存取字符串、数字或布尔值得属性时创建的临时对象称为包装对象具体看问题本</dd>
 			
 			<dt>3.7不可变得原始值和可变的对象引用</dt>
-			<dd>原始值:undefined,null,boolean,number,string,object</dd>
+			<dd>原始值:undefined,null,boolean,number,string</dd>
 			<dd>对象是可变的属性是可以发生改变的,两个相同属性以及相同的值他们是等的！因为索引值不同</dd>
 			<dd>对象的比较都是引用的比较</dd>
 			<dd>原始值和对象区别:</dd>
@@ -185,7 +185,8 @@
 
 		console.info('------------------------------3.1.3javascriptzhong算术的运算------------------------------')
 		console.info('Infinity',Infinity);
-		console.info('Number',Number);
+		console.info('Number()',Number());
+		console.info('new Number()',new Number());
 		console.info('0/0:',0/0);
 		console.info('1/0:',1/0);
 		console.info('-1/0:',-1/0);
@@ -282,11 +283,15 @@
 		console.info("'nihaoa'['nihaoa'.length-1]//返回a",'nihaoa'['nihaoa'.length-1])
 
 		console.info('------------------------------3.2.4模式匹配------------------------------')
+		var text='t11es2ti33ng: 1,22,3,77';
+		var pattern=/\d+/g //匹配所有包含一个或多个数字的实例
+		console.info('text:',text);
+		console.info('pattern:',pattern);
+
 		console.info('/^HTML/:匹配以html开始的字符串',/^HTML/)
 		console.info('/[1-9][0-9]*/:匹配一个非0数字后面是任意个数字',/[1-9][0-9]*/)
 		console.info('/\bjavascript\b/i:匹配单词"javascript"忽略大小写',/\bjavascript\b/i);
-		var text='t11es2ti33ng: 1,22,3,77';
-		var pattern=/\d+/g //匹配所有包含一个或多个数字的实例
+
 		console.info('pattern.test(text)//返回boolean类型',pattern.test(text));
 		console.info('text.search(pattern)//返回number,首次匹配成功的下标位置',text.search(pattern));
 		console.info('text.match(pattern)//返回array,所有符合的组成数组',text.match(pattern));
@@ -315,9 +320,9 @@
 		var getStr=str.len;
 			console.log('getStr://通过原始的字符串值创建一个新字符串对象,尝试读取len属性,但是len不存在所以报undefined',getStr)
 			var str='test',num=1,bool=true;
-			console.log('typeof str//未包装后的字符串',typeof str);
+			console.log('typeof str str=\'test\'//未包装后的字符串',typeof str);
 			str=new String(str);
-			console.log('typeof str //包装后的字符串',typeof str);
+			console.log('typeof str  new String(str)//包装后的字符串',typeof str);
 			num=new Number(num);
 			bool=new Boolean(bool);
 
@@ -334,12 +339,14 @@
 			vals[3]=4;
 			console.info('--索引值--');
 			var array=[],array1=[];
+			console.info('array=[],array1=[]')
 			console.info('array===array1',array===array1);
 			console.info('array==array1',array==array1);
 			console.info('--更改引用值--');
 			var a=[];
 			var b=a;
 			b[0]=666;
+			console.log('var a=[];var b=a;b[0]=666;')
 			console.info('a[0]',a[0]);
 			console.info('a===b:',a===b);
 			console.info(new Array())
@@ -435,6 +442,7 @@
 			console.info('------------------------------3.10.2作为属性的变量------------------------------')			
 			console.info('--静态作用域--')			
 			var creatglobalObjects = 'foo里面的value';
+			console.info('var creatglobalObjects = \'foo里面的value\'');
 			function foo() {			    
 			      console.log('bar调用了foo然后输出了全局变量creatglobalObjects里面的值:',creatglobalObjects);
 			      return creatglobalObjects
