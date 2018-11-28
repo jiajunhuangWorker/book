@@ -103,28 +103,30 @@
 
 			<dt>6.6属性getter和setter</dt>
 			<dd>对象属性是由名字,值和一组特性构成的</dd>
-			<dd>属性可以用getter和setter来定义,这种属性称为存取器属性</dd>
-			<dd>当程序查询存取属性的值时调用getter方法,这个方法回来的方法将复制表达式右侧的值当做参数的传入setter</dd>
-			<dd>setter方法是只写属性的</dd>
+			<dd>属性可以用getter和setter来定义,getter和setter定义的属性称为存取器属性</dd>
+			<dd>当程序查询存取器属性的值时,调用getter方法,这个方法返回值就是属性存取表达的值</dd>
+			<dd>当程序设置一个存取器属性的值时js调用setter方法</dd>
+			<dd>存储器属性不具有可写性,读取只写属性总是返回undifined</dd>
+			<dd>存取器属性是可以继承的</dd>
 
+			<dt>6.7属性的特征</dt>
+			<dd>数据属性的特征:值,可写性,可枚举,可配置性</dd>
+			<dd>可写性是setter的存在与否决定的</dd>
+			<dd>1.可以通过api给原型添加方法,并将它们设置成不可枚举,这让它们看起来像内置方法</dd>
+			<dd>2.可以通过这些api给对象定义不能修改或删除的属性,借此锁定这个对象</dd>
+			<dd>存取器:读取(get),写入(set),可枚举,可配置性</dd>
+			<dd>为了实现属性特性的查询和设置操作,ECMAScript5中定义了一个名为'属性描述符'的对象</dd>
+			<dd>属性描述符对象属性有value,writable,enumerable,configurable</dd>
+			<dd>writable<写>,enumerable<枚举>,configurable<删除>是boolean 类型</dd>
+			<dd>get和set是函数</dd>
+			<dd>方法要么修改已有属性要么新建自有属性,但不能修改继承属性</dd>
+			<dd>Object.defineProperty()和Object.definePropertys()</dd>
+			<dd>如果对象是不可扩展的,则可以编辑已有的自有属性,但不能给它添加新属性</dd>
+			<dd>如果属性不可配置的,则不能修改它的可配置性和可枚举性</dd>
+			<dd>如果存取器属性是不可配置的,则不能修改其getter和setter方法,也不能将它转换为数据属性</dd>
+			<dd>如果数据属性是不可配置的,则不能将它转换为存取器属性</dd>
+			<dd>如果数据属性是不可配置的,则不能</dd>
 
-
-
-
-			<dd>对象属性是由名字，值和一组特性构成的，在ecma5中属性值可以用getter和setter方法来进行存取器属性
-			<br>getter：当程序查询存取器属性的值时javascript调用getter方法 返回存储属性的值.
-			<br>setter：当设置存储属性的值时.set方法主要是用来检测的时候使用到了！！！！！！！如果不合法的时候就会报错
-			<br>存储属性和属性属性区分：存取器属性不具有可写性，如果属性具有getter/setter方法时那么它具有读/写属性			
-			<br>笛卡尔坐标系就是直角坐标系和斜角坐标系的统称.相交于原点的两条数轴,构成了平面放射坐标
-			</dd>
-			<dt>8.属性的特征</dt>
-			<dd>除了包括名字和值之外，属性还包括了一些标识符，可写，可枚举，可配置的特征
-			<br>一个属性包含一个名字和4个特征（值（存取器属性不包含value特性），可写性，可枚举，可配置属性）（读，取，写，可枚举，可配置性）
-			Ecma5定义了属性描述符，属性描述符对象的属性(value,writable,enumerable,configurable)它们都是布尔类型的存储器属性描述符(get，set替代了value和writable)set和get是函数值
-			<br>Object.getOwnPropertyDescriptor()可以获得某个对象属性的属性描述符(只能获取到自有属性的描述符，如果想获取继承属性的特征需要遍历原型链)《Object.getPrototypeOf》
-			<br>Object.defineProperty():设置属性的特性，或者想让新建属性具有某种特性，传入的修改对象，要创建或修改的属性的名称以及属性描述的对象
-			<br>Object.defineProperties():修改或者创建多条属性（第一个参数是要修改的独享，第二个参数是要映射的表）
-			</dd>
 			<dt>9.对象的三个属性</dt>
 			<dd>每一个对象都有和它相似的原型，类和可扩展性</dd>			
 			<dt>9.1原型属性</dt>
@@ -164,7 +166,7 @@
 			<dd>toJSON(),JSON.stringify调用了toSJON()方法</dd>
 			<dt>11.1valueOf:</dt>
 			<dd>需要将对象转换为某种原始值而非字符串的时候才用到它尤其是转换为数字的时候</dd>
-
+			
 		</dl>		
 	</body>
 	<script type="text/javascript">
@@ -375,104 +377,61 @@
 		}
 	}
 	console.info('数组包含的是o中可美剧的自有属性的名字\n',key);
-	// console.log('6.枚举属性----------------extend');
-	// function extend(o,p){
-	// 	for(prop in p){
-	// 		o[prop]=p[prop];
-	// 	}
-	// 	return o;
-	// }
-	// console.log('6.枚举属性----------------keys');
-	// function keys(o){
-	// 	if(typeof o !=='object') throw TypeError();
-	// 	var result=[];
-	// 	for(var prop in o){
-	// 		if(o.hasOwnProperty(prop))
-	// 			result.push(prop);
-	// 	}
-	// 	return result;
-	// }
-	// console.log('7.属性getter和setter----------------');
-	// var p={
-	// 	x:0,
-	// 	y:0,
-	// 	get r(){						
-	// 		return this.x+this.y;
-	// 	},
-	// 	set r(n){			
-	// 		debugger;			
-	// 		if(this.x<5){
-	// 			throw new Error("x不能少于5");
-	// 		}
-	// 	},
-	// 	get thera(){
-	// 		//atan2是表示x轴到点x，y之间的角度
-	// 		return Math.atan2(this.y,this.x);
-	// 	}
-	// }
-	// var q=inherit(p);	
-	// q.x=2,q.y=3;
-	// console.log("get:q.r:"+q.r);	
-	// console.log("q.thera:"+q.thera);
-	// console.log('7.1设置当前的序列号-----------------------');
-	// var serialnum={
-	// 	//$符号暗示这回属性是一个私有的属性
-	// 	$n:6,
-	// 	get next(){
-	// 		return ++this.$n;
-	// 	},
-	// 	set next(n){				
-	// 		if(n>=this.$n){				
-	// 			this.$n=n;				
-	// 		}else{
-	// 			throw new Error("传入的值不够大："+n+"至少传入6");
-	// 		}
-	// 	}
-	// }
-	// var s=inherit(serialnum);
-	// console.log("set:s.next:"+(s.next=10)+"<br/>");
-	// console.log(s.next);
-	// console.log('7.2随机对象-----------------------');
-	// var radom={
-	// 	get octet(){return Math.floor(Math.random()*256);},
-	// 	get octet2(){return Math.floor(Math.random()*65536);},
-	// 	get octet3(){return Math.floor(Math.random()*65536)-32768;}
-	// }
-	// console.log(radom.octet);
-	// console.log(radom.octet2);
-	// console.log(radom.octet3);
-	// console.log("");
-	// console.log('8.Object.getOwnPropertyDescriptor()-----------------------');
-	// console.log("Object.getOwnPropertyDescriptor({x:1,y:2},'y'):"+(Object.getOwnPropertyDescriptor({x:1,y:2},"y")));
-	// console.log("Object.getOwnPropertyDescriptor({},'x'):"+Object.getOwnPropertyDescriptor({},"x"));//没有这个属性
-	// console.log("Object.getOwnPropertyDescriptor({},'toString'):"+Object.getOwnPropertyDescriptor({},"toString"));//继承属性
-	// console.log('8.1 Object.defineProperty（）-----------------------');
-	// var o={};
-	// Object.defineProperty(o,"x",{value:'666',writable:true,enumerable:false,configurable:true});
-	// console.log("o.x:"+o.x);
-	// console.log("Object.keys(o):"+Object.keys(o));//不可枚举
-	// Object.defineProperty(o,"x",{writable:false});
-	// o.x=888;
-	// console.log("o.x:"+o.x);//不能够修改属性值
-	// Object.defineProperty(o,"x",{value:"999"});
-	// console.log("o.x:"+o.x);//修改属性值
-	// //将数据属性修改为存储属性
-	// Object.defineProperty(o,"x",{get:function(){
-	// 	return o;
-	// }})
-	// 	console.log('8.2  Object.defineProperties()-----------------------');
-	// 	var p =Object.defineProperties({},{
-	// 		x:{value:'666',writable:true,enumerable:false,configurable:true},
-	// 		y:{value:'777',writable:true,enumerable:false,configurable:true},
-	// 		r:{
-	// 			get:function(){
-	// 				return 666
-	// 			},enumerable:false,configurable:true
-	// 		},
-	// 	})
-	// 	console.log("p.x:"+p.x);
-	// 	console.log("p.y:"+p.y);
-	// 	console.log("");
+
+	console.info('------------------------------6.6属性getter和setter------------------------------')
+	var p={
+		x:1.0,
+		y:1.0,
+		get r(){						
+			return this.x*this.x+this.y*this.y;
+		},
+		set r(newValue){			
+			var oldValue=this.x*this.x+this.y*this.y;			
+			var ratio=newValue/oldValue;
+			this.x*=ratio;
+			this.y*=ratio;
+		},
+		get thera(){
+			//atan2是表示x轴到点x，y之间的角度
+			return this.y+this.x;
+		}
+	}
+	console.info('对象p',p);
+	console.info('对象p里面的方法',p.r);
+	console.info('p.x=3',p.x=3,'p.thera',p.thera);
+	var q=inherit(p);	
+	q.x=2,q.y=3;
+	console.log("get:q.r:"+q.r);	
+	console.log("q.thera:"+q.thera);
+	
+	var random={
+		get octet(){return Math.floor(Math.random()*256)},
+		get uint16(){return Math.floor(Math.random()*65536)},
+		get int16(){return Math.floor(Math.random()*65536-32768)}
+	}
+
+	console.info('------------------------------6.7属性的特征------------------------------')
+	console.info('Object.getOwnPropertyDescriptor({x:1},\'x\')//获取某个对象特定属性的属性描述符',Object.getOwnPropertyDescriptor({x:1},'x'))
+	var createAtt={};
+	console.info('创建了:createAtt={}')
+	console.info('Object.defineProperty(createAtt,\'definedAttr\',{value:666,writable:true,enumerable:false,configurable:true})',Object.defineProperty(createAtt,'definedAttr',{value:666,writable:true,enumerable:false,configurable:true}));
+	console.info('Object.keys(createAtt)//查看数组里面存不存在属性,必须不存在因为被禁用了',Object.keys(createAtt));
+	console.info('Object.defineProperty(createAtt,\'definedAttr\',{writable:false})//禁用修改属性',Object.defineProperty(createAtt,'definedAttr',{writable:false}));
+	console.info('createAtt.definedAttr=123123',createAtt.definedAttr=123123,'读取createAtt.definedAttr',createAtt.definedAttr);
+	console.info('存储器的写法')
+	console.info('Object.defineProperty(createAtt,\'definedAttr\',{get:function(){return o;}})',Object.defineProperty(createAtt,'definedAttr',{get:function(){return o;}}),'createAtt.definedAttr=120',createAtt.definedAttr=120,'createAtt.definedAttr',createAtt.definedAttr)
+	console.info('Object.defineProperties同时修改多个属性')
+		var p =Object.defineProperties({},{
+			x:{value:'666',writable:true,enumerable:false,configurable:true},
+			y:{value:'777',writable:true,enumerable:false,configurable:true},
+			r:{
+				get:function(){
+					return 666
+				},enumerable:false,configurable:true
+			}
+		})
+	console.info('对象多属性同时初始化',p)
+	
 	// 	console.log('9.1isPrototypeOf()-----------------------');
 	// 	var s={x:1};//定义一个原型对象
 	// 	var p=Object.create(s);//使用这个原型创建一个对象
