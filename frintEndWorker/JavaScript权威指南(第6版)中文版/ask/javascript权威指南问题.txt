@@ -17,6 +17,9 @@ Math,JSON
 new Date(),new RegExp(),new String()
 ,new Object(),new Array(),new Number()
 ,new Error(),new Boolean()
+5.序列化
+JSON.stringify(object)
+JSON.parse(string)
 -----------------------------
 4.原始类型?
 boolean,String,Number

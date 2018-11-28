@@ -111,9 +111,9 @@
 
 			<dt>6.7属性的特征</dt>
 			<dd>数据属性的特征:值,可写性,可枚举,可配置性</dd>
-			<dd>可写性是setter的存在与否决定的</dd>
-			<dd>1.可以通过api给原型添加方法,并将它们设置成不可枚举,这让它们看起来像内置方法</dd>
-			<dd>2.可以通过这些api给对象定义不能修改或删除的属性,借此锁定这个对象</dd>
+			<dd>可写性:setter的存在与否决定的</dd>
+			<dd>可枚举:可以通过api给原型添加方法,并将它们设置成不可枚举,这让它们看起来像内置方法</dd>
+			<dd>可配置性:可以通过这些api给对象定义不能修改或删除的属性,借此锁定这个对象</dd>
 			<dd>存取器:读取(get),写入(set),可枚举,可配置性</dd>
 			<dd>为了实现属性特性的查询和设置操作,ECMAScript5中定义了一个名为'属性描述符'的对象</dd>
 			<dd>属性描述符对象属性有value,writable,enumerable,configurable</dd>
@@ -142,33 +142,30 @@
 			<dd>对象的可扩展性是表示是否可以给对象添加新的属性</dd>
 			<dd>所有的内置对象和自定义的对象都是显示可扩展的</dd>
 			<dd>宿主对象的可扩展是由javascript引擎定义的</dd>
+			<dd>可扩展属性的目的是将对象'锁定',以避免外界的干扰</dd>
+			<dd>对象的可扩展性通常和属性配合使用</dd>
+			
+			<dt>6.9序列化对象</dt>
+			<dd>对象序列化是指将对象的状态转换为字符串,也可将字符串还原为对象</dd>			
+			<dd>JSON的语法是javascript语法的子集,它并不能表示javascript里的所有值</dd>
+			<dd>NaN,Infinity,-Infinity序列化的结果是null</dd>
+			<dd>对象,数组,字符串,无穷大数字,true,false和null可以序列化还原javascript对象</dd>
+			<dd>日期对象序列化的结果是ISO格式的格式日期字符串</dd>
+			<dd>函数,RegExp,Error,undifined不能序列化和还原f</dd>
 
-			<dd>
-			<br>Object.esExtensible()：判断对象是否可扩展
-			<br>Object.preventExtensions():将可扩展的对象变成不可扩展属性
-			<br>注意：一旦将对象转换为不可扩展，就无法再将其转换回克扩展，preventExtensions()只会影响对象本身，如果给一个不可扩展的对象添加属性，这个不可扩展的对象同样会继承这些新的属性
-			<br>Object.seal()和Objecy.preventExtensions类似，Object.seal除了能够将对象设置为不可扩展之外还可以将对象的所有的属性都设置为不可扩展
-			<br>Object.isSealed（）来检测对象是否封闭
-			<br>Object.freeze（）将更严格地锁定对象
-			<br>Object.isFrozen（）检测是否被冻结
-			</dd>
+			<dt>6.10对象方法</dt>
+			
+			<dt>6.10.1toString()</dt>
+			<dd>toString()方法没有参数,它将返回一个表示调用这个方法的对象值得字符串</dd>
+			
+			<dt>6.10.2toLoacaleString()</dt>
+			<dd>该方法返回一个表示这个对象的本地化字符串</dd>
+			
+			<dt>6.10.3toJSON()</dt>
+			<dd>待序列化的对象中存在的方法</dd>
 
-			<dt>10.序列化对象</dt>
-			<dd>对象的序列化就是将对象转换为字符串，或者将字符串转换为对象
-			<br>
-			JSON（JAVASCRIPT OBJECT NOTATION）
-			<br>
-			JSON.stringify()：只能序列化对象可枚举的自有，对于不能序列化的属性来说将会被忽略
-
-			<br>
-			JSON.parse()
-			</dd>
-			<dt>11.对象方法</dt>
-			<dd>toString()</dd>
-			<dd>toLocaleString():这个对象本地化字符串</dd>
-			<dd>toJSON(),JSON.stringify调用了toSJON()方法</dd>
-			<dt>11.1valueOf:</dt>
-			<dd>需要将对象转换为某种原始值而非字符串的时候才用到它尤其是转换为数字的时候</dd>
+			<dt>6.10.4valueOf()</dt>
+			<dd>对象转为原始值,对转为数字特别敏感</dd>
 			
 		</dl>		
 	</body>
@@ -451,14 +448,32 @@
 	console.info('classof(p)//和typeof name 类似',classof(p))
 	
 	console.info('------------------------------6.8.3可扩展性------------------------------')
+	console.info('Object.isExtensible(p)//判断对象可不可以拓展',Object.isExtensible(p));
+	console.info('Object.preventExtensions(p)//对象转为不可拓展,一旦将对象转为不可扩展就无法再将其转为可扩展',Object.preventExtensions(p));
+	var expand={a:111,b:222},expand1={a:111,b:222},isfreeze={a:111,b:222};
+	console.info('Object.seal(expand)//对象不可拓展和对象自有属性不可配置(不能添加新属性,它已存在的属性不能删除或配置,已有属性可以设置)\n',Object.seal(expand),'\n Object.isSealed(expand)//检测是否封闭了',Object.isSealed(expand),'\n');
+	console.info('Object.preventExtensions(expand)//对象不可拓展和对象自有属性不可配置(不能添加新属性,它已存在的属性不能删除或配置,已有属性可以设置)\n',Object.preventExtensions(expand));
+	console.info('冻结,除了将对象设置为不可扩展的和将其属性设置为不可配置之外,只有属性设置为只读,如果对象的存取器属性具有setter方法,存取器属性将不受影响,仍可以通过给属性赋值调用它们\n ',Object.freeze(isfreeze),'\n Object.isFrozen()//检测对象是否冻结',Object.isFrozen(isfreeze))
 
-	// 	console.log('10.序列化-----------------------');
-	// 	var o={a:1,b:{c:[false,'true']}};
-	// 	var s=JSON.stringify(o);
-	// 	console.log("JSON.stringify(o):"+JSON.stringify(o));//对象转字符串
-	// 	console.log("typeof JSON.stringify(o):"+typeof JSON.stringify(o));
-	// 	console.log("JSON.stringify(o):"+JSON.parse(s));//字符串转对象
-	// 	console.log("typeof JSON.stringify(o):"+typeof JSON.parse(s));
+	console.info('------------------------------6.9序列化对象------------------------------')
+	var o={a:1,b:{c:[false,'true']}};
+	var s=JSON.stringify(o);
+	console.log("JSON.stringify(o)//只能序列化对象可枚举的自有属性:",JSON.stringify(o),"\n typeof JSON.stringify(o):",typeof JSON.stringify(o));//对象转字符串
+	console.log("JSON.parse(s):",JSON.parse(s),"\n typeof JSON.parse(s):",typeof JSON.parse(s));//字符串转对象
+
+	console.info('------------------------------6.10对象方法------------------------------')
+
+	console.info('------------------------------6.10.1toString()方法------------------------------')
+	console.info('[1,\'a22\',233,true,false].toString():\n',[1,'a22',233,true,false].toString());
+	
+	console.info('------------------------------6.10.2toLocaleString()方法------------------------------')
+	console.info('[1,\'a22\',233,true,false].toLocaleString():\n',[1,'a22',233,true,false].toLocaleString(),'\n new Date().toLocaleString():',new Date().toLocaleString(),'\n Number(1321232).toLocaleString():',Number(1321232).toLocaleString())
+
+	console.info('------------------------------6.10.3toJSON()方法------------------------------')
+	console.info('new Date(\'August 19, 1975 23:15:30 UTC\').toJSON()\n', new Date('August 19, 1975 23:15:30 UTC').toJSON(),'\n new Date() \n',new Date());
+
+	console.info('------------------------------6.10.4valueOf()方法------------------------------')
+	console.info('new Date().valueOf()//对象转为原始值,对转为数字特别敏感',new Date().valueOf())
 
 	</script>
 </html>
