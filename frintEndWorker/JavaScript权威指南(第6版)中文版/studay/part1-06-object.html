@@ -127,21 +127,23 @@
 			<dd>如果数据属性是不可配置的,则不能将它转换为存取器属性</dd>
 			<dd>如果数据属性是不可配置的,则不能</dd>
 
-			<dt>9.对象的三个属性</dt>
-			<dd>每一个对象都有和它相似的原型，类和可扩展性</dd>			
-			<dt>9.1原型属性</dt>
-			<dd>对象的原型属性是用来继承属性的，原型属性是在实例对象创建之初就设置好了
-			Object.getPrototypeOf()可以查询它的原型,通过new表达式创建的对象会继承一个constructor属性
-			<br>constructor属性:这个属性就会指代创建这个对象的构造函数
-			constructor.prototype:这个构造函数时new 创建的对象的真正原型 <br>
-			isPrototypeOf():检测一个对象是另一个对象的原型(或处于原型链中)；
-			</dd>
-			<dt>9.2类属性</dt>
-			<dd>对象的类属性表示一个字符串，用以表示对象的类型信息.
-			<br>classof函数：可以传入任何类型的参数
-			</dd>
-			<dt>9.3可扩展</dt>
-			<dd>对象的可扩展性是表示是否可以给对象添加新的属性.所有的内置对象和自定义的对象都是显示可扩展的，宿主对象的可扩展是由javascript引擎定义的
+			<dt>6.8对象的三个属性</dt>
+			<dd>每一个对象都有和它相似的原型,类和可扩展性</dd>
+
+			<dt>6.8.1原型属性</dt>
+			<dd>对象的原型属性是用来继承属性的</dd>
+			<dd>原型属性是在实例对象创建之初就设置好的</dd>
+			
+
+			<dt>6.8.2类属性</dt>
+			<dd>对象的类属性表示一个字符串,用以表示对象的类型信息.</dd>
+
+			<dt>6.8.3可扩展</dt>
+			<dd>对象的可扩展性是表示是否可以给对象添加新的属性</dd>
+			<dd>所有的内置对象和自定义的对象都是显示可扩展的</dd>
+			<dd>宿主对象的可扩展是由javascript引擎定义的</dd>
+
+			<dd>
 			<br>Object.esExtensible()：判断对象是否可扩展
 			<br>Object.preventExtensions():将可扩展的对象变成不可扩展属性
 			<br>注意：一旦将对象转换为不可扩展，就无法再将其转换回克扩展，preventExtensions()只会影响对象本身，如果给一个不可扩展的对象添加属性，这个不可扩展的对象同样会继承这些新的属性
@@ -150,6 +152,7 @@
 			<br>Object.freeze（）将更严格地锁定对象
 			<br>Object.isFrozen（）检测是否被冻结
 			</dd>
+
 			<dt>10.序列化对象</dt>
 			<dd>对象的序列化就是将对象转换为字符串，或者将字符串转换为对象
 			<br>
@@ -432,11 +435,23 @@
 		})
 	console.info('对象多属性同时初始化',p)
 	
-	// 	console.log('9.1isPrototypeOf()-----------------------');
-	// 	var s={x:1};//定义一个原型对象
-	// 	var p=Object.create(s);//使用这个原型创建一个对象
-	// 	console.log("s.isPrototypeOf(p):"+s.isPrototypeOf(p));//p继承自s
-	// 	console.log("Object.prototype.isPrototypeOf(p):"+Object.prototype.isPrototypeOf(p));//p自称自Object.peototype
+	console.info('------------------------------6.8对象的三个属性------------------------------')
+
+	console.info('------------------------------6.8.1原型属性------------------------------')	
+	console.info('Object.getPrototypeOf(p)//查看对象原型,获取原型链',Object.getPrototypeOf(p))
+	console.info('p.constructor.prototype//检测一个对象的原型,通过new表达式创建的对象通常继承一个constructor属性,这个属性指代创建这个对象的构造函数',p.constructor.prototype);
+	console.info('Object.prototype.isPrototypeOf(p)//一个对象是不是另外一个对象的原型',Object.prototype.isPrototypeOf(p));
+
+	console.info('------------------------------6.8.2类属性------------------------------')
+	function classof(o){
+		if(o===null) return 'Null';
+		if(o===undefined) return 'undefined';
+		return Object.prototype.toString.call(o).slice(8,-1);
+	}
+	console.info('classof(p)//和typeof name 类似',classof(p))
+	
+	console.info('------------------------------6.8.3可扩展性------------------------------')
+
 	// 	console.log('10.序列化-----------------------');
 	// 	var o={a:1,b:{c:[false,'true']}};
 	// 	var s=JSON.stringify(o);
