@@ -17,7 +17,8 @@
 			<dd>对象中不存在同名属性</dd>
 			<dd>属性的特征(可写,可枚举,可配置)</dd>
 			<dd>可写:表明是否可以设置属性值</dd>
-			<dd>可枚举:表明是否可以通过for/in循环返回该属性</dd>
+			<dd>可枚举:表明是否可以通过for/
+			循环返回该属性</dd>
 			<dd>可配置:表明是否可以删除或修改该属性</dd>
 			<dd>对象特征(对象原型，对象类，对象的扩展标记)</dd>
 			<dd>对象的原型(prototype):指向另外一个对象,本对象的属性继承自它的原型对象</dd>
@@ -300,7 +301,7 @@
 	console.log('Object.prototype:'+Object.prototype);
 
 	console.log('val.x!==undefined',val.x!==undefined);
-
+	console.info('\'x\' in val',x' in val);
 	console.info('------------------------------6.5枚举属性------------------------------')
 	var for_inObj={x:1,y:2,c:3};
 	for_inObj.propertyIsEnumerable('toString');//返回false 不能枚举
