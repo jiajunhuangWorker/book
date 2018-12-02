@@ -25,6 +25,13 @@
 			<dd>足够稀疏的数组通常在实现上比稠密的数组更慢,内存利用率跟更高,内存利用率更高,在这样的数组中查找元素的时间与常规对象属性的查找时间一样长</dd>
 			<dd>当在数组直接量中省略值时不会创建稀疏数组</dd>
 			<dd>省略的元素是undefined</dd>
+
+			<dt>7.4数组长度</dt>
+			<dd>当数组是稀疏数组,length属性值大于元素个数</dd>
+			<dd>如果让一个数组元素不能配置,就不能删除它,如果不能删除它,length属性不能设置为小于不可配置元素的索引值</dd>
+
+			<dt>7.5数组元素的添加和删除</dt>
+			<dd></dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
@@ -59,22 +66,33 @@
 	console.info('查看方法体:globalArray[globalArray.length-2]',globalArray[globalArray.length-2]);
 
 	console.info('------------------------------7.3稀疏数组------------------------------')
-	var sparseArray=[,,,,];
+	var sparseArray=[,,,,2];
 	var sparseArray2=[undefined];
 	var sparseArray3=new Array(3);
 	console.info('sparseArray=[,]','\n 0 in sparseArray:',0 in sparseArray);
 	console.info('sparseArray2=[undefined]','\n 0 in sparseArray2:',0 in sparseArray2);	
-	console.info('aparseArray3=new Array()','\n 0 in sparseArray3:',0 in sparseArray3);	
+	console.info('sparseArray3=new Array()','\n 0 in sparseArray3:',0 in sparseArray3);	
 	console.info('for(element in sparseArray)')
 	for(element in sparseArray){
-		console.info(2)
+		
 		if(element ==='function') continue;
 		console.info('element',sparseArray[element])
 	}
 	for(element in sparseArray3){
-		console.info(2)
+		
 		if(element ==='function') continue;
 		console.info('element',element)
 	}
+
+	console.info('------------------------------7.4数组长度------------------------------')
+	console.info('全局数组',globalArray);
+	console.info('[].length',[].length);
+	console.info('["1","2","3"].length',["1","2","3"].length);
+	//console.info('globalArray.length=3//这里限制了数组的显示长度',globalArray.length=3,'globalArray:',globalArray);
+	//console.info('globalArray.length=0//索引受到影响',globalArray.length=0,'globalArray:',globalArray);
+	//console.info('globalArray.length=5//索引受到影响',globalArray.length=3,'globalArray:',globalArray);
+	console.info('Object.defineProperty(globalArray,"length",{writable:false})//让数组的length属性变成只读',Object.defineProperty(globalArray,"length",{writable:false}))
+	console.info('globalArray.length=0',globalArray.length=0,'\n读取globalArray',globalArray)
+
 	</script>
 </html>
