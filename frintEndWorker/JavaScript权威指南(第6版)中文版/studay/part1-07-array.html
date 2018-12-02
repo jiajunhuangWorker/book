@@ -88,11 +88,14 @@
 	console.info('全局数组',globalArray);
 	console.info('[].length',[].length);
 	console.info('["1","2","3"].length',["1","2","3"].length);
-	//console.info('globalArray.length=3//这里限制了数组的显示长度',globalArray.length=3,'globalArray:',globalArray);
-	//console.info('globalArray.length=0//索引受到影响',globalArray.length=0,'globalArray:',globalArray);
-	//console.info('globalArray.length=5//索引受到影响',globalArray.length=3,'globalArray:',globalArray);
-	console.info('Object.defineProperty(globalArray,"length",{writable:false})//让数组的length属性变成只读',Object.defineProperty(globalArray,"length",{writable:false}))
-	console.info('globalArray.length=0',globalArray.length=0,'\n读取globalArray',globalArray)
-
+	// console.info('Object.defineProperty(globalArray,"length",{writable:false})//让数组的length属性变成只读',Object.defineProperty(globalArray,"length",{writable:false}))
+	// console.info('globalArray.length=3//这里限制了数组的显示长度',globalArray.length=3,'globalArray:',globalArray);
+	// console.info('globalArray.length=0//索引受到影响',globalArray.length=0,'globalArray:',globalArray);
+	// console.info('globalArray.length=5//索引受到影响',globalArray.length=3,'globalArray:',globalArray);
+	
+	// console.info('globalArray.length=0',globalArray.length=0,'\n读取globalArray',globalArray);
+	
+	console.info('------------------------------7.5数组元素的添加和删除------------------------------')
+	console.log('globalArray.push(1,2,3)',globalArray.push(1,2,3),'globalArray',globalArray);
 	</script>
 </html>
