@@ -31,6 +31,11 @@
 			<dd>如果让一个数组元素不能配置,就不能删除它,如果不能删除它,length属性不能设置为小于不可配置元素的索引值</dd>
 
 			<dt>7.5数组元素的添加和删除</dt>
+			<dd>unshift:从队头添加元素,push从队尾添加元素,索引往前移动一位,length发生改变</dd>
+			<dd>shift:从对头删除元素,pop:从队尾删除元素,索引往前移动一位,length发生改变</dd>
+			<dd>对一个数组元素使用ddelete不会改变修改的length属性,也不会将元素从高索引处移下来填充已删除的留白元素,数组会变成稀疏数组</dd>
+			
+			<dt>7.6数组遍历</dt>
 			<dd></dd>
 		</dl>
 	</body>
@@ -88,14 +93,21 @@
 	console.info('全局数组',globalArray);
 	console.info('[].length',[].length);
 	console.info('["1","2","3"].length',["1","2","3"].length);
+	//console.info('globalArray.length=3//这里限制了数组的显示长度',globalArray.length=3,'globalArray:',globalArray);
+	//console.info('globalArray.length=0//索引受到影响',globalArray.length=0,'globalArray:',globalArray);
+	//console.info('globalArray.length=5//索引受到影响',globalArray.length=3,'globalArray:',globalArray);
 	// console.info('Object.defineProperty(globalArray,"length",{writable:false})//让数组的length属性变成只读',Object.defineProperty(globalArray,"length",{writable:false}))
-	// console.info('globalArray.length=3//这里限制了数组的显示长度',globalArray.length=3,'globalArray:',globalArray);
-	// console.info('globalArray.length=0//索引受到影响',globalArray.length=0,'globalArray:',globalArray);
-	// console.info('globalArray.length=5//索引受到影响',globalArray.length=3,'globalArray:',globalArray);
-	
-	// console.info('globalArray.length=0',globalArray.length=0,'\n读取globalArray',globalArray);
-	
-	console.info('------------------------------7.5数组元素的添加和删除------------------------------')
-	console.log('globalArray.push(1,2,3)',globalArray.push(1,2,3),'globalArray',globalArray);
+	// console.info('globalArray.length=0',globalArray.length=0,'\n读取globalArray',globalArray)
+
+	console.info('------------------------------7.5数组元素的添加和删除------------------------------');
+	console.info('part1-07-array.html:97 Uncaught TypeError: Cannot assign to read only property length of object [object Array] at Array.push//line 94行锁定数组长度')
+	console.info('add Elements');
+	console.info('push:globalArray.push(1,true,false,"one"):',globalArray.push(1,true,false,"one"),'<返回字符串长度>\n read globalArray',globalArray,'\n push:在队尾添加Element');
+	console.info('unshift:globalArray.unshift("I","love","pig")',globalArray.unshift("I","love","pig"),'<返回字符串长度>\n read globalArray',globalArray,'\n unshift:在队头添加Element');
+	console.info('delete globalArray[4]',delete globalArray[4],'globalArray',globalArray,'变成empty','read delete element:',globalArray[4]);
+	console.info('globalArray.pop()',globalArray.pop(),'read globalArray',globalArray);
+	console.info('globalArray.shift()',globalArray.shift(),'read globalArray',globalArray);
+
+	console.info('------------------------------7.6数组遍历------------------------------');
 	</script>
 </html>
