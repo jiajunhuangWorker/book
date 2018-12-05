@@ -36,6 +36,9 @@
 			<dd>对一个数组元素使用ddelete不会改变修改的length属性,也不会将元素从高索引处移下来填充已删除的留白元素,数组会变成稀疏数组</dd>
 			
 			<dt>7.6数组遍历</dt>
+			<dd>for/in处理稀疏数组</dd>
+
+			<dt>7.7多维数组</dt>
 			<dd></dd>
 		</dl>
 	</body>
@@ -109,5 +112,17 @@
 	console.info('globalArray.shift()',globalArray.shift(),'read globalArray',globalArray);
 
 	console.info('------------------------------7.6数组遍历------------------------------');
+	console.info('for/in');
+	for(i in globalArray){
+		if(!globalArray.hasOwnProperty(i)) continue;//跳过继承属性
+		if(typeof globalArray[i] ==='function') continue;//跳过继承属性
+		console.info('!globalArray.hasOwnProperty(i)跳过继承属性',globalArray[i])
+	}
+	console.info('forEach')
+	globalArray.forEach(function(value,index){
+		console.info('值:',value,'	下标:',index)
+	})
+
+	console.info('------------------------------7.7多维数组------------------------------');
 	</script>
 </html>
