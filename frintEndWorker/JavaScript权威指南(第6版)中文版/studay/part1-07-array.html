@@ -39,7 +39,36 @@
 			<dd>for/in处理稀疏数组</dd>
 
 			<dt>7.7多维数组</dt>
-			<dd></dd>
+			<dd>javascript不支持真正的多维数组</dd>
+
+			<dt>7.8数组方法</dt>
+
+			<dt>7.8.1join方法</dt>
+			<dd>Array.join方法将数组转为字符串,并返回</dd>
+			<dd>Array.join()方法是String.split()方法的逆向操作,后者是字符串分割成若干块来创建一个数组</dd>
+
+			<dt>7.8.2reverse()</dt>
+			<dd>Array.reverse()方法将数组中的元素颠倒顺序,返回逆序的数组.它采取替换,换句话说它不通过重新排序的元素创建新的数组</dd>
+
+			<dt>7.8.3sort方法</dt>
+			<dd>排序并返回数组,当不带参数调用sort,数组元素以字母顺序排序,如果有undefined将被派到尾部</dd>
+			
+			<dt>7.8.4concat方法</dt>
+			<dd>Array.concat()方法创建并返回一个新数组,它的元素包括调用concat()的原始数组的元素和concat()的每个参数</dd>
+
+			<dt>7.8.5slice方法</dt>
+			<dd>数组截取并返回新数组,包含第一个number,不包含最后一个number</dd>
+
+			<dt>7.8.6splice方法</dt>
+			<dd>在数组中插入或删除元素的通用方法</dd>
+
+			<dt>7.8.7push方法和pop方法</dt>
+
+			<dt>7.8.8unshift和shift方法</dt>
+
+			<dt>7.8.9toString()方法和toLocaleString()</dt>
+
+			<dt>7.9数组方法</dt>
 		</dl>
 	</body>
 	<script type="text/javascript">
@@ -118,11 +147,69 @@
 		if(typeof globalArray[i] ==='function') continue;//跳过继承属性
 		console.info('!globalArray.hasOwnProperty(i)跳过继承属性',globalArray[i])
 	}
-	console.info('forEach')
+	console.info('forEach,使用前提一定要value一定要存在值')
 	globalArray.forEach(function(value,index){
 		console.info('值:',value,'	下标:',index)
 	})
 
 	console.info('------------------------------7.7多维数组------------------------------');
+	var table=new Array(10);
+	//创建多维数组
+	for(var i=0;i<table.length;i++){
+		table[i]=new Array(10);
+	}
+	for(var row=0;row<table.length;row++){
+		for(var col=0;col<table[row].length;col++){
+			if(row===0 ||col===0||row>col) continue;
+			if(row===col){
+				console.info('\n');
+			}
+			console.info('row*col,乘法表:',row+'*'+col+':',row*col)
+		}
+	}
+
+	console.info('------------------------------7.8数组方法------------------------------');
+
+	console.info('------------------------------7.8.1join方法------------------------------');
+	console.info('globalArray.join()',globalArray.join());
+	console.info('globalArray.join("-")',globalArray.join('-'));
+
+	console.info('------------------------------7.8.2reverse方法------------------------------');
+	console.info('globalArray.reverse()',globalArray.reverse())
+
+	console.info('------------------------------7.8.3sort方法------------------------------');
+	console.info('globalArray.sort()',globalArray.sort());
+	console.info('globalArray.sort(function(a,b){return a-b;})//会影响数组',globalArray.sort(function(a,b){return a-b;}))
+	// console.info('globalArray.sort(function(a,b){var a=a.toLowerCase();var b=b.toLowerCase();if(a<b)return -1;if(a>b)return 1;})',globalArray.sort(
+	// 		function(s,t){
+	// 			var a=s.toLowerCase();
+	// 			var b=t.toLowerCase();
+	// 			if(a<b)
+	// 				return -1;
+	// 			if(a>b)return 1;
+	// 			return 0;
+	// 		}
+	// 	)
+	// )
+
+	console.info('------------------------------7.8.4concat方法------------------------------');
+	console.info('globalArray.concat([12,33,22],false)',globalArray.concat([12,33,22],false))
+
+	console.info('------------------------------7.8.5slice方法------------------------------');
+	console.info('globalArray.slice(3,5)',globalArray.slice(3,5));
+
+	console.info('------------------------------7.8.6splice方法------------------------------');
+	console.info('globalArray.splice(4)',globalArray.splice(4))
+	console.info('globalArray.splice(1,2)',globalArray.splice(1,5))
+	console.info('globalArray.splice(1,1)',globalArray.splice(1,1))
+
+	console.info('------------------------------7.8.7push方法和pop方法------------------------------');
+
+	console.info('------------------------------7.8.8unshift和shift方法------------------------------');
+
+	console.info('------------------------------7.8.9toString()方法和toLocaleString()------------------------------');
+
+	console.info('------------------------------7.9数组方法------------------------------');
+
 	</script>
 </html>
