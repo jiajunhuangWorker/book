@@ -69,11 +69,23 @@
 			<dt>7.8.9toString()方法和toLocaleString()</dt>
 
 			<dt>7.9数组方法</dt>
+
+			<dt>7.9.1forEach()</dt>
+			<dd>forEach方法从头至尾遍历数组,为每个元素调用制定的函数</dd>
+			<dd>forEach无法在所有的元素都传递给调用的函数之前终止遍历,简单来说就是不能使用break语句,只能使用try-catch来抛出foreach.break异常进行终止</dd>
+
+			<dt>7.9.2map()</dt>
+			<dd>map()方法将调用的数组的每个元素传递给指定的函数,并返回一个数组,它包含该函数的返回值</dd>
+			<dd>和forEach类似,map存在返回值,返回新数组,它不修改调用的数组,对稀疏数组它具有相同的长度</dd>
+
+			<dt>7.9.3filter()</dt>
+			<dd></dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
 	'user static';
 	var globalArray=[true,false,1,1.3,'你好啊',undefined,null,NaN,function numbers(){return 222},[1,2,3,4,5,6]];
+	var globalArray2=[true,false,1,1.3,'你好啊',undefined,null,NaN,function numbers(){return 222},[1,2,3,4,5,6]];
 	var globalObject={1:'测试一下','string':'测试一下2',false:'测试一下3',null:'测试一下4',undifined:'测试一下5',NaN:'测试一下6',suibian:'测试一下7'};
 	console.info('------------------------------7数组------------------------------')
 	console.info('Array.prototype',Array.prototype);
@@ -211,5 +223,11 @@
 
 	console.info('------------------------------7.9数组方法------------------------------');
 
+	console.info('------------------------------7.9.1forEach()------------------------------');
+
+	console.info('------------------------------7.9.2map()------------------------------');
+	console.info('globalArray2.map(function(x){return x})',globalArray2.map(function(x){return x}))
+	
+	console.info('------------------------------7.9.3filter()------------------------------');
 	</script>
 </html>
