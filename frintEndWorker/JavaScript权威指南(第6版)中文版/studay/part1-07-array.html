@@ -79,7 +79,38 @@
 			<dd>和forEach类似,map存在返回值,返回新数组,它不修改调用的数组,对稀疏数组它具有相同的长度</dd>
 
 			<dt>7.9.3filter()</dt>
-			<dd></dd>
+			<dd>filter方法返回的数组元素是调用的数组的一个子集.传递的函数是用来逻辑判定的.该函数返回true/false</dd>
+			<dd>filter会跳过稀疏数组中缺少的元素,返回稠密数组</dd>
+			
+			<dt>7.9.4every()和some()</dt>
+			<dd>方法是数组的逻辑判定,它们对数组元素应用指定的函数进行判定,返回true和false</dd>
+			<dd>every()方法就类似数学中的'针对所有',的量词:当且仅当针对数组的所有元素调用判定函数都返回true</dd>
+			<dd>some()方法就像数学中的'存在'的量词,当数组中至少有一个元素调用判定函数返回true，它就返回true并且当且仅当所有元素返回false就返回false</dd>
+			<dd>some()在判定函数第一次返回true后返回true，但是判断返回false就会遍历整个数组</dd>
+			<dd>every()和some()意义相反	</dd>
+
+			<dt>7.9.5reduce()和reduceRight()</dt>
+			<dd>reduce()和reduceRight()方法使用指定的函数将数组元素进行组合,生成单个值,这在函数式编程中是常见的操作,称为注入和折叠</dd>
+			<dd>reduce()需要两个参数.第一个是执行化简单操作的函数,化简函数的任务就是用某种方法把两个值组合或化简为一个值并返回化简后的值,第二个参数是一个传递给函数的初始值</dd>
+			<dd>reduce()不带初始值参数调用时将报导致类型错误异常</dd>
+			<dd>reduceRight按照数组索引从高到低,从右到左处理数组</dd>
+			<dd>并集功能</dd>
+
+			<dt>7.9.6indexOf()和lastindexOf()</dt>
+			<dd>indexOf()和lastindexOf()搜索数组中具有给定值的元素,返回找到的第一个元素的索引位置,如果不存在返回-1</dd>
+
+			<dt>7.10数组类型</dt>
+			
+			<dt>7.11类数组对象</dt>
+			<dd>当新的元素添加到列表时,自动更新了length属性</dd>
+			<dd>设置length为一个较小值将截断数组</dd>
+			<dd>从Array.prototype中继承一些有用的方法</dd>
+			<dd>其类属性为Array</dd>
+			<dd>拥有length属性,对应的非负整数属性的对象看做一种类型数组</dd>
+
+			<dt>7.12作为数组的字符串</dt>
+			<dd>push，pop,unshift，shift，sort，reverse，splice，会改变数组</dd>
+			<dd>chartAt访问单个字符,数组也可以访问单个字符串</dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
@@ -229,5 +260,34 @@
 	console.info('globalArray2.map(function(x){return x})',globalArray2.map(function(x){return x}))
 	
 	console.info('------------------------------7.9.3filter()------------------------------');
+	console.info('globalArray2',globalArray2,'globalArray2.filter(function(val){return val<2})',globalArray2.filter(function(val){return val<2}));
+
+	console.info('------------------------------7.9.4every()和some()------------------------------')
+	console.info('globalArray2.every(function(x){return x<10})',globalArray2.every(function(x){return x<10}));
+	console.info('globalArray2.some(function(x){return x<10})',globalArray2.some(function(x){return x<10}));
+
+	console.info('------------------------------7.9.5reduce()和reduceRight()------------------------------')
+	var arr=[{a:22},{c:222}];
+	// console.info('arr.reduce()',arr.reduce());
+
+	console.info('------------------------------7.9.6indexOf()和lastindexOf()------------------------------')
+
+	console.info('------------------------------7.10数组类型------------------------------')	
+	console.info('Array.isArray([])',Array.isArray([]));
+	console.info('[] instanceof Array//弊端：使用instanceof问题是在web浏览器中可能有多个窗口或窗体(frame)存在,每个窗口有自己的javascript的环境有自己的全局对象,一个窗体中的对象将不可能是另外窗体中的构造函数实例',[] instanceof Array)
+	console.info(new Array())
+	var	isArray=Function.isArray||function(o){
+		return typeof o==='object' && Object.prototype.toString.call(o)==='[object Array]';
+	}
+
+	console.info('------------------------------7.11类数组对象------------------------------')	
+	console.info('------------------------------7.12作为数组的字符串------------------------------')	
+	var s='javascript!hellow!';
+	var joinStr=Array.prototype.join.call(s,' ');
+	var breakStr=Array.prototype.filter.call(joinStr,function(x){
+		return x.match(/^[abc]/);
+	}).join('');
+	console.info('s=javascript!hellow!  ','  Array.prototype.join.call(s,"")  ',joinStr)
+	console.info('Array.prototype.filter.call(\njoinStr,function(x){\nreturn x.match(\/\^[aeiou]\/);\n}).join("")\n',breakStr)
 	</script>
 </html>
