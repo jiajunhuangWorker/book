@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>第八章函数</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>8.function</dt>
+			<dd>函数是这样的一段JavaScript代码,它只定义一次,但可能被执行或调用任意次数</dd>
+			<dd>javascript函数是参数化的函数定义是包括形参和实参,除了实参之外,每次调用还会拥有另一个值，可以利用this关键字</dd>
+			<dd>如果函数挂载在对象上,作为对象的一个属性就称为对象的方法,函数既对象,程序可以随意操控它们</dd>
+			<dd>JavaScript的函数可以嵌套在其他函数中定义,这样它们就可以访问它们被定义时所处的作用域中的任何变量</dd>
+			
+			<dt>8.1函数定义</dt>
+			<dd>函数名称标识符.函数名称是函数声明语句必需的部分.它的用途就像变了的名字,新定义的函数对象会赋值给这个变量.对函数定义表达式</dd>
+			<dd>驼峰命名法</dd>
+			<dd>return语句没有一个与之相关表达式就返回undifined</dd>
+
+			<dt>8.2函数调用</dt>
+			<dd>4种方式调用JavaScript函数,作为函数,作为方法,作为构造函数,通过他们的call()和apply方法</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------8.function------------------------------');
+
+	console.info('------------------------------8.1函数定义------------------------------');
+	console.info('嵌套函数')
+	var nestFunction=function hypotenuse(a,b){
+		function square(x){return x*x};
+		return Math.sqrt(square(a)+square(b));
+	}
+	console.info('嵌套函数://函数声明语句并非真正的语句,他们只允许它们作为顶级语句.他们可以出现在全局代码里或者内嵌其它函数中,他们不出现在循环,条件判断,try/catch/finally以及with语句中,此限制仅适用于以语句声明形式定义的函数',nestFunction);
+
+	console.info('------------------------------8.2函数调用------------------------------');
+	</script>
+</html>
