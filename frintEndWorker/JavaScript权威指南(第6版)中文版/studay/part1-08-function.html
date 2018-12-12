@@ -20,6 +20,20 @@
 
 			<dt>8.2函数调用</dt>
 			<dd>4种方式调用JavaScript函数,作为函数,作为方法,作为构造函数,通过他们的call()和apply方法</dd>
+
+			<dt>8.2.1函数调用</dt>
+			<dd>使用调用表达式可以进行普通的函数调用也可以进行方法调用,参数列表是由逗号分隔的零个或多个参数表达式组成</dd>
+
+			<dt>8.2.2方法调用</dt>
+			<dd>一个方法无非是个保存在一个对象的属性里的javascript函数</dd>
+			<dd>方法调用和函数调用区别,方法调用可以调用上下文,属性访问表达式由两部分组成,一个是对象和属性,可以通过关键字this去引用对象</dd>
+			<dd>方法和this关键字是面向对象编程范例的核心,任何函数只要作为方法调用实际上都会传入一个隐式的实参,这个实参是一个对象,方法调用的母体就是这个对象</dd>
+			<dd>方法链</dd>
+			<dd>当方法返回值是一个对象,这个对象还可以调用它的方法,这种方法调用序列中(通常称为'链'或者'级联'),每次的调用结果都是另外一个表达式的组成部分.</dd>
+			<dd>当方法并不需要返回值时最好返回this,如果设计api中一直采用这种方式(每个方法都返回this),使用api就可以进行'链式调用'风格进行编程</dd>
+			<dd>javascript不允许给this赋值,关键字this没有作用域的限制,嵌套的函数不会从调用它的函数中继承this,</dd>
+
+			<dt>8.2.3构造函数调用</dt>
 		</dl>
 	</body>
 	<script type="text/javascript">
@@ -35,5 +49,31 @@
 	console.info('嵌套函数://函数声明语句并非真正的语句,他们只允许它们作为顶级语句.他们可以出现在全局代码里或者内嵌其它函数中,他们不出现在循环,条件判断,try/catch/finally以及with语句中,此限制仅适用于以语句声明形式定义的函数',nestFunction);
 
 	console.info('------------------------------8.2函数调用------------------------------');
+
+	console.info('------------------------------8.2.1函数调用------------------------------');
+	var static=(function(){return this}());
+	console.info(static,'//定义并调用一个函数来确定当前运行脚本运行时是否使用严格模式')
+
+	console.info('------------------------------8.2.2方法调用------------------------------');
+	var calculator={
+		operand:1,
+		operand1:1,
+		add:function(){
+			this.result=this.operand+this.operand1;
+		}
+	}
+	console.info('对象',calculator,'\n调用calculator.add()方法:',calculator.add(),'result结果:',calculator.result);
+	var object={
+		m:function(){
+			var self=this;
+			console.info(this===object);
+			f();
+			funciton f(){
+				console.info(this===obejct);
+				console.info(self===object);
+			}
+		}
+	}
+	console.info(object);
 	</script>
 </html>
