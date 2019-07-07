@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数字</title>
+	<link rel="stylesheet" href="base.css">
+</head>
+<body>
+	<dl>
+		<dt>0.数字</dt>
+		<dd>javscript中所有数字均用浮点数值表示，采用ieee 754标准定义64位浮点</dd>
+		<dd>事件处理程序是一个浏览器中注册的javascript函数，当特定类型事件发生时浏览器便调用该方法</dd>
+		<dd>--16进制直接量是指0x和0X为前缀，十六进制值是0~9之间的数字a（A）~f（F）之间的字母构成 10~15</dd>
+		<dd>--8进制是以0开始的</dd>
+		<dt>1.Math方法</dt>		
+		<dt>2.算数运算时出现的问题</dt>
+		<dd>
+			溢出(overflow),下溢（underflow）:当运算结果无限接近0并且比javascript的最小值还小的情形下将出现下溢问题、
+			<br/>被0整除不报错！报无穷大（infinity）
+			<br/>当0/0没意义报NAN表示非数字
+			<br/>无穷大/无穷大NAN表示非数字
+			<br/>负数开方NAN表示非数字
+			<br/>正无穷大(Infinity)和非数字(NaN)
+		</dd>
+
+	</dl>
+</body>
+	<script type="text/javascript">		
+		/*
+			因为javascript是2进制，8进制和1024进制而不是10进制导致这个精度问题出现在javascript出现在任何使用二进制浮点数编程语言中都会出现这个问题		
+		*/
+		console.log("1.Math方法--------------------");
+		console.log("Math.pow(2,3)--次幂："+Math.pow(2,3));
+		console.log("Math.round(.5)--四舍五入："+Math.round(.5));
+		console.log("Math.ceil(.5)--向上取整"+Math.ceil(.2));
+		console.log("Math.floor(.5)--向下取整"+Math.floor(.9));
+		console.log("Math.abs(-5)--绝对值："+Math.abs(-5));
+		console.log("Math.max(5,7,6)--最大值："+Math.max(5,7,6));
+		console.log("Math.min(5,7,6)--最小值："+Math.min(5,7,6));
+		console.log("Math.random()--（0~1）随机数:"+Math.random());
+		console.log("Math.PI--圆周率:"+Math.PI);
+		console.log("Math.e--自然数:"+Math.E);
+		console.log("Math.sqrt(4)-平方跟:"+Math.sqrt(4));
+		console.log("Math.pow(27,1/3)-立方根："+Math.pow(27,1/3));
+		console.log("Math.sin(0)--三角函数："+Math.sin(0));
+		console.log("Math.log(10)-自然对数："+Math.log(10));
+		console.log("Math.log(10)/Math.LN10--以10位底100的对数:"+Math.log(10)/Math.LN10);
+		console.log("Math.exp(2)--e的二次幂"+Math.exp(2));
+		console.log("2.算数运算时出现的问题-------------------");
+		console.log("0/0:"+0/0);
+		console.log("NaN==NaN:"+(NaN==NaN));
+		console.log("isNaN(如果是非数字返回true):"+(isNaN(0/0)));
+		console.log("isFinite(如果不是NaN,Infinity,-Infinity,string(但是boolean很特殊)就返回true):"+(isFinite(1/10)));
+		var number=.3-.2;
+		var number2=.2-.1;		
+		console.log(".3-.2==.2-.1:"+(number==number2));
+	</script>
+</html>

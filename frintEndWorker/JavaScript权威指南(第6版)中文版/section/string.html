@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字符串-string</title>
+	<link rel="stylesheet" href="base.css">
+</head>
+<body>
+	<dl>
+		<dt>1.文本</dt>
+		<dd>字符串是一组由16位值组成的不可变的有序序列，双引号可以包单引号，单引号也可以包双引号</dd>
+		<dd>\n表示是换行，\是用来转义的</dd>
+		<dt>2.字符串方法</dt>
+		<dd>javascript的字符串是固定不变的因此repeat和变大都是会返回新的字符串</dd>
+	</dl>
+</body>
+	<script type="text/javascript">
+		console.log("1.字符串方法-------------------string");
+		var str="hellow,word";
+		console.log('hellow,word');
+		console.log("str.length:"+str.length);
+		console.log("str.charAt(0):"+str.charAt(0));
+		console.log("str.charAt(str.length-1):"+str.charAt(str.length-1));
+		console.log("str.substring(1,4)(裁剪1~4):"+str.substring(1,4));
+		console.log("str.slice(1,4)(裁剪1~4):"+str.slice(1,4));
+		console.log("str.slice(-3)(剪裁后三个):"+str.slice(-3));
+		console.log("str.indexOf('h'):"+str.indexOf('h'));
+		console.log("str.lastIndexOf('d'):"+str.lastIndexOf('d'));
+		console.log("str.indexOf('w'):"+str.indexOf('w',3));
+		console.log("str.split(','):"+str.split(','));
+		console.log("str.replace('h','H'):"+str.replace('h','H'));
+		console.log("str.toUpperCase():"+str.toUpperCase());
+		console.log("15.undefined和null-------------------");
+		console.log("null==undefined:"+(null==undefined));
+		console.log("null===undefined:"+(null===undefined));
+	</script>
+</html>

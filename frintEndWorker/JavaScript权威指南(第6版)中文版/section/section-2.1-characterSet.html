@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>2.1 字符集</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>2.1字符集</dt>
+			<dd>javascript程序是unicode字符集编写的，unicode是ascll和lain-1超集,几乎支持地球所有的语言</dd>
+			
+			<dt>2.1.1区分大小写,严格区分大小写</dt>
+			<dd>javascript区分大小写的语言(关键字.变量.函数名和所有标识符),html不区分大小写,xhtml区分大小写</dd>
+			
+			<dt>2.1.2空格，换行符，格式控制符</dt>
+			<dd>javascript会忽略程序中标识(token)之间的空格</dd>
+			<dd>unicode格式控制字符控制着文本视觉显示</dd>
+			<dd>javascript忽略程序中标识token之间空格</dd>
+			<dd>空格符(\u0020),水平制表符(\u0009),垂直制表符(\u000B),换页符(\u000c),不中断空白(\u00A0),字符序标记(\ufeff),javscript:换行符（\u000a）
+				回车符（\u000d）,行分隔符（\u2028）,段分隔符（\u2029）
+			</dd>
+			<dd>回车符加换行符在一起呗解析为单行换行结束符</dd>
+
+			<dt>2.1.3.unicode转义</dt>
+			<dd>有些计算机硬件和软件里无法显示或输入Unicode字符全集,javascript定义了特殊的序列6个ascll字符来代替任意16位</dd>
+			
+			<dt>2.1.4标准化</dt>
+			<dd>unicode 允许使用多种方法对同一个字符进行编码</dd>
+			<dd>unicode 和 ascii表示同某一个字符的时候，他们是显示同一个字符但是它们的二进制编码表示不一样</dd>
+			<dd>unicode标准为所有字符定义了首选编码格式，给出了标准化处理方式,将文本转换为适合的标准格式</dd>
+		</dl>
+	</body>
+</html>
