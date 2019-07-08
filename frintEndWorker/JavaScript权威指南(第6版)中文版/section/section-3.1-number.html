@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+	<html lang="en" id="html">
+	<head>
+		<meta charset="UTF-8">
+		<title>3.1 数字</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>3.1数字</dt>
+			<dd>javascript不区分整数和浮点,javscript所有数字都是浮点型,ieee 754标准定义的64位浮点格式(-2的53次方和2的53次方)</dd>
+
+			<dt>3.1.1整形直接量</dt>
+			<dd>十六进制</dd>
+			<dd>0x或0X为前缀都是十六进制的直接量</dd>
+			<dd>A~F在16进制中表示10~15</dd>
+			<dd>八进制</dd>
+			<dd>以数字0作为开头,在严格模式下禁止八进制直接量</dd>
+
+			<dt>3.1.2浮点型直接量</dt>
+			<dd>浮点型直接量可以含有小数,可以使用指数记数法表示浮点型直接量,</dd>
+
+			<dt>3.1.3javascriptzhong算术的运算</dt>
+			<dd>javascript程序是使用语言本身提供算术运算符来进行数字运算的</dd>
+			<dd>+,-,*,/,%</dd>
+			<dd>溢出,下溢,或被零整除不报错</dd>
+			<dd>上溢/下溢:正/负无穷大,Infinity/-Infinity</dd>
+			<dd>NaN(no a number)它和任何值都不相等,包括自身</dd>
+
+			<dt>3.1.4二进制浮点数和四舍五入错误</dt>
+			<dd>javascript通过浮点数的形式只能表示其中有限个数因此会出现精度问题</dd>
+
+			<dt>3.1.5日期和时间</dt>			
+			<dd>javascript语言核心包括Date()构造函数用来创建日期</dd>
+			
+			
+		</dl>	
+	</body>
+	<script type="text/javascript">	
+		/*全局对象*/
+		var creatglobalObject='1222';
+		console.log('creatglobalObject===window.creatglobalObject',creatglobalObject===window.creatglobalObject);
+		/* 将16进制转10进制 */
+		console.info('------------------------------3.1.1整形直接量------------------------------')//10*16+10 171
+		console.info('0xaa:',0xaa,'result:10*16+10 171')//10*16+10 171
+		console.info('0xab:',0Xab,'result:10*16+11 171')//10*16+11 171
+		console.info('0xff:',0xff,'result:15*16+15 255')//15*16+15 255
+		/*将8进制转10进制*/
+		console.info('0377:',0377,'result:3*64+7*8+7')//3*64+7*8+7
+		console.info('01:',01,'result:1')//1 1
+		console.info('011:',011,'result:1+1*8 9')//9 1+1*8 9
+		console.info('0111:',0111,'result:1+8*9')//73 1+8*9
+		
+		
+		console.info('------------------------------3.1.2浮点型直接量------------------------------')
+		console.info('1.47E-32//1.47*10的-32次方',1.47E-32);
+		console.info('1.47e32//1.47*1011的-32次方',1.47e32);
+
+		console.info('------------------------------3.1.3javascriptzhong算术的运算------------------------------')
+		console.info('Infinity',Infinity);
+		console.info('Number()',Number());
+		console.info('new Number()',new Number());
+		console.info('0/0:',0/0);
+		console.info('1/0:',1/0);
+		console.info('-1/0:',-1/0);
+		console.info('Number.NaN',Number.NaN);
+		console.info('NaN',NaN);
+		console.info('NaN==Number.NaN',NaN==Number.NaN);
+		console.log('Number.POSITIVE_INFINITY//只读:',Number.POSITIVE_INFINITY);
+		console.log('Number.MAX_VALUE+1//只读:',Number.MAX_VALUE+1);
+		console.log('Number.MIN_VALUE/2//发生下溢:',Number.MIN_VALUE/2);
+		console.log('-Number.MIN_VALUE/2//负零:',-Number.MIN_VALUE/2);
+		console.log('-1/Infinity//负零:',-1/Infinity);
+		console.info('isNaN(NaN)',isNaN(NaN));
+		console.info('isNaN("666")',isNaN("666"));
+		console.info('isNaN("我是中文")',isNaN("我是中文"));
+		console.info('isFinite合法的数值返回true')
+		console.info('isFinite("我是中文")',isFinite("我是中文"));
+		console.info('isFinite("666")',isFinite("666"));
+		console.info('isFinite("NaN")',isFinite(NaN));
+		console.info('Number.POSITIVE_INFINITY',Number.POSITIVE_INFINITY);
+		console.info('isFinite(Number.POSITIVE_INFINITY)',isFinite(Number.POSITIVE_INFINITY));
+		console.info('isFinite(-Number.POSITIVE_INFINITY)',isFinite(-Number.POSITIVE_INFINITY));
+		console.log('Math:',Math)
+		console.info('Math.pow(2,3)//2的3次方:',Math.pow(2,3))
+		console.info('Math.round(.4)//四舍五入:',Math.round(.4))
+		console.info('Math.ceil(.4)//向上取整:',Math.ceil(.4))
+		console.info('Math.floor(.7)//向下取整:',Math.floor(.7))
+		console.info('Math.abs(-3)//绝对值:',Math.abs(-3))
+		console.info('Math.max(a,b,c,d,e)//最大值:',Math.max(3,'44',55,22,'1999','1999.3'))//如果传入字符串返回NAN
+		console.info('Math.min(a,b,c,d,e)//最小值:',Math.min(3,'44',55,22,'1999','1999.3'))
+		console.info('Math.random()//0~1随机数:',Math.random())
+		console.info('Math.PI//圆周率:',Math.PI)
+		console.info('Math.E//自然对数的底数:',Math.E)
+		console.info('Math.sqrt(9)//9的平方根:',Math.sqrt(9))
+		console.info('Math.pow(9,1/3)//3的立方根:',Math.pow(9,1/3))
+		console.info('Math.sin(0)//三角函数(Math.cos,Math.atan等):',Math.sin(0))
+		console.info('Math.log(10)//10的自然对数:',Math.log(10))
+		console.log('Math.log(100)/Math.LN10//以10为底100的对数:')
+		console.info(Math.log(100)/Math.LN10)
+		console.log('Math.log(512)/Math.LN2//以2为底数512的对数:')
+		console.info(Math.log(512)/Math.LN2)
+		console.info('Math.exp(3)//e的三次幂:',Math.exp(3))
+		console.info('------------------------------3.1.4二进制浮点数和四舍五入错误------------------------------')
+		console.info('.3-.2:',.3-.2);
+		console.info('.4-.3:',.4-.3);
+		console.log('.3-.2==.4-.3',.3-.2==.4-.3);
+
+		console.info('------------------------------3.1.5日期和时间------------------------------')
+		console.info('Date',Date);
+		console.info('typeof:'+typeof new Date() ,'time:'+ new Date())
+		console.info('1秒等于1000毫秒 计算毫秒差new Date(2018,11,18) - new Date(2018,11,17):',new Date(2018,11,18) - new Date(2018,11,17))
+		console.info('获取年new Date().getFullYear():',new Date().getFullYear());
+		console.info('获取月（1月是表示0）new Date().getMonth():',new Date().getMonth());
+		console.info('计算几号:new Date().getDate()',new Date().getDate());
+		console.info('计算星期几（星期天表示0）new Date().getDay():',new Date().getDay());
+		console.info('计算时间:new Date().getHours()',new Date().getHours());
+		console.info('计算UTC小时,基于时区:new Date().getUTCHours()',new Date().getUTCHours());
+
+		console.info('------------------------------3.2文本------------------------------')
+
+		console.info('------------------------------3.2.1字符串直接量------------------------------')
+		console.info('two\nLine');
+		console.info('can\'t')
+
+		console.info('------------------------------3.2.2转义符------------------------------')
+		console.info('版权符号:','\xA9');
+		console.info('π：','\u03c0');
+		console.info('NUL字符\o：','\o');
+		console.info('退格符\b：','\b 222');
+		console.info('水平制表符\t：','\t 2222');
+		console.info('换行符\n：','\n 222');
+		console.info('垂直制表符\v：','\v 222');
+		console.info('换页符\f：','\f222');
+		console.info('回车符\r：','\r222');
+		console.info('双引号\u0022：','\u0022');
+		console.info('撇号或单引号：','\u0027');
+		console.info('反斜线：','\\');
+		console.info('两位十六进制数XX指定的是Latin-1字符\x01(不能是中文只能是数字)：','\x01');
+		console.info('由4位十六进制数XXXX代表unicode\u1111(不能是中文只能是数字)：','\x1111');
+
+		console.info('------------------------------3.2.3字符串使用------------------------------')
+		console.info("'你好啊'.length",'你好啊'.length)
+		console.info('nihaoa.chartAt(2)','nihaoa'.charAt(2))
+		console.info("'nihaoa'.chartAt('nihaoa'.length-1)",'nihaoa'.charAt('nihaoa'.length-1))
+		console.info("'nihaoa'.substring(1,3)//下标0开始计算末尾不包含值关系",'nihaoa'.substring(1,3))
+		console.info("'nihaoa'.slice(1,3)//下标0开始计算末尾不包含值关系",'nihaoa'.slice(1,3))
+		console.info("'nihaoa'.slice(-3)//最后三个字符串",'nihaoa'.slice(-3))
+		console.info("'nihaoa'.indexOf('a')//匹配字符串中是否存在a字符，如果存在将返回非-1的小标值",'nihaoa'.indexOf('a'))
+		console.info("'nihaoa'.lastindexOf('a')",'nihaoa'.lastIndexOf('a'))
+		console.info("'nihaoa'.indexOf('a',4)//从第四个字符开始寻找a",'nihaoa'.indexOf('a',4))
+		console.info("'n，iha，o，a'.split(',')//按照规则进行分割成子字符串以数组返回",'n,iha,o,a'.split(','))
+		console.info("'nihaoa'.replace('a','fuck')//返回一个新的字符串",'nihaoa'.replace('a','fuck'))
+		console.info("'nihaoa'.toUpperCase()//返回一个新的字符串",'nihaoa'.toUpperCase())
+		console.info("nihaoa'[2]//返回2，从0开始读取",'nihaoa'[2])
+		console.info("'nihaoa'['nihaoa'.length-1]//返回a",'nihaoa'['nihaoa'.length-1])
+
+		console.info('------------------------------3.2.4模式匹配------------------------------')
+		var text='t11es2ti33ng: 1,22,3,77';
+		var pattern=/\d+/g //匹配所有包含一个或多个数字的实例
+		console.info('text:',text);
+		console.info('pattern:',pattern);
+
+		console.info('/^HTML/:匹配以html开始的字符串',/^HTML/)
+		console.info('/[1-9][0-9]*/:匹配一个非0数字后面是任意个数字',/[1-9][0-9]*/)
+		console.info('/\bjavascript\b/i:匹配单词"javascript"忽略大小写',/\bjavascript\b/i);
+
+		console.info('pattern.test(text)//返回boolean类型',pattern.test(text));
+		console.info('text.search(pattern)//返回number,首次匹配成功的下标位置',text.search(pattern));
+		console.info('text.match(pattern)//返回array,所有符合的组成数组',text.match(pattern));
+		console.info('text.replace(pattern,\'#\')//返回新的对象 替换符号',text.replace(pattern,'#'));
+		console.info('text.split(/\D+/)//返回数组用非数字字符截取字符串',text.split(/\D+/));
+
+		console.info('------------------------------3.3布尔值------------------------------')
+
+		console.info('------------------------------3.4null和undefined------------------------------')
+		console.info('typeof undefined:',typeof undefined)
+		console.info('typeof null:',typeof null)
+		var str={};
+		str.null=null;
+		str.undefined=undefined;
+		console.info(str)
+		console.info('------------------------------全局对象(3.5全局对象)------------------------------')
+		console.info('this',this)
+		console.info('window',window)
+		console.info('window==this//证明this引用了全局对象',window==this);
+		console.info('------------------------------包装对象(3.6包装对象)------------------------------')
+		console.info('"hellow!lucas".substring(1,5):',"hellow!lucas".substring(1,5));
+		var str='test';
+			console.log('str',str)
+			str.len=4;
+			console.log('str.len://因为临时字符串对象,并给其len属性赋值4,随即销毁这个临时对象',str.len)
+		var getStr=str.len;
+			console.log('getStr://通过原始的字符串值创建一个新字符串对象,尝试读取len属性,但是len不存在所以报undefined',getStr)
+			var str='test',num=1,bool=true;
+			console.log('typeof str str=\'test\'//未包装后的字符串',typeof str);
+			str=new String(str);
+			console.log('typeof str  new String(str)//包装后的字符串',typeof str);
+			num=new Number(num);
+			bool=new Boolean(bool);
+
+		console.info('------------------------------3.7不可变得原始值和可变的对象引用------------------------------')
+			console.info('--原始值--');
+		var str='lucas!hellow!'
+			str.toUpperCase();
+			console.info('str使用了toUpperCase方法！但是str 没变成大写证明原始数据类型没发生改变',str);
+			console.info('--对象--');
+			var val={x:1};
+			val.x=2,val.y=3;
+			var vals=[1,2,3];
+			vals[0]=0;
+			vals[3]=4;
+			console.info('--索引值--');
+			var array=[],array1=[];
+			console.info('array=[],array1=[]')
+			console.info('array===array1',array===array1);
+			console.info('array==array1',array==array1);
+			console.info('--更改引用值--');
+			var a=[];
+			var b=a;
+			b[0]=666;
+			console.log('var a=[];var b=a;b[0]=666;')
+			console.info('a[0]',a[0]);
+			console.info('a===b:',a===b);
+			console.info(new Array())
+			console.info('--copy Array--');
+			var arrs=[2,43,1,2,44,55,66],arr01=[];
+			for( i in arrs){
+				if(typeof arrs[i] != 'function'){
+					arr01.push(arrs[i]);
+				}
+			}
+			console.info('null==undefined',null==undefined)
+			console.info('"0"==0',"0"==0)
+			console.info('false==0',"0"==false)
+			console.info('false==0',0==false)
+
+			console.info('------------------------------3.8类型转换------------------------------')			
+			console.info('数字转字符串:10+"object":',10+"object",'   typeof 10+"object":', typeof (10+"object"));
+			console.info('字符串转数字:"10"+"20":',"10"+"20",'   typeof "10"+"20":', typeof ("10"+"20"));
+			console.info('NaN:n=1-"x":',n=1-"x",'   typeof var n=1-"x":', typeof (n=1-"x"));
+			console.info('NaN:n=1-"x":',n=1-"x",'   typeof var n=1-"x":', typeof (n=1-"x"));
+			
+			console.info('------------------------------3.8.1转换和相等性------------------------------')
+			console.info('null==undefined',null==undefined)
+			console.info('0=="0"',0=='0')
+			console.info('0==false',0==false)
+			console.info('"0"==false',"0"==false)
+			console.info('undefined==false',undefined==false)
+
+			console.info('------------------------------3.8.2显式类型转换------------------------------')
+			console.info(new Number())
+			console.info('Object(undefined)',Object(undefined))
+			console.info('String(undefined)',String(undefined))
+			var n=12345.678;
+			console.info('n.toFixed(2)',n.toFixed(2))
+			console.info('n.toExponential(2)',n.toExponential(2))
+			console.info('n.toPrecision(2)',n.toPrecision(2))
+
+			console.info('------------------------------3.8.3对象转换为原始值------------------------------')
+			console.info('--toString()--');			
+			console.log('{a:1,b:2,b:2}.toString()',{a:1,b:2}.toString());
+			console.log('[2,35,334].toString()',[2,35,334].toString());
+			console.log('(function(x){f(x);}).toString()',(function(x){f(x);}).toString());
+			console.log('new Date().toString()',new Date().toString());
+			console.info('--valueOf() 对象转为原始值--');
+			console.info('new Date().valueOf()',new Date().valueOf())
+
+			console.info('------------------------------3.9变量声明------------------------------')
+
+			console.info('------------------------------3.10变量作用域------------------------------')
+			var val='global script';
+			var scopeName=function scope(){
+				var val='scope script';
+				return val;
+			}
+			console.info('方法名:',scopeName,'\n全局value:',val,'\n方法调用',scopeName(),'变量就近原则');	
+				val02='global script222';
+			var scopeName02=function scope(){
+				var val='scope script scope script';
+				var val02='scope script 值2';
+				return [val,val02];
+			}
+
+			console.info('方法名:',scopeName02,'\n全局value:',val02,'\n方法调用',scopeName02(),'没发生异常');	
+			var scopeName03=function scope(){
+				var val='scope script local';
+				function son(){
+					var val='scope script nested';
+					return val;
+				}
+				return son();
+			}
+			console.info('方法名:',scopeName03,'\n全局value:',val,'\n方法调用',scopeName03(),'嵌套作用域');	
+
+			console.info('------------------------------3.10.1函数作用域和声明提前------------------------------')
+			var scopeName04=function scope(o){
+				var i=0;
+				if(typeof o=="object"){
+					var j=666;
+					for(var k=0;k<10;k++){
+						console.info('内部的k:',k)
+					}
+					console.info('外部的k:',k)
+				}
+				console.log('假设o成立之后就会获取内部的j')
+			}
+			console.info('方法名:',scopeName04,'\n方法调用',scopeName04(Object()),'嵌套作用域');
+
+
+			function scope(){
+				alert(val)
+			}
+			//console.info('window.scope()证明已经被提前声明了函数已经扔到scope中',window.scope(),'证明了scope在注册的时候已经在window中注册了')
+			console.info('------------------------------3.10.2作为属性的变量------------------------------')			
+			console.info('--静态作用域--')			
+			var creatglobalObjects = 'foo里面的value';
+			console.info('var creatglobalObjects = \'foo里面的value\'');
+			function foo() {			    
+			      console.log('bar调用了foo然后输出了全局变量creatglobalObjects里面的值:',creatglobalObjects);
+			      return creatglobalObjects
+			}
+
+			var bar=function bar() {
+			    var creatglobalObjects = 222222;
+			    foo();
+			    return creatglobalObjects;
+			}
+			console.info('方法名:',bar,'\n全局value:',creatglobalObject,'\n方法调用',bar());
+
+			var scope = "global scope";
+			var checkscope=function checkscope(){
+			    var scope = "local scope111";
+			    function f(){
+			        return scope;
+			    }
+			    return f();
+			}			
+			console.info('方法名:',checkscope,'\n全局value:',scope,'\n方法调用',checkscope());
+			var checkscope01=function checkscope(){
+			    var scope = "local scope222";
+			    function f(){
+			        return scope;
+			    }
+			    return f;
+			}
+			console.info('方法名:',checkscope01,'\n全局value:',scope,'\n方法调用',checkscope01()());
+			
+	</script>	
+</html>
