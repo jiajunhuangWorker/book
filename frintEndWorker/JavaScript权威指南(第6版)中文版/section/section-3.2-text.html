@@ -2,65 +2,24 @@
 	<html lang="en" id="html">
 	<head>
 		<meta charset="UTF-8">
-		<title>第三章.类型、值和变量</title>
+		<title>3.2 文本</title>
 		<link rel="stylesheet" href="../../../globalBase.css">
 	</head>
 	<body>
 		<dl>
-			<dt>3.概括</dt>
-			<dd>计算机程序运行需要对值,进行操作,在编程中能够表示操作的值称为数据类型(第一章又提到)</dd>
-			<dd>变量是一个值得符号名称,通过名称获取引用</dd>
-			<dd>null和undefined属于特殊原始值</dd>
-			<dd>对象是键值对的</dd>
-			<dd>特殊对象:global object</dd>
-			<dd>普通的javascript对象是命名值得无序集合</dd>
-			<dd>特殊对象函数,如果函数用来初始化使用new运算符我们称为构造函数</dd>
-			<dd>构造函数定义了一类对象</dd>
-			<dd>类可以看做事对象类型的子类型</dd>
-			<dd>javascript可以自由的进行数据类型转换</dd>
-			<dd>变量是无类型的var </dd>
-
-
-			<dt>3.1数字</dt>
-			<dd>javascript不区分整数和浮点,javscript所有数字都是浮点型,ieee 754标准定义的64位浮点格式(-2的53次方和2的53次方)</dd>
-
-			<dt>3.1.1整形直接量</dt>
-			<dd>十六进制</dd>
-			<dd>0x或0X为前缀都是十六进制的直接量</dd>
-			<dd>A~F在16进制中表示10~15</dd>
-			<dd>八进制</dd>
-			<dd>以数字0作为开头,在严格模式下禁止八进制直接量</dd>
-
-			<dt>3.1.2浮点型直接量</dt>
-			<dd>浮点型直接量可以含有小数,可以使用指数记数法表示浮点型直接量,</dd>
-
-			<dt>3.1.3javascriptzhong算术的运算</dt>
-			<dd>javascript程序是使用语言本身提供算术运算符来进行数字运算的</dd>
-			<dd>+,-,*,/,%</dd>
-			<dd>溢出,下溢,或被零整除不报错</dd>
-			<dd>上溢/下溢:正/负无穷大,Infinity/-Infinity</dd>
-			<dd>NaN(no a number)它和任何值都不相等,包括自身</dd>
-
-			<dt>3.1.4二进制浮点数和四舍五入错误</dt>
-			<dd>javascript通过浮点数的形式只能表示其中有限个数因此会出现精度问题</dd>
-
-			<dt>3.1.5日期和时间</dt>			
-			<dd>javascript语言核心包括Date()构造函数用来创建日期</dd>
-			
 			<dt>3.2文本</dt>
 			<dd>字符串是一组由16位值组成的不可变得有序序列每个字符都是雷子unicode字符集</dd>
 			<dd>javascript采用UTF-16编码的Unicode字符集,javascript字符是由一组无符号的16位值组成的序列</dd>
 			<dd>不能表示16位的unicode字符则遵循utf-16编码规则</dd>
-			
 			<dt>3.2.1字符串直接量</dt>
 			<dd>单引号或者双引号括住的内容是字符串直接量</dd>
 			<dd>example:'name="myName"'</dd>
 			<dd>字符串直接量可以拆分成数行每行\结束，反斜杆和行结束符都不算是字符串直接量的内容</dd>
-			<dd>注意单引号使用example: can't   应该写成'can\'t'</dd>	
+			<dd>注意单引号使用example: can't   应该写成'can\'t'</dd>
 
 			<dt>3.2.2转义符</dt>
 			<dd>反斜杆：\</dd>
-			
+
 			<dt>3.2.3字符串使用</dt>
 			<dd>连接符号 +</dd>
 			<dd>javascript中字符四固定不变的,类似replace,toUpperCase()的方法都返回一个新的字符串,原字符串没发生改变</dd>
@@ -70,100 +29,9 @@
 			<dd>RegExp()构造函数,用来创建表示文本匹配模式的对象</dd>
 			<dd>RegExp()是一种强大和常用的文本处理工具</dd>
 			<dd>StringheRegExp对象均定义了利用正则表达进行匹配和查找替换的函数</dd>
-
-			<dt>3.3布尔值</dt>
-			<dd>布尔值通常用于JavaScript中控制结构中,true/false</dd>
-			<dd>!==,==,&&,||,!</dd>
-			<dd>转为false:undefined,null,0,-0,NaN,''</dd>
-			
-			<dt>3.4null和undifined</dt>
-			<dd>null是关键字表示空值,nil,表示程序级错误</dd>
-			<dd>undefined:空缺表示深层次的空值,表示没有初始化,元素不存在,不是关键字,表示系统级的</dd>
-			<dd>.和[]不能存null和undifined</dd>
-			
-			<dt>3.5全局对象</dt>
-			<dd>当javascript解析器启动时它就会创建一个新的全局对象并初始化全局属性,全局函数,构造函数,全局对象</dd>
-			<dd>全局属性:undefined,Infinity和NAN</dd>
-			<dd>全局函数:isNaN(),parseInt(),eval(),in,等</dd>
-			<dd>构造函数：Data(),RegExp(),String(),Object(),Array(),Number()</dd>
-			<dd>全局对象:Math,JSON</dd>
-			<dd>全局对象要以保留字来对待</dd>
-			<dd>window对象定义了核心全局属性,它针对web浏览器和客户端</dd>
-
-			<dt>3.6包装对象</dt>
-			<dd>javascript对象是一种复合值,它是属性或已命名的集合，存取字符串、数字或布尔值得属性时创建的临时对象称为包装对象具体看问题本</dd>
-			
-			<dt>3.7不可变得原始值和可变的对象引用</dt>
-			<dd>原始值:undefined,null,boolean,number,string</dd>
-			<dd>对象是可变的属性是可以发生改变的,两个相同属性以及相同的值他们是等的！因为索引值不同</dd>
-			<dd>对象的比较都是引用的比较</dd>
-			<dd>原始值和对象区别:</dd>
-			<dd>原始值无法更改,没有索引值,没有键值对,值比较而不是索引比较</dd>
-			<dd>对象:键值对,索引比较而不是值比较,存在索引</dd>
-
-			<dt>3.8类型转换</dt>
-			<dd>javascript期望使用一个布尔值得时候你可以使用各种类型的值来进行转为boolean 例如undifined,0,'',null，nan</dd>
-			<dd>如果转换没有意义就会返回nan</dd>
-			
-			<dt>3.8.1转换和相等性</dt>
-			<dd>由于javascript可以灵活的类型转换,其==相等运算符也随相等的含义灵活多变</dd>
-
-			<dt>3.8.2显式类型转换</dt>
-			<dd>parseInt(nuumber),parseFloat(nuumber),Boolean(),Number(),String(),Object()</dd>
-			<dd>除了null和undefined之外的任何对象都具有toString()</dd>
-			<dd>null和undefined不能转为对象</dd>
-			
-			<dt>3.8.3对象转换为原始值</dt>
-			<dd>对象继承了toString()方法和valueOf方法</dd>
-			
-			<dt>3.9声明变量</dt>
-			<dd>var(使用变量之前需要声明)</dd>
-			<dd>在严格模式下如果不声明var 会报undifined</dd>
-			<dd>编程语言分为动态和静态语言</dd>
-			<dd>动态语言：运行期间才去做数据类型检测的语言，example:Python,Ruby,javascript</dd>
-			<dd>静态语言：它的数据类型是在编译期间检查的，写程序时要声明所有变量的数据类型 example:c#,java</dd>
-			<dd>重复声明和遗漏声明</dd>
-			<dd>var重复声明变量会出现重新初始化</dd>	
-			<dd>遗漏声明会再严格模式出现报错的</dd>
-
-			<dt>3.10变量作用域</dt>
-			<dd>一个变量的作用域是程序源代码中的定义这个变量的区域</dd>
-			<dd>global变量拥有全局作用域,在javascript代码中的任何地方都存在意义</dd>
-			<dd>局部变量的优先级高于同名的全局变量</dd>
-
-			<dt>3.10.1函数作用域和声明提前</dt>
-			<dd>花括号内的每一段代码都具有各自的作用域,变量声明它们的代码之外不可见的我们称之为块级作用域</dd>
-			<dd>而在javascript只有函数去取代块级作用域</dd>
-			<dd>javascript的函数作用域是指在函数内声明的所有变量在函数体内始终可见,在声明之前就可以调用这是javascript的声明提前</dd>
-			<dd>声明提前在javascript引擎的预编译</dd>
-
-			<dt>3.10.2作为属性的变量</dt>
-			<dd>javascript全局变量是全局对象的属性mdn做实验测试过该花</dd>
-			<dd>this关键字引用到全局对象</dd>
-
-			<dt>3.10.3作为域链</dt>
-			<dd>当查找变量的时候，会先从当前上下文的变量对象中查找，如果没有找到，就会从父级(词法层面上的父级)执行上下文的变量对象中查找，一直找到全局上下文的变量对象，也就是全局对象。这样由多个执行上下文的变量对象构成的链表就叫做作用域链</dd>
-			<dd>javascript是基于词法作用域的语言</dd>
-			
-			
-			<dd>作用域链是一个对象列表或链表,这组对象定定义了这段代码作用域中的变量,通过属性查找值叫做变量解析</dd>
-			<dd>javscript是基于词法作用域的语言,通过阅读包含变量定义在内的数行源码就知道变量作用域</dd>
-			<dd>javascript在查找的时候是属于变量解析</dd>
-			<dd>作用域内有两个对象,第一个是全局对象，第二个是局部对象</dd>
-			<dd>每次调用外部函数的时候,作用域链都不同</dd>
-			<dd>函数的执行用到了作用域链，这个作用域链是在函数定义的时候创建的。嵌套的函数 f() 定义在这个作用域链里，其中的变量 scope 一定是局部变量，不管何时何地执行函数 f()，这种绑定在执行 f() 时依然有效</dd>
-			
-			<dt>作用域链补充说明1</dt>
-			<dd>作用域分为静态作用域(词法作用域)和动态作用域</dd>
-			<dd>词法作用域:函数的作用域是根据函数的定义来决定的</dd>
-			<dd>动态作用域:函数的作用域是在函数调用的时候决定的</dd>
-			
-			<dt>作用域链补充说明2</dt>
-			<dd>作用域链上有三个对象,全局对象,定义函数的参数,局部变量对象</dd>
-			<dd>当定义一个函数时实际上就保存一个作用域链,当调用函数时它会创建一个新的对象来存储它的局部变量，并将对象保存到作用域链上，因此每次调用外部作用域它的内部作用域都会重新定义一遍,因为每次调用外部作用域的时候作用域链都发生了一次改变</dd>
-		</dl>	
+		</dl>
 	</body>
-	<script type="text/javascript">	
+	<script type="text/javascript">
 		/*全局对象*/
 		var creatglobalObject='1222';
 		console.log('creatglobalObject===window.creatglobalObject',creatglobalObject===window.creatglobalObject);
@@ -177,8 +45,8 @@
 		console.info('01:',01,'result:1')//1 1
 		console.info('011:',011,'result:1+1*8 9')//9 1+1*8 9
 		console.info('0111:',0111,'result:1+8*9')//73 1+8*9
-		
-		
+
+
 		console.info('------------------------------3.1.2浮点型直接量------------------------------')
 		console.info('1.47E-32//1.47*10的-32次方',1.47E-32);
 		console.info('1.47e32//1.47*1011的-32次方',1.47e32);
@@ -362,12 +230,12 @@
 			console.info('false==0',"0"==false)
 			console.info('false==0',0==false)
 
-			console.info('------------------------------3.8类型转换------------------------------')			
+			console.info('------------------------------3.8类型转换------------------------------')
 			console.info('数字转字符串:10+"object":',10+"object",'   typeof 10+"object":', typeof (10+"object"));
 			console.info('字符串转数字:"10"+"20":',"10"+"20",'   typeof "10"+"20":', typeof ("10"+"20"));
 			console.info('NaN:n=1-"x":',n=1-"x",'   typeof var n=1-"x":', typeof (n=1-"x"));
 			console.info('NaN:n=1-"x":',n=1-"x",'   typeof var n=1-"x":', typeof (n=1-"x"));
-			
+
 			console.info('------------------------------3.8.1转换和相等性------------------------------')
 			console.info('null==undefined',null==undefined)
 			console.info('0=="0"',0=='0')
@@ -385,7 +253,7 @@
 			console.info('n.toPrecision(2)',n.toPrecision(2))
 
 			console.info('------------------------------3.8.3对象转换为原始值------------------------------')
-			console.info('--toString()--');			
+			console.info('--toString()--');
 			console.log('{a:1,b:2,b:2}.toString()',{a:1,b:2}.toString());
 			console.log('[2,35,334].toString()',[2,35,334].toString());
 			console.log('(function(x){f(x);}).toString()',(function(x){f(x);}).toString());
@@ -401,7 +269,7 @@
 				var val='scope script';
 				return val;
 			}
-			console.info('方法名:',scopeName,'\n全局value:',val,'\n方法调用',scopeName(),'变量就近原则');	
+			console.info('方法名:',scopeName,'\n全局value:',val,'\n方法调用',scopeName(),'变量就近原则');
 				val02='global script222';
 			var scopeName02=function scope(){
 				var val='scope script scope script';
@@ -409,7 +277,7 @@
 				return [val,val02];
 			}
 
-			console.info('方法名:',scopeName02,'\n全局value:',val02,'\n方法调用',scopeName02(),'没发生异常');	
+			console.info('方法名:',scopeName02,'\n全局value:',val02,'\n方法调用',scopeName02(),'没发生异常');
 			var scopeName03=function scope(){
 				var val='scope script local';
 				function son(){
@@ -418,7 +286,7 @@
 				}
 				return son();
 			}
-			console.info('方法名:',scopeName03,'\n全局value:',val,'\n方法调用',scopeName03(),'嵌套作用域');	
+			console.info('方法名:',scopeName03,'\n全局value:',val,'\n方法调用',scopeName03(),'嵌套作用域');
 
 			console.info('------------------------------3.10.1函数作用域和声明提前------------------------------')
 			var scopeName04=function scope(o){
@@ -439,11 +307,11 @@
 				alert(val)
 			}
 			//console.info('window.scope()证明已经被提前声明了函数已经扔到scope中',window.scope(),'证明了scope在注册的时候已经在window中注册了')
-			console.info('------------------------------3.10.2作为属性的变量------------------------------')			
-			console.info('--静态作用域--')			
+			console.info('------------------------------3.10.2作为属性的变量------------------------------')
+			console.info('--静态作用域--')
 			var creatglobalObjects = 'foo里面的value';
 			console.info('var creatglobalObjects = \'foo里面的value\'');
-			function foo() {			    
+			function foo() {
 			      console.log('bar调用了foo然后输出了全局变量creatglobalObjects里面的值:',creatglobalObjects);
 			      return creatglobalObjects
 			}
@@ -462,7 +330,7 @@
 			        return scope;
 			    }
 			    return f();
-			}			
+			}
 			console.info('方法名:',checkscope,'\n全局value:',scope,'\n方法调用',checkscope());
 			var checkscope01=function checkscope(){
 			    var scope = "local scope222";
@@ -472,6 +340,6 @@
 			    return f;
 			}
 			console.info('方法名:',checkscope01,'\n全局value:',scope,'\n方法调用',checkscope01()());
-			
-	</script>	
+
+	</script>
 </html>
