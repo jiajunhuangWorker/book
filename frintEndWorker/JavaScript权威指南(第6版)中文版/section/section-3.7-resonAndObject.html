@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+	<html lang="en" id="html">
+	<head>
+		<meta charset="UTF-8">
+		<title>3.7 不可变的原始值和可变的对象引用</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>3.7不可变得原始值和可变的对象引用</dt>
+			<dd>原始值:undefined,null,boolean,number,string与对象(array和function)有根本区别</dd>
+			<dd>原始值时不可更改,任何方法都无法更改一个原始值</dd>
+			<dd>原始值得比较是值得比较:只有他们的值相等时它们才相等</dd>
+			<dd>如果比较两个单独的字符串,当且仅当它们长度相等且每个索引的字符都相等时,Javascript才认为它们相等</dd>
+			<dd>对象是可变的属性是可以发生改变的,两个相同属性以及相同的值他们是等的,因为索引值不同</dd>
+			<dd>对象的比较都是引用的比较</dd>
+			<dd>对象称为引用类型，对象的比较是引用的比较</dd>
+			<dd>原始值和对象区别:</dd>
+			<dd>原始值无法更改,没有索引值,没有键值对,值比较而不是索引比较</dd>
+			<dd>对象:键值对,索引比较而不是值比较,存在索引</dd>
+		</dl>	
+	</body>
+	<script type="text/javascript">	
+		console.info('------------------------------3.7不可变得原始值和可变的对象引用------------------------------')
+			console.info('--原始值--');
+		var str='lucas!hellow!'
+			str.toUpperCase();
+			console.info('str使用了toUpperCase方法！但是str 没变成大写证明原始数据类型没发生改变',str);
+			console.info('--对象--');
+			var val={x:1};
+			val.x=2,val.y=3;
+			var vals=[1,2,3];
+			vals[0]=0;
+			vals[3]=4;
+			console.info('--索引值--');
+			var array=[],array1=[];
+			console.info('array=[],array1=[]')
+			console.info('array===array1',array===array1);
+			console.info('array==array1',array==array1);
+			console.info('--更改引用值--');
+			var a=[];
+			var b=a;
+			b[0]=666;
+			console.log('var a=[];var b=a;b[0]=666;')
+			console.info('a[0]',a[0]);
+			console.info('a===b:',a===b);
+			console.info(new Array())
+			console.info('--copy Array--');
+			var arrs=[2,43,1,2,44,55,66],arr01=[];
+			for( i in arrs){
+				if(typeof arrs[i] != 'function'){
+					arr01.push(arrs[i]);
+				}
+			}
+			console.info('null==undefined',null==undefined)
+			console.info('"0"==0',"0"==0)
+			console.info('false==0',"0"==false)
+			console.info('false==0',0==false)
+			console.info('--比较两个对象或数组--');
+			function equalArray(a,b){
+				if(a.length != b.length) return false;
+				for(var i = 0; i<a.length;i++){
+					if(a[i] !== b[i]) return false;
+					return true;
+				}
+			}
+	</script>	
+</html>

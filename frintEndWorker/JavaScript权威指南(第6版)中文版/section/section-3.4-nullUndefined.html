@@ -8,11 +8,21 @@
 	<body>
 		<dl>
 			<dt>3.4null和undifined</dt>
-			<dd></dd>
+			<dd>null是javascript语言的关键字,它表示一个特殊的值，常用来描述空值</dd>
+			<dd>null它自有类型的唯一一个成员，它可以表示数字,字符串和对象是‘无值’</dd>
+			<dd>未定义undefined表示更深层次的空值,表明变量没有初始化(元素不存在/属性不存在)</dd>
+			<dd>undefined是预定义的全局变量(它和null不一样,它不是关键字)</dd>
+			<dd>使用'.'和[]来存取这两个值得成员或方法都会产生一个类型错误</dd>
+			<dd>null赋值给变量或属性</dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
-
-
+	console.log('证明null 是特殊的对象')
+	console.log('typeof null',typeof null);
+	console.log('typeof undefined',typeof undefined);
+	var str={};
+	str.null=null;
+	str.undefined=undefined;
+	console.info(str)
 	</script>
 </html>

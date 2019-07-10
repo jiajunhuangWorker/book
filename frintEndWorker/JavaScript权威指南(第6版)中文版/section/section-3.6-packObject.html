@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+	<html lang="en" id="html">
+	<head>
+		<meta charset="UTF-8">
+		<title>3.6 packObject</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>3.6包装对象</dt>
+			<dd>javascript对象是一种复合值,它是属性或已命名的集合，</dd>
+			<dd>通过.符号来引用属性值,当属性值时一个函数的时候,我们称为方法</dd>
+			<dd>存取字符串、数字或布尔值得属性时创建的临时对象称为包装对象具体看问题本</dd>
+			<dd>字符串有属性和方法,但是字符串不是对象,原理 javascript 会new String(字符串)将字符串转为对象,处理属性的引用</dd>
+			<dd>当引用的属性结束后它会销毁当前的对象(创建临时对象调用完方法销毁临时对象)</dd>
+			<dd>修改只是发生在临时对象身上,临时对象并未继续保留下来</dd>
+			<dd>存取字符串、数字或布尔值的属性时创建的临时对象称为包装对象,它只是奥尔用来区分字符串值和字符串对象 ,数字和数值对象以及布尔类型</dd>
+		</dl>	
+	</body>
+	<script type="text/javascript">	
+		console.info('------------------------------包装对象(3.6包装对象)------------------------------')
+		console.info('"hellow!lucas".substring(1,5):',"hellow!lucas".substring(1,5));
+		var str='test';
+			console.log('str',str)
+			str.len=4;
+			console.log('str.len://因为临时字符串对象,并给其len属性赋值4,随即销毁这个临时对象',str.len)
+		var getStr=str.len;
+			console.log('getStr://通过原始的字符串值创建一个新字符串对象,尝试读取len属性,但是len不存在所以报undefined',getStr)
+			var str='test',num=1,bool=true;
+			console.log('typeof str str=\'test\'//未包装后的字符串',typeof str);
+			str=new String(str);
+			console.log('typeof str  new String(str)//包装后的字符串',typeof str);
+			num=new Number(num);
+			bool=new Boolean(bool);			
+	</script>	
+</html>

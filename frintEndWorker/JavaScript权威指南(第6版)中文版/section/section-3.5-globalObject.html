@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+	<html lang="en" id="html">
+	<head>
+		<meta charset="UTF-8">
+		<title>3.5 全局对象</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>3.5全局对象</dt>
+			<dd>全局对象的属性时全局定义的符号,javascript可以直接使用</dd>
+			<dd>当javascript解析器启动时它就会创建一个新的全局对象并初始化全局属性,全局函数,构造函数,全局对象</dd>
+			<dd>全局属性:undefined,Infinity和NAN</dd>
+			<dd>全局函数:isNaN(),parseInt(),eval(),in,等</dd>
+			<dd>构造函数：Data(),RegExp(),String(),Object(),Array(),Number()</dd>
+			<dd>全局对象:Math,JSON</dd>
+			<dd>全局对象的初始属性并不是保留字,但是它们应该当做保留字对待</dd>
+			<dd>window对象定义了核心全局属性,它针对web浏览器和客户端</dd>
+			<dd>在初始创建的时候,全局对象定义了javascript中所有的预定义全局值</dd>
+			<dd>通过代码声明了全局变量,这个全局变量就是全局对象的一个属性</dd>
+		</dl>	
+	</body>
+	<script type="text/javascript">	
+		var	str='try 存不存在window';
+		console.info('------------------------------全局对象(3.5全局对象)------------------------------')
+		console.info('this',this)
+		console.info('window',window)
+		console.info('window==this//证明this引用了全局对象',window==this);
+		console.info('window.str:',window.str)
+	</script>	
+</html>
