@@ -45,7 +45,7 @@
 		console.info('creatglobalObject===window.creatglobalObject',creatglobalObject===window.creatglobalObject);
 		/* 将16进制转10进制 */
 		console.info('------------------------------3.1.1整形直接量------------------------------')//10*16+10 171
-		console.info('0xaa:',0xaa,'result:10*16+10 171')//10*16+10 171
+		console.info('0xaa:',0xaa,'result:10*16+10 170')//10*16+10 170
 		console.info('0xab:',0Xab,'result:10*16+11 171')//10*16+11 171
 		console.info('0xff:',0xff,'result:15*16+15 255')//15*16+15 255
 		/*将8进制转10进制*/
@@ -74,9 +74,11 @@
 		console.info('Number.MIN_VALUE/2//发生下溢:',Number.MIN_VALUE/2);
 		console.info('-Number.MIN_VALUE/2//负零:',-Number.MIN_VALUE/2);
 		console.info('-1/Infinity//负零:',-1/Infinity);
+		console.info('判断是不是数字,判断是不是nan')
 		console.info('isNaN(NaN)',isNaN(NaN));
 		console.info('isNaN("666")',isNaN("666"));
 		console.info('isNaN("我是中文")',isNaN("我是中文"));
+		console.info('判断是不是数字,判断是不是nan,是不是infinity,是不是-infinity 币nan强大')
 		console.info('isFinite合法的数值返回true')
 		console.info('isFinite("我是中文")',isFinite("我是中文"));
 		console.info('isFinite("666")',isFinite("666"));
