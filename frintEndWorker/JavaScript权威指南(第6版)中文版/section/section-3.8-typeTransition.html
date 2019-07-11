@@ -8,31 +8,184 @@
 	<body>
 		<dl>
 			<dt>3.8类型转换</dt>
-			<dd>javascript期望使用一个布尔值得时候你可以使用各种类型的值来进行转为boolean 例如undifined,0,'',null，nan</dd>
+			<dd>javascript期望使用一个布尔值得时候,JavaScript會按需要自動转换类型,你可以使用各种类型的值来进行转为boolean 例如undifined,0,'',null，nan</dd>
 			<dd>如果转换没有意义就会返回nan</dd>
-			
+			<table>
+				<thead>
+					<tr>
+						<th>值</th>
+						<th>转换为字符串</th>
+						<th>数字</th>
+						<th>布尔值</th>
+						<th>对象</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>undefined</td>
+						<td>'undefined'</td>
+						<td>NAN</td>
+						<td>false</td>
+						<td>throws TypeError</td>
+					</tr>
+					<tr>
+						<td>null</td>
+						<td>'null'</td>
+						<td>0</td>
+						<td>false</td>
+						<td>throws TypeError</td>
+					</tr>
+					<tr>
+						<td>true</td>
+						<td>'true'</td>
+						<td>1</td>
+						<td>true</td>
+						<td>new Boolean(true)</td>
+					</tr>
+					<tr>
+						<td>false</td>
+						<td>'false'</td>
+						<td>0</td>
+						<td>false</td>
+						<td>new Boolean(false)</td>
+					</tr>
+					<tr>
+						<td>""(空字符串)</td>
+						<td>""</td>
+						<td>0</td>
+						<td>false</td>
+						<td>new String("")</td>
+					</tr>
+					<tr>
+						<td>"1.2"(非空,數字)</td>
+						<td>"1.2"</td>
+						<td>1.2</td>
+						<td>true</td>
+						<td>new String("1.2")</td>
+					</tr>
+					<tr>
+						<td>"one"(非空,非數字)</td>
+						<td>"one"</td>
+						<td>NAN</td>
+						<td>true</td>
+						<td>new String("one")</td>
+					</tr>
+					<tr>
+						<td>0</td>
+						<td>"0"</td>
+						<td>0</td>
+						<td>false</td>
+						<td>new Number(0)</td>
+					</tr>
+					<tr>
+						<td>-0</td>
+						<td>"-0"</td>
+						<td>-0</td>
+						<td>false</td>
+						<td>new Number(-0)</td>
+					</tr>
+					<tr>
+						<td>NAN</td>
+						<td>"nan"</td>
+						<td>nan</td>
+						<td>false</td>
+						<td>new Number(NAN)</td>
+					</tr>
+					<tr>
+						<td>Infinity</td>
+						<td>"Infinity"</td>
+						<td>"Infinity"</td>
+						<td>true</td>
+						<td>new Number(Infinity)</td>
+					</tr>
+					<tr>
+						<td>-Infinity</td>
+						<td>"-Infinity"</td>
+						<td>"-Infinity"</td>
+						<td>true</td>
+						<td>new Number(-Infinity)</td>
+					</tr>
+					<tr>
+						<td>1(无穷大,非零)</td>
+						<td>"1"</td>
+						<td>1</td>
+						<td>true</td>
+						<td>new Number(1)</td>
+					</tr>
+					<tr>
+						<td>{}(任意對象)</td>
+						<td></td>
+						<td></td>
+						<td>true</td>
+						<td>new Object()</td>
+					</tr>
+					<tr>
+						<td>[](任意数组)</td>
+						<td>""</td>
+						<td>0</td>
+						<td>true</td>
+						<td>new Array()</td>
+					</tr>
+					<tr>
+						<td>[9](1个数字元素)</td>
+						<td>"9"</td>
+						<td>9</td>
+						<td>true</td>
+						<td>new Array().push(9)</td>
+					</tr>
+					<tr>
+						<td>[a](其他数组)</td>
+						<td>join方法转换</td>
+						<td>NAN</td>
+						<td>true</td>
+						<td>new Array().push('a')</td>
+					</tr>
+					<tr>
+						<td>function(){任意函数}</td>
+						<td></td>
+						<td>NAN</td>
+						<td>true</td>
+						<td>function name()</td>
+					</tr>
+				</tbody>
+			</table>
+			<dd>原始值通過包裝對象进行转换</dd>
+
 			<dt>3.8.1转换和相等性</dt>
 			<dd>由于javascript可以灵活的类型转换,其==相等运算符也随相等的含义灵活多变</dd>
+			<dd>除了null和undefined之外任何值都具有toString()方法</dd>
+			<dd>"==="(恒等运算符,判断值和数据类型)和"=="(判断值)</dd>
 
 			<dt>3.8.2显式类型转换</dt>
 			<dd>parseInt(nuumber),parseFloat(nuumber),Boolean(),Number(),String(),Object()</dd>
 			<dd>除了null和undefined之外的任何对象都具有toString()</dd>
 			<dd>null和undefined不能转为对象</dd>
-			
-			<dt>3.8.3对象转换为原始值</dt>
-			<dd>对象继承了toString()方法和valueOf方法</dd>
-			
-		</dl>	
-	</body>
-	<script type="text/javascript">	
-		
+			<dd>javascript中某些运算符会做隐式转换</dd>
+			<dd>如果'+'运算符的一个操作数是字符串,它将会把另外一个操作数操作数转换为字符串.(x+"")</dd>
+			<dd>一元"+"运算负将其操作数转换为数字(+x)</dd>
+			<dd>一元"!"运算负将其操作数转换为布尔值并取反(!!x)</dd>
 
-			console.info('------------------------------3.8类型转换------------------------------')			
+
+			<dt>3.8.3对象转换为原始值</dt>
+			<dd>object turn boolean so easy(array and function) 都转为true</dd>
+			<dd>对于包装对象也是如此new Boolean(false)是一个对象而不是原始值</dd>
+			<dd>object-to-string || object-to-number的转换时通过调用待待转换对象的一个方法来完成的</dd>
+			<dd>字符串和数字的转换规则只适用于本地对象(native object)</dd>
+			<dd>宿主对象genuine各自的算法可以转换成字符串和数字</dd>
+			<dd>所有的对象继承了toString()方法和valueOf方法</dd>
+			<dd>
+				对象转换为数字解析了空数组会被转换为0以及为什么具有单个元素的数组,数组集成了默认的valueOf()方法([]->string->number)
+			</dd>
+			<dd>r任何对象都会先调用valueOf在调用toString方法</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+			console.info('------------------------------3.8类型转换------------------------------')
 			console.info('数字转字符串:10+"object":',10+"object",'   typeof 10+"object":', typeof (10+"object"));
 			console.info('字符串转数字:"10"+"20":',"10"+"20",'   typeof "10"+"20":', typeof ("10"+"20"));
 			console.info('NaN:n=1-"x":',n=1-"x",'   typeof var n=1-"x":', typeof (n=1-"x"));
 			console.info('NaN:n=1-"x":',n=1-"x",'   typeof var n=1-"x":', typeof (n=1-"x"));
-			
+
 			console.info('------------------------------3.8.1转换和相等性------------------------------')
 			console.info('null==undefined',null==undefined)
 			console.info('0=="0"',0=='0')
@@ -44,21 +197,50 @@
 			console.info(new Number())
 			console.info('Object(undefined)',Object(undefined))
 			console.info('String(undefined)',String(undefined))
+			console.info('--字符串轉數字--')
+			console.info('parseInt("11.22")',parseInt("11.22"),'typeof parseInt("11.22")',typeof parseInt("11.22"))
+			console.info('parseFloat("11.22")',parseFloat("11.22"),'typeof parseFloat("11.22")',typeof parseFloat("11.22"))
+			console.info('parseInt("168.33.dasda22")',parseInt("168.33.dasda22"));
+			console.info('parseFloat("168dasd33")',parseFloat("168dasd33"));
+			console.info('parseInt("-12.34")',parseInt("-12.34"));
+			console.info('parseInt("0xff")',parseInt("0xff"));
+			console.info('parseInt("0xFF")',parseInt("0xFF"));
+			console.info('parseFloat(".1")',parseFloat(".1"));
+			console.info('parseInt("0.1")',parseInt("0.1"));
+			console.info('parseInt(".1")',parseInt(".1"));
+			console.info('parseFloat("$72.47")',parseFloat("$72.47"));
+
+			console.info('---parseInt接受第二個參數---')
+			console.info('parseInt("11",2)',parseInt("11",2),'//3(1*2+1)');
+			console.info('parseInt("ff",16)',parseInt("ff",16),'//255(15*16+15)');
+			console.info('parseInt("zz",36)',parseInt("zz",36),'//1295(35*36+35)');
+			console.info('parseInt("077",8)',parseInt("077",8),'//63(7*8+7)');
+			console.info('parseInt("077",10)',parseInt("077",10),'//77(7*10+7)');
+
+
+			console.info('--數字转字符串--')
+			var num=17;
+			console.info('num=17');
+			console.info('bimary_string = num.toString(2)',bimary_string = num.toString(2),'typeof num.toString(2)',typeof num.toString(2));
+			console.info('octal_string = "0"+num.toString(8)',bimary_string ="0"+num.toString(8),'typeof "0"+num.toString(8)',typeof "0"+num.toString(8));
+			console.info('hex_string = "0x"+num.toString(16)',bimary_string ="0x"+num.toString(16),typeof "0x"+num.toString(16),typeof "0x"+num.toString(16));
 			var n=12345.678;
-			console.info('n.toFixed(2)',n.toFixed(2))
-			console.info('n.toExponential(2)',n.toExponential(2))
-			console.info('n.toPrecision(2)',n.toPrecision(2))
+			console.info('var n=12345.678');
+			console.info('n.toFixed(2)//根據小数点后的指定位数将数字转换字符串',n.toFixed(2),'typeof n.toFixed(2)',typeof n.toFixed(2))
+			console.info('n.toExponential(2)//使用指数记数法将数字转换为指数形式的字符串',n.toExponential(2),'typeof n.toExponential(2)',typeof n.toExponential(2))
+			console.info('n.toPrecision(2)//指定的有效数字位数将数字转换为字符串',n.toPrecision(2),'typeof n.toPrecision(2)',typeof n.toPrecision(2))
 
 			console.info('------------------------------3.8.3对象转换为原始值------------------------------')
-			console.info('--toString()--');			
-			console.log('{a:1,b:2,b:2}.toString()',{a:1,b:2}.toString());
-			console.log('[2,35,334].toString()',[2,35,334].toString());
-			console.log('(function(x){f(x);}).toString()',(function(x){f(x);}).toString());
-			console.log('new Date().toString()',new Date().toString());
-			console.info('--valueOf() 对象转为原始值--');
-			console.info('new Date().valueOf()',new Date().valueOf())
+			console.info('--对象转字符串--')
+			console.info('--toString()--');
+			console.info('{a:1,b:2,b:2}.toString()',{a:1,b:2}.toString());
+			console.info('[2,35,334].toString()',[2,35,334].toString());
+			console.info('(function(x){f(x);}).toString()',(function(x){f(x);}).toString());
+			console.info('/d+/g.toString()',/d+/g.toString());
+			console.info('new Date().toString()',new Date().toString(),'typeof new Date().toString()',typeof new Date().toString());
+			console.info('--valueOf() 对象转为原始值 对象转数字--');
+			console.info('new Date().valueOf()',new Date().valueOf(),'typeof new Date().valueOf()',typeof new Date().valueOf())
 
-			
-			
-	</script>	
+
+	</script>
 </html>
