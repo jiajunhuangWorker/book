@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+	<html lang="en" id="html">
+	<head>
+		<meta charset="UTF-8">
+		<title>3.10 作用域</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>3.10变量作用域</dt>
+			<dd>一个变量的作用域是程序源代码中的定义这个变量的区域</dd>
+			<dd>global变量拥有全局作用域,在javascript代码中的任何地方都存在意义</dd>
+			<dd>局部变量的优先级高于同名的全局变量</dd>
+			<dd>在全局作用域编写时可以不写var,但在局部变量时必须使用var声明</dd>
+
+			<dt>3.10.1函数作用域和声明提前</dt>
+			<dd>花括号内的每一段代码都具有各自的作用域,变量声明它们的代码之外不可见的我们称之为块级作用域</dd>
+			<dd>而在javascript只有函数去取代块级作用域</dd>
+			<dd>javascript的函数作用域是指在函数内声明的所有变量在函数体内始终可见,在声明之前就可以调用这是javascript的声明提前</dd>
+			<dd>声明提前在javascript引擎的预编译</dd>
+
+			<dt>3.10.2作为属性的变量</dt>
+			<dd>javascript全局变量是全局对象的属性mdn做实验测试过该花</dd>
+			<dd>this关键字引用到全局对象</dd>
+
+			<dt>3.10.3作为域链</dt>
+			<dd>javascript是基于词法作用域的语言</dd>
+			<dd>如果将一个局部变量看做是自定义实现的对象的属性的话,那么可以换个角度来解读变量作用域.当javascript需要查找变量x的值得时候(这个过程叫变量解析)它会从链中第一个对象开始查找,如果这个对象有一个名为x的属性则会直接使用这个属性,如果第一个对象中不存在名为x的属性就会继续往下个属性去查，如果作用链上没有任何名含有属性x那么就认为这段代码的作用域链上不存在x,并抛出一个引用错误异常</dd>
+			<dd>javascript的顶层代码中(不包含在任何函数定义内的代码),作用域链由一个全局对象组成,在不包含嵌套的函数体内,作用域链上有两个对象,第一个是定义函数参数和局部变量的对象,第二个是全局对象.</dd>
+			<dd>作用链上至少三个对象,理解对象连的创建规则是非常重要.当定义一个函数时,实际是保存一个作用链，当调用函数时,它创建一个新的更长的表示函数调用作用域的链</dd>
+			<dd>对于嵌套函数来讲,事情变得更加有趣,每次调用外部函数时,内部函数又会重新定义一遍,因为每次调用外部函数的时候作用域都不是相同的</dd>
+			<dd>在每次调用外部函数时,内部函数的代码都是相同的而且关联这段代码的作用域链也不相同</dd>
+			
+			<dt>作用域链补充说明1</dt>
+			<dd>作用域分为静态作用域(词法作用域)和动态作用域</dd>
+			<dd>词法作用域:函数的作用域是根据函数的定义来决定的</dd>
+			<dd>动态作用域:函数的作用域是在函数调用的时候决定的</dd>
+			
+			<dt>作用域链补充说明2</dt>
+			<dd>作用域链上有三个对象,全局对象,定义函数的参数,局部变量对象</dd>
+			<dd>当定义一个函数时实际上就保存一个作用域链,当调用函数时它会创建一个新的对象来存储它的局部变量，并将对象保存到作用域链上，因此每次调用外部作用域它的内部作用域都会重新定义一遍,因为每次调用外部作用域的时候作用域链都发生了一次改变</dd>
+		</dl>	
+	</body>
+	<script type="text/javascript">
+			console.info('------------------------------3.10变量作用域------------------------------')
+			var val='global script';
+			var scopeName=function scope(){
+				var val='scope script';
+				return val;
+			}
+			console.info('方法名:',scopeName,'\n全局value:',val,'\n方法调用',scopeName(),'变量就近原则');	
+				val02='global script222';
+			var scopeName02=function scope(){
+				var val='scope script scope script';
+				var val02='scope script 值2';
+				return [val,val02];
+			}
+
+			console.info('方法名:',scopeName02,'\n全局value:',val02,'\n方法调用',scopeName02(),'没发生异常');	
+			var scopeName03=function scope(){
+				var val='scope script local';
+				function son(){
+					var val='scope script nested';
+					return val;
+				}
+				return son();
+			}
+			console.info('方法名:',scopeName03,'\n全局value:',val,'\n方法调用',scopeName03(),'嵌套作用域');	
+
+			console.info('------------------------------3.10.1函数作用域和声明提前------------------------------')
+			var scopeName04=function scope(o){
+				var i=0;
+				if(typeof o == "object"){
+					var j=666;
+					for(var k=0;k<10;k++){
+						console.info('内部的k:',k)
+					}
+					console.info('外部的k:',k)
+				}
+				console.info('假设o成立之后就会获取内部的j')
+			}
+			console.info('方法名:',scopeName04,'\n方法调用',scopeName04(Object()),'嵌套作用域');
+
+
+			function scope(){
+				alert(val)
+			}
+			//console.info('window.scope()证明已经被提前声明了函数已经扔到scope中',window.scope(),'证明了scope在注册的时候已经在window中注册了')
+			console.info('------------------------------3.10.2作为属性的变量------------------------------')			
+			console.info('--静态作用域--')			
+			var creatglobalObjects = 'foo里面的value';
+			console.info('var creatglobalObjects = \'foo里面的value\'');
+			function foo() {			    
+			      console.info('bar调用了foo然后输出了全局变量creatglobalObjects里面的值:',creatglobalObjects);
+			      return creatglobalObjects
+			}
+
+			var bar=function bar() {
+			    var creatglobalObjects = 222222;
+			    foo();
+			    return creatglobalObjects;
+			}
+			console.info('方法名:',bar,'\n全局value:',creatglobalObjects,'\n方法调用',bar());
+
+			var scope = "global scope";
+			var checkscope=function checkscope(){
+			    var scope = "local scope111";
+			    function f(){
+			        return scope;
+			    }
+			    return f();
+			}			
+			console.info('方法名:',checkscope,'\n全局value:',scope,'\n方法调用',checkscope());
+			var checkscope01=function checkscope(){
+			    var scope = "local scope222";
+			    function f(){
+			        return scope;
+			    }
+			    return f;
+			}
+			console.info('方法名:',checkscope01,'\n全局value:',scope,'\n方法调用',checkscope01()());
+
+			console.info('------------------------------3.10.3作用域链------------------------------')		
+			console.info()
+			
+	</script>	
+</html>
