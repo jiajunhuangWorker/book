@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>4.4 属性访问表达式</title>
+	<link rel="stylesheet" href="../../../globalBase.css">
+</head>
+<body>
+	<dl>
+		<dt>4.4属性访问表达式</dt>
+		<dd>expression.attr或者expression[attr]</dd>
+		<dd>不管怎么访问对象里面的谁能够在.和[]之前的表达式总是会首先计算</dd>
+		<dd>计算结果是null和undefined会报错!</dd>
+	</dl>
+</body>
+<script type="text/javascript">
+	console.info('------------------------------4.4属性访问表达式------------------------------')
+	var o={x:1,y:{z:3}};
+	var a=[o,4,[5,6],undefined,null];
+	console.info("o对象:o={x:1,y:{z:3}}",o);
+	console.info("a数组对象:a=[o,4,[5,6],undefined,null]",a);
+	console.info("o.x:",o.x);
+	console.info("o.y.z:",o.y.z);
+	console.info("o['x']:",o['x']);
+	console.info("a[1]:",a[1]);
+	console.info("a[2]['1']:",a[2]['1']);
+	console.info("a[3]:",a[3]);
+	console.info("a[4]:",a[4]);
+</script>
+</html>

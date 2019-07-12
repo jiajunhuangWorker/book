@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>4.2 对象和数组的初始化表达式</title>
+	<link rel="stylesheet" href="../../../globalBase.css">
+</head>
+<body>
+	<dl>
+		<dt>4.2对象和数组的初始化表达式</dt>
+		<dd>对象和数组初始化表达式实际上是一个新创建的对象和数组(对象直接量和数组直接量)</dd>
+		<dd>对象和数组不是原始表达式,它们所包含的成员或元素都是子表达式</dd>
+		<dd>数组初始化表达式是通过一对方括号和其内由逗号隔开的列表构成的</dd>
+		<dd>数组初始化表达式中的元素初始化表达式也可以是数组初始化表达式</dd>
+		<dd>javascript求初始化表达式的值得时候,对象表达式也都会各自计算一次,并且它们不必包含常数值</dd>
+	</dl>
+</body>
+<script type="text/javascript">
+	console.info('------------------------------4.2对象和数组的初始化表达式------------------------------')
+	var arrs=[1,,,,5];
+	var p={x:2.3,y:-102};
+	var q={};
+	console.info('[1,,,,5]',arrs);
+	console.info('arrs=[1,,,,5],arrs[1]','arrs[1]:',arrs[1]);
+	console.info('[[1,2,3],[2,2],[7,7]]',[[1,2,3],[2,2],[7,7]]);
+	console.info('--对象初始化--')
+	console.info('{x:2.3,y:-102}',{x:2.3,y:-102});
+	console.info('{}',{});
+	console.info('{a:{x:1},b:{y:1}}',{a:{x:1},b:{y:1}});
+</script>
+</html>

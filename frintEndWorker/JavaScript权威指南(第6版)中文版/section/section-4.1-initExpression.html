@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>4.1原始表达式</title>
+	<link rel="stylesheet" href="../../../globalBase.css">
+</head>
+<body>
+	<dl>
+		<dt>4.1原始表达式</dt>
+		<dd>最简单的表达式是原始表达式,原始表达式是最小的单位(常量，直接量，关键字，变量)</dd>
+		<dd>this(不是常量)在不同的作用域指代的属性都不一样,它經常面向对象编程出现</dd>
+		<dd>当javascript代码中出现标识符,javascript会将其当做变量而去查找它的值,如果变量不存在,表达式将运算结果为undefined(在严格模式下会抛出引用错误异常)</dd>
+	</dl>
+</body>
+<script type="text/javascript">
+	console.info('------------------------------4.1原始表达式------------------------------')
+	console.info('hellow,world','//字符串直接量');
+	console.info('/pattern/','//正則表達式直接量');
+	console.info('1.23','//數字直接量');
+	console.info('this是根据作用于而获取当前的数值,它在不同的语境中返回的值不同',this)
+</script>
+</html>
