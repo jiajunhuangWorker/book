@@ -10,7 +10,11 @@
 		<dt>4.4属性访问表达式</dt>
 		<dd>expression.attr或者expression[attr]</dd>
 		<dd>不管怎么访问对象里面的谁能够在.和[]之前的表达式总是会首先计算</dd>
-		<dd>计算结果是null和undefined会报错!</dd>
+		<dd>计算结果是null和undefined会报typeError,因为这两个值都不能包含任意属性</dd>
+		<dd>如果运算结果不是对象/数组,javascript会将其转换为对象</dd>
+		<dd>如果对象表达式后跟随句点和标识符，则会查找由这个标识符所指定的属性的值,并将其作为整个表达式值返回</dd>
+		<dd>如果对象表达式后跟随一对方括号,则会计算方括号内的表达式的值并将它转换字符串</dd>
+		<dd>如果命名的属性不存在,那么整个属性访问表达式的值就是undefined</dd>
 	</dl>
 </body>
 <script type="text/javascript">
@@ -19,6 +23,7 @@
 	var a=[o,4,[5,6],undefined,null];
 	console.info("o对象:o={x:1,y:{z:3}}",o);
 	console.info("a数组对象:a=[o,4,[5,6],undefined,null]",a);
+	console.info('--访问对象的方法--')
 	console.info("o.x:",o.x);
 	console.info("o.y.z:",o.y.z);
 	console.info("o['x']:",o['x']);

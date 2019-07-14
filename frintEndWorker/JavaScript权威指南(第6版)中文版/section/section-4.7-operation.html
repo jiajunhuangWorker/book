@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>4.7运算符概述</title>
+	<link rel="stylesheet" href="../../../globalBase.css">
+</head>
+<body>
+	<dl>
+		<dt>4.7运算符概述</dt>
+		<dd>javascript运算符用于算数表达式，比较表达式，逻辑表达式，赋值表达式</dd>
+		<dd>关键字运算符 delete 和 instanceof,关键字运算符和标点符号所表示的运算符一样都是正规的符,语法言简意赅</dd>
+		<dd>javascript运算符表<br>1.前面的运算符优先级高于后面的运算符优先级<br>2.被水平分割线分割开来的运算符具有不同的优先级<br>3.标题为A的列表表示的运算符的结合性L<从左至右>或R<从右至左>)<br>4.标题N的列表示操作数的个数<br>5.类型的列表示期望的操作数类型以及运算符结果类型</dd>
+		<table >
+				<thead>
+					<tr>
+						<th>运算符</th>
+						<th>操作</th>
+						<th>A</th>
+						<th>N</th>
+						<th>类型</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>++</td>
+						<td>前/后增量</td>
+						<td>R</td>
+						<td>1</td>
+						<td>lval→num</td>
+					</tr>
+					<tr>
+						<td>--</td>
+						<td>前/后减量</td>
+						<td>R</td>
+						<td>1</td>
+						<td>lval→num</td>
+					</tr>
+					<tr>
+						<td>-</td>
+						<td>求反</td>
+						<td>R</td>
+						<td>1</td>
+						<td>num→num</td>
+					</tr>
+					<tr>
+						<td>+</td>
+						<td>转换为数字</td>
+						<td>R</td>
+						<td>1</td>
+						<td>num→num</td>
+					</tr>
+					<tr>
+						<td>~</td>
+						<td>按位求反</td>
+						<td>R</td>
+						<td>1</td>
+						<td>int→int</td>
+					</tr>
+					<tr>
+						<td>!</td>
+						<td>逻辑非</td>
+						<td>R</td>
+						<td>1</td>
+						<td>bool→bool</td>
+					</tr>
+					<tr>
+						<td>delete</td>
+						<td>删除属性</td>
+						<td>R</td>
+						<td>1</td>
+						<td>lval→bool</td>
+					</tr>
+					<tr>
+						<td>typeof</td>
+						<td>检测操作数类型</td>
+						<td>R</td>
+						<td>1</td>
+						<td>any→str</td>
+					</tr>
+					<tr>
+						<td>void</td>
+						<td>返回undefined值</td>
+						<td>R</td>
+						<td>1</td>
+						<td>any→undefined</td>
+					</tr>
+					<tr class="border-top">
+						<td>*、/、%</td>
+						<td>乘,除,求余</td>
+						<td>L</td>
+						<td>2</td>
+						<td>
+							num,num→num
+						</td>
+					</tr>
+					<tr class="border-top">
+						<td>+、-</td>
+						<td>加,减</td>
+						<td>L</td>
+						<td>2</td>
+						<td>num,num→num</td>
+					</tr>
+					<tr >
+						<td>+</td>
+						<td>字符串连接</td>
+						<td>L</td>
+						<td>2</td>
+						<td>str,str→str</td>
+					</tr>
+					<tr class="border-top">
+						<td> << </td>
+						<td>左移位</td>
+						<td>L</td>
+						<td>2</td>
+						<td>int,int→int</td>
+					</tr>
+					<tr >
+						<td> >> </td>
+						<td>有符号右移</td>
+						<td>L</td>
+						<td>2</td>
+						<td>int,int→int</td>
+					</tr>
+					<tr >
+						<td> >>> </td>
+						<td>无符号右移</td>
+						<td>L</td>
+						<td>2</td>
+						<td>int,int→int</td>
+					</tr>
+					<tr class="border-top">
+						<td> <、<=、>、>= </td>
+						<td>比较数字顺序</td>
+						<td>L</td>
+						<td>2</td>
+						<td>num,num→bool</td>
+					</tr>
+					<tr >
+						<td> <、<=、>、>= </td>
+						<td>比较字母表中的顺序</td>
+						<td>L</td>
+						<td>2</td>
+						<td>str,str→bool</td>
+					</tr>
+					<tr >
+						<td>instanceof</td>
+						<td>测试对象类</td>
+						<td>L</td>
+						<td>2</td>
+						<td>obj,function→bool</td>
+					</tr>
+					<tr >
+						<td>in</td>
+						<td>测试属性是否存在</td>
+						<td>L</td>
+						<td>2</td>
+						<td>str,obj→bool</td>
+					</tr>
+					<tr class="border-top">
+						<td>==</td>
+						<td>判断相等</td>
+						<td>L</td>
+						<td>2</td>
+						<td>any,any→bool</td>
+					</tr>
+					<tr >
+						<td>!=</td>
+						<td>判断不等</td>
+						<td>L</td>
+						<td>2</td>
+						<td>any,any→bool</td>
+					</tr>
+					<tr >
+						<td>===</td>
+						<td>判断恒等</td>
+						<td>L</td>
+						<td>2</td>
+						<td>any,any→bool</td>
+					</tr>
+					<tr >
+						<td>!==</td>
+						<td>判断非恒等</td>
+						<td>L</td>
+						<td>2</td>
+						<td>any,any→bool</td>
+					</tr>
+					<tr class="border-top">
+						<td>&</td>
+						<td>按位与</td>
+						<td>L</td>
+						<td>2</td>
+						<td>int,int→int</td>
+					</tr>
+					<tr class="border-top">
+						<td>^</td>
+						<td>按位异或</td>
+						<td>L</td>
+						<td>2</td>
+						<td>int,int→int</td>
+					</tr>
+					<tr class="border-top">
+						<td>|</td>
+						<td>按位或</td>
+						<td>L</td>
+						<td>2</td>
+						<td>int,int→int</td>
+					</tr>
+					<tr class="border-top">
+						<td>&&</td>
+						<td>逻辑与</td>
+						<td>L</td>
+						<td>2</td>
+						<td>any,any→any</td>
+					</tr>
+					<tr class="border-top">
+						<td>||</td>
+						<td>逻辑或</td>
+						<td>L</td>
+						<td>2</td>
+						<td>any,any→any</td>
+					</tr>
+					<tr class="border-top">
+						<td>?:</td>
+						<td>条件运算符</td>
+						<td>R</td>
+						<td>3</td>
+						<td>bool,any,any→any</td>
+					</tr>
+					<tr class="border-top">
+						<td>=</td>
+						<td>变量赋值或对象属性赋值运算且赋值</td>
+						<td>R</td>
+						<td>2</td>
+						<td>lval,any→any</td>
+					</tr>
+					<tr >
+						<td>*=、/=、%=、+=、-=、&=</td>
+						<td>变量赋值或对象属性赋值运算且赋值</td>
+						<td>R</td>
+						<td>2</td>
+						<td>lval,any→any</td>
+					</tr>
+					<tr >
+						<td>^=、|=、<<=、>>=、>>>=</td>
+						<td>变量赋值或对象属性赋值运算且赋值</td>
+						<td>R</td>
+						<td>2</td>
+						<td>lval,any→any</td>
+					</tr>
+					<tr class="border-top">
+						<td>,</td>
+						<td>忽略第一个操作数,返回第二个操作数</td>
+						<td>L</td>
+						<td>2</td>
+						<td>any,any→any</td>
+					</tr>
+				</tbody>
+			</table>
+			<dd>lval是left-value的简写左值</dd>
+
+		<dt>4.7.1操作数的个数</dt>
+		<dd>运算符可以根据其操作数个数进行分类</dd>
+		<dd>一个二元运算符将两个表达式合并成为一个稍微复杂的表达式</dd>
+		<dd>三元运算符boolean?true:false</dd>
+
+		<dt>4.7.2操作数类型和结果类型</dt>
+		<dd>javascript运算符通常会根据需要对操作数进行类型转换</dd>
+		<dd>有一些运算符对操作数类型有着不同程度的依赖（#运算符可以对数字进行加法也可以对字符串进行连接）</dd>
+		<dd>一些运算操作符可以作用于任何数据类型,但仍然希望它们操作数十指定类型的数据</dd>
+
+		<dt>4.7.3左值</dt>
+		<dd>赋值运算符合其他少数运算符期望它们的操作数时lval类型</dd>
+		<dd>表达式只能出现在赋值运算符的左侧</dd>
+		<dd>变量、对象属性和数组元素均是左值</dd>
+	
+		<dt>4.7.4运算符的副作用</dt>
+		<dd>计算一个简单的表达式不会对程序的运行状态造成任何影响，程序后续执行的计算也不会受到该计算的影响</dd>
+		<dd>有一些表达式则存在副作用，前后的表达式运算会相互影响</dd>
+		<dd>副作用案例: delete 删除运算符删除了某个属性后会留下undefined</dd>
+			
+		<dt>4.7.5运算符优先级</dt>
+		<dd>typeof 是优先级最高的运算符之一</dd>
+		<dd>如果不确定所用的运算符的优先级,最简单的方法就是使用圆括号执行</dd>
+
+		<dt>4.7.6运算符的结合性</dt>
+		<dd>L指从左至右结合,R指从右至左结合</dd>
+		<dd>结合性指定了在多个具有同样优先级的运算符表达式中的运算顺序</dd>
+		<dd>从右到左运算的例子:x=~-y,w=x=y=c,q=a?b:c?d:e?f:g</dd>
+		
+		<dt>4.7.7运算顺序</dt>
+		<dd>运算符的优先级和结合性规定了它们在复杂的表达式中的运算顺序,但并没有规定子表达的计算过程中的运算顺序</dd>
+
+	</dl>
+		
+</body>
+<script type="text/javascript">
+
+	console.info('------------------------------4.7.4运算符的副作用------------------------------')
+	var str={a:1,b:2,c:3};
+	delete str.a;
+	console.info('str.a',str.a)
+	console.info('str',str)
+
+	console.info('------------------------------4.7.6运算符的副作用------------------------------')
+	console.info('w=x-y-z 和代码 w=((x-y)-z)一模一样')
+	
+</script>
+</html>
