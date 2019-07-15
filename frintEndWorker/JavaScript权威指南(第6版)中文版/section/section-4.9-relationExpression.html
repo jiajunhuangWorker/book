@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>4.9算术表达式</title>
+	<link rel="stylesheet" href="../../../globalBase.css">
+</head>
+<body>
+	<dl>
+		<dt>4.9关系表达式</dt>
+		<dd>关系运算符是用于测试两个值之间的关系(关系表达式返回boolean值)</dd>
+		<dd>in和installof根据关系是否存在返回true和false</dd>
+		<dt>4.9.1相等和不等运算符</dt>
+		<dd>'=='和'==='运算符用于比较两个值是否相等,当然它们对相等的定义不尽相同</dd>
+		<dd>'='(赋值),'=='(值相等),==='(数据类型相等+值相等)</dd>
+		<dd>'!='(值不等),'!=='(数据类型相等+值不等)</dd>
+		<table>
+			<tbody>
+				<tr>
+					<td>1.如果两个值类型不相同,则它们不相等</td>
+				</tr>
+				<tr>
+					<td>2.如果两个值是null或者undefined则它们不相等</td>
+				</tr>
+				<tr>
+					<td>3.如果两个值是布尔值true或false,则它们相等</td>
+				</tr>
+				<tr>
+					<td>4.如果其中一个值是nan,或者两个值都是nan,则它们不相等.nan和其他任何值都是不相等,包括自身,通过x!==x来判断x是否为nan,只有在x为nana的时候这个表达式为true</td>
+				</tr>
+				<tr>
+					<td>5.如果两个值为数字且数值相等,则它们相等.如果一个值为0,另外一个值也为0,则它们同样相等.</td>
+				</tr>
+				<tr>
+					<td>6.如果两个值是字符串,且所含的对应位行的16位数,完全相等,则它们相等.
+					如果它们的长度或内容不同则它们不等.两个字符串可能含义完全一样且所显示的字符一样,但具有不用的编码的16位值。javascript并不对unicode进行标准转化,因此'==='和'=='运算比较的结果都不相同,String.localeCompare()提供比较字符的方法
+					</td>
+				</tr>
+				<tr>
+					<td>7.如果两个引用值指向同一个对象,数组或函数，则它们相等
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<dt>4.9.2比较运算符</dt>
+		<dd><(小于),>(大于),<=(小于等于),>=(大于等于)</dd>
+		<dd>只有数字和字符串菜能执行比较操作</dd>
+		<table>
+			<tbody>
+				<tr>
+					<td>1.操作数为对象,那么这个对象将依照转换规则转换为原始值,如果没返回原始值就会继续转为string 类型</td>
+				</tr>
+				<tr>
+					<td>2.对象转换为原始值后至少有一个操作数不是字符那么两个操作数都是字符串,那么将依照字母顺序对两个字符串进行比较,字母表顺序是指字符串16位unicode字符的索引顺序</td>
+				</tr>
+				<tr>
+					<td>3.对象转换为原始值之后,如果至少有一个操作数不是字符串,那么两个操作数都将转换为数字进行比较</td>
+				</tr>
+			</tbody>
+		</table>
+		<dd>字符串比较是区分大小写的所有的大写的ascll字母都小于小写的ascll字母</dd>
+		<dt>4.9.3in运算符</dt>
+		<dd>in 运算符希望它的左操作数是一个字符串货可以转换为字符串,希望它的右操作数是一个对象(如果右则的对象拥有左操作数值得属性名则返回true)</dd>
+		<dt>4.9.4instanceof运算符</dt>
+		<dd>instanceof运算符希望左操作数是一个对象,右操作数表示对象的类(如果左侧的对象是右侧类的实例则返回true)</dd>
+		<dd>所有的对象都是object的实例,这个判断是包含对父类的检测(如果左操作数不是对象就返回false,如果右操作数不是函数就抛出错误异常)</dd>
+		<dd>instanceof运算符工作机制和原型链的继承机制息息相关</dd>
+	</dl>
+
+</body>
+<script type="text/javascript">
+
+
+	console.info("------------------------------4.9关系表达式------------------------------");
+	var str='李四';
+	var str01='abc';
+	var str02='AbC';
+	console.info('String.localeCompare()假设相等的字符串返回0，假设目标字符串在比较字符串的字母在前面返回-1,假设目标字符串在比较字符串后面返回1')
+	console.info("str.localeCompare('张三'):"+str.localeCompare(''));
+	console.info("str.localeCompare('尼玛'):"+str.localeCompare('尼玛'));
+
+	console.info("------------------------------4.9.1相等和不相等运算符------------------------------");
+	console.info("'1'!==1",'1'!==1);
+
+	console.info("------------------------------4.9.2比较运算符------------------------------");
+	console.info("abc.toUpperCase():"+str01.toUpperCase());
+	console.info("AbC.toLowerCase():"+str01.toLowerCase())
+	console.info("Number('eqweqw222dasd')",Number('eqweqw222dasd'))
+	var obj={a:66,b:'111dsa',c:true};
+	console.info(obj.valueOf());
+	console.info('1==true','1'==true)
+	console.info('"one"<3',"one"<3)
+
+	console.info("------------------------------4.9.3in运算符------------------------------");
+	var point={"x":1,"y":2};
+	var arr=[1,2,3];
+	console.info('point={"x":1,"y":2}','arr=[1,2,3]')
+	console.info('object.attr in object //判断对象里面存不存在该属性')
+	console.info("'z' in point:"+("z" in point));
+	console.info("'y' in point:"+("y" in point));
+	console.info("'0' in arr:"+('0' in arr));
+	console.info("1 in arr:"+(1 in arr));
+	console.info("5 in arr:"+(5 in arr));
+	console.info("toString in point://所有对象都包含toString和valueOf方法",'toString' in point);
+
+	console.info("------------------------------4.9.4instanceof运算符------------------------------");
+	var d=new String();
+	console.info('var d=new String();');
+	console.info("d instanceof Date:"+(d instanceof Date));
+	console.info("d instanceof Object:"+(d instanceof Object));
+	console.info("d instanceof Number:"+(d instanceof Number));
+	console.info("d instanceof String:"+(d instanceof String));
+	console.info("d instanceof RegExp:"+(d instanceof RegExp));
+	console.info("d instanceof Array:"+(d instanceof Array));
+
+
+</script>
+</html>
