@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>第五章 语句</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>5语句</dt>
+			<dd>表达式在javascript中是短语,那么语句就是javascript整句或命令</dd>
+			<dd>声明语句,表达式</dd>
+			<dd>javascript程序无非就是一系列可执行语句的集合</dd>
+			<dd>条件语句<conditional>(if switch)，循环语句<loop>(do-while，while,for，for/in)，跳转语句<jump>（break,continue,throw）</dd>
+
+			<dt>5.1表达式语句</dt>
+			<dd>具有副作用的表达式是javascript中最简单的语句</dd>
+
+			<dt>5.2复合语句和空语句</dt>
+			<dd>可以用逗号运算符将几个表达式链接在一起，形成一个表达式，同样javascript中还可以将多条语句联合在一起，形成复合语句.只须用多条语句包括起来即可</dd>
+			<dd>
+			语句块需要注意：
+			</dd>
+			<dd>1.语句块结尾不需要使用分号,语句块内的语句必须用分号结尾</dd>
+			<dd>2.javascript中没有块级作用域</dd>	
+			<dd>3.在语句块中声明的变量并不是语句块私有的</dd>		
+			<dd>复合语句：多条语句被当做一条语句使用时使用复合语句来替换</dd>
+			
+			<dt>5.3声明语句</dt>
+			<dd>var 和function都是声明语句它们声明或者定义变量或函数.</dd>
+
+			
+			<dt>5.3.1var</dt>
+			<dd>var语句用来声明一个或多个变量,var在函数体内将成为局部变量作用于函数中</dd>
+			<dd>如果变量没有指定初始化表达式返回undifined</dd>
+			
+			<dt>5.3.2function</dt>
+			<dd>function关键字用来定义函数</dd>
+			<dd>function是要声明函数名称标识符</dd>
+			<dd>函数中入参叫实际参数，把参数引用到函数内部叫形式参数</dd>			
+			<dd>声明函数和函数定义区别</dd>
+			<dd>共性：创建了新的函数对象</dd>
+			<dd>函数声明放在其它语句内的做法不具备移植性</dd>
+			<dd>函数声明的语句通常出现在javascript代码的最顶层,也可以嵌套在其他函数体内</dd>
+			<dd>函数声明语句中的函数名是一个变量，变量指向函数对象</dd>
+			<dd>函数声明函数体和函数名称被提前，创建的变量无法删除,这些变量可以重写</dd>
+			<dd>函数定义的语句函数被显式的提前 window.functionName证明了，整个脚本和函数内都是可见的</dd>
+
+			<dt>5.4条件语句</dt>
+			<dd>条件语句是通过判断指定表达式的值来决定执行还是跳过某些语句</dd>
+			<dd>1.if(){}</dd>
+			<dd>2.if(){}else{}</dd>
+			<dd>3.if(){}else if(){}else{} </dd>
+			<dd>4.if() 语句</dd>
+
+			<dt>5.4.1if</dt>
+
+			<dt>5.4.2else if</dt>
+			
+			<dt>5.4.3switch</dt>
+			<dd>1.switch(val){case 1：//执行1 break;case 2：//执行2 break; default: break;}</dd>
+			<dd>2.switch(val){case 1:case2: //执行语句 break; case 3:case4: //执行语句 break; default: break;}</dd>
+			
+			<dt>5.5循环</dt>
+			
+			<dt>5.5.1while</dt>
+			<dd>
+			while(判断的条件){
+			 执行的语句			 
+			}
+			</dd>		
+
+			<dt>5.5.2 do while</dt>
+			<dd>至少执行一次：</dd>
+			<dd>
+			do{
+			执行的语句
+			}while(判断的条件)
+			</dd>		
+
+			<dt>5.5.3 for</dt>
+			<dd>
+			for(初始化;判断;递增){
+				循环体
+			}
+			</dd>
+			
+			<dt>5.5.4 for in</dt>
+			<dd>for(初始值变量名 in 循环对象){}</dd>
+			<dd>for/in循环可以像枚举对象属性一样枚举数组索引</dd>
+			<dd>对象继承了可枚举属性，对象具有整数数组索引的属性，使用delect删除了对象已有的属性，使用object.defineproperty()或者类似的方法改变对象属性</dd>
+			<dd>表达式是null/undefined 时js解析器会跳过循环并执行after的code</dd>
+
+			<dt>5.6跳转</dt>
+			<dd>break(跳转到循环或者其他语句的结束)</dd>			
+			<dd>continue(终止本次循环的执行下次循环)</dd>
+			<dd>return(语句让解析器跳出函数体的执行，并返回结果)</dd>
+			<dd>throw(抛出异常  try/catch/finally)</dd>
+
+			<dt>5.6.1标签语句</dt>
+			<dd>identifer:statement,标识符号一般是在循环体重声明</dd>
+			<dd>
+			语句是可以加标签的，标签是由语句前的标识符和冒号组成,定义语句块时才能使用和break或者continue配合使用,不能是保留字，语句标签只能在它所起的语句</dd>
+			
+			<dt>5.6.2break</dt>
+			<dd>立即退出最内层的循环</dd>
+			
+			<dt>6.3continue</dt>
+			<dd>continue在for或者while循环中如果在循环体里面进行判断当遇到错误的时候就跳过循环</dd>
+			
+			<dt>5.6.4return</dt>
+			<dd>return 返回一个结果，只能出现在函数体</dd>
+			
+			<dt>5.6.5throw语句</dt>
+			<dd>抛出错误信息,捕获异常是指处理这个信号，采用必要的手段进行恢复 try/catch/finally语句捕获异常</dd>
+			
+			<dt>5.6.6try/catch/finally语句</dt>
+			<dd>try/catch/finally语句是javascript的异常处理机制，try从句定义了需要处理的异常代码块,catch从句是在try后当try出现异常时调用catch内的代码逻辑,finally块后者放置清理代码，finally块必须会执行的</dd>
+			
+			<dt>5.7其他语句</dt>
+			<dd>with,debugger,use strict</dd>
+			
+			<dt>5.7.1 with</dt>
+				<dd>作用链:一个按序检索的对象列表，通过它可以进行变量名解析</dd>
+				<dd>with语句用于临时扩展作用域，在严格模式下禁止使用witch</dd>
+				<dd>缺点：with 语句不好优化，with性能低</dd>					
+			<form>
+				<input type="text" name="name" placeholder="try with">
+			</form>
+				
+			<dt>5.7.2 debugger</dt>
+			<dd>debugger通常什么也不做，当调试程序可以运行时,javascript解析器将会以调试模式运行，这种语句产生断点,</dd>
+			
+			<dt>5.7.3 use strict</dt>
+			<dd>use strict 是ecmaScript5引入的一条指令。</dd>
+			<dd>指令和普通的语句之间两个重要区别</dd>
+			<dd>它不包含任何语言的关键字，它是一个特殊字符串直接量的表达式可以使用单引号或者双引号，它代表着脚本的开始或者函数的开始</dd>
+			<dd>javascript具体的实现可能将它们解析为解析器器自有的指令，如果遵循了ecmaScript的‘use strict’后面的代码将会严格代码</dd>
+			<dd>它修正了语言的重要缺陷,提供健壮的查错功能和增强了安全机制</dd>
+			<dd>严格模式和非严格模式区别</dd>
+			<dd>1.严格模式禁用with语句</dd>
+			<dd>2.所有的变量都要先声明</dd>
+			<dd>3.在严格模式中调用的函数(不是方法)中的一个this值是undefined，在严格模式中函数中的this值是指全局对象,</dd>
+			<dd>4.严格模式中call()和apply()来调用函数时,其中this值就是通过call()或apply()传入第一个参数(非严格情况下null和undefined值被全局对象和转换为对象的非对象值所替换)</dd>
+			<dd>5.严格:给只读属性赋值和给不可扩展的对象创建新成员将抛出一个类型错误,在非严格模式中这些操作就只会简单的操作失败不报错</dd>
+			<dd>6.严格:传入eval()的代码不能在调用程序所在的上下文中声明变量或定义函数而在非严格可以这样做。相反，变量和函数定义的eval()创建新作用域中,这个eval()返回时就弃用了.</dd>
+			<dd>7.严格:arguments对象拥有传入函数值静态副本.非严格模式中，arguments对象有魔术般的行为，arguments里的数组元素和函数参数都是指同一个值得引用</dd>
+			<dd>8.严格模式：delete运算符跟随非法的标识符就报错，而非严格就报false</dd>
+			<dd>9.严格:试图删除一个不可配置的属性将抛出一个类型错误异常在非严格模式中会抛出false</dd>
+			<dd>10.一个对象定义两个或多个同名的属性将报错，而非严格模式不会</dd>
+			<dd>11.在严格模式中是不允许使用八进制整数直接量非严格可以</dd>
+			<dd>12.严格:eval和arguments当做关键字,他们的值不能修改不能给标识符赋值，也不能给他们声明变量，用做函数名，用做函数参数或者用做catch块的标识符</dd>
+			<dd>13.严格模式中失去了调用栈的检查能力在严格模式函数中，caller，arguments，arguments.caller会抛出一个类型错误异常.当访问两个属性时将抛出类型错误异常</dd>
+			</dd>
+			<dt>5.8 javascript 语句小结</dt>
+		</dl>		
+	</body>
+	<script type="text/javascript">
+		console.info('------------------------------5语句------------------------------');
+
+		console.info('------------------------------5.1表达式语句------------------------------');
+		
+		console.info('------------------------------5.2复合语句和空语句------------------------------')
+		var x=6;
+		{
+			console.log("块级内的x:"+x);
+			var x=Math.PI;
+			
+		};
+		console.log("块级外获取x:"+x);
+		console.info('------------------------------5.3声明语句------------------------------')
+		
+		console.info('------------------------------5.3.1var------------------------------')
+
+		console.info('------------------------------5.3.2function------------------------------')
+		console.log("3.1function------------------");
+		console.log("getVal():"+getVal());
+		var a=function getVal(){
+			var i=10;
+			return i;
+		}
+		function getVal(){
+			var i=10;
+			return i;
+		}		
+		console.log("a//返回函数体"+a);
+		console.log('typeof a//function',typeof a);
+
+		console.log('----3.1递归方法----');
+		var digui=function factor(n){
+			if(n<=1) return 1;
+			return n*factor(n-1);
+		}
+		console.log('递归方法体:',digui,'入参factor(3)递归结果:',digui(3),'typeof digui',typeof digui);
+	
+		console.info('------------------------------5.4.1 if------------------------------')
+	
+		console.info('------------------------------5.4.2else if------------------------------')
+	
+		console.info('------------------------------5.4.3switch------------------------------')
+		
+		console.info('------------------------------5.5循环------------------------------')
+	
+		console.info('------------------------------5.5.1 while------------------------------')
+	
+		console.info('------------------------------5.5.2 do while------------------------------')
+	
+		console.info('------------------------------5.5.3 for------------------------------')
+	
+		console.info('------------------------------5.5.4 for in------------------------------')
+		var arr=[1,2,3,4,5,6];
+		var object={"a":666,"b":777,"c":888,"d":999};
+		var nullArr=[],i=0,nullVal=[];
+		for(val in arr){
+			console.info('for(val in arr)：',arr[val])
+		}
+		for(nullArr[i++] in object){
+		}
+		//字符串不能够当属性去使用
+		for(i in nullArr){
+			var str=new Object(nullArr[i].replace(/"/g,""));
+			nullVal.push(object.str)
+		}
+		console.info('nullArr',nullArr)
+		console.info('nullVal',nullVal)
+	
+		console.info('------------------------------5.6 跳转------------------------------')
+	
+		console.log('------------------------------5.6.1标签语句------------------------------');
+		function myWay(n){
+			loop:for(;n>0;n--){
+
+				if(n>4){
+					console.info('n>4,看看当n大于4的时候不会执行n>0 code',n);
+					continue loop;
+				}	
+				if(n>0){
+					console.info('n>0',n);
+						n--;
+				}			
+			}
+		}
+		console.info('myWay(6)',myWay(6));
+	
+		console.log('------------------------------5.6.2break语句------------------------------');
+		var sum=0,success=false,val=[10,'我是中文',20,30],row=new Array();
+		com:if(val){
+			for(var i=0;i<val.length;i++){
+				row.push(val[i]);
+				console.log('row:',row);
+				if(!row) break com;
+				for(var y=0;y<row.length;y++){
+					var cell=row[y];
+					console.log('cell:'+cell);
+					if(isFinite(cell)) break com;
+					sum+=cell;
+					console.log("sum:"+sum);
+				}
+			}
+		}
+	
+		console.log('------------------------------5.6.3continue语句------------------------------');
+	
+		console.log('------------------------------5.6.4return语句------------------------------');
+	
+		console.log('------------------------------5.6.5throw语句------------------------------');
+		function errors(x){
+			if(x<0) throw new Error('x不能为负数');
+			console.log("x:"+x);
+		}
+		console.info('errors(5)//假设入参是-5就会在console 抛出错误',errors(5));
+	
+		console.log('------------------------------5.6.6 try/catch/finally语句------------------------------');
+		function trys(n){
+			try{
+				loop:while(n>0){
+					n--;
+					if(n>0){						
+					}else{
+						console.log("不符合:"+n);
+						break loop;	
+					}
+				}
+			}catch(e){
+				console.log("error:"+e);
+			}finally{
+				console.log("finally被执行了");
+			}
+		}
+		console.info('trys(1)',trys(1));	
+	
+		console.log('------------------------------5.7其他语句类型------------------------------');	
+	
+		console.log('------------------------------5.7.1 with----------------------------------');
+		//添加至作用域链的顶层，这种方法减少大量的输入不需要每个属性都添加document.forms  document.form[0].address.value
+		console.info('window:',window);
+		with(window){
+			var arr=[23,3233,23,323,3];
+		}
+		console.info('with change window://影响到了global window attr',window);
+	
+		console.log('------------------------------5.7.2 debugger----------------------------------');
+		function f(o){
+			if(o>0){
+				// debugger;
+				console.log(o);
+			}
+		}
+		f(1);
+	
+		console.log('------------------------------5.7.3 user static----------------------------------');
+	
+		console.log('------------------------------5.8 javascript 语句小结----------------------------------');
+	</script>
+</html>
