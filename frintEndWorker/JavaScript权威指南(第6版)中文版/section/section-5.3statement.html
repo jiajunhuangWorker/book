@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>5.3声明语句</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>5.3声明语句</dt>
+			<dd>var 和function都是声明语句它们声明或者定义变量或函数.</dd>
+			<dd>声明语句本身什么也不做,但它有一个重要的意义，通过创建变量和函数,可以更好地组织代码的语义</dd>
+			
+			<dt>5.3.1var</dt>
+			<dd>关键字var之后跟随的是要声明的变量列表</dd>
+			<dd>如果var语句出现在函数体内,那么它定义的是一个局部变量,其作用域就是这个函数.如果在顶层代码中使用var语句,它声明的是全局变量</dd>
+			<dd>var声明的变量无法通过delete删除的</dd>
+			<dd>如果var语句中变量没有指定初始化表达式.变量的值初始为undefined</dd>
+			
+			<dt>5.3.2function</dt>
+			<dd>关键字function用来定义函数</dd>
+			<dd>function是要声明的函数</dd>
+		</dl>		
+	</body>
+	<script type="text/javascript">
+	
+		console.info('------------------------------5.3声明语句------------------------------')
+		
+		console.info('------------------------------5.3.1var------------------------------')
+		var name='world';
+		var j=0;
+		var p,q;
+		var greeting='hellow'+name;
+
+		console.info('------------------------------5.3.2function------------------------------')
+		console.log("3.1function------------------");
+		console.log("getVal():"+getVal());
+		var a=function getVal(){
+			var i=10;
+			return i;
+		}
+		function getVal(){
+			var i=10;
+			return i;
+		}		
+		console.log("a//返回函数体"+a);
+		console.log('typeof a//function',typeof a);
+
+		console.log('----3.1递归方法----');
+		var digui=function factor(n){
+			if(n<=1) return 1;
+			return n*factor(n-1);
+		}
+		console.log('递归方法体:',digui,'入参factor(3)递归结果:',digui(3),'typeof digui',typeof digui);
+	
+		
+	</script>
+</html>
