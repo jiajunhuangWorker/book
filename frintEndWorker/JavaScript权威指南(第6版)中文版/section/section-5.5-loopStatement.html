@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>5.5 循环</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>5.5循环</dt>
+			<dd>while,do/while,for和for/in</dd>
+			
+			<dt>5.5.1while</dt>
+			<dd>if语句是一种基本的控制语句,用来选择执行程序的分支语句</dd>
+			<dd>while(expression)statement</dd>
+			<dd>在执行while语句之前,javascript解析器首先计算expression的值,如果它的值时假值,那么程序将跳过循环中的逻辑statement转而执行程序中的的下一条语句</dd>
+			<dd>
+			while(判断的条件){
+			 执行的语句			 
+			}
+			</dd>		
+
+			<dt>5.5.2 do while</dt>
+			<dd>它是在循环尾部而不是顶部检测循环表达式,这以为着循环至少执行一次</dd>
+			<dd>
+			do{statement
+			}while(expression)
+			</dd>		
+			<dd>do/while和while区别</dd>
+			<dd>1.必须要使用关键字do</dd>	
+			<dd>do/while是用分号结尾的</dd>
+
+			<dt>5.5.3 for</dt>
+			<dd>for语句提供了一种币whiloe语句更加方便的循环控制结构，for循环两个分号是关键</dd>
+			<dd>initialize表达式只在循环开始之前执行一次</dd>
+			<dd>当两个分号存在for循环中将出现在表达式,并没其他元素,将会死循环</dd>
+
+			<dd>
+			for(initialize;test;increment){
+				statement
+			}
+			</dd>
+			
+			<dt>5.5.4 for in</dt>
+			<dd>for/in语句使用for关键字,但它是和常规的for循环完全不同的一类循环</dd>
+			<dd>for(variable in object){statement}</dd>
+			<dd>for/in循环可以像枚举对象属性一样枚举数组索引</dd>
+			<dd>javascript解析器首先计算object表达式.如果表达式为null或者undefined,javascript解析器将会跳过循环并执行后续代码</dd>
+			<dd>对象继承了可枚举属性，对象具有整数数组索引的属性，使用delect删除了对象已有的属性，使用object.defineproperty()或者类似的方法改变对象属性</dd>
+			<dd>表达式是null/undefined 时js解析器会跳过循环并执行after的code</dd>
+			<dd>for/in 循环可以像枚举对象属性一样枚举数组索引</dd>
+			<dd>属性枚举的顺序</dd>
+			<dd>ecmascript规范并没有指定for/in循环按照何种顺序来枚举对象属性</dd>
+			<dd>主流浏览厂商的javascript实现是按照属性定义的先后顺序来枚举简单对象的属性,先定义的属性先枚举</dd>
+			<dd>对象继承了可枚举属性</dd>
+			<dd>对象具有整数数组索引的属性</dd>
+			<dd>使用delete删除了对象已有属性</dd>
+			<dd>Object.defineProperty()或者类似的方法改变对象的属性</dd>
+			<dd>如果对象继承自多个原型,也就是说它的原型链上有好多对象,那么链上面的每一个原型对象的属性的遍历是依照特定顺序执行的</dd>
+			<dd>实现依照数字顺序来枚举数组属性,而不是某种特定的顺序</dd>
+			<dd>数组元素的索引是非数字或者数组是稀疏数组时他们则按照特定顺序枚举</dd>
+		</dl>		
+	</body>
+	<script type="text/javascript">
+		console.info('------------------------------5.5.1 while------------------------------')
+			var count=0;
+			while(count<10){
+				console.log(count);
+				count++;
+			}
+		console.info('------------------------------5.5.2 do while------------------------------')
+			function printArray(a){
+				var len=a.length,i=0;
+				if(len==0){
+					console.log('Empty Array');
+				}else{
+					do{
+						console.log(a[i])
+					}while(++i<len)
+				}
+			}
+		console.info('------------------------------5.5.3 for------------------------------')
+		
+		for(var i=0,j=10;i<10;i++,j--){
+			sum+=i*j;
+		}
+	
+		console.info('------------------------------5.5.4 for in------------------------------')
+		var arr=[1,2,3,4,5,6];
+		var object={"a":666,"b":777,"c":888,"d":999};
+		var nullArr=[],i=0,nullVal=[];
+		for(val in arr){
+			console.info('for(val in arr)：',arr[val])
+		}
+		for(nullArr[i++] in object){
+		}
+		//字符串不能够当属性去使用
+		for(i in nullArr){
+			var str=new Object(nullArr[i].replace(/"/g,""));
+			nullVal.push(object.str)
+		}
+		console.info('nullArr',nullArr)
+		console.info('nullVal',nullVal)
+	
+		
+	</script>
+</html>

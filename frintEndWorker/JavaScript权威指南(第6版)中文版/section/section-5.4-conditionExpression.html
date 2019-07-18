@@ -11,15 +11,23 @@
 			<dd>条件语句是通过判断指定表达式的值来决定执行还是跳过某些语句</dd>
 			<dd>这些语句是代码的决策点,有时候称为分支</dd>
 
-			<dt>5.4.1if</dt>
+			<dt>5.4.1 if</dt>
 			<dd>if语句是一种基本的控制语句,它让javascript程序可以选择执行路径,更准备地说,就是有条件地执行语句</dd>
 			<dd>if(expression)statement</dd>
+			<dd>if(expression)statement1 else statement2</dd>
+
 
 			<dt>5.4.2else if</dt>
+			<dd>if/else语句通过判断一个表达式的计算结果来选择执行两条分支中的一条</dd>
 
 			<dt>5.4.3switch</dt>
+			<dd>if语句在程序执行过程中创建一支分支,并且可以使用else if 来处理多条分支.</dd>
+			<dd>switch(expression){statements}</dd>
 			<dd>1.switch(val){case 1：//执行1 break;case 2：//执行2 break; default: break;}</dd>
 			<dd>2.switch(val){case 1:case2: //执行语句 break; case 3:case4: //执行语句 break; default: break;}</dd>
+			<dd>switch语句首先计算switch关键字的表达式,然后按照从上到下的顺序计算每个case后的表达式,直到执行到case的表达式的值与switch的表达式的值相等时为止</dd>
+			<dd>由于对每个case的匹配操作实际上是恒等运算符比较而不是相等运算符比较,因此,表达式和case的匹配并不会做任何类型转换</dd>
+			<dd>javascript中的case表达式的值时运行时计算的</dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
@@ -30,6 +38,38 @@
 		}
 		if(!username){
 
+		}
+		console.info('------------------------------5.4.2 else if------------------------------')
+		if(n ==1){
+			//执行代码块1
+		}else if(n ==2){
+			//执行代码块2
+		}else if(n ==3 ){
+		//执行代码3
+		}else{
+			//之前的条件都为false,则执行这里的代码块4
+		}
+		console.info('------------------------------5.4.3 switch------------------------------')
+		switch(n){
+			case 1:
+			//执行代码1
+			break；
+			case 2:
+			//执行代码2
+			break；
+			default:
+			//执行代码3
+			break;
+		}
+		function convert(x){
+			switch(typeof x){
+				case 'number':
+				return x.toString(16);
+				case 'string':
+				return '"'+x+'"';
+				default:
+				return String(x);
+			}
 		}
 	</script>
 </html>
