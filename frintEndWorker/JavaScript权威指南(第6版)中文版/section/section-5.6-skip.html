@@ -2,109 +2,31 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>第五章 语句</title>
+		<title>5.6跳转</title>
 		<link rel="stylesheet" href="../../../globalBase.css">
 	</head>
 	<body>
 		<dl>
-			<dt>5语句</dt>
-			<dd>表达式在javascript中是短语,那么语句就是javascript整句或命令</dd>
-			<dd>声明语句,表达式</dd>
-			<dd>javascript程序无非就是一系列可执行语句的集合</dd>
-			<dd>条件语句<conditional>(if switch)，循环语句<loop>(do-while，while,for，for/in)，跳转语句<jump>（break,continue,throw）</dd>
-
-			<dt>5.1表达式语句</dt>
-			<dd>具有副作用的表达式是javascript中最简单的语句</dd>
-
-			<dt>5.2复合语句和空语句</dt>
-			<dd>可以用逗号运算符将几个表达式链接在一起，形成一个表达式，同样javascript中还可以将多条语句联合在一起，形成复合语句.只须用多条语句包括起来即可</dd>
-			<dd>
-			语句块需要注意：
-			</dd>
-			<dd>1.语句块结尾不需要使用分号,语句块内的语句必须用分号结尾</dd>
-			<dd>2.javascript中没有块级作用域</dd>	
-			<dd>3.在语句块中声明的变量并不是语句块私有的</dd>		
-			<dd>复合语句：多条语句被当做一条语句使用时使用复合语句来替换</dd>
-			
-			<dt>5.3声明语句</dt>
-			<dd>var 和function都是声明语句它们声明或者定义变量或函数.</dd>
-
-			
-			<dt>5.3.1var</dt>
-			<dd>var语句用来声明一个或多个变量,var在函数体内将成为局部变量作用于函数中</dd>
-			<dd>如果变量没有指定初始化表达式返回undifined</dd>
-			
-			<dt>5.3.2function</dt>
-			<dd>function关键字用来定义函数</dd>
-			<dd>function是要声明函数名称标识符</dd>
-			<dd>函数中入参叫实际参数，把参数引用到函数内部叫形式参数</dd>			
-			<dd>声明函数和函数定义区别</dd>
-			<dd>共性：创建了新的函数对象</dd>
-			<dd>函数声明放在其它语句内的做法不具备移植性</dd>
-			<dd>函数声明的语句通常出现在javascript代码的最顶层,也可以嵌套在其他函数体内</dd>
-			<dd>函数声明语句中的函数名是一个变量，变量指向函数对象</dd>
-			<dd>函数声明函数体和函数名称被提前，创建的变量无法删除,这些变量可以重写</dd>
-			<dd>函数定义的语句函数被显式的提前 window.functionName证明了，整个脚本和函数内都是可见的</dd>
-
-			<dt>5.4条件语句</dt>
-			<dd>条件语句是通过判断指定表达式的值来决定执行还是跳过某些语句</dd>
-			<dd>1.if(){}</dd>
-			<dd>2.if(){}else{}</dd>
-			<dd>3.if(){}else if(){}else{} </dd>
-			<dd>4.if() 语句</dd>
-
-			<dt>5.4.1if</dt>
-
-			<dt>5.4.2else if</dt>
-			
-			<dt>5.4.3switch</dt>
-			<dd>1.switch(val){case 1：//执行1 break;case 2：//执行2 break; default: break;}</dd>
-			<dd>2.switch(val){case 1:case2: //执行语句 break; case 3:case4: //执行语句 break; default: break;}</dd>
-			
-			<dt>5.5循环</dt>
-			
-			<dt>5.5.1while</dt>
-			<dd>
-			while(判断的条件){
-			 执行的语句			 
-			}
-			</dd>		
-
-			<dt>5.5.2 do while</dt>
-			<dd>至少执行一次：</dd>
-			<dd>
-			do{
-			执行的语句
-			}while(判断的条件)
-			</dd>		
-
-			<dt>5.5.3 for</dt>
-			<dd>
-			for(初始化;判断;递增){
-				循环体
-			}
-			</dd>
-			
-			<dt>5.5.4 for in</dt>
-			<dd>for(初始值变量名 in 循环对象){}</dd>
-			<dd>for/in循环可以像枚举对象属性一样枚举数组索引</dd>
-			<dd>对象继承了可枚举属性，对象具有整数数组索引的属性，使用delect删除了对象已有的属性，使用object.defineproperty()或者类似的方法改变对象属性</dd>
-			<dd>表达式是null/undefined 时js解析器会跳过循环并执行after的code</dd>
-
 			<dt>5.6跳转</dt>
+			<dd>跳转语句使得javascript执行可以从一个位置跳转到另一个位置</dd>
 			<dd>break(跳转到循环或者其他语句的结束)</dd>			
 			<dd>continue(终止本次循环的执行下次循环)</dd>
 			<dd>return(语句让解析器跳出函数体的执行，并返回结果)</dd>
 			<dd>throw(抛出异常  try/catch/finally)</dd>
 
 			<dt>5.6.1标签语句</dt>
-			<dd>identifer:statement,标识符号一般是在循环体重声明</dd>
-			<dd>
-			语句是可以加标签的，标签是由语句前的标识符和冒号组成,定义语句块时才能使用和break或者continue配合使用,不能是保留字，语句标签只能在它所起的语句</dd>
+			<dd>语句是可以添加标签的,标签是由语句前的标识符和冒号组成</dd>
+			<dd>identifer:statement</dd>
+			<dd>通过给语句定义标签,就可以在程序的任何地方通过标签名引用这条语句</dd>
+			<dd>标签的命名空间和变量或函数的命名空间是不同的,因此可以使用同一个标识符作为语句标签和作为变量名或函数名</dd>
+			<dd>一个语句标签不能和它内部的语句标签重名，但在两个代码段不相互嵌套的情况下是可以出现同名的语句标签的</dd>
 			
 			<dt>5.6.2break</dt>
-			<dd>立即退出最内层的循环</dd>
-			
+			<dd>单独使用break语句的作用是立即退出最内层的循环或switch语句</dd>
+			<dd>当break和标签一块使用时,程序将跳转到这个标签所标识的语句块结束,或者直接终止这个闭合语句块的执行</dd>
+			<dd>当没有任何闭合语句块指定了break所用的标签,这时会产生一个语法错误</dd>
+
+
 			<dt>6.3continue</dt>
 			<dd>continue在for或者while循环中如果在循环体里面进行判断当遇到错误的时候就跳过循环</dd>
 			
@@ -156,76 +78,6 @@
 		</dl>		
 	</body>
 	<script type="text/javascript">
-		console.info('------------------------------5语句------------------------------');
-
-		console.info('------------------------------5.1表达式语句------------------------------');
-		
-		console.info('------------------------------5.2复合语句和空语句------------------------------')
-		var x=6;
-		{
-			console.log("块级内的x:"+x);
-			var x=Math.PI;
-			
-		};
-		console.log("块级外获取x:"+x);
-		console.info('------------------------------5.3声明语句------------------------------')
-		
-		console.info('------------------------------5.3.1var------------------------------')
-
-		console.info('------------------------------5.3.2function------------------------------')
-		console.log("3.1function------------------");
-		console.log("getVal():"+getVal());
-		var a=function getVal(){
-			var i=10;
-			return i;
-		}
-		function getVal(){
-			var i=10;
-			return i;
-		}		
-		console.log("a//返回函数体"+a);
-		console.log('typeof a//function',typeof a);
-
-		console.log('----3.1递归方法----');
-		var digui=function factor(n){
-			if(n<=1) return 1;
-			return n*factor(n-1);
-		}
-		console.log('递归方法体:',digui,'入参factor(3)递归结果:',digui(3),'typeof digui',typeof digui);
-	
-		console.info('------------------------------5.4.1 if------------------------------')
-	
-		console.info('------------------------------5.4.2else if------------------------------')
-	
-		console.info('------------------------------5.4.3switch------------------------------')
-		
-		console.info('------------------------------5.5循环------------------------------')
-	
-		console.info('------------------------------5.5.1 while------------------------------')
-	
-		console.info('------------------------------5.5.2 do while------------------------------')
-	
-		console.info('------------------------------5.5.3 for------------------------------')
-	
-		console.info('------------------------------5.5.4 for in------------------------------')
-		var arr=[1,2,3,4,5,6];
-		var object={"a":666,"b":777,"c":888,"d":999};
-		var nullArr=[],i=0,nullVal=[];
-		for(val in arr){
-			console.info('for(val in arr)：',arr[val])
-		}
-		for(nullArr[i++] in object){
-		}
-		//字符串不能够当属性去使用
-		for(i in nullArr){
-			var str=new Object(nullArr[i].replace(/"/g,""));
-			nullVal.push(object.str)
-		}
-		console.info('nullArr',nullArr)
-		console.info('nullVal',nullVal)
-	
-		console.info('------------------------------5.6 跳转------------------------------')
-	
 		console.log('------------------------------5.6.1标签语句------------------------------');
 		function myWay(n){
 			loop:for(;n>0;n--){
@@ -289,27 +141,6 @@
 		}
 		console.info('trys(1)',trys(1));	
 	
-		console.log('------------------------------5.7其他语句类型------------------------------');	
-	
-		console.log('------------------------------5.7.1 with----------------------------------');
-		//添加至作用域链的顶层，这种方法减少大量的输入不需要每个属性都添加document.forms  document.form[0].address.value
-		console.info('window:',window);
-		with(window){
-			var arr=[23,3233,23,323,3];
-		}
-		console.info('with change window://影响到了global window attr',window);
-	
-		console.log('------------------------------5.7.2 debugger----------------------------------');
-		function f(o){
-			if(o>0){
-				// debugger;
-				console.log(o);
-			}
-		}
-		f(1);
-	
-		console.log('------------------------------5.7.3 user static----------------------------------');
-	
-		console.log('------------------------------5.8 javascript 语句小结----------------------------------');
+		
 	</script>
 </html>
