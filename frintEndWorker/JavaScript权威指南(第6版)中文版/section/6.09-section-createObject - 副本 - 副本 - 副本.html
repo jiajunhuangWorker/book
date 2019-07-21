@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>第六章对象</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>6对象</dt>
+			<dd>对象是javascript的基本数据类型,对象是一种复合值，它将很多值聚合在一起,通过名字访问这些值</dd>
+			<dd>对象也可以看做是属性的无序集合，每个属性都是键值对</dd>
+			<dd>散列，散列表，字典，关联数组的基本数据类型和对象相似</dd>
+			<dd>对象可以称为原型的对象继承属性,对象里面的方法通常是继承属性</dd>
+			<dd>原型式继承是javascript的核心特征</dd>
+			<dd>对象最常见的用法是创建，设置，查找，删除，检测和枚举它的属性</dd>
+			<dd>对象中不存在同名属性</dd>
+			<dd>属性的特征(可写,可枚举,可配置)</dd>
+			<dd>可写:表明是否可以设置属性值</dd>
+			<dd>可枚举:表明是否可以通过for/
+			循环返回该属性</dd>
+			<dd>可配置:表明是否可以删除或修改该属性</dd>
+			<dd>对象特征(对象原型，对象类，对象的扩展标记)</dd>
+			<dd>对象的原型(prototype):指向另外一个对象,本对象的属性继承自它的原型对象</dd>
+			<dd>对象的类(class):是一个标识对象类型的字符串</dd>
+			<dd>对象的扩展标记:是否可以向该对象添加新属性</dd>			
+			<dd>三类javascript对象和两类属性</dd>
+			<dd>内置对象:</dd>
+			<dd>是由ECMAScript规范定义的对象或类.example:数组,函数,日期和正则表达式都是内置对象</dd>
+			<dd>宿主对象<dd>
+			<dd>javascript解析器所嵌入的宿主环境（web浏览器定义的）客户端javascript中表示页面结构的htmlElement对象均是宿主对象</dd>
+			<dd>自定义对象<dd>
+			<dd>运行中的javascript代码创建的对象</dd>
+			<dd>自有属性<dd>
+			<dd>直接在对象中定义的属性</dd>
+			<dd>继承属性<dd>
+			<dd>对象的原型对象中定义的属性</dd>
+								
+			<dt>6.1创建对象</dt>			
+			<dd>可以通过对象直接量,关键字new 和Object.create()函数来创建对象.</dd>	
+			
+			<dt>6.1.1对象直接量</dt>			
+			<dd>对象直接量最后一个属性可以忽略逗号,但是IE会报错</dd>
+			<dd>计算对象直接量的时候都会计算每个属性值</dd>	
+			
+			<dt>6.1.2通过new创建对象</dt>
+			<dd>关键字后跟随一个函数调用,这里称为构造函数</dd>
+			<dd>javascript语言核心中的原始类型都包含内置构造函数</dd>	
+			
+			<dt>6.1.3原型</dt>
+			<dd>每一个对象都从原型继承属性</dd>
+			<dd>Object.prototype获取对原型的引用</dd>
+			<dd>Date对象的属性同时继承自Date.prototype和Object.prototype，这一系列链接的原型对象就叫原型链</dd>
+
+			<dt>6.1.4Object.create()</dt>
+			<dd>Object.create()是一个静态函数</dd>
+			
+			<dt>6.2属性的查询和设置</dt>
+			<dd>当使用方括号时,我们说方括号内的表达必须返回字符串</dd>
+			
+			<dt>6.2.1作为关联数组的对象</dt>
+			<dd>object.property和object['property']</dd>
+			<dd>object['property']这个数组元素是通过字符串索引,这种数组也叫做关联数组别称散列，映射或字典,javascript对象都是关联数组的</dd>
+			<dd>javascript中式弱类型语言因此对象中程序可以创建任意数量属性</dd>	
+			<dd>数组写法和用字符串表达来访问对象属性的灵活性</dd>
+			
+			<dt>6.2.2继承</dt>
+			<dd>javascript对象具有'自由属性',也有一些属性是从原型对象继承而来</dd>
+			<dd>如果是同属性名的情况下老的属性名下的值会被同名新的属性值覆盖,说明属性赋值是先检查原型链是否允许赋值，如果允许属性赋值操作，它总是在原始对象上创建属性或对已有的属性赋值而不会修改原型链，只有在查询属性的时候才会到继承的存在</dd>
+			
+			<dt>6.2.3属性访问错误</dt>
+			<dd>属性访问并不总是返回或设置一个值</dd>
+			<dd>查询一个不存在的属性并不会报错，当原型链中也没查到属性的情况下返回undifined</dd>
+			<dd>如果对象不存在那么试图试图查询这个不存在对象的属性会报错</dd>
+			<dd>给null和undifined设置属性也会报错</dd>
+			<dd>Object.prototype=o//赋值失败,但不报错要在user static严格模式下才报错</dd>	
+			<dd>对象里面的属性只读，不能对只读属性赋值</dd>
+			<dd>对象中的属性时继承的并且它是只读模式</dd>
+			
+			<dt>6.3删除属性</dt>
+			<dd>delete运算符，可以删除属性</dd>
+			<dd>delete是断开属性和宿主对象的联系</dd>
+			<dd>delete只能删除自有属性,不能删除继承属性</dd>
+			<dd>delete object.attr如果属性存在返回true</dd>
+			<dd>delete 后面不是一个属性访问表达式同样返回true</dd>
+			<dd>在严格模式下不能删除全局对象</dd>
+			<dd>delete后跟随一个非法操作数在严格模式下会报错</dd>
+
+			<dt>6.4检测属性</dt>
+			<dd>javascript对象可以看做是属性的集合</dd>
+			<dd>检测集合中成员的所属关系</dd>
+			<dd>in,hasOwnPrepert和propertyIsEnumerable</dd>
+			<dd>in:属性是否存在对象中</dd>
+			<dd>hasOwnProperty:检测对象里面存不存在自己的属性</dd>
+			<dd>propertyIsEnumerable是hasOwnPrepert的增强版,只能检测到自有属性和该属性可枚举才返回true</dd>
+			<dd>!==是可以区分undifined和null</dd>
+
+			<dt>6.5枚举属性</dt>
+			<dd>遍历对象:for/in可以遍历对象中的所有课枚举的属性(自有属性和继承属性)</dd>
+			<dd>对象继承的内置方法不可枚举,代码中给对象添加的属性时可枚举的</dd>
+			<dd>Object.prototype添加了新的方法和属性,这些方法和属性可以被所有对象继承使用,ECMAScript5标准前这些新添加的方法是不能定义为不可枚举的，for/in需要过滤返回的属性</dd>
+			<dd>Object.keys()//枚举属性名称返回array</dd>
+			<dd>Object.getOwnpropertyNames()//返回对象自有属性的名称</dd>
+
+			<dt>6.6属性getter和setter</dt>
+			<dd>对象属性是由名字,值和一组特性构成的</dd>
+			<dd>属性可以用getter和setter来定义,getter和setter定义的属性称为存取器属性</dd>
+			<dd>当程序查询存取器属性的值时,调用getter方法,这个方法返回值就是属性存取表达的值</dd>
+			<dd>当程序设置一个存取器属性的值时js调用setter方法</dd>
+			<dd>存储器属性不具有可写性,读取只写属性总是返回undifined</dd>
+			<dd>存取器属性是可以继承的</dd>
+
+			<dt>6.7属性的特征</dt>
+			<dd>数据属性的特征:值,可写性,可枚举,可配置性</dd>
+			<dd>可写性:setter的存在与否决定的</dd>
+			<dd>可枚举:可以通过api给原型添加方法,并将它们设置成不可枚举,这让它们看起来像内置方法</dd>
+			<dd>可配置性:可以通过这些api给对象定义不能修改或删除的属性,借此锁定这个对象</dd>
+			<dd>存取器:读取(get),写入(set),可枚举,可配置性</dd>
+			<dd>为了实现属性特性的查询和设置操作,ECMAScript5中定义了一个名为'属性描述符'的对象</dd>
+			<dd>属性描述符对象属性有value,writable,enumerable,configurable</dd>
+			<dd>writable<写>,enumerable<枚举>,configurable<删除>是boolean 类型</dd>
+			<dd>get和set是函数</dd>
+			<dd>方法要么修改已有属性要么新建自有属性,但不能修改继承属性</dd>
+			<dd>Object.defineProperty()和Object.definePropertys()</dd>
+			<dd>如果对象是不可扩展的,则可以编辑已有的自有属性,但不能给它添加新属性</dd>
+			<dd>如果属性不可配置的,则不能修改它的可配置性和可枚举性</dd>
+			<dd>如果存取器属性是不可配置的,则不能修改其getter和setter方法,也不能将它转换为数据属性</dd>
+			<dd>如果数据属性是不可配置的,则不能将它转换为存取器属性</dd>
+			<dd>如果数据属性是不可配置的,则不能</dd>
+
+			<dt>6.8对象的三个属性</dt>
+			<dd>每一个对象都有和它相似的原型,类和可扩展性</dd>
+
+			<dt>6.8.1原型属性</dt>
+			<dd>对象的原型属性是用来继承属性的</dd>
+			<dd>原型属性是在实例对象创建之初就设置好的</dd>
+			
+
+			<dt>6.8.2类属性</dt>
+			<dd>对象的类属性表示一个字符串,用以表示对象的类型信息.</dd>
+
+			<dt>6.8.3可扩展</dt>
+			<dd>对象的可扩展性是表示是否可以给对象添加新的属性</dd>
+			<dd>所有的内置对象和自定义的对象都是显示可扩展的</dd>
+			<dd>宿主对象的可扩展是由javascript引擎定义的</dd>
+			<dd>可扩展属性的目的是将对象'锁定',以避免外界的干扰</dd>
+			<dd>对象的可扩展性通常和属性配合使用</dd>
+			
+			<dt>6.9序列化对象</dt>
+			<dd>对象序列化是指将对象的状态转换为字符串,也可将字符串还原为对象</dd>			
+			<dd>JSON的语法是javascript语法的子集,它并不能表示javascript里的所有值</dd>
+			<dd>NaN,Infinity,-Infinity序列化的结果是null</dd>
+			<dd>对象,数组,字符串,无穷大数字,true,false和null可以序列化还原javascript对象</dd>
+			<dd>日期对象序列化的结果是ISO格式的格式日期字符串</dd>
+			<dd>函数,RegExp,Error,undifined不能序列化和还原f</dd>
+
+			<dt>6.10对象方法</dt>
+			
+			<dt>6.10.1toString()</dt>
+			<dd>toString()方法没有参数,它将返回一个表示调用这个方法的对象值得字符串</dd>
+			
+			<dt>6.10.2toLoacaleString()</dt>
+			<dd>该方法返回一个表示这个对象的本地化字符串</dd>
+			
+			<dt>6.10.3toJSON()</dt>
+			<dd>待序列化的对象中存在的方法</dd>
+
+			<dt>6.10.4valueOf()</dt>
+			<dd>对象转为原始值,对转为数字特别敏感</dd>
+			
+		</dl>		
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------6对象------------------------------')
+	
+	console.info('------------------------------6.1创建对象------------------------------')
+	console.info('Object',Object);
+	console.info('new Object()',new Object());
+	console.info('Object()',Object());
+	console.info(Object.create({}));
+	console.info('{}',{});
+
+	console.info('------------------------------6.1.1对象直接量------------------------------')
+	var object={
+		title:'javascript图书馆'
+		,content:'javascript内容'
+		,author:{
+			name:'lucas'
+			,book:'javascript权威'
+		}
+		,new:{
+			try:'测试关键字能不能做名称'
+			,String:'好像可以'
+		}
+	};
+	console.info('object',object);
+
+	console.info('------------------------------6.1.2通过new创建对象------------------------------')
+	var date=new Date();
+	var str=new String();
+	var rex=new RegExp();
+
+	console.info('------------------------------6.1.3原型------------------------------')
+	console.info('Object原型:Object.prototype',Object.prototype)
+	console.info('Array原型:Array.prototype',Array.prototype)
+	console.info('Date原型:Date.prototype',Date.prototype)
+	console.info('RegExp原型:RegExp.prototype',RegExp.prototype)
+	console.log("Date instanceof Object:"+(date instanceof Object));
+	console.log("string instanceof Object:"+(str instanceof Object));
+	console.log("ReExp instanceof Object:"+(rex instanceof Object));
+	console.info('------------------------------6.1.4Object.create()------------------------------')
+	console.info('Object.create({x:1,y:2})',Object.create({x:1,y:2}));
+	console.info('Object.create(null)//不继承任何原型链',Object.create(null));
+	console.info('Object.create(Object.prototype)//继承原型链',Object.create(Object.prototype))
+	// console.log("JSON.stringify(obj1):"+JSON.stringify(obj1));
+	function inherit(obj){
+		if(obj==null)throw TypeError();
+		if(Object.create){
+			return Object.create(obj);
+			var t=typeof obj;
+			if(t!=='object'&& t!=='function'){
+				function f(){
+					f.prototype=obj;
+					return new f();
+				}
+			}
+		}
+	}
+	var object={x:111,y:22};
+	console.info('inherit(object)',inherit(object))
+
+	console.info('------------------------------6.2属性的查询和设置------------------------------')
+
+	console.info('------------------------------6.2.1作为关联数组的对象------------------------------')
+	var addr='',customer={};
+	for(var i=0;i<4;i++){
+		addr+=customer['address'+i]+'\n';
+	}
+	console.info('addr:',addr,'customer',customer);
+
+	function getValue(portfolio){
+		var total=0.0;
+		for(stock in portfolio){
+			var shares=portfolio[stock];
+			var price=getquote(shares);
+			total+=shares*price;
+		}
+		return total;
+	}
+	console.info('------------------------------6.2.2继承------------------------------')
+	var o={};
+		o.x=1;
+	var p=inherit(o);
+		p.y=2;
+	var q=inherit(p);
+		q.z=3;
+	var s=q.toString();
+	console.info('q.x+q.y:',q.x+q.y);
+	// demo2
+	var unitcircle={r:1};
+	var demo2=inherit(unitcircle);
+		demo2.x=1;demo2.y=2;
+		demo2.r=666;
+		console.info('demo2:',demo2,'unitcircle://原型链没发生改变',unitcircle);
+
+	console.info('------------------------------6.2.3属性访问错误------------------------------')
+	var len=undefined;
+	var book=null;
+		if(book){
+			if(book.subtitle) len=book.subtitle.length;
+		}
+
+
+		// 第二种防止报错
+		var lens=book && book.subtitle && book.subtitle.length;
+
+	console.info('------------------------------6.3删除属性------------------------------')
+	var a={p:{x:1}};
+	var b=a.p;
+		delete a.p;
+		console.info('b.x',b.x);
+		console.info('javascript 的某些实现中,可能因为这种不严格严谨的代码而造成内存泄露因此需要先进行遍历属性在进行依次删除');
+
+	var object_deleteAttr={x:1};
+		console.info('delete object_deleteAttr.x',delete object_deleteAttr.x)
+		console.info('delete object_deleteAttr.x',delete object_deleteAttr.x)
+		console.info('object_deleteAttr.toString()',object_deleteAttr.toString());
+
+		console.info('delete Object.prototype',delete Object.prototype)
+
+	console.info('------------------------------6.4检测属性------------------------------')
+	var val={x:1,y:2};
+	console.log("{x:1,y:2}");
+	console.log("val.hasOwnPreperty('x'):"+val.hasOwnProperty('x'));
+	console.log("val.hasOwnPreperty('z'):"+val.hasOwnProperty('z'));
+	console.log('val.hasOwnProperty("toString"):'+val.hasOwnProperty('toString'));//证明了不能检测父级原型
+	console.log("val.propertyIsEnumerable('x'):"+val.propertyIsEnumerable('x'));
+	console.log("val.propertyIsEnumerable('z'):"+val.propertyIsEnumerable('z'));
+	console.log('val.propertyIsEnumerable("toString"):'+val.propertyIsEnumerable('toString'));
+	console.log('Object.prototype:'+Object.prototype);
+
+	console.log('val.x!==undefined',val.x!==undefined);
+	console.info('\'x\' in val','x' in val);
+	console.info('------------------------------6.5枚举属性------------------------------')
+	var for_inObj={x:1,y:2,c:3};
+	for_inObj.propertyIsEnumerable('toString');//返回false 不能枚举
+	for(p in for_inObj){
+		console.info('p',p)
+	}
+
+	//过滤器
+	var filtration=function (){
+		for(p in for_inObj){
+			if(!for_inObj.hasOwnProperty(p)) continue;//跳过继承的属性
+		}
+		for(p in for_inObj){
+			if(typeof for_inObj[p] === 'function') continue;//跳过方法
+		}
+	}
+	console.info('过滤属性和方法',filtration);
+
+	var extend=function extend(o,p){
+		/*
+			工具函数来操控对象的属性extend()函数
+			把P中的可美剧属性赋值到o中并返回o
+			如果o和p中含有同名属性则覆盖o中的属性
+			这个函数并不处理getter和setter以及复制属性
+		*/
+		//弥补了IE中一些bug
+		for(prop in p){
+			o[prop]=p[prop];
+		}
+		return o;
+	}
+	console.info('将p中的所有属性都整合到o中\n',extend);
+	var extend2=function extend(o,p){
+		/*
+			工具函数来操控对象的属性extend()函数
+			把P中的可美剧属性赋值到o中并返回o
+			如果o和p中含有同名属性则覆盖o中的属性
+			这个函数并不处理getter和setter以及复制属性
+		*/
+		//弥补了IE中一些bug
+		for(prop in p){
+			if(o.hasOwnProperty[prop]) continue; 
+			o[prop]=p[prop];
+		}
+		return o;
+	}
+	console.info('过滤掉已经存在o中存在的属性\n',extend2);
+
+	var deleteData=function restrict(o,p){
+		/*
+			工具函数来操控对象的属性extend()函数
+			把P中的可美剧属性赋值到o中并返回o
+			如果o和p中含有同名属性则覆盖o中的属性
+			这个函数并不处理getter和setter以及复制属性
+		*/
+		for(prop in p){
+			if(!(prop in o)) delete o[prop];
+		}
+		return o;
+	}
+	console.info('过滤掉p中存在的属性\n',deleteData);
+
+	var key=function key(o){
+		/*
+			返回一个数组,数组包含的是o中可美剧的自有属性的名字
+		*/
+		if(typeof o!=='object') throw TypeError();
+		var result=[];
+		for(var prop in o){
+			if(o.hasOwnProperty(prop)){//判断是否自有属性
+				result.push(prop)
+			}
+			return result;
+		}
+	}
+	console.info('数组包含的是o中可美剧的自有属性的名字\n',key);
+
+	console.info('------------------------------6.6属性getter和setter------------------------------')
+	var p={
+		x:1.0,
+		y:1.0,
+		get r(){						
+			return this.x*this.x+this.y*this.y;
+		},
+		set r(newValue){			
+			var oldValue=this.x*this.x+this.y*this.y;			
+			var ratio=newValue/oldValue;
+			this.x*=ratio;
+			this.y*=ratio;
+		},
+		get thera(){
+			//atan2是表示x轴到点x，y之间的角度
+			return this.y+this.x;
+		}
+	}
+	console.info('对象p',p);
+	console.info('对象p里面的方法',p.r);
+	console.info('p.x=3',p.x=3,'p.thera',p.thera);
+	var q=inherit(p);	
+	q.x=2,q.y=3;
+	console.log("get:q.r:"+q.r);	
+	console.log("q.thera:"+q.thera);
+	
+	var random={
+		get octet(){return Math.floor(Math.random()*256)},
+		get uint16(){return Math.floor(Math.random()*65536)},
+		get int16(){return Math.floor(Math.random()*65536-32768)}
+	}
+
+	console.info('------------------------------6.7属性的特征------------------------------')
+	console.info('Object.getOwnPropertyDescriptor({x:1},\'x\')//获取某个对象特定属性的属性描述符',Object.getOwnPropertyDescriptor({x:1},'x'))
+	var createAtt={};
+	console.info('创建了:createAtt={}')
+	console.info('Object.defineProperty(createAtt,\'definedAttr\',{value:666,writable:true,enumerable:false,configurable:true})',Object.defineProperty(createAtt,'definedAttr',{value:666,writable:true,enumerable:false,configurable:true}));
+	console.info('Object.keys(createAtt)//查看数组里面存不存在属性,必须不存在因为被禁用了',Object.keys(createAtt));
+	console.info('Object.defineProperty(createAtt,\'definedAttr\',{writable:false})//禁用修改属性',Object.defineProperty(createAtt,'definedAttr',{writable:false}));
+	console.info('createAtt.definedAttr=123123',createAtt.definedAttr=123123,'读取createAtt.definedAttr',createAtt.definedAttr);
+	console.info('存储器的写法')
+	console.info('Object.defineProperty(createAtt,\'definedAttr\',{get:function(){return o;}})',Object.defineProperty(createAtt,'definedAttr',{get:function(){return o;}}),'createAtt.definedAttr=120',createAtt.definedAttr=120,'createAtt.definedAttr',createAtt.definedAttr)
+	console.info('Object.defineProperties同时修改多个属性')
+		var p =Object.defineProperties({},{
+			x:{value:'666',writable:true,enumerable:false,configurable:true},
+			y:{value:'777',writable:true,enumerable:false,configurable:true},
+			r:{
+				get:function(){
+					return 666
+				},enumerable:false,configurable:true
+			}
+		})
+	console.info('对象多属性同时初始化',p)
+	
+	console.info('------------------------------6.8对象的三个属性------------------------------')
+
+	console.info('------------------------------6.8.1原型属性------------------------------')	
+	console.info('Object.getPrototypeOf(p)//查看对象原型,获取原型链',Object.getPrototypeOf(p))
+	console.info('p.constructor.prototype//检测一个对象的原型,通过new表达式创建的对象通常继承一个constructor属性,这个属性指代创建这个对象的构造函数',p.constructor.prototype);
+	console.info('Object.prototype.isPrototypeOf(p)//一个对象是不是另外一个对象的原型',Object.prototype.isPrototypeOf(p));
+
+	console.info('------------------------------6.8.2类属性------------------------------')
+	function classof(o){
+		if(o===null) return 'Null';
+		if(o===undefined) return 'undefined';
+		return Object.prototype.toString.call(o).slice(8,-1);
+	}
+	console.info('classof(p)//和typeof name 类似',classof(p))
+	
+	console.info('------------------------------6.8.3可扩展性------------------------------')
+	console.info('Object.isExtensible(p)//判断对象可不可以拓展',Object.isExtensible(p));
+	console.info('Object.preventExtensions(p)//对象转为不可拓展,一旦将对象转为不可扩展就无法再将其转为可扩展',Object.preventExtensions(p));
+	var expand={a:111,b:222},expand1={a:111,b:222},isfreeze={a:111,b:222};
+	console.info('Object.seal(expand)//对象不可拓展和对象自有属性不可配置(不能添加新属性,它已存在的属性不能删除或配置,已有属性可以设置)\n',Object.seal(expand),'\n Object.isSealed(expand)//检测是否封闭了',Object.isSealed(expand),'\n');
+	console.info('Object.preventExtensions(expand)//对象不可拓展和对象自有属性不可配置(不能添加新属性,它已存在的属性不能删除或配置,已有属性可以设置)\n',Object.preventExtensions(expand));
+	console.info('冻结,除了将对象设置为不可扩展的和将其属性设置为不可配置之外,只有属性设置为只读,如果对象的存取器属性具有setter方法,存取器属性将不受影响,仍可以通过给属性赋值调用它们\n ',Object.freeze(isfreeze),'\n Object.isFrozen()//检测对象是否冻结',Object.isFrozen(isfreeze))
+
+	console.info('------------------------------6.9序列化对象------------------------------')
+	var o={a:1,b:{c:[false,'true']}};
+	var s=JSON.stringify(o);
+	console.log("JSON.stringify(o)//只能序列化对象可枚举的自有属性:",JSON.stringify(o),"\n typeof JSON.stringify(o):",typeof JSON.stringify(o));//对象转字符串
+	console.log("JSON.parse(s):",JSON.parse(s),"\n typeof JSON.parse(s):",typeof JSON.parse(s));//字符串转对象
+
+	console.info('------------------------------6.10对象方法------------------------------')
+
+	console.info('------------------------------6.10.1toString()方法------------------------------')
+	console.info('[1,\'a22\',233,true,false].toString():\n',[1,'a22',233,true,false].toString());
+	
+	console.info('------------------------------6.10.2toLocaleString()方法------------------------------')
+	console.info('[1,\'a22\',233,true,false].toLocaleString():\n',[1,'a22',233,true,false].toLocaleString(),'\n new Date().toLocaleString():',new Date().toLocaleString(),'\n Number(1321232).toLocaleString():',Number(1321232).toLocaleString())
+
+	console.info('------------------------------6.10.3toJSON()方法------------------------------')
+	console.info('new Date(\'August 19, 1975 23:15:30 UTC\').toJSON()\n', new Date('August 19, 1975 23:15:30 UTC').toJSON(),'\n new Date() \n',new Date());
+
+	console.info('------------------------------6.10.4valueOf()方法------------------------------')
+	console.info('new Date().valueOf()//对象转为原始值,对转为数字特别敏感',new Date().valueOf())
+
+	</script>
+</html>

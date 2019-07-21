@@ -11,19 +11,19 @@
 		<dt>4.12表达式计算</dt>
 		<dd>javascript同样可以解析运行由javascript源代码组成的字符串,并产生一个值</dd>
 		<dd>javascript通过全局的eval()完成工作eval 是函数也是运算符</dd>
-		<dd>动态判断源代码中的字符串是一种强大的语言特性,几乎没有必要再实际应用</dd>
+		<dd>动态判断源代码中的字符串是一种强大的语言特性,几乎没有必要实际应用</dd>
 		<dd>eval()是一个函数也是一个运算符</dd>
 		<dd>现代javascript解析器进行了大量的代码分析和优化.eval()问题在于,用于动态执行的代码通常来讲是不能分析,不能进一步优化,它可以赋予为其他名字</dd>
 		
 		<dt>4.12.1 eval()</dt>
-		<dd>eval()只是一个参数，如果传入的参数不是字符串,它直接返回这个参数,如果参数是字符串</dd>
+		<dd>eval()只是一个参数，如果传入的参数不是字符串,它直接返回这个参数,参数是字符串</dd>
 		<dd>工作原理传入字符串,进行编译，如果编译失败抛错误，成功执行这段代码并返回字符串中最后一个表达式或者语句的值，如果最后的表达式没值就返回undefined（注意：它使用了调用它的变量作用域环境，意思：它查找变量的值和定义新变量和函数的操作和局部作用域中的代码一样)，如果字符串抛出一个异常,这个异常将把该调用传递给eval()</dd>
 
 		<dt>4.12.2全局eval()</dt>
 		<dd>eval()具有更改局部变量的能力，这个对javascript优化器来说是一个很大问题,ecmascript3标准规定了任何解析器不允许对eval()赋予别名,如果eval()函数通过别名调用会报错</dd>
-		<dd>当通过别名调用时,eval()会将其字符串当成顶层的全局代码去执行.执行的代码可能会定义新的全局变量和全局函数,或者给全局变量赋值,但却不能使用或修改主调函数中的局部变量,因此不会影响到后汉书内的代码优化</dd>
+		<dd>当通过别名调用时,eval()会将其字符串当成顶层的全局代码去执行.执行的代码可能会定义新的全局变量和全局函数,或者给全局变量赋值,但却不能使用或修改主调函数中的局部变量,因此不会影响到作用域内的代码优化</dd>
 		<dd>ecmascript5是反对使用EvalError的，并且规范eval()的行为.</dd>
-		<dd>直接调用eval()时,它总是在调用它的上下文作用域内执行.其他的间接调用则使用全局对象作为其上下文作用域，并且无法读,写,,定义局部变量和函数</dd>
+		<dd>直接调用eval()时,它总是在调用它的上下文作用域内执行.其他的间接调用则使用全局对象作为其上下文作用域，并且无法读,写,定义局部变量和函数</dd>
 		<dd>ie 是使用execSceript()(会返回空而不会报错)的全局函数来完成全局eval的功能</dd>
 		
 		<dt>4.12.3严格eval()</dt>
@@ -42,8 +42,12 @@
 	var geval=eval;//赋值为其他名字
 	var x=1;
 
-	// var eval=eval('function f(x){return x+1;}');
-	// console.info(f(1));	//这里将eval改写了！ 需要按照规则去玩耍方法
+	var evalFun=eval('function f(x){return x*2;}');
+	console.info('evalFun',evalFun)
+	console.info('eval()',eval())
+	console.info(f(1));	//这里将eval改写了！ 需要按照规则去玩耍方法
+	console.info(f(2));
+
 	console.info('typeof eval()//undifined',typeof eval());
 	
 	
@@ -51,23 +55,27 @@
 	console.log("------------------------------4.12.2全局eval()----------------------------");	
 	//function val(){console.info(111)};//不能随便重写eval()否则容易报错
 	var geval=eval;//使用别名调用rval将是全局的eval
-	var x='global',y='global';
+	var globals='我是全局globals',globals2='我是全局global2';
 
-	function f(){//函数内执行的是局部eval
-		var x= 'local';//定义局部变量
-		eval("x+='-changed';");//直接eval更改了局部变量的值
-		return x;//返回更改后的局部变量
+	function globalsFun(){//函数内执行的是局部eval
+		console.log('---globalsFun函数内的globals:',globals);
+		var globals= 'local';//定义局部变量
+		console.log('---globalsFun函数内的globals:',globals);
+		eval("globals+='-changed';");//直接eval更改了局部变量的值
+		return globals;//返回更改后的局部变量
 	}
-	function g(){//这个函数内执行了全局的eval
-		var y= 'local';//定义局部变量
-		geval("y+='-changed2';");//间接调用改变了全局变量的值
-		return y;//返回未更改的局部变量
+	function globals2Fun(){//这个函数内执行了全局的eval
+		console.log('---globals2Fun函数内的globals2:',globals2);
+		var globals2= 'local222';//定义局部变量
+		console.log('---globals2Fun函数内的globals2:',globals2);
+		geval("globals2+='-changed2';");//间接调用改变了全局变量的值
+		return globals2;//返回未更改的局部变量
 	}
 	// window.print();调起打印模式
-	console.log('f():',f());//localchanged
-	console.log('g():',g());//local
-	console.log('f(),x:',f(),x);//localchanged global
-	console.log('g(),y:',g(),y);//local globalchangedchanged	
+	console.log('globalsFun():',globalsFun());//localchanged
+	console.log('globals2Fun():',globals2Fun());//local
+	console.log('globalsFun(),x:',globalsFun(),globals);//localchanged global
+	console.log('globals2Fun(),y:',globals2Fun(),globals2,'//调用了两次globals2Fun()因此changed2进行叠加了');//local globalchangedchanged	
 
 	
 	
