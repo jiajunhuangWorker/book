@@ -22,7 +22,7 @@
 
 			<dt>3.2.3字符串使用</dt>
 			<dd>连接符号 +</dd>
-			<dd>javascript中字符四固定不变的,类似replace,toUpperCase()的方法都返回一个新的字符串,原字符串没发生改变</dd>
+			<dd>javascript中字符固定不变的,类似replace,toUpperCase()的方法都返回一个新的字符串,原字符串没发生改变</dd>
 			<dd>字符串可以当做读书组因此可以有chartAt方法</dd>
 			<dd>replace()和toUpperCase()方法都是返回新的字符串,原来字符串不发生任何改变</dd>
 
@@ -47,17 +47,17 @@
 		console.info('------------------------------3.2.3字符串的使用------------------------------')
 		console.info('str =\"hellow,world\"');
 		var str='hellow,world';
-		console.info('str.charAt(0)',str.charAt(0));
-		console.info('str.charAt(str.length-1)',str.charAt(str.length-1));
-		console.info('str.substring(1,4)',str.substring(1,4));
-		console.info('str.slice(-3)',str.slice(-3));
-		console.info('str.slice(1,4)',str.slice(1,4));
-		console.info('str.indexOf(\"ow\")',str.indexOf('ow'));
-		console.info('str.indexOf(\"l\",3)',str.indexOf('l',3));
-		console.info('str.lastIndexOf(\"ow\")',str.lastIndexOf('ow'));
-		console.info('str.split(\",\")',str.split(','));
-		console.info('str.replace(\"h\",\"H\")',str.replace('h','H'));
-		console.info('str.toUpperCase()',str.toUpperCase());
+		console.info('str.charAt(0)',str.charAt(0),'读取init字符串',str);
+		console.info('str.charAt(str.length-1)',str.charAt(str.length-1),'读取init字符串',str);
+		console.info('str.substring(0,4)',str.substring(0,4),'读取init字符串',str);
+		console.info('str.slice(-3)',str.slice(-3),'读取init字符串',str);
+		console.info('str.slice(0,4)',str.slice(0,4),'读取init字符串',str);
+		console.info('str.indexOf(\"ow\")',str.indexOf('ow'),'读取init字符串',str);
+		console.info('str.indexOf(\"l\",3)',str.indexOf('l',3),'读取init字符串',str);
+		console.info('str.lastIndexOf(\"ow\")',str.lastIndexOf('ow'),'读取init字符串',str);
+		console.info('str.split(\",\")',str.split(','),'读取init字符串',str);
+		console.info('str.replace(\"h\",\"H\")',str.replace('h','H'),'读取init字符串',str);
+		console.info('str.toUpperCase()',str.toUpperCase(),'读取init字符串',str);
 
 		console.info('------------------------------3.2.4模式匹配------------------------------')
 		console.info('text = testing:1,2,3');
@@ -65,7 +65,7 @@
 		console.info('pattern = \/\/d+\/g');
 		var pattern = /\d+/g;
 		console.info('pattern.test(text)',pattern.test(text));
-		console.info('text.search(pattern)',text.search(pattern));
+		console.info('text.search(pattern)',text.search(pattern),'从下标0开始找起');
 		console.info('text.match(pattern)',text.match(pattern));
 		console.info('text.replace(pattern,"#")',text.replace(pattern,"#"));
 		console.info('text.split(/\D+/)',text.split(/\D+/));

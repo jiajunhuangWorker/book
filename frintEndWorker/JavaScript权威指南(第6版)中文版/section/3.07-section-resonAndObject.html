@@ -26,12 +26,16 @@
 		var str='lucas!hellow!'
 			str.toUpperCase();
 			console.info('str使用了toUpperCase方法！但是str 没变成大写证明原始数据类型没发生改变',str);
+
 			console.info('--对象--');
 			var val={x:1};
 			val.x=2,val.y=3;
 			var vals=[1,2,3];
 			vals[0]=0;
 			vals[3]=4;
+			console.info(JSON.stringify(vals))
+			console.info('vals[0]',vals[0]);
+			console.info('vals[3]',vals[3])
 			console.info('--索引值--');
 			var array=[],array1=[];
 			console.info('array=[],array1=[]')
@@ -45,6 +49,7 @@
 			console.info('a[0]',a[0]);
 			console.info('a===b:',a===b);
 			console.info(new Array())
+
 			console.info('--copy Array--');
 			var arrs=[2,43,1,2,44,55,66],arr01=[];
 			for( i in arrs){
@@ -56,6 +61,7 @@
 			console.info('"0"==0',"0"==0)
 			console.info('false==0',"0"==false)
 			console.info('false==0',0==false)
+			
 			console.info('--比较两个对象或数组--');
 			function equalArray(a,b){
 				if(a.length != b.length) return false;

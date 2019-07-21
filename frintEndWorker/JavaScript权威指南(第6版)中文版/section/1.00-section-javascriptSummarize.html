@@ -8,16 +8,17 @@
 <body>
 	<dl>
 		<dt>1.javascript是什么?</dt>
-		<dd>JavaScript是面向web的编程语言</dd>
+		<dd>javascript是面向web的编程语言</dd>
 		<dd>javscript适合面向对象和函数式的编程风格</dd>
-		<dd>JavaScript是高端，动态，弱类型的编程语言</dd>
+		<dd>javascript是高端，动态，弱类型的编程语言</dd>
 		
-		<dt>2.JavaScript语言核心？</dt>
+		<dt>2.javascript语言核心？</dt>
 		<dd>string,array,date,error,RegExp</dd>	
 		
 		<dt>3.宿主环境</dt>
-		<dd>宿主环境：web浏览器(浏览器包含javascript解析器)</dd>
-		<dd>宿主对象:所有非本地对象都是宿主对象（host object），即由 ECMAScript 实现的宿主环境提供的对象
+		<dd>宿主环境：web浏览器( 浏览器包含javascript解析器,JavaScript运行环境一般都由宿主环境和执行期环境共同构成。其中宿主环境是由外壳程序生成的，如Web浏览器就是一个外壳程序，它提供了 一个可控制浏览器窗口的宿主环境,宿主环境一般会创建一套公共对象系统，这套对象系统对所有脚本语言开放，并允许它们自由访问 )</dd>
+		<dd>宿主对象:所有非本地对象都是宿主对象（host object），即由 ecmascript 实现的宿主环境提供的对象( ECMAScript中的“宿主”当然就是我们网页的运行环境，即“操作系统”和“浏览器”。所有非本地对象都是宿主对象（host object），即由 ECMAScript 实现的宿主环境提供的对象	
+	所有的BOM和DOM对象都是宿主对象。因为其对于不同的“宿主”环境所展示的内容不同。其实说白了就是，ECMAScript官方未定义的对象都属于宿主对象，因为其未定义的对象大多数是自己通过ECMAScript程序创建的对象 )
 		</dd>
 
 		<dt>4.数据类型</dt>
@@ -27,9 +28,9 @@
 		<dd>javascript数据类型分为原始数据类型和对象类型</dd>
 		<dd>原始数据类型:String,Number,boolean,Undefined,Null</dd>
 		<dd>对象类型:内置对象,宿主对象,本地对象</dd>
-		<dd>本地对象<new String(),new Number(),new Object()></dd>
+		<dd>本地对象 new String(),new Number(),new Object()(ECMA-262 把本地对象（native object）定义为“独立于宿主环境的 ECMAScript 实现提供的对象”)</dd>
 		<dd>内置对象<开发者不必明确实例化内置对象，它已被实例化了,Window,Document,Math等></dd>
-		<dd>宿主对象<所有非本地对象都是宿主对象（host object），即由 ECMAScript 实现的宿主环境提供的对象></dd>
+		<dd>宿主对象<所有非本地对象都是宿主对象（host object），即由 ecmascript 实现的宿主环境提供的对象></dd>
 		<dd>对象补充说明:对象是键值对
 		<br/>javascript对象是命名值的无序集合，javascript同样定义了一种特殊的对象-数组有序集合，另外一种特殊对象是函数,而使用new是创建对象</dd>
 		
@@ -38,7 +39,7 @@
 		<dd>表达式：仅仅计算出一个值但并不作任何操作它并不改变程序运行状态</dd>
 		
 		<dt>6.函数和方法</dt>
-		<dd>函数：带有名称的和参数的JavaScript代码段 </dd>
+		<dd>函数：带有名称的和参数的javascript代码段 </dd>
 		<dd>方法：当函数和对象一起使用叫做方法（所有javascript对象都包含方法）</dd>
 		
 		<dt>7.this</dt>

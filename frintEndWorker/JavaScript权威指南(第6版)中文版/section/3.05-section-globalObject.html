@@ -8,10 +8,11 @@
 	<body>
 		<dl>
 			<dt>3.5全局对象</dt>
-			<dd>全局对象的属性时全局定义的符号,javascript可以直接使用</dd>
+			<dd>全局对象的属性时全局定义的符号,javascript可以直接使用( 解析说在一个全局对象就是存在全局范围内的对象,全局范围的意思是不存放在函数，汉法内的,例如window object 就是global 对象 )</dd>
 			<dd>当javascript解析器启动时它就会创建一个新的全局对象并初始化全局属性,全局函数,构造函数,全局对象</dd>
 			<dd>全局属性:undefined,Infinity和NAN</dd>
-			<dd>全局函数:isNaN(),parseInt(),eval(),in,等</dd>
+			<dd>全局函数:isNaN(),parseInt(),eval(),in,isFinite(),parseFloat(),
+,typeof,window,document,geval(),等</dd>
 			<dd>构造函数：Data(),RegExp(),String(),Object(),Array(),Number()</dd>
 			<dd>全局对象:Math,JSON</dd>
 			<dd>全局对象的初始属性并不是保留字,但是它们应该当做保留字对待</dd>
@@ -20,11 +21,14 @@
 			<dd>通过代码声明了全局变量,这个全局变量就是全局对象的一个属性</dd>
 		</dl>	
 	</body>
-	<script type="text/javascript">	
+	<script type="text/javascript">
 		var	str='try 存不存在window';
 		console.info('------------------------------全局对象(3.5全局对象)------------------------------')
 		console.info('this',this)
 		console.info('window',window)
+		console.info('typeof window',typeof window);
+		console.info('typeof this',typeof this);
+		console.info('this === window',this === window)
 		console.info('window==this//证明this引用了全局对象',window==this);
 		console.info('window.str:',window.str)
 	</script>	
