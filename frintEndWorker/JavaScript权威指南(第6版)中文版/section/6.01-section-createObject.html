@@ -24,12 +24,17 @@
 			<dd>每一个javascript对象都和另一个对象相关联,每一个对象都从原型继承属性</dd>
 			<dd>所有通过对象直接量创建的对象都具有同一个圆形对象，并通过javascript代码Object.prototype获取对原型对象的引用</dd>
 			<dd>Date对象的属性同时继承自Date.prototype和Object.prototype，这一系列链接的原型对象就是所谓的原型链</dd>
+			<dd>原型对象(prototype)</dd>
+			<dd>1.原型对象也有一个自己的原型对象(__proto__) ，层层向上直到一个对象的原型对象为 null, 没有原型，并作为这个原型链中的最后一个环节</dd>
+			<dd>2.原型继承通常被认为是JavaScript的弱点之一，但是原型继承模型本身实际上比经典模型更强大</dd>
+
+
 
 			<dt>6.1.4Object.create()</dt>
 			<dd>Object.create()是一个静态函数,而不是提供给某个对象调用的方法</dd>
 			<dd>inherit()函数的其中一个用途就是防止库函数无意间修改哪些不受你控制的对象</dd>
-
-
+			<dd>当函数读取继承对象的属性时,实际上读取的是继承来的值</dd>
+			<dd>如果给继承对象的属性赋值,则这些属性只会影响这个继承对象自身,而不是原始对象</dd>
 
 		</dl>
 	</body>
@@ -94,6 +99,5 @@
 	}
 	var object={x:111,y:22};
 	console.info('inherit(object)',inherit(object))
-
 	</script>
 </html>
