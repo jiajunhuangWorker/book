@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>第六章对象</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+
+
+			<dt>6.2属性的查询和设置</dt>
+			<dd>当使用方括号时,我们说方括号内的表达必须返回字符串</dd>
+
+			<dt>6.2.1作为关联数组的对象</dt>
+			<dd>object.property和object['property']</dd>
+			<dd>object['property']这个数组元素是通过字符串索引,这种数组也叫做关联数组别称散列，映射或字典,javascript对象都是关联数组的</dd>
+			<dd>javascript中式弱类型语言因此对象中程序可以创建任意数量属性</dd>
+			<dd>数组写法和用字符串表达来访问对象属性的灵活性</dd>
+
+			<dt>6.2.2继承</dt>
+			<dd>javascript对象具有'自由属性',也有一些属性是从原型对象继承而来</dd>
+			<dd>如果是同属性名的情况下老的属性名下的值会被同名新的属性值覆盖,说明属性赋值是先检查原型链是否允许赋值，如果允许属性赋值操作，它总是在原始对象上创建属性或对已有的属性赋值而不会修改原型链，只有在查询属性的时候才会到继承的存在</dd>
+
+			<dt>6.2.3属性访问错误</dt>
+			<dd>属性访问并不总是返回或设置一个值</dd>
+			<dd>查询一个不存在的属性并不会报错，当原型链中也没查到属性的情况下返回undifined</dd>
+			<dd>如果对象不存在那么试图试图查询这个不存在对象的属性会报错</dd>
+			<dd>给null和undifined设置属性也会报错</dd>
+			<dd>Object.prototype=o//赋值失败,但不报错要在user static严格模式下才报错</dd>
+			<dd>对象里面的属性只读，不能对只读属性赋值</dd>
+			<dd>对象中的属性时继承的并且它是只读模式</dd>
+
+
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+
+
+	console.info('------------------------------6.2属性的查询和设置------------------------------')
+
+	console.info('------------------------------6.2.1作为关联数组的对象------------------------------')
+	var addr='',customer={};
+	for(var i=0;i<4;i++){
+		addr+=customer['address'+i]+'\n';
+	}
+	console.info('addr:',addr,'customer',customer);
+
+	function getValue(portfolio){
+		var total=0.0;
+		for(stock in portfolio){
+			var shares=portfolio[stock];
+			var price=getquote(shares);
+			total+=shares*price;
+		}
+		return total;
+	}
+	console.info('------------------------------6.2.2继承------------------------------')
+	var o={};
+		o.x=1;
+	var p=inherit(o);
+		p.y=2;
+	var q=inherit(p);
+		q.z=3;
+	var s=q.toString();
+	console.info('q.x+q.y:',q.x+q.y);
+	// demo2
+	var unitcircle={r:1};
+	var demo2=inherit(unitcircle);
+		demo2.x=1;demo2.y=2;
+		demo2.r=666;
+		console.info('demo2:',demo2,'unitcircle://原型链没发生改变',unitcircle);
+
+	console.info('------------------------------6.2.3属性访问错误------------------------------')
+	var len=undefined;
+	var book=null;
+		if(book){
+			if(book.subtitle) len=book.subtitle.length;
+		}
+
+
+		// 第二种防止报错
+		var lens=book && book.subtitle && book.subtitle.length;
+
+
+	</script>
+</html>

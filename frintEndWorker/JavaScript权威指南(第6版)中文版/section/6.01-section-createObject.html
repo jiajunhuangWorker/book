@@ -7,35 +7,34 @@
 	</head>
 	<body>
 		<dl>
-			
-								
-			<dt>6.1创建对象</dt>			
-			<dd>可以通过对象直接量,关键字new 和Object.create()函数来创建对象.</dd>	
-			
-			<dt>6.1.1对象直接量</dt>			
-			<dd>对象直接量最后一个属性可以忽略逗号,但是IE会报错</dd>
-			<dd>计算对象直接量的时候都会计算每个属性值</dd>	
-			
+			<dt>6.1创建对象</dt>
+			<dd>可以通过对象直接量,关键字new 和Object.create()函数来创建对象.</dd>
+
+			<dt>6.1.1对象直接量</dt>
+			<dd>创建对象最简单的方式就是在javascript代码中使用对象直接量</dd>
+			<dd>在ecmascript3中对象直接量最后一个属性后的逗号可以忽略,但是IE会报错</dd>
+			<dd>对象直接量是一个表达式,这个表达式的每次运算都创建并初始化一个新的对象.每次计算对象直接量的时候,也都会计算它的每个属性的值</dd>
+
 			<dt>6.1.2通过new创建对象</dt>
-			<dd>关键字后跟随一个函数调用,这里称为构造函数</dd>
-			<dd>javascript语言核心中的原始类型都包含内置构造函数</dd>	
-			
+			<dd>new运算符创建并初始化一个新的对象,关键字new后跟随一个函数调用</dd>
+			<dd>关键字后跟随一个函数调用,这里称为构造函数,构造函数用以初始化一个新创建的对象</dd>
+			<dd>javascript语言核心中的原始类型都包含内置构造函数</dd>
+
 			<dt>6.1.3原型</dt>
-			<dd>每一个对象都从原型继承属性</dd>
-			<dd>Object.prototype获取对原型的引用</dd>
-			<dd>Date对象的属性同时继承自Date.prototype和Object.prototype，这一系列链接的原型对象就叫原型链</dd>
+			<dd>每一个javascript对象都和另一个对象相关联,每一个对象都从原型继承属性</dd>
+			<dd>所有通过对象直接量创建的对象都具有同一个圆形对象，并通过javascript代码Object.prototype获取对原型对象的引用</dd>
+			<dd>Date对象的属性同时继承自Date.prototype和Object.prototype，这一系列链接的原型对象就是所谓的原型链</dd>
 
 			<dt>6.1.4Object.create()</dt>
-			<dd>Object.create()是一个静态函数</dd>
-			
-			
-			
-		</dl>		
+			<dd>Object.create()是一个静态函数,而不是提供给某个对象调用的方法</dd>
+			<dd>inherit()函数的其中一个用途就是防止库函数无意间修改哪些不受你控制的对象</dd>
+
+
+
+		</dl>
 	</body>
 	<script type="text/javascript">
 	'user static';
-	
-	
 	console.info('------------------------------6.1创建对象------------------------------')
 	console.info('Object',Object);
 	console.info('new Object()',new Object());
@@ -44,7 +43,10 @@
 	console.info('{}',{});
 
 	console.info('------------------------------6.1.1对象直接量------------------------------')
-	var object={
+	var empty={};
+	var point={x:0,y:0};
+	var point2={x:point.x,y:point.y};
+	var bookInfo={
 		title:'javascript图书馆'
 		,content:'javascript内容'
 		,author:{
@@ -56,12 +58,13 @@
 			,String:'好像可以'
 		}
 	};
-	console.info('object',object);
-
+	console.info('bookInfo:',JSON.stringify(bookInfo));
+	console.info('point2.x === point.x',point2.x === point.x);
 	console.info('------------------------------6.1.2通过new创建对象------------------------------')
 	var date=new Date();
 	var str=new String();
 	var rex=new RegExp();
+	console.info('内置构造函数:new RegExp(),new String(),new Date()');
 
 	console.info('------------------------------6.1.3原型------------------------------')
 	console.info('Object原型:Object.prototype',Object.prototype)
