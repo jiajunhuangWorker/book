@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>6.5枚举属性</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>6.5枚举属性</dt>
+			<dd>除了检测独享的属性是否存在,我们还会经常遍历对象的属性,遍历对象:for/in可以遍历对象中的所有课枚举的属性(自有属性和继承属性)</dd>
+			<dd>for/in循环可以在循环中遍历对象中所有的可枚举的属性(包括自有属性和继承属性(除非将它们装换为不可枚举的)</dd>
+			<dd>有许多实用工具库给Object.prototype添加新的方法或属性,这些方法和属性可以被所有对象继承并使用.然而在ecmascript5之前这些新增的方法是不能定义为不可枚举的.因此他阿门枚举的时候需要进行过滤</dd>
+			<dd>Object.keys()//枚举属性名称返回array,这个数组由对象中可枚举的自有属性的名称组成,它的工作原理和keys类似</dd>
+			<dd>Object.getOwnpropertyNames()//返回对象自有属性的名称</dd>			
+		</dl>		
+	</body>
+	<script type="text/javascript">
+	'user static';
+	
+	console.info('------------------------------6.5枚举属性------------------------------')
+	var for_inObj={x:1,y:2,c:3};
+	
+	console.info('for_inObj.propertyIsEnumerable("toString")',for_inObj.propertyIsEnumerable("toString"));//返回false 不能枚举
+	for(p in for_inObj){
+		console.info('p',p)
+	}
+
+	//过滤器
+	var filtration=function (){
+		for(p in for_inObj){
+			if(!for_inObj.hasOwnProperty(p)) continue;//跳过继承的属性
+		}
+		for(p in for_inObj){
+			if(typeof for_inObj[p] === 'function') continue;//跳过方法
+		}
+	}
+	console.info('过滤属性和方法',filtration);
+
+	var extend=function extend(o,p){
+		/*
+			工具函数来操控对象的属性extend()函数
+			把P中的可美剧属性赋值到o中并返回o
+			如果o和p中含有同名属性则覆盖o中的属性
+			这个函数并不处理getter和setter以及复制属性
+		*/
+		//弥补了IE中一些bug
+		for(prop in p){
+			o[prop]=p[prop];
+		}
+		return o;
+	}
+	console.info('将p中的所有属性都整合到o中\n',extend);
+	var extend2=function extend(o,p){
+		/*
+			工具函数来操控对象的属性extend()函数
+			把P中的可美剧属性赋值到o中并返回o
+			如果o和p中含有同名属性则覆盖o中的属性
+			这个函数并不处理getter和setter以及复制属性
+		*/
+		//弥补了IE中一些bug
+		for(prop in p){
+			if(o.hasOwnProperty[prop]) continue; 
+			o[prop]=p[prop];
+		}
+		return o;
+	}
+	console.info('过滤掉已经存在o中存在的属性\n',extend2);
+
+	var deleteData=function restrict(o,p){
+		/*
+			工具函数来操控对象的属性extend()函数
+			把P中的可美剧属性赋值到o中并返回o
+			如果o和p中含有同名属性则覆盖o中的属性
+			这个函数并不处理getter和setter以及复制属性
+		*/
+		for(prop in p){
+			if(!(prop in o)) delete o[prop];
+		}
+		return o;
+	}
+	console.info('过滤掉p中存在的属性\n',deleteData);
+
+	var key=function key(o){
+		/*
+			返回一个数组,数组包含的是o中可美剧的自有属性的名字
+		*/
+		if(typeof o!=='object') throw TypeError();
+		var result=[];
+		for(var prop in o){
+			if(o.hasOwnProperty(prop)){//判断是否自有属性
+				result.push(prop)
+			}
+			return result;
+		}
+	}
+	console.info('数组包含的是o中可枚举的自有属性的名字\n',key);
+	</script>
+</html>

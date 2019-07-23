@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>6.4 检测属性</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>6.4检测属性</dt>
+			<dd>javascript对象可以看做是属性的集合,我们经常会检测集合中成员的所属关系0判断某个属性是否存在与某个对象中</dd>
+			<dd>in,hasOwnPrepert和propertyIsEnumerable</dd>
+			<dd>in:属性是否存在对象中(使用:左侧是属性名(字符串)右侧是对象,如果对象的自有属性或者继承属性中包含这个属性则返回true)</dd>
+			<dd>hasOwnProperty:(用来检测给定的名字是否对象的自有属性,对于继承属性它将返回falase)</dd>
+			<dd>propertyIsEnumerable是hasOwnPrepert的增强版,只有检测到自有属性且这个属性的可枚举性才为true时才返回true,某些内置属性是不可以枚举的(javascript代码创建的属性时可枚举的,除非ecmascript5中使用一些特殊的方法来改变属性的可枚举性)</dd>
+			
+			<dd>in可以区分不存在的属性和存在但值为undefined的属性</dd>
+			<dd>!==可以区分undefined和null</dd>
+
+		</dl>		
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------6.4检测属性------------------------------')
+	function inherit(obj){
+		if(obj==null)throw TypeError();
+		if(Object.create){
+			return Object.create(obj);
+			var t=typeof obj;
+			if(t!=='object'&& t!=='function'){
+				function f(){
+					f.prototype=obj;
+					return new f();
+				}
+			}
+		}
+	}
+	var val={x:1,y:2};
+	console.log("{x:1,y:2}");
+	console.log("x in val","x" in val);
+	console.log("z in val","z" in val);
+	console.log("toString in val","toString" in val);
+
+	console.log("val.hasOwnPreperty('x'):"+val.hasOwnProperty('x'));
+	console.log("val.hasOwnPreperty('z'):"+val.hasOwnProperty('z'));
+	console.log('val.hasOwnProperty("toString"):'+val.hasOwnProperty('toString'));//证明了不能检测父级原型
+	var o=inherit({y:2})
+	o.x=1;
+	console.log("o.propertyIsEnumerable('x'):"+o.propertyIsEnumerable('x'),'o是自有属性');
+	console.log("o.propertyIsEnumerable('y'):"+o.propertyIsEnumerable('y'),'y是继承属性');
+	console.log("Object.prototype.propertyIsEnumerable('toString'):"+Object.prototype.propertyIsEnumerable('toString'),'不可枚举');
+	
+	var z={x:undefined};
+	console.info('z.x!== undefined',z.x!== undefined);
+	console.info('z.y!== undefined',z.y!== undefined);
+	console.info('x in o','x' in z);
+	console.info('y in o','y' in z);
+	console.info('delete z.x',delete z.x);
+	console.info('x in o','x' in z);
+
+	console.log('val.x!==undefined',val.x!==undefined);
+	console.info('\'x\' in val','x' in val);
+
+
+	</script>
+</html>
