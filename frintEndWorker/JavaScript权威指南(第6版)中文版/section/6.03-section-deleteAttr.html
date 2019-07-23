@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>第六章对象</title>
+		<title>6.3删除属性</title>
 		<link rel="stylesheet" href="../../../globalBase.css">
 	</head>
 	<body>
@@ -23,7 +23,7 @@
 			<dd>对象特征(对象原型，对象类，对象的扩展标记)</dd>
 			<dd>对象的原型(prototype):指向另外一个对象,本对象的属性继承自它的原型对象</dd>
 			<dd>对象的类(class):是一个标识对象类型的字符串</dd>
-			<dd>对象的扩展标记:是否可以向该对象添加新属性</dd>			
+			<dd>对象的扩展标记:是否可以向该对象添加新属性</dd>
 			<dd>三类javascript对象和两类属性</dd>
 			<dd>内置对象:</dd>
 			<dd>是由ECMAScript规范定义的对象或类.example:数组,函数,日期和正则表达式都是内置对象</dd>
@@ -35,18 +35,18 @@
 			<dd>直接在对象中定义的属性</dd>
 			<dd>继承属性<dd>
 			<dd>对象的原型对象中定义的属性</dd>
-								
-			<dt>6.1创建对象</dt>			
-			<dd>可以通过对象直接量,关键字new 和Object.create()函数来创建对象.</dd>	
-			
-			<dt>6.1.1对象直接量</dt>			
+
+			<dt>6.1创建对象</dt>
+			<dd>可以通过对象直接量,关键字new 和Object.create()函数来创建对象.</dd>
+
+			<dt>6.1.1对象直接量</dt>
 			<dd>对象直接量最后一个属性可以忽略逗号,但是IE会报错</dd>
-			<dd>计算对象直接量的时候都会计算每个属性值</dd>	
-			
+			<dd>计算对象直接量的时候都会计算每个属性值</dd>
+
 			<dt>6.1.2通过new创建对象</dt>
 			<dd>关键字后跟随一个函数调用,这里称为构造函数</dd>
-			<dd>javascript语言核心中的原始类型都包含内置构造函数</dd>	
-			
+			<dd>javascript语言核心中的原始类型都包含内置构造函数</dd>
+
 			<dt>6.1.3原型</dt>
 			<dd>每一个对象都从原型继承属性</dd>
 			<dd>Object.prototype获取对原型的引用</dd>
@@ -54,29 +54,29 @@
 
 			<dt>6.1.4Object.create()</dt>
 			<dd>Object.create()是一个静态函数</dd>
-			
+
 			<dt>6.2属性的查询和设置</dt>
 			<dd>当使用方括号时,我们说方括号内的表达必须返回字符串</dd>
-			
+
 			<dt>6.2.1作为关联数组的对象</dt>
 			<dd>object.property和object['property']</dd>
 			<dd>object['property']这个数组元素是通过字符串索引,这种数组也叫做关联数组别称散列，映射或字典,javascript对象都是关联数组的</dd>
-			<dd>javascript中式弱类型语言因此对象中程序可以创建任意数量属性</dd>	
+			<dd>javascript中式弱类型语言因此对象中程序可以创建任意数量属性</dd>
 			<dd>数组写法和用字符串表达来访问对象属性的灵活性</dd>
-			
+
 			<dt>6.2.2继承</dt>
 			<dd>javascript对象具有'自由属性',也有一些属性是从原型对象继承而来</dd>
 			<dd>如果是同属性名的情况下老的属性名下的值会被同名新的属性值覆盖,说明属性赋值是先检查原型链是否允许赋值，如果允许属性赋值操作，它总是在原始对象上创建属性或对已有的属性赋值而不会修改原型链，只有在查询属性的时候才会到继承的存在</dd>
-			
+
 			<dt>6.2.3属性访问错误</dt>
 			<dd>属性访问并不总是返回或设置一个值</dd>
 			<dd>查询一个不存在的属性并不会报错，当原型链中也没查到属性的情况下返回undifined</dd>
 			<dd>如果对象不存在那么试图试图查询这个不存在对象的属性会报错</dd>
 			<dd>给null和undifined设置属性也会报错</dd>
-			<dd>Object.prototype=o//赋值失败,但不报错要在user static严格模式下才报错</dd>	
+			<dd>Object.prototype=o//赋值失败,但不报错要在user static严格模式下才报错</dd>
 			<dd>对象里面的属性只读，不能对只读属性赋值</dd>
 			<dd>对象中的属性时继承的并且它是只读模式</dd>
-			
+
 			<dt>6.3删除属性</dt>
 			<dd>delete运算符，可以删除属性</dd>
 			<dd>delete是断开属性和宿主对象的联系</dd>
@@ -134,7 +134,7 @@
 			<dt>6.8.1原型属性</dt>
 			<dd>对象的原型属性是用来继承属性的</dd>
 			<dd>原型属性是在实例对象创建之初就设置好的</dd>
-			
+
 
 			<dt>6.8.2类属性</dt>
 			<dd>对象的类属性表示一个字符串,用以表示对象的类型信息.</dd>
@@ -145,9 +145,9 @@
 			<dd>宿主对象的可扩展是由javascript引擎定义的</dd>
 			<dd>可扩展属性的目的是将对象'锁定',以避免外界的干扰</dd>
 			<dd>对象的可扩展性通常和属性配合使用</dd>
-			
+
 			<dt>6.9序列化对象</dt>
-			<dd>对象序列化是指将对象的状态转换为字符串,也可将字符串还原为对象</dd>			
+			<dd>对象序列化是指将对象的状态转换为字符串,也可将字符串还原为对象</dd>
 			<dd>JSON的语法是javascript语法的子集,它并不能表示javascript里的所有值</dd>
 			<dd>NaN,Infinity,-Infinity序列化的结果是null</dd>
 			<dd>对象,数组,字符串,无穷大数字,true,false和null可以序列化还原javascript对象</dd>
@@ -155,25 +155,25 @@
 			<dd>函数,RegExp,Error,undifined不能序列化和还原f</dd>
 
 			<dt>6.10对象方法</dt>
-			
+
 			<dt>6.10.1toString()</dt>
 			<dd>toString()方法没有参数,它将返回一个表示调用这个方法的对象值得字符串</dd>
-			
+
 			<dt>6.10.2toLoacaleString()</dt>
 			<dd>该方法返回一个表示这个对象的本地化字符串</dd>
-			
+
 			<dt>6.10.3toJSON()</dt>
 			<dd>待序列化的对象中存在的方法</dd>
 
 			<dt>6.10.4valueOf()</dt>
 			<dd>对象转为原始值,对转为数字特别敏感</dd>
-			
-		</dl>		
+
+		</dl>
 	</body>
 	<script type="text/javascript">
 	'user static';
 	console.info('------------------------------6对象------------------------------')
-	
+
 	console.info('------------------------------6.1创建对象------------------------------')
 	console.info('Object',Object);
 	console.info('new Object()',new Object());
@@ -343,7 +343,7 @@
 		*/
 		//弥补了IE中一些bug
 		for(prop in p){
-			if(o.hasOwnProperty[prop]) continue; 
+			if(o.hasOwnProperty[prop]) continue;
 			o[prop]=p[prop];
 		}
 		return o;
@@ -383,11 +383,11 @@
 	var p={
 		x:1.0,
 		y:1.0,
-		get r(){						
+		get r(){
 			return this.x*this.x+this.y*this.y;
 		},
-		set r(newValue){			
-			var oldValue=this.x*this.x+this.y*this.y;			
+		set r(newValue){
+			var oldValue=this.x*this.x+this.y*this.y;
 			var ratio=newValue/oldValue;
 			this.x*=ratio;
 			this.y*=ratio;
@@ -400,11 +400,11 @@
 	console.info('对象p',p);
 	console.info('对象p里面的方法',p.r);
 	console.info('p.x=3',p.x=3,'p.thera',p.thera);
-	var q=inherit(p);	
+	var q=inherit(p);
 	q.x=2,q.y=3;
-	console.log("get:q.r:"+q.r);	
+	console.log("get:q.r:"+q.r);
 	console.log("q.thera:"+q.thera);
-	
+
 	var random={
 		get octet(){return Math.floor(Math.random()*256)},
 		get uint16(){return Math.floor(Math.random()*65536)},
@@ -432,10 +432,10 @@
 			}
 		})
 	console.info('对象多属性同时初始化',p)
-	
+
 	console.info('------------------------------6.8对象的三个属性------------------------------')
 
-	console.info('------------------------------6.8.1原型属性------------------------------')	
+	console.info('------------------------------6.8.1原型属性------------------------------')
 	console.info('Object.getPrototypeOf(p)//查看对象原型,获取原型链',Object.getPrototypeOf(p))
 	console.info('p.constructor.prototype//检测一个对象的原型,通过new表达式创建的对象通常继承一个constructor属性,这个属性指代创建这个对象的构造函数',p.constructor.prototype);
 	console.info('Object.prototype.isPrototypeOf(p)//一个对象是不是另外一个对象的原型',Object.prototype.isPrototypeOf(p));
@@ -447,7 +447,7 @@
 		return Object.prototype.toString.call(o).slice(8,-1);
 	}
 	console.info('classof(p)//和typeof name 类似',classof(p))
-	
+
 	console.info('------------------------------6.8.3可扩展性------------------------------')
 	console.info('Object.isExtensible(p)//判断对象可不可以拓展',Object.isExtensible(p));
 	console.info('Object.preventExtensions(p)//对象转为不可拓展,一旦将对象转为不可扩展就无法再将其转为可扩展',Object.preventExtensions(p));
@@ -466,7 +466,7 @@
 
 	console.info('------------------------------6.10.1toString()方法------------------------------')
 	console.info('[1,\'a22\',233,true,false].toString():\n',[1,'a22',233,true,false].toString());
-	
+
 	console.info('------------------------------6.10.2toLocaleString()方法------------------------------')
 	console.info('[1,\'a22\',233,true,false].toLocaleString():\n',[1,'a22',233,true,false].toLocaleString(),'\n new Date().toLocaleString():',new Date().toLocaleString(),'\n Number(1321232).toLocaleString():',Number(1321232).toLocaleString())
 
