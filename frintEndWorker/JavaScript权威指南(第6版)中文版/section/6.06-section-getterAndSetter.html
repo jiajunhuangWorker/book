@@ -9,41 +9,71 @@
 		<dl>
 			<dt>6.6属性getter和setter</dt>
 			<dd>对象属性是由名字,值和一组特性构成的</dd>
-			<dd>属性可以用getter和setter来定义,getter和setter定义的属性称为存取器属性</dd>
-			<dd>当程序查询存取器属性的值时,调用getter方法,这个方法返回值就是属性存取表达的值</dd>
+			<dd>属性值可以用一个或者两个方法替代的,getter和setter定义的属性称为存取器属性(accessor properrty),数据属性只是一个简单的值</dd>
+			<dd>当程序查询存取器属性的值时javascript調用getter方法(无参数)</dd>
 			<dd>当程序设置一个存取器属性的值时js调用setter方法</dd>
-			<dd>存储器属性不具有可写性,读取只写属性总是返回undifined</dd>
-			<dd>存取器属性是可以继承的</dd>
-		</dl>		
+			<dd>对象属性和数据属性不同,存取器属性不具有可写性(writable attribute)</dd>
+			<dd>如果属性同时具有getter和setter方法,那么它是一个读/写属性.如果它只有getter方法,那么它是一个只读属性.如果它只有setter方法,那么它是一个只写属性(数据属性中有一些例外),读取只写属性总是返回undefined</dd>
+			<dd>对象属性和属性属性一样,存取器属性是可以继承的</dd>
+		</dl>
 	</body>
 	<script type="text/javascript">
 	'user static';
+	function inherit(obj){
+		if(obj==null)throw TypeError();
+		if(Object.create){
+			return Object.create(obj);
+			var t=typeof obj;
+			if(t!=='object'&& t!=='function'){
+				function f(){
+					f.prototype=obj;
+					return new f();
+				}
+			}
+		}
+	}
 	console.info('------------------------------6.6属性getter和setter------------------------------')
-	var p={
+	var p={//存取器属性是可以继承的,因此,对象p可以做成另一个'点'的原型
 		x:1.0,
 		y:1.0,
-		get r(){						
+		get r(){
+			/*
+				r是可读写的存取器属性,它有getter和setter
+				函数体结束后不要忘记带上逗号
+				this指向当前对象
+			*/
 			return this.x*this.x+this.y*this.y;
 		},
-		set r(newValue){			
-			var oldValue=this.x*this.x+this.y*this.y;			
+		set r(newValue){
+			var oldValue=this.x*this.x+this.y*this.y;
 			var ratio=newValue/oldValue;
 			this.x*=ratio;
 			this.y*=ratio;
 		},
 		get thera(){
-			//atan2是表示x轴到点x，y之间的角度
+			//thera是只读存取器属性,它只有getter方法
+
 			return this.y+this.x;
 		}
 	}
 	console.info('对象p',p);
 	console.info('对象p里面的方法',p.r);
 	console.info('p.x=3',p.x=3,'p.thera',p.thera);
-	var q=inherit(p);	
+	var q=inherit(p);
 	q.x=2,q.y=3;
-	console.log("get:q.r:"+q.r);	
+	console.log("get:q.r:"+q.r);
 	console.log("q.thera:"+q.thera);
-	
+
+	var serialnum={
+		$n:0,
+		get next(){
+			return this.$n++;
+		}
+		set next(n){
+			if(n>=this.$n) this.$n=n;
+			else throw '序号的值不能比当前值小'
+		}
+	}
 	var random={
 		get octet(){return Math.floor(Math.random()*256)},
 		get uint16(){return Math.floor(Math.random()*65536)},

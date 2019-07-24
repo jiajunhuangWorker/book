@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>6.7屬性的特性</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>6.7属性的特征</dt>
+			<dd>数据属性的特征:值,可写性,可枚举,可配置性</dd>
+			<dd>可写性:setter的存在与否决定的</dd>
+			<dd>可枚举:可以通过api给原型添加方法,并将它们设置成不可枚举,这让它们看起来像内置方法</dd>
+			<dd>可配置性:可以通过这些api给对象定义不能修改或删除的属性,借此锁定这个对象</dd>
+			<dd>存取器:读取(get),写入(set),可枚举,可配置性</dd>
+			<dd>为了实现属性特性的查询和设置操作,ECMAScript5中定义了一个名为'属性描述符'的对象</dd>
+			<dd>属性描述符对象属性有value,writable,enumerable,configurable</dd>
+			<dd>writable<写>,enumerable<枚举>,configurable<删除>是boolean 类型</dd>
+			<dd>get和set是函数</dd>
+			<dd>方法要么修改已有属性要么新建自有属性,但不能修改继承属性</dd>
+			<dd>Object.defineProperty()和Object.definePropertys()</dd>
+			<dd>如果对象是不可扩展的,则可以编辑已有的自有属性,但不能给它添加新属性</dd>
+			<dd>如果属性不可配置的,则不能修改它的可配置性和可枚举性</dd>
+			<dd>如果存取器属性是不可配置的,则不能修改其getter和setter方法,也不能将它转换为数据属性</dd>
+			<dd>如果数据属性是不可配置的,则不能将它转换为存取器属性</dd>
+			<dd>如果数据属性是不可配置的,则不能</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------6.7属性的特征------------------------------')
+	console.info('Object.getOwnPropertyDescriptor({x:1},\'x\')//获取某个对象特定属性的属性描述符',Object.getOwnPropertyDescriptor({x:1},'x'))
+	var createAtt={};
+	console.info('创建了:createAtt={}')
+	console.info('Object.defineProperty(createAtt,\'definedAttr\',{value:666,writable:true,enumerable:false,configurable:true})',Object.defineProperty(createAtt,'definedAttr',{value:666,writable:true,enumerable:false,configurable:true}));
+	console.info('Object.keys(createAtt)//查看数组里面存不存在属性,必须不存在因为被禁用了',Object.keys(createAtt));
+	console.info('Object.defineProperty(createAtt,\'definedAttr\',{writable:false})//禁用修改属性',Object.defineProperty(createAtt,'definedAttr',{writable:false}));
+	console.info('createAtt.definedAttr=123123',createAtt.definedAttr=123123,'读取createAtt.definedAttr',createAtt.definedAttr);
+	console.info('存储器的写法')
+	console.info('Object.defineProperty(createAtt,\'definedAttr\',{get:function(){return o;}})',Object.defineProperty(createAtt,'definedAttr',{get:function(){return o;}}),'createAtt.definedAttr=120',createAtt.definedAttr=120,'createAtt.definedAttr',createAtt.definedAttr)
+	console.info('Object.defineProperties同时修改多个属性')
+		var p =Object.defineProperties({},{
+			x:{value:'666',writable:true,enumerable:false,configurable:true},
+			y:{value:'777',writable:true,enumerable:false,configurable:true},
+			r:{
+				get:function(){
+					return 666
+				},enumerable:false,configurable:true
+			}
+		})
+	console.info('对象多属性同时初始化',p)
+	</script>
+</html>
