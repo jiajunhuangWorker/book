@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>6.9序列化对象</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>6.9序列化对象</dt>
+			<dd>对象序列化是指将对象的状态转换为字符串,也可将字符串还原为对象JSON.stringify()和JSON.parse()用来序列化和还原对象</dd>			
+			<dd>JSON的语法是javascript语法的子集,它并不能表示javascript里的所有值</dd>
+			<dd>NaN,Infinity,-Infinity序列化的结果是null</dd>
+			<dd>对象,数组,字符串,无穷大数字,true,false和null可以序列化还原javascript对象</dd>
+			<dd>日期对象序列化的结果是ISO格式的格式日期字符串而不会将它们还原为原始日期对象</dd>
+			<dd>函数,RegExp,Error,undifined不能序列化和还原f</dd>
+			<dd>JSON.stringify只能序列化对象可枚举的自有属性,对于一个不能序列化的属性来说,在序列化后的输出字符串中会将这个属性忽略</dd>
+			<dd>JSON.stringify和JSON.parse都可以接收第二个参数,通过传入需要序列化或还原的属性列表来定制自定义的序列化或还原操作</dd>
+		</dl>		
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------6.9序列化对象------------------------------')
+	var o={a:1,b:{c:[false,'true']}};
+	var s=JSON.stringify(o);
+	console.log("JSON.stringify(o)//只能序列化对象可枚举的自有属性:",JSON.stringify(o),"\n typeof JSON.stringify(o):",typeof JSON.stringify(o));//对象转字符串
+	console.log("JSON.parse(s):",JSON.parse(s),"\n typeof JSON.parse(s):",typeof JSON.parse(s));//字符串转对象
+	</script>
+</html>

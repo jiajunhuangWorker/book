@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>6.10对象方法</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>6.10对象方法</dt>
+			<dd>所有javascript对象都从Object.prototype继承属性</dd>
+
+			<dt>6.10.1toString()</dt>
+			<dd>toString()方法没有参数,它将返回一个表示调用这个方法的对象值得字符串</dd>
+			
+			<dt>6.10.2toLoacaleString()</dt>
+			<dd>该方法返回一个表示这个对象的本地化字符串,方法并不做任何本地化自身的操作(date和number类对toLocaleString方法做了定制)</dd>
+			
+			<dt>6.10.3toJSON()</dt>
+			<dd>Object.prototype实际上没有定义toJSON()方法,但对于需要执行序列化的对象来说,JSON.stringify()会调用toJSON()方法.如果在带序列化对象中存在这个方法则调用它.返回值即序列化结果</dd>
+
+			<dt>6.10.4valueOf()</dt>
+			<dd>valueof方法和toString方法类似,但往往当javascript需要将对象转换为某种原始值而非字符创的时候才会调用它.尤其转换数字的时候</dd>
+			
+		</dl>		
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------6.10.1toString()方法------------------------------')
+	console.info('[1,\'a22\',233,true,false].toString():\n',[1,'a22',233,true,false].toString());
+	
+	console.info('------------------------------6.10.2toLocaleString()方法------------------------------')
+	console.info('[1,\'a22\',233,true,false].toLocaleString():\n',[1,'a22',233,true,false].toLocaleString(),'\n new Date().toLocaleString():',new Date().toLocaleString(),'\n Number(1321232).toLocaleString():',Number(1321232).toLocaleString())
+
+	console.info('------------------------------6.10.3toJSON()方法------------------------------')
+	console.info('new Date(\'August 19, 1975 23:15:30 UTC\').toJSON()\n', new Date('August 19, 1975 23:15:30 UTC').toJSON(),'\n new Date() \n',new Date());
+
+	console.info('------------------------------6.10.4valueOf()方法------------------------------')
+	console.info('new Date().valueOf()//对象转为原始值,对转为数字特别敏感',new Date().valueOf())
+	
+
+
+	</script>
+</html>
