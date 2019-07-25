@@ -17,31 +17,54 @@
 			<dd>可配置性:可以通过这些api给对象定义不能修改或删除的属性,借此锁定这个对象</dd>
 
 			<dd>存取器属性的4个特性是:读取(get),写入(set),可枚举,可配置性</dd>
+
 			<dd>为了实现属性特性的查询和设置操作,ECMAScript5中定义了一个名为'属性描述符'的对象</dd>
-			<dd>属性描述符对象属性有value,writable,enumerable,configurable</dd>
+			<dd>属性描述符对象属性有value,writable(boolean),enumerable(boolean),configurable(boolean)</dd>
 			<dd>writable<写>,enumerable<枚举>,configurable<删除>是boolean 类型</dd>
-			<dd>get和set是函数</dd>
+			<dd>存取器属性的描述对象则用get和set是属性代替value和writable</dd>
 			<dd>方法要么修改已有属性要么新建自有属性,但不能修改继承属性</dd>
-			<dd>Object.defineProperty()和Object.definePropertys()</dd>
+			<dd>Object.getOwnPropertyDescriptor():只能得到自有属性的描述符/dd>
+			<dd>Object.getPrototypeof():获得继承属性的特性,需要遍历原型链</dd>
+			<dd>Object.defineProperty():设置属性的特性,或者想让新建属性具有某种特性,传入要修改的对象,要创建或修改的属性的名称以及属性描述符对象</dd>
+			<dd>方法修改已有屬性要么新建自有属性,但不能修改继承属性，如果要同时修改或创建多个属性,则需要使用Object.definedProperties()</dd>
+
+			<dd>对于那些不允许创建或修改属性来说,如果Object.definedPropety()和Object.defineProperties()对其操作,就会抛出类型错误,例如给一个不可扩展的对象新增属性就会报错.可写性控制着对值特性的修改.可配置性控制着对其他特性的修改，以下规则:</dd>
 			<dd>如果对象是不可扩展的,则可以编辑已有的自有属性,但不能给它添加新属性</dd>
 			<dd>如果属性不可配置的,则不能修改它的可配置性和可枚举性</dd>
 			<dd>如果存取器属性是不可配置的,则不能修改其getter和setter方法,也不能将它转换为数据属性</dd>
 			<dd>如果数据属性是不可配置的,则不能将它转换为存取器属性</dd>
-			<dd>如果数据属性是不可配置的,则不能</dd>
+			<dd>如果数据属性是不可配置的,则不能将它的可写性从false修改为true,但可以从true修改为false</dd>
+			<dd>如果数据属性是不可配置且不可写的,则不能修改它的值.然而可配置但不可写属性的值是可以修改的(实际上是先将它标记为可写的,然后修改它的值,最后转换为不可写的)</dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
 	'user static';
 	console.info('------------------------------6.7属性的特征------------------------------')
-	console.info('Object.getOwnPropertyDescriptor({x:1},\'x\')//获取某个对象特定属性的属性描述符',Object.getOwnPropertyDescriptor({x:1},'x'))
+	console.info('Object.getOwnPropertyDescriptor({x:1},\'x\')//获取某个对象特定属性的属性描述符',Object.getOwnPropertyDescriptor({x:1},'x'));
+	var random={
+		get octet(){return Math.floor(Math.random()*256)},
+		get uint16(){return Math.floor(Math.random()*65536)},
+		get int16(){return Math.floor(Math.random()*65536-32768)}
+	}
+	console.info(Object.getOwnPropertyDescriptor(random,'octet','//查询上文中定义的random对象的octet属性'))
+	console.info(Object.getOwnPropertyDescriptor({} ,'x', '//没有继承这个属性'))
+	console.info(Object.getOwnPropertyDescriptor({} ,'toString', '//继承属性'))
+
 	var createAtt={};
 	console.info('创建了:createAtt={}')
 	console.info('Object.defineProperty(createAtt,\'definedAttr\',{value:666,writable:true,enumerable:false,configurable:true})',Object.defineProperty(createAtt,'definedAttr',{value:666,writable:true,enumerable:false,configurable:true}));
+	console.info('createAtt.definedAttr',createAtt.definedAttr);
 	console.info('Object.keys(createAtt)//查看数组里面存不存在属性,必须不存在因为被禁用了',Object.keys(createAtt));
+
 	console.info('Object.defineProperty(createAtt,\'definedAttr\',{writable:false})//禁用修改属性',Object.defineProperty(createAtt,'definedAttr',{writable:false}));
 	console.info('createAtt.definedAttr=123123',createAtt.definedAttr=123123,'读取createAtt.definedAttr',createAtt.definedAttr);
-	console.info('存储器的写法')
-	console.info('Object.defineProperty(createAtt,\'definedAttr\',{get:function(){return o;}})',Object.defineProperty(createAtt,'definedAttr',{get:function(){return o;}}),'createAtt.definedAttr=120',createAtt.definedAttr=120,'createAtt.definedAttr',createAtt.definedAttr)
+
+	console.info(Object.defineProperty(createAtt,'definedAttr',{value:'我测试一下配置方法,就算值被禁止修改了,看能不能通过修改配置在修改值'}))
+	console.info('createAtt.definedAttr',createAtt.definedAttr);
+
+	//
+	console.info(Object.defineProperty(createAtt,'definedAttr',{get:function(){return createAtt}}))
+
 	console.info('Object.defineProperties同时修改多个属性')
 		var p =Object.defineProperties({},{
 			x:{value:'666',writable:true,enumerable:false,configurable:true},
