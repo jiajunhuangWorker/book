@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>7.3稀疏数组</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>7.3稀疏数组</dt>
+			<dd>稀疏数组是就是包含从0开始的不连续索引的数组</dd>
+			<dd>数组中的length属性值代表数组中元素的个数,如果数组是稀疏的,length属性值大于元素个数</dd>
+			<dd>足够稀疏的数组通常在实现上比稠密的数组更慢,内存利用率跟更高,内存利用率更高,在这样的数组中查找元素的时间与常规对象属性的查找时间一样长</dd>
+			<dd>当在数组直接量中省略值时不会创建稀疏数组</dd>
+			<dd>省略的元素是undefined</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	var globalArray=[true,false,1,1.3,'你好啊',undefined,null,NaN,function numbers(){return 222},[1,2,3,4,5,6]];
+	var globalArray2=[true,false,1,1.3,'你好啊',undefined,null,NaN,function numbers(){return 222},[1,2,3,4,5,6]];
+	var globalObject={1:'测试一下','string':'测试一下2',false:'测试一下3',null:'测试一下4',undifined:'测试一下5',NaN:'测试一下6',suibian:'测试一下7'};
+	console.info('------------------------------7.3稀疏数组------------------------------')
+	var sparseArray=[,,,,2];
+	var sparseArray2=[undefined];
+	var sparseArray3=new Array(3);
+	console.info('sparseArray=[,]','\n 0 in sparseArray:',0 in sparseArray);
+	console.info('sparseArray2=[undefined]','\n 0 in sparseArray2:',0 in sparseArray2);
+	console.info('sparseArray3=new Array()','\n 0 in sparseArray3:',0 in sparseArray3);
+	console.info('for(element in sparseArray)')
+	for(element in sparseArray){
+
+		if(element ==='function') continue;
+		console.info('element',sparseArray[element])
+	}
+	for(element in sparseArray3){
+
+		if(element ==='function') continue;
+		console.info('element',element)
+	}
+	</script>
+</html>

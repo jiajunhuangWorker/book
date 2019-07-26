@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>7.2数组元素的读和写</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>7.2数组元素的读和写</dt>
+			<dd>使用[]操作符来访问数组中的一个元素,方括号返回非负数值得任意表达式</dd>
+			<dd>数组是对象的特殊形式</dd>
+			<dd>javascript将制定的数字索引值转换成字符串-索引值1变成'1'然后将其作为属性名来使用</dd>
+			<dd>数组的特别之处在于当使用小于2的32次方的非负数整数作为属性名时数组会自动维护其length属性值.</dd>
+			<dd>清晰地区分数组的索引和对象的属性名时非常有用的,所有的索引都是属性名,但只有在0~2的32次方-2之间的整数属性名才有索引</dd>
+			<dd>所有数组都是对象,可以为其创建任意名字的属性.但如果使用的属性是数组的索引,数组的特殊行为就是将根据需要更新它们的length属性值</dd>
+			<dd>事实上数组索引仅仅是对象属性名的一种特殊类型</dd>
+			<dd>数组可以定义元素的getter和setter方法,因为数组是特殊的对象</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	var globalArray=[true,false,1,1.3,'你好啊',undefined,null,NaN,function numbers(){return 222},[1,2,3,4,5,6]];
+	var globalArray2=[true,false,1,1.3,'你好啊',undefined,null,NaN,function numbers(){return 222},[1,2,3,4,5,6]];
+	var globalObject={1:'测试一下','string':'测试一下2',false:'测试一下3',null:'测试一下4',undifined:'测试一下5',NaN:'测试一下6',suibian:'测试一下7'};
+	var a=[];
+	console.info('------------------------------7.2数组元素的读和写------------------------------')
+	console.info('读取Array');
+	console.info('读取最后一位元素globalArray[globalArray.length-1]',globalArray[globalArray.length-1]);
+	console.info('写Array');
+	console.info('读取数组',globalArray,'\n更改第一个元素globalArray[0]=1',globalArray[0]=1,'\n读取数组',globalArray,'总结当索引值里面的元素发生改变之后会影响全局元素');
+	console.info('二维数组,globalArray[globalArray.length-1][2]:',globalArray[globalArray.length-1][2])
+	for(id in globalObject){
+		console.info('id in globalObject 想看看key是什么类型：typeof id\n//证明所有的key 都是字符串类型被隐式转换',typeof id)
+	}
+	console.info('查看方法体:globalArray[globalArray.length-2]',globalArray[globalArray.length-2]);
+	console.info('a[-1.23]=true',a[-1.23]=true,'访问a[-1.23]',a[-1.23]);
+	console.info('a["1000"]=true',a['1000']=0,'访问a['1000']',a['1000']);
+	console.info('a[1.23]=true',a[1.23]=true,'访问a[1.23]',a[1.23]);
+	</script>
+</html>
