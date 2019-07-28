@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>7.4数组长度</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>7.4数组长度</dt>
+			<dd>每个数组有一个length属性,就是这个属性使其区别于常规的javascript对象</dd>
+			<dd>length币数组中最大的索引大1</dd>
+			<dd>当数组是稀疏数组,length属性值大于元素个数</dd>
+			<dd>1.如果让一个数组元素不能配置,就不能删除它,如果不能删除它,length属性不能设置为小于不可配置元素的索引值</dd>
+			<dd>数组有两个特殊行为,
+			<br>
+			1.如果为一个数组元素赋值,它的索引i大于或等于现有数组的长度时,length属性的值设置为i+1;
+			<br>
+			2.第二个特殊行为就是设置length属性为一个小于前长度的非负数n时,当前数组中那些索引值大于或等于n的元素将从中删除
+			</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	var globalArray=[true,false,1,1.3,'你好啊',undefined,null,NaN,function numbers(){return 222},[1,2,3,4,5,6]];
+	var globalArray2=[true,false,1,1.3,'你好啊',undefined,null,NaN,function numbers(){return 222},[1,2,3,4,5,6]];
+	var globalObject={1:'测试一下','string':'测试一下2',false:'测试一下3',null:'测试一下4',undifined:'测试一下5',NaN:'测试一下6',suibian:'测试一下7'};
+	console.info('------------------------------7.4数组长度------------------------------')
+	console.info('全局数组',globalArray);
+	console.info('[].length',[].length);
+	console.info('["1","2","3"].length',["1","2","3"].length);
+	console.info('globalArray.length=3//这里限制了数组的显示长度',globalArray.length=3,'globalArray:',globalArray);
+	console.info('globalArray.length=0//索引受到影响',globalArray.length=0,'globalArray:',globalArray);
+	console.info('globalArray.length=5//索引受到影响',globalArray.length=5,'globalArray:',globalArray);
+	console.info('Object.defineProperty(globalArray,"length",{writable:false})//让数组的length属性变成只读',Object.defineProperty(globalArray,"length",{writable:false}))
+	console.info('globalArray.length=0',globalArray.length=0,'\n读取globalArray',globalArray)
+	</script>
+</html>

@@ -12,7 +12,7 @@
 			<dd>数组中的length属性值代表数组中元素的个数,如果数组是稀疏的,length属性值大于元素个数</dd>
 			<dd>足够稀疏的数组通常在实现上比稠密的数组更慢,内存利用率跟更高,内存利用率更高,在这样的数组中查找元素的时间与常规对象属性的查找时间一样长</dd>
 			<dd>当在数组直接量中省略值时不会创建稀疏数组</dd>
-			<dd>省略的元素是undefined</dd>
+			<dd>省略的元素在数组中存在其值是undefined</dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
@@ -27,14 +27,14 @@
 	console.info('sparseArray=[,]','\n 0 in sparseArray:',0 in sparseArray);
 	console.info('sparseArray2=[undefined]','\n 0 in sparseArray2:',0 in sparseArray2);
 	console.info('sparseArray3=new Array()','\n 0 in sparseArray3:',0 in sparseArray3);
-	console.info('for(element in sparseArray)')
+	console.info('for(element in sparseArray)');
+	
 	var arr=[,];
 	var arr2=[undefined];
 	
 	for(element in sparseArray){
-
 		if(element ==='function') continue;
-		console.info('element',sparseArray[element])
+		console.info('sparseArray[element]',sparseArray[element])
 	}
 	for(element in sparseArray3){
 

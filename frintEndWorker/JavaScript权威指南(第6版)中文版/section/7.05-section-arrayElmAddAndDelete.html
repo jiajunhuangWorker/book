@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>7.5数组元素的添加和删除</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>7.5数组元素的添加和删除</dt>
+			<dd>添加数组元素最简单的方法是为新的索引赋值</dd>
+			<dd>push(数组的末尾增加一个或多个元素)</dd>
+			<dd>pop(减少长度1并返回被删除的元素,从队尾删除元素,索引往前移动一位,length发生改变)</dd>
+			<dd>unshift(在数组的首部插入一个元素,并且将其他元素依次移到更高的索引)</dd>
+			<dd>shift(从对头删除元素)</dd>
+			<dd>删除数组元素与其赋undefined值时类似的，对一个数组元素使用delete不会修改数组的length属性,也不会将元素从高索引处移下来填充已删除属性留下的空白,如果从数组中删除一个元素,它会变成稀疏数组</dd>
+			<dd>shift,pop与delete不同的是delete删除后数组的长度没发生改变而shift,pop会导致数组发生改变</dd>
+			<dd>splice()是一个普通的方法来插入,删除,替换数组元素</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------7.5数组元素的添加和删除------------------------------');
+	var a=[];
+	a[0]='zero';
+	a[1]='one';
+	console.info('part1-07-array.html:97 Uncaught TypeError: Cannot assign to read only property length of object [object Array] at Array.push//line 94行锁定数组长度')
+	console.info('add Elements');
+	console.info('push:globalArray.push(1,true,false,"one"):',globalArray.push(1,true,false,"one"),'<返回字符串长度>\n read globalArray',globalArray,'\n push:在队尾添加Element');
+	console.info('unshift:globalArray.unshift("I","love","pig")',globalArray.unshift("I","love","pig"),'<返回字符串长度>\n read globalArray',globalArray,'\n unshift:在队头添加Element');
+	console.info('delete globalArray[4]',delete globalArray[4],'globalArray',globalArray,'变成empty','read delete element:',globalArray[4]);
+	console.info('globalArray.pop()',globalArray.pop(),'read globalArray',globalArray);
+	console.info('globalArray.shift()',globalArray.shift(),'read globalArray',globalArray);
+	</script>
+</html>
