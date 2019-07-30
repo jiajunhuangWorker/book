@@ -42,8 +42,6 @@
 
 			<dt>7.9.6indexOf()和lastindexOf()</dt>
 			<dd>indexOf()和lastindexOf()搜索数组中具有给定值的元素,返回找到的第一个元素的索引位置,如果不存在返回-1</dd>
-
-
 		</dl>
 	</body>
 	<script type="text/javascript">
@@ -85,8 +83,9 @@
 
 	console.info('globalArray2.some(function(x){return x%2 === 0})',globalArray2.some(function(x){return x%2 === 0}));
 	console.info('globalArray2.some(function(x){return x>10})',globalArray2.some(function(x){return x>10}));
+
 	console.info('------------------------------7.9.5reduce()和reduceRight()------------------------------')
-{	var arr=[1,2,4,5,6];
+	var arr=[1,2,4,5,6];
 	var sun=arr.reduce(function(x,y){return x+y},0);
 	var sun1=arr.reduce(function(x,y){return x*y},1);
 	var sun2=arr.reduce(function(x,y){return (x>y)?x:y});
@@ -95,6 +94,12 @@
 	console.info('arr.reduce(function(x,y){return x*y},1)',sun1,'//数组求积');
 	console.info('arr.reduce(function(x,y){return (x>y)?x:y})',sun2,'//求最大值');
 	var obj=[{x:1,a:1},{y:2,a:2},{z:3,a:3}]
-	console.info('arr.reduce(function(x,y){return (x>y)?x:y})',Object.reduce());
+	console.info('arr.reduce(function(x,y){return (x>y)?x:y})');
+
+	console.info('------------------------------7.9.6indexOf()和lastIndexOf()------------------------------')
+	var arrs=[0,1,2,1,0];
+	console.info('arrs.indexOf(1)',arrs.indexOf(1));
+	console.info('arrs.lastIndexOf(1)',arrs.lastIndexOf(1));
+	console.info('arrs.indexOf(3)',arrs.indexOf(3));
 	</script>
 </html>

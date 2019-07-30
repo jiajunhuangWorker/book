@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>7.12作为数组的字符串</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>7.12作为数组的字符串</dt>
+			<dd>在ECMASCRIPT5中字符串的行为类似于只读的数组,除了用chartAt()方法来访问单个字符以外,还可以使用方括号</dd>
+			<dd>push，pop,unshift，shift，sort，reverse，splice等数组方法会修改数组,它们在字符串上是无效的.不仅如此,使用数组方法来修改字符串会导致错误,出错的时候没有提示</dd>
+			<dd>chartAt访问单个字符,数组也可以访问单个字符串</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	var globalArray=[true,false,1,1.3,'你好啊',undefined,null,NaN,function numbers(){return 222},[1,2,3,4,5,6]];
+	console.info('------------------------------7.12作为数组的字符串------------------------------')	
+	var s='javascript!hellow!';
+	var joinStr=Array.prototype.join.call(s,' ');
+	var breakStr=Array.prototype.filter.call(joinStr,function(x){
+		return x.match(/^[abc]/);
+	}).join('');
+	console.info('s=javascript!hellow!  ','  Array.prototype.join.call(s,"")  ',joinStr)
+	console.info('Array.prototype.filter.call(\njoinStr,function(x){\nreturn x.match(\/\^[aeiou]\/);\n}).join("")\n',breakStr)
+	</script>
+</html>
