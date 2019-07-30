@@ -22,14 +22,15 @@
 			<dd>传递给map()函数的调用方式和forEach一样,但传递给map的函数应该有返回值map返回新数组它不修改调用的数组,如果是稀疏数组,返回的也是相同方式的稀疏数组,它具有相同的长度,相同的缺失元素</dd>
 
 			<dt>7.9.3filter()</dt>
-			<dd>filter方法返回的数组元素是调用的数组的一个子集.传递的函数是用来逻辑判定的.该函数返回true/false</dd>
+			<dd>filter方法返回的数组元素是调用的数组的一个子集.传递的函数是用来逻辑判定的.该函数返回true/false,如果返回值為true或能转化为true的值,那么传递给判定函数的元素就是这个子集的成员,它将添加到一个作为返回值的数组中</dd>
 			<dd>filter会跳过稀疏数组中缺少的元素,返回稠密数组</dd>
-			
+
 			<dt>7.9.4every()和some()</dt>
-			<dd>方法是数组的逻辑判定,它们对数组元素应用指定的函数进行判定,返回true和false</dd>
-			<dd>every()方法就类似数学中的'针对所有',的量词:当且仅当针对数组的所有元素调用判定函数都返回true</dd>
+			<dd>every和some()方法是数组的逻辑判定:它们对数组元素应用指定的函数进行判定,返回true和false</dd>
+			<dd>every()方法就类似数学中的'针对所有',的量词:当且仅当针对数组中的所有元素调用判定函数都返回true,才返回true</dd>
 			<dd>some()方法就像数学中的'存在'的量词,当数组中至少有一个元素调用判定函数返回true，它就返回true并且当且仅当所有元素返回false就返回false</dd>
-			<dd>some()在判定函数第一次返回true后返回true，但是判断返回false就会遍历整个数组</dd>
+
+			<dd>some()当数组中至少有一个元素调用判定函数返回true,它就返回true,当且尽当数值中所有元素调用判定函数返回false，它才返回false</dd>
 			<dd>every()和some()意义相反	</dd>
 
 			<dt>7.9.5reduce()和reduceRight()</dt>
@@ -37,18 +38,19 @@
 			<dd>reduce()需要两个参数.第一个是执行化简单操作的函数,化简函数的任务就是用某种方法把两个值组合或化简为一个值并返回化简后的值,第二个参数是一个传递给函数的初始值</dd>
 			<dd>reduce()不带初始值参数调用时将报导致类型错误异常</dd>
 			<dd>reduceRight按照数组索引从高到低,从右到左处理数组</dd>
-			<dd>并集功能</dd>kb
+			<dd>并集功能</dd>
 
 			<dt>7.9.6indexOf()和lastindexOf()</dt>
 			<dd>indexOf()和lastindexOf()搜索数组中具有给定值的元素,返回找到的第一个元素的索引位置,如果不存在返回-1</dd>
 
-			
+
 		</dl>
 	</body>
 	<script type="text/javascript">
 	'user static';
 	var globalArray=[true,false,1,1.3,'你好啊',undefined,null,NaN,function numbers(){return 222},[1,2,3,4,5,6]];
 	var num=[1,true,0,'你好',false,0.3];
+	var globalArray2=[1,2,3,4,5];
 	console.info('------------------------------7.9.1forEach()------------------------------');
 		globalArray.forEach(function(v,i,a){
 			console.info('v',v);
@@ -62,7 +64,7 @@
 			a.forEach(function(){});
 		}catch(e){
 			if(e===foreach.break) return;
-			else{ 
+			else{
 			console.info(e)
 				throw e;
 			}
@@ -72,20 +74,27 @@
 	foreach([1,2,3,4,5,6,7],'error')
 	console.info('------------------------------7.9.2map()------------------------------');
 	console.info('num.map(function(x){return x+1})',num.map(function(x){return x+1}))
-	
+
 	console.info('------------------------------7.9.3filter()------------------------------');
 	console.info('globalArray',globalArray,'globalArray.filter(function(val){return val<2})',globalArray.filter(function(val){return val<2}));
 
 	console.info('------------------------------7.9.4every()和some()------------------------------')
-	console.info('globalArray.every(function(x){return x<10})',globalArray.every(function(x){return x<10}));
-	console.info('globalArray.some(function(x){return x<10})',globalArray.some(function(x){return x<10}));
+	console.info('globalArray2',globalArray2)
+	console.info('globalArray2.every(function(x){return x<10})',globalArray2.every(function(x){return x<10}));
+	console.info('globalArray2.every(function(x){return x%2 === 0})',globalArray2.every(function(x){return x%2 === 0}));
 
+	console.info('globalArray2.some(function(x){return x%2 === 0})',globalArray2.some(function(x){return x%2 === 0}));
+	console.info('globalArray2.some(function(x){return x>10})',globalArray2.some(function(x){return x>10}));
 	console.info('------------------------------7.9.5reduce()和reduceRight()------------------------------')
-	var arr=[{a:22},{c:222}];
-	// console.info('arr.reduce()',arr.reduce());
-
-	console.info('------------------------------7.9.6indexOf()和lastindexOf()------------------------------')
-
-	
+{	var arr=[1,2,4,5,6];
+	var sun=arr.reduce(function(x,y){return x+y},0);
+	var sun1=arr.reduce(function(x,y){return x*y},1);
+	var sun2=arr.reduce(function(x,y){return (x>y)?x:y});
+	console.info('arr',arr);
+	console.info('arr.reduce(function(x,y){return x+y},0)',sun,'//数组求和');
+	console.info('arr.reduce(function(x,y){return x*y},1)',sun1,'//数组求积');
+	console.info('arr.reduce(function(x,y){return (x>y)?x:y})',sun2,'//求最大值');
+	var obj=[{x:1,a:1},{y:2,a:2},{z:3,a:3}]
+	console.info('arr.reduce(function(x,y){return (x>y)?x:y})',Object.reduce());
 	</script>
 </html>
