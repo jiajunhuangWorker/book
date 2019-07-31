@@ -2,46 +2,11 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>第八章函数</title>
+		<title>8.3函数的实参和形参</title>
 		<link rel="stylesheet" href="../../../globalBase.css">
 	</head>
 	<body>
 		<dl>
-			<dt>8.function</dt>
-			<dd>函数是这样的一段JavaScript代码,它只定义一次,但可能被执行或调用任意次数</dd>
-			<dd>javascript函数是参数化的函数定义是包括形参和实参,除了实参之外,每次调用还会拥有另一个值，可以利用this关键字</dd>
-			<dd>如果函数挂载在对象上,作为对象的一个属性就称为对象的方法,函数既对象,程序可以随意操控它们</dd>
-			<dd>JavaScript的函数可以嵌套在其他函数中定义,这样它们就可以访问它们被定义时所处的作用域中的任何变量</dd>
-
-			<dt>8.1函数定义</dt>
-			<dd>函数名称标识符.函数名称是函数声明语句必需的部分.它的用途就像变了的名字,新定义的函数对象会赋值给这个变量.对函数定义表达式</dd>
-			<dd>驼峰命名法</dd>
-			<dd>return语句没有一个与之相关表达式就返回undifined</dd>
-
-			<dt>8.2函数调用</dt>
-			<dd>4种方式调用JavaScript函数,作为函数,作为方法,作为构造函数,通过他们的call()和apply方法</dd>
-
-			<dt>8.2.1函数调用</dt>
-			<dd>使用调用表达式可以进行普通的函数调用也可以进行方法调用,参数列表是由逗号分隔的零个或多个参数表达式组成</dd>
-
-			<dt>8.2.2方法调用</dt>
-			<dd>一个方法无非是个保存在一个对象的属性里的javascript函数</dd>
-			<dd>方法调用和函数调用区别,方法调用可以调用上下文,属性访问表达式由两部分组成,一个是对象和属性,可以通过关键字this去引用对象</dd>
-			<dd>方法和this关键字是面向对象编程范例的核心,任何函数只要作为方法调用实际上都会传入一个隐式的实参,这个实参是一个对象,方法调用的母体就是这个对象</dd>
-			<dd>方法链</dd>
-			<dd>当方法返回值是一个对象,这个对象还可以调用它的方法,这种方法调用序列中(通常称为'链'或者'级联'),每次的调用结果都是另外一个表达式的组成部分.</dd>
-			<dd>当方法并不需要返回值时最好返回this,如果设计api中一直采用这种方式(每个方法都返回this),使用api就可以进行'链式调用'风格进行编程</dd>
-			<dd>javascript不允许给this赋值,关键字this没有作用域的限制,嵌套的函数不会从调用它的函数中继承this,</dd>
-
-			<dt>8.2.3构造函数调用</dt>
-			<dd>构造函数调用创建一个新的空对象,这个对象继承自构造函数prototype属性,构造函数试图初始化这个心创建的对象，构造函数通常不适用return关键字，它们通常初始化新对象,构造函数调用return语句返回一个对象
-			</dd>
-
-			<dt>8.2.4间接调用</dt>
-			<dd>call()和apply()可以间接调用函数,两个方法都允许显式指定调用所需的this值</dd>
-			<dd>call()方法使用它自有的实参列表作为函数的实参</dd>
-			<dd>apply()方法则要求以数组的形式传入参数</dd>
-
 			<dt>8.3函数的实参和形参</dt>
 			<dd>javascript中的函数定义并未指定函数形参的类型,函数调用也未对传入的实参值做任何类型检查</dd>
 
@@ -58,55 +23,10 @@
 				caller是非标准的
 			</dd>
 
-			<dt></dt>
-			<dd></dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
 	'user static';
-	console.info('------------------------------8.function------------------------------');
-
-	console.info('------------------------------8.1函数定义------------------------------');
-	console.info('嵌套函数')
-	var nestFunction=function hypotenuse(a,b){
-		function square(x){return x*x};
-		return Math.sqrt(square(a)+square(b));
-	}
-	console.info('嵌套函数://函数声明语句并非真正的语句,他们只允许它们作为顶级语句.他们可以出现在全局代码里或者内嵌其它函数中,他们不出现在循环,条件判断,try/catch/finally以及with语句中,此限制仅适用于以语句声明形式定义的函数',nestFunction);
-
-	console.info('------------------------------8.2函数调用------------------------------');
-
-	console.info('------------------------------8.2.1函数调用------------------------------');
-	var static=(function(){return this}());
-	console.info(static,'//定义并调用一个函数来确定当前运行脚本运行时是否使用严格模式')
-
-	console.info('------------------------------8.2.2方法调用------------------------------');
-	var calculator={
-		operand:1,
-		operand1:1,
-		add:function(){
-			this.result=this.operand+this.operand1;
-		}
-	}
-	console.info('对象',calculator,'\n调用calculator.add()方法:',calculator.add(),'result结果:',calculator.result);
-	var object={
-		m:function(){
-			var self=this;
-			console.info(this===object);
-			f();
-			function f(){
-				console.info(this===obejct);
-				console.info(self===object);
-			}ss
-		}
-	}
-	console.info(object);
-
-	console.info('------------------------------8.2.3构造函数调用------------------------------');
-
-	console.info('------------------------------8.2.4间接调用------------------------------');
-
-	console.info('------------------------------8.3函数的实参合形参------------------------------');
 
 	console.info('------------------------------8.3.1可选形参------------------------------');
 	function getPropertyName(opt,array){

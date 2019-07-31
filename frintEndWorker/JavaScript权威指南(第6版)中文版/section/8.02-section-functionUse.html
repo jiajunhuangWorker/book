@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>8.2函數调用</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>8.2函数调用</dt>
+			<dd>构成函数主体的javascript代码在定义 之时并不会执行,只有调用函数时,它们才会执行</dd>
+			<dd>4种方式调用JavaScript函数</dd>
+			<dd>作为函数</dd>
+			<dd>作为方法</dd>
+			<dd>作为构造函数</dd>
+			<dd>通过他们的call()和apply方法</dd>
+			<dd>有些JavaScript的实现并未严格遵守这条规则,比如,FireFox就允许在if语句中出现条件函数声明</dd>
+
+			<dt>8.2.1函数调用</dt>
+			<dd>使用调用表达式可以进行普通的函数调用也可以进行方法调用,一个调用表达式由多个函数表达式组成,每个函数表达式都是由一个函数对象和左圆括号,参数列表和右圆括号组成,参数列表是由逗号分隔的零个或多个参数表达式组成</dd>
+			<dd>对于普通的函数调用,函数的返回值称为调用表达式的值</dd>
+			<dd>如果函数返回是因为解析器执行到一条人团语句,返回值就是return之后的表达式的值,如果return语句没有值则返回undefined</dd>
+			<dd>ECMASCRIPT3和非严格的ECMASCRIOT5对函数调用的规定,调用上下文(this的值)是全局对象.然而严格模式下,调用上下文则是undefined.</dd>
+			<dd>以函数形式调用的函数通常不使用this关键字</dd>
+
+			<dt>8.2.2方法调用</dt>
+			<dd>一个方法无非是个保存在一个对象的属性里的javascript函数</dd>
+			<dd>方法调用和函数调用区别,方法调用可以调用上下文,属性访问表达式由两部分组成,一个是对象和属性,可以通过关键字this去引用对象</dd>
+			<dd>方法和this关键字是面向对象编程范例的核心,任何函数只要作为方法调用实际上都会传入一个隐式的实参,这个实参是一个对象,方法调用的母体就是这个对象</dd>
+			<dd>方法链</dd>
+			<dd>当方法返回值是一个对象,这个对象还可以调用它的方法,这种方法调用序列中(通常称为'链'或者'级联'),每次的调用结果都是另外一个表达式的组成部分.</dd>
+			<dd>当方法并不需要返回值时,最好返回this,如果设计api中一直采用这种方式(每个方法都返回this),使用api就可以进行'链式调用'风格进行编程</dd>
+			<dd>javascript不允许给this赋值,关键字this没有作用域的限制,嵌套的函数不会从调用它的函数中继承this</dd>
+			<dd>如果嵌套函数作为方法调用,其this的值指向调用它的对象</dd>
+			<dd>如果嵌套函数作为函数调用,其this值不是全局对象(非严格模式下)就是undefined</dd>
+
+			<dt>8.2.3构造函数调用</dt>
+			<dd>如果函数或方法调用之前带有关键字new,它就构成构造函数调用</dd>
+			<dd>构造函数调用创建一个新的空对象,这个对象继承自构造函数prototype属性,构造函数试图初始化这个新创建的对象,并将这个对象用做其调用上下文,因此构造函数可以使用this关键字来引用这个心创建的对象
+			</dd>
+			<dd>构造函数通常不适用return关键字，它们通常初始化新对象,当构造函数的函数体执行完毕时,它会显式返回返回一</dd>	
+
+			<dt>8.2.4间接调用</dt>
+			<dd>javascript中的函数也是对象,和其他javascript对象没什么两样,函数对象也可以包含方法</dd>
+			<dd>call()和apply()可以间接调用函数,两个方法都允许显式指定调用所需的this值</dd>
+			<dd>call()方法使用它自有的实参列表作为函数的实参</dd>
+			<dd>apply()方法则要求以数组的形式传入参数</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+		'user static';
+		console.info('------------------------------8.2.1函数调用------------------------------');
+		function printprops(o){
+			for(var p in o)
+				console.info(p+":")
+		}
+		var static=(function(){return this}());
+		console.info(static,'//定义并调用一个函数来确定当前运行脚本运行时是否使用严格模式')
+
+		console.info('------------------------------8.2.2方法调用------------------------------');
+		var calculator={
+			operand:1,
+			operand1:1,
+			add:function(){
+				this.result=this.operand+this.operand1;
+			}
+		}
+		console.info('对象',calculator,'\n调用calculator.add()方法:',calculator.add(),'result结果:',calculator.result);
+		var object={
+			m:function(){
+				var self=this;
+				console.info(this===object);
+				f();
+				function f(){
+					console.info(this===obejct);
+					console.info(self===object);
+				}
+			}
+		}
+		console.info(object);
+		var o={
+			m:function(){
+				var self =this;
+				console.info(this == o);
+				f();
+				function f(){
+					console.info(this === o);
+					console.info(self === o);
+				}
+			}
+		}
+		console.info('o.m()',o.m());
+	</script>
+</html>
