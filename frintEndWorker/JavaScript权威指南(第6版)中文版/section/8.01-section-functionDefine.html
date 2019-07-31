@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>8.1函数定义</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>8.1函数定义</dt>
+			<dd>函数使用function关键字来定义,它可以用在函数定义表达式或者函数声明语句里</dd>
+			<dd>函数名称标识符.函数名称是函数声明语句必需的部分.它的用途就像变量的名字,新定义的函数对象会赋值给这个变量.对函数定义表达式来说,这个名字是可选的:如果存在,该名字只存在于函数体中,并指代该函数对象本身</dd>
+			<dd>一对圆括号,其中包含由0个或者多个用逗号隔开的标识符组成的列表,这些标识符是函数的参数名称,它们就像函数体中的局部变量一样</dd>
+			<dd>一对花括号,其中包含0条或多条javascript语句.这些语句构成了函数体:一旦调用函数,就会执行这些语句</dd>
+			<dd>以表达式定义的函数,函数的名称是可选的,一条函数声明语句实际上声明了一个变量,并把一个函数对象赋值给它</dd>
+			<dd>函数的局部作用域将会包含一个绑定到函数对象的名称.实际上,函数的名称将成为函数内部的一个局部变量</dd>
+			<dd>函数命名驼峰命名法</dd>
+			<dd>return语句没有一个与之相关表达式就返回undifined</dd>
+			<dd>嵌套函数:函数声明语句并非真正的语句,它们可访问嵌套它们(或多重嵌套)的函数的参数和变量.只允许它们作为顶级语句.他们可以出现在全局代码里或者内嵌其它函数中,他们不出现在循环,条件判断,try/catch/finally以及with语句中,此限制仅适用于以语句声明形式定义的函数</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------8.1函数定义------------------------------');
+	function printprops(o){//输出o的每个属性的名称和值,返回undefined
+		for(var p in o)
+			console.info(p+':'+o[p]+'\n');
+	}
+	function distance(x1,y1,x2,y2){//計算两个笛卡尔坐标(x1,y1)和(x2,y2)之间的距离
+		var dx=x2-x1;
+		var dy=y2-y1;
+		return Math.sqrt(dx*dx+dy*dy);
+	}
+	function factorial(x){//計算阶乘的递归函数(调用自身的函数),x的值从x到x递减(步长1)的值得累乘
+		if(x<=1) return 1;
+		return x*factorial(x-1);
+	}
+
+	// 这个函数表达式定义了一个函数用来求传入参数的平方,注意我们把它赋值给一个变量
+	var square=function(x){return x*x};
+
+	//函数表达式可以包含名称,这在递归时很有用
+	var f=function fact(x){if(x<=1) return 1; else return x*fact(x-1);};
+
+	//函数表达式也可以作为参数传给其他函数
+	data.sort(function(a,b){return a-b});
+
+	//函数表达式有时定义后立即调用
+	var tensquared=(function(x){return x*x}(10));
+
+	var nestFunction=function hypotenuse(a,b){
+		function square(x){return x*x};
+		return Math.sqrt(square(a)+square(b));
+	}
+	console.info('函数嵌套',nestFunction);
+	</script>
+</html>
