@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>8.5作为命名空间的函数</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>8.5作为命名空间的函数</dt>
+			<dd>在函数中声明的变量在整个函数体内都是可见的,在函数的外部是不可见的。在全局声明的变量在整个程序中国都是可见的</dd>
+			<dd>javascript中是无法声明只在一个代码块内可见的变量,基于这个原因,我们常常简单地定义一个函数用做临时的命名空间,这个命名空间内定义的变量都不会污染全局命名空间</dd>
+			<dd>定义匿名函数并立即在单个表达式中调用它的写法非常常见,已经成为一种惯用法了。注意代码的圆括号的用法,function之前的左圆括号是必须的,因为如果不写这个括号,javascript解析器会试图将关键字function解析为函数声明的语句</dd>
+			<dd>使用圆括号javascript解析器才会正确地将其解析为函数定义的表达式</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------8.5作为命名空间的函数------------------------------');
+	(function(){
+		//模块代码
+		console.info('我是匿名函数');
+	}())
+	/*
+		定义一个扩展函数,用来将第二个以及后续参数复制至第一个参数
+		这里我们处理了ie bug 在多数ie版本中
+		如果o的属性拥有一个不可枚举的同名属性则for/in循环
+		不会枚举对象o的可枚举属性,也就是说将不会正确地处理诸如toString的属性
+		除非我们显示检测它
+	*/
+	var extend=(function(){//将这个函数的返回值赋值给extend
+		for(var p in {toString:null}){
+			//如果代码执行到这里那么for/IN循环会正确工作并返回,一个简单版本的extend函数
+			return function extend(o){
+				for (var i = 1 ; i < arguments.length; i++) {
+					var source=arguments[i];
+					for(var prop in source) o[pop] = source[prop];
+						return o;
+				}
+			}
+		}
+	})
+	</script>
+</html>

@@ -7,12 +7,71 @@
 	</head>
 	<body>
 		<dl>
-			<dt></dt>
-			<dd></dd>
+			<dt>8.4作为值得函数</dt>
+			<dd>函数可以定义,也可以调用,这是函数最重要的特性</dd>
+			<dd>函数不仅是一种语法,也是值,也就是说,可以将函数赋值给变量,存储在对象的属性或数组元素中,作为参数传入另外一个函数等</dd>
+			<dd>除了函数赋值给变量也可以将函数赋值给对象的属性</dd>
+			<dd>数组元素进行排序规则优(基于数值大小,字母表顺序,日期大小,从小到大,从大到小等)自定义Array.sort()</dd>
+			<dd>自定义函数属性</dd>
+			<dd>javascript中的函数不是原始值而是一种特殊的对象,也就是说,函数可以拥有属性</dd>
+			<dd>为了在调用函数入参持久化因此都记录到对象或window中,但是记录到window中会出现全局污染</dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
 	'user static';
+	console.info('------------------------------8.4作为值得函数------------------------------');
+	var s=function square(x){return x*x};
+	// console.info('square(4)',square(4));
+	console.info('s(4)',s(4));
+	console.info('------------------------------函数赋值给对象的属性------------------------------');
+	var o={square:function(x){return x*x}};
+	console.info('o.square(4)',o.square(4));
+	console.info('------------------------------数组直接量------------------------------');
+	var a=[function(x){return x*x},20];
+	console.info(a,'调用：a[0](a[1]);',a[0](a[1]))
+	var add=1,multiply=2;
+	function operate(operaor,operand1,operand2){
+		return operator(operand1,operand2);
+	}
+	function operator(x,y){
+		return x+y;
+	}
+	var i=operate(add,operate(add,2,3),operate(multiply,4,5))
+	console.info('operate(add,operate(add,2,3),operate(multiply,4,5))',i);
+	//函数重构成方法
+	var operators={
+		add:function(x,y){return x+y},
+		subtract:function(x,y){return x-y},
+		multipty:function(x,y){return x*y},
+		divide:function(x,y){return x/y},
+		pow:Math.pow
+	}
 
+	/*
+		初始化函数对象的计数器属性
+		由于函数声明被提前了,因此这里是可以在函数声明
+		之前给它的成员赋值的
+	*/
+	var uniqueInteger={counter:0};
+	/*
+		每次调用这个函数都会返回一个不同的整数
+		它使拥一个属性来记住下一次将返回的值		
+	*/
+	var num=function uniqueInteger(){
+		return uniqueInteger.counter++;
+	} 
+	console.info(num,num());
+	/*
+		计算阶乘,并将结果缓存至函数的属性中
+	*/
+	function factorial(n){
+		if(isFinite(n) && n>0 && n==Math.round(n)){
+			if(!(n in factorial))
+				factorial[n]=n*factorial(n-1);
+			return factorial[n];
+		}else return NaN
+	}
+	
+	console.info('factorial[0]=666',factorial[0]=666,factorial);//缓存保存基本情况
 	</script>
 </html>
