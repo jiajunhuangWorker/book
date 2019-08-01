@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>8.3函数的实参和形参</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>8.3函数的实参和形参</dt>
+			<dd>javascript中的函数定义并未指定函数形参的类型,函数调用也未对传入的实参值做任何类型检查</dd>
+
+			<dt>8.3.1可选形参</dt>
+			<dd>当调用函数的时候传入的实参比函数声明时形参个数要少剩下的形参都设置为undefined</dd>
+			<dd>调用函数时形参是否可选以及是否可以省略应当保持较好的适应性</dd>
+			<dd>当用 a=a||[]这种可选实参来实现函数时,需要将可选实参放在实参列表的最后</dd>
+			<dd>需要注意的是使用||运算符代替if语句的前提是a必须预先声明,否则a=a||[]会报引用错误,在这个例子中a是作为形参传入的,相当于var a,即已经声明了a,所以这样用是没问题的</dd>
+			<dd>当函数的实参可选时往往传入一个无意义的占位符,惯用做法是传入null作为占位符当然也可以使用undefined作为占位符</dd>
+
+			<dt>8.3.2可变长的实参列表:实参对象</dt>
+			<dd>当调用函数的时候传入的实参个数超过函数定义的形参个数时,没有办法直接获得未命值得引用利用参数对象去进行解决问题</dd>
+			<dd>实参个数>形参个数:会报命名值引用问题，参数对象解决这个问题,在函数体内标识符</dd>
+			<dd>标识符arguments是指向实参对象的引用,实参对象是一个类数组对象,这样可以通过数字下标能访问传入函数的实参值,而不用非要通过名字来得到实参</dd>
+			<dd>实参对象有一个重要的用处,就是让函数可以操作任意数量的实参</dd>
+			<dd>类似这种函数可以接收任意个数的实参,这种函数也称为'不定实参函数,不定实参函数的实参个数不能为零,arguments并不是真正的数组，它是一个实参对象.每个实参对象都包含以数字索引的一组元素以及length属性,但它毕竟不是真正的数组</dd>
+			<dd>在严格模式下,当一个函数包含若干形参,实参对象的数组元素是函数形参所对应实参的别名,实参对象中数字索引,并且形参名称可以认为是相同变量的不同命名</dd>
+			<dd>在严格模式下,arguments是保留字,在非严格模式下arguments是一个标识符</dd>
+			<dd>在ecmascript5中移除了实参对象的这个特殊特性</dd>
+
+			<dd>arguments自带的属性callee和caller <br>
+			ECMASCRIPT5严格模式:<br>
+				对这两个属性的读写操作都会产生一个类型错误<br>
+			非严格模式:<br>
+				callee指代正在执行的函数,callee属性在某些时候会非常有用，比如匿名函数中通过callee来递归地调用自身<br>
+				caller是非标准的但大多数浏览器都实现了这个属性,它指代调用当前正在自行的函数的函数,通过caller属性可以访问调用栈。
+			</dd>
+			<dd>不定实参函数,variadic function 、variable arity function 和 varargs function</dd>
+			<dd>实参的顺序不定,variable arity 的含义是实参的个数不定,variable的含义是实参的值不定,统称不定实参函数</dd>
+
+			<dt>8.3.3将对象属性用做实参</dt>
+			<dd>当一个函数包含超过三个形参时,对于程序员说,要记住调用的函数中实参的正确顺序确实头痛,为了解决这个问题,最好通过名/值对的形式来传入参数,这样参数的顺序就无关紧要了</dd>
+
+			<dt>8.3.4实参类</dt>
+			<dd>JavaScript方法的形参并未声明类型,在形参传入函数体之前也未做任何类型检查</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------8.3.1可选形参------------------------------');
+	function getPropertyName(opt,arr){
+		var arr=arr||[];
+		if(typeof opt !='object') opt={};
+		for(var obj in opt){
+			arr.push(obj);
+		}
+		return arr;
+	}
+	console.info('getPropertyName([1,2,3,4])',getPropertyName([1,2,3,4]),'getPropertyName([1,2,3,4],[])',getPropertyName([1,2,3,4],[]));
+
+	console.info('------------------------------8.3.2可变长的实参列表:实参对象------------------------------');
+		function f(x,y,z){
+			//首先,验证传入实参的个数时否正确
+			if(argumnets.length!=3){
+				throw new Error('function f called width'+arguments.length+'arguments,but it expects 3 arguments')
+			}
+		}
+
+		function max(){
+			var max=Number.NEGATIVE_INFINITY
+			for(var i=0;i<arguments.length;i++){
+				if(arguments[i]>max) max=arguments[i];
+			}
+			console.info(max)
+			return max;
+		}
+		var largest= max(1,2,3,4,5,6,7,8,9);
+
+
+		function fx(x){
+			console.info(x);
+			arguments[0]=null;
+			console.info(x)
+		}
+		console.info('fx(123)',fx(123));
+
+		console.info('------------------------------8.3.2callee递归------------------------------');
+		var factorial=function(x){
+			if (x<=1) {return 1}
+				return x*arguments.callee(x-1);
+		}
+		console.info('factorial(2,3,-2,2,1,1)',factorial(2,3,-2,2,1,1))
+
+		console.info('------------------------------8.3.3将对象属性用做实参------------------------------');
+		function easycopy(args){
+			var o=0;
+			console.info(args.from,args.from_start||o,args.to,args.to_start||o,args.length)
+		}
+		easycopy({from:168,to:123,length:4});
+		console.info('------------------------------8.3.4实参类------------------------------');
+		function isArrayLike(o){
+			if(o && typeof o === 'object' && isFinite(o.length) && o.length>=0 && o.length === Math.floor(o.length) && o.length<4294967296){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		function sum(a){
+			if(isArrayLike(a)){
+				var total=0;
+				for(var i=0;i<a.length;a++){
+					var elm=a[i];
+					if(elm == null) continue;
+					if(isFinite(elm)) total +=elm;
+					else throw new Error('sum():element must be finite numbers')
+				}
+			}else{
+				throw new Error('sum(): argument must be array-like');
+			}
+		}
+		console.info('sum([1,23,4,"a"])',sum([1,23,4,"a"]));
+
+		function flexisum(a){
+			var total=o;
+			for(var i=o;i<arguments.length;i++){
+				var elm=arguments[i],n;
+				if(elm ==null) continue;
+				if(isArray(elm)){
+					n=fiexisum.apply(this,elm);
+				}else if(typeof elm == 'funtion'){
+					n=Number(elm());
+				}else{
+					n=Number(elm);
+					if(isNaN(n))
+						throw Error('flexisum():can"t convert '+elm+"to number");
+					total+=n;
+				}
+			}
+			return total;
+		}
+	</script>
+</html>
