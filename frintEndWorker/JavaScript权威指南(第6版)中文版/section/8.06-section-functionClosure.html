@@ -17,7 +17,8 @@
 			<dd>实现闭包</dd>
 			<dd>函数定义时的作用域链到函数执行时依然有效,我们将作用域链描述为一个对象列表,不是绑定的栈,每次调用javascript函数的时候,都会为之创建一个新的对象用来保存局部变量,把这个对象添加至作用域链中,当函数返回时候,就从作用域链中将这个绑定比那里的对象删除,如果不存在嵌套的函数,也没有其他引用指向这个绑定对象,它会被当做垃圾回收掉,如果定义了嵌套函数,每个嵌套的函数各自对应一个作用域链,并且这个作用域链指向一个变量绑定对象，但如果这些嵌套的函数对象在外部函数中保存下来,那么它们也会和所指的变量绑定对象以一样当做垃圾回收但是如果这个函数定义了嵌套的函数并将它作为返回值返回或者存储在某个属性里面,这时就会有一个外部引用指向这个嵌套的函数,它不会被回收并且它所指向的变量绑定对象也不会被回收</dd>
 			<dd>闭包可以捕捉到单个函数调用的局部变量,并将这些局部变量用做私有状态</dd>
-			<dd>this值在闭包的时候需要注意,this在函数中和argument有关系，因此闭包无法直接访问外部函数的参数数组,除非外部函数将参数数组保存到另外的变量中</dd>
+			<dd>this是javascript的关键字而不是变量.每个函数调用都包含一个this值,如果闭包在外部函数里是无法访问this的.除非外部函数将this转化为变量. 绑定arguments的问题与之类似,arguments并不是一个关键字，但在调用每个函数时都会自动声明它,b\b\闭包具有自己所绑定的argumets,因此闭包无法直接访问外部函数的参数数组</dd>
+
 		</dl>
 	</body>
 	<script type="text/javascript">
@@ -59,14 +60,59 @@
 		}
 	}
 	var a=counter(),d=counter();
-		console.info('a.count()',a.count())	
+		console.info('a.count()',a.count())
 		console.info('a.count()',a.count())
 		console.info('a.count()',a.count())
 		console.info('a.count()',a.count())
 		console.info('b.reset()',a.reset())
-		console.info('a.count()',a.count())	
 		console.info('a.count()',a.count())
 		console.info('a.count()',a.count())
 		console.info('a.count()',a.count())
+		console.info('a.count()',a.count())
+
+	console.info('-------------------------------闭包实现私有属性存取器方法-----------------------------');
+	/*
+		这个函数给对象o增加了属性存取器方法方法名称为get和set 如果提供了判定函数
+		setter方法就会用它来进行检测参数的合法性,然后存储它
+		如果判定函数返回false,setter方法抛出一个异常
+		这个函数有一个非同寻常之处就是getter和setter函数
+		所操作的属性值并没有存储在对象o中
+		相反,这个值仅仅是保存在函数中的局部变量中
+		getter和setter方法同样是局部函数,因此可以访问这个局部变量
+		也就是说,对于两个存取器方法来说这个变量是私有的
+		没有办法绕过存取器方法来设置或修改这个值
+	*/
+	function addPrivateProperty(o,name,predicate){
+		var value;//这是一个属性值
+		o['get'+name]=function(){return value};//getter方法简单地将其返回
+		//setter方法首先檢查是否合法,若不合法就抛出异常,否則就將其存儲起來
+		o['set'+name]=function(v){
+			if(predicate && !predicate(v)){
+				throw Error('set'+name+':invalid value'+v);
+			}else
+			value =v;
+		}
+	}
+	var o={};
+	console.info('o={}',o);
+	/**
+		增加属性存取其器方法getName()和setName()
+		确保只允许字符值
+	*/
+	addPrivateProperty(o,'Name',function(x){return typeof x == 'string'})
+	console.info('addPrivateProperty(o,"Name",function(x){return typeof x == "string"})');
+	o.setName('frank');
+	console.info('o.getName()',o.getName());
+	// 错误的提示
+	// console.info('o.setName(0)',o.setName(0));
+	console.info('在同一个作用域链中定义两个闭包,闭包共享同样的私有变量或变量,这是一种非常重要的技术,但还是要特别小心那些不希望共享变量往往不经意间共享给其他的闭包')
+	function constfunc(v){return function(){return v;}}//这个函数返回一个总是返回v的函数
+	//创建一个数组用来存储常数函数
+	var funcs=[];
+	for(var i=0;i<10;i++){
+		funcs[i]=constfunc(i);
+	}
+	console.info('funcs',funcs,'funcs[3]',funcs[3],'funcs[3]()',funcs[3]());
+	console.info('创建10个闭包,并将它们存储到一个数组中.这些闭包都是在同一个函数调用定义的因此可以共享变量i,关联到闭包的作用域链都是"活动的",嵌套的函数不会将作用域内的私有成员复制一份,也不会对所绑定的变量生成静态快照')
 	</script>
 </html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+(<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -8,13 +8,84 @@
 	<body>
 		<dl>
 			<dt>8.7函数属性,方法和构造函数</dt>
-			<dd></dd>
+			<dd>我们看到javascript程序中,函数是值.对函数执行typeof 运算返回字符串function,但是函数时javascript中特殊的对象</dd>
+			<dd>function有属性和方法因为它是特殊的对象,function()构造函数来创建新的函数对象.</dd>
+
+			<dt>8.7.1length属性</dt>
+			<dd>在函数体里,arguments.length表示传入的函数的实参的个数而函数本身的length属性则有着不同含义.函数的length属性只读屬性,它代表函數实参的数量</dd>
+			<dd>严格讲,闭包内的逻辑可以使用this的,但这个this和当初定义函数时的this不是同一个,即便是同一个this,this的值是随着调用栈的变化而变化的,而闭包里的逻辑所取到的this的值也是不确定的,因此外部函数内的闭包是可以使用this的但非常小心地使用菜行</dd>
+
+			<dt>8.7.2 prototype属性</dt>
+			<dd>每個函數都包含一個prototype屬性,这个属性是指向一个对象的引用,这个对象称做'原型对象'</dd>
+			<dd>每一个函数都包含不同的原型对象,当将函数用做构造函数的时候,新创建的对象会原型对象上继承属性</dd>
+
+			<dt>8.7.3call()方法和apply()方法</dt>
+			<dd>我们可以将call()和apply()看做是某个对象的方法,通过调用方法的形式间接调用函数</dd>
+			<dd>call()和apply()第一个实参是要调用函数的母对象,他是调用上下文,在函数体内通过this来获得对它的引用.</dd>
+			<dd>在ecmascript5严格模式中call和apply第一个实参都会变成this,不管串null或者undefined</dd>
+			<dd>apply传入的实参形式和call有所不同,它的实参都放在一个数组中</dd>
+			<dd>apply()和call()区别:apply()接收参数数组,call()接收参数列表</dd>
+		<dd>apply方法調用一個具有給定this值得函數,以及作爲一個數組,以及作爲一个数组(或类似数组对象)体公的参数</dd>
+			<dd>call()方法使用一个指定的this值和单独给出的一个或多个参数来调用一个函数</dd>
+
+			<dt>8.7.4 bind()方法</dt>
+			<dd>bind()是在</dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
 	'user static';
-	console.info('------------------------------8.7函数属性,方法和构造函数------------------------------');
+	console.info('------------------------------8.7.1 length属性------------------------------');
+	/*这个函数使用arguments.callee,因此它不能再严格模式下工作*/
+	function check(args){
+		var actual=args.length;//实参的真实个数
+		var expected=args.callee.length;//期望的实参个数
+		if(actual!=expected){
+			throw Error('Expected:'+expected+'args;got:'+actual);
+		}
+	}
+	function f(x,y,z){
+		check(arguments);
+		return x+y+z;
+	}
+	// console.info('f(1,2,3)',f(1,2,3));
+	// console.info('f(1,2,3,4)',f(1,2,3,4));
 
-	
+	console.info('------------------------------8.7.3 call()和apply()方法------------------------------');
+	var o={a:0};
+	console.info('要想对象o的方法来调用函数f(),可以使用call()和apply()')
+	console.info('o.m=f',o.m=f,'//将f存储为o的临时方法');
+	console.info('o.m()',o.m(1,2,3),'//调用它，不传入参数');
+	console.info('delete o.m',delete o.m,'//将临时方法删除');
+	console.info('------------------------------apply()方法------------------------------');
+	var number=[2,34,545,1,323,4];
+	console.info('Math.max.apply(null,number)',Math.max.apply(null,number));
+	console.info('Math.min.apply(this,number)',Math.min.apply(this,number));
+	console.info('------------------------------call()方法------------------------------');
+	function Product(name,price){
+		this.name=name;
+		this.price=price;
+	}
+	function Food(name,price){
+		Product.call(this,name,price);
+		this.cateory='food';
+	}
+	console.info('new Food("cheese",5).name',new Food('cheese',5));
+	/*
+		将对象o中的名为m()的方法替换为另一个方法可以调用原始的方法之前和之后记录日志消息
+		动态修改已有方法的做法:monkey-patching
+	*/
+	function trace(o,m){
+		var original=o[m];//闭包中保存原始方法
+		o[m]=function(){
+			console.info(new Date(),'Entering:',m);
+			var result=original.apply(this,arguments);
+			console.info(new Date(),'Entering:',m);
+			return result;
+		}();
+	}
+	var o={a:function(){
+		console.info(123);
+	}}
+	console.info('trace(o,o.a())',trace(o,'a'));
 	</script>
 </html>
