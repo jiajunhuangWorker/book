@@ -29,7 +29,31 @@
 			<dd>call()方法使用一个指定的this值和单独给出的一个或多个参数来调用一个函数</dd>
 
 			<dt>8.7.4 bind()方法</dt>
-			<dd>bind()是在</dd>
+			<dd>bind()是在ECMASCRIPT5中新增的方法,但在ecmascript3中可以轻易模拟bind()</dd>
+			<dd>方法主要作用就是将函数绑定至某个对象.当在函数f()上调用bind()方法并传入一个对象o作为参数,这个方法将返回一个新的函数.</dd>
+			<dd>调用新的函数将会把原始的函数f()当做o的方法来调用.传入新函数的任何实参都将传入原始函数</dd>
+			<dd>泛函数也叫泛函,在这里特指一种变换,以函数为输入,输出可以是值也可以是另一个函数.</dd>
+			<dd>bind()方法不仅仅是将函数绑定至一个对象,它还附带一些其他应用:</dd>
+			<dd>除了第一个实参之外,传入bind()实参也会绑定至this,这种函数式编程技术成为柯里化</dd>
+			<dd>真正的bind方法返回一个函数对象,这个函数对象的length属性时绑定函数的形参个数减去绑定实参的个数</dd>
+			<dd>ecmascript5的bind()方法可以顺带用做构造函数.如果bind返回的函数用做构造函数,将忽略传入bind()的this,原始函数就会以构造函数的形式调用,其实参也已经绑定 
+			</dd>
+			<dd>bind方法所返回的函数并不包含prototype属性,并且将这些绑定的函数用做构造函数时所创建的对象从原始的未绑定的构造函数中继承prototype</dd>
+			<dd>在使用instanceof运算符时,绑定构造函数和未绑定构造函数并无两样</dd>
+			
+			<dt>8.7.5toString()方法</dt>
+			<dd>凡是对象都会有这个方法</dd>
+
+			<dt>8.7.6Function()构造函数</dt>
+			<dd>不管是通过函数定义语句还是函数直接量表达式,函数的定义都要使用Function关键字,Function()构造函数定义</dd>
+			<dd>Function()构造函数允许javascript在运行时动态地创建并编译函数</dd>
+			<dd>每次调用function()构造函数都会解析函数体,并创建新的函数对象.如果是在一个循环或者多次调用的函数中执行这个构造函数,执行效率会受影响,相比之下,循环中的嵌套函数和函数定义表达式则不会每次执行时都重新编译</dd>
+			<dd>它所创建的函数并不是使用词法作用域,相反,函数体代码的编译总是会顶层函数执行</dd>
+			
+			<dt>8.7.7可调用的对象</dt>
+			<dd>'类数组对象'并不是真正的数组,但大部分场景下可以将其当做数组来对待.函数也存在类似的情况,'可调用的对象'是一个对象，可以在函数调用表达式中调用这个对象,所有的函数都是可调用的,并非所有的可调用对象都是函数(demo:window.alert()和document.getElementById()) </dd>
+			<dd>使用了可调用的宿主对象,而不必是内置函数对象</dd>
+			<dd>RegExp对象是可调用对象,可以直接调用,这比调用它的exec()方法更快捷一些</dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
@@ -87,5 +111,80 @@
 		console.info(123);
 	}}
 	console.info('trace(o,o.a())',trace(o,'a'));
+	console.info('------------------------------8.7.4bind()方法------------------------------');
+	function bindF(y){
+		return this.x+y;
+	}
+	var bindO={x:1};
+	var bindG=bindF.bind(bindO);
+	console.info('bindG(4)',bindG(4));
+
+	/*
+		返回一个函数,通过调用它来调用o中的方法f().传递所有的实参
+	*/
+	function bind(f,o){
+		if(f.bind) return f.bind(o);//如果bind()方法存在的话使用bind 方法
+		else
+		return function(){	//否则,这样绑定
+			return f.apply(o,arguments);
+		}
+	}
+	console.info('------------------------------函数式编程------------------------------');
+	var sum=function(x,y){return x+y};//返回两个实参的和值
+	/*
+		创建一个类似sum的新函数,但this的值绑定到null
+		并且第一个参数绑定到1，这个心的函数期望只传入一个实参
+	*/
+	var sum=function(x,y){return x+y};
+	var succ=sum.bind(this,1);
+	console.info(succ,'succ(2)',succ(2));
+	
+	function sum2(y,z){return this.x+y+z};
+	var sugg=sum2.bind({x:1},2);
+		console.info(sugg,'sugg(3)',sugg(3));
+	console.info('------------------------------Function.prototype.bind------------------------------');
+	if(!Function.prototype.bind){
+		Function.prototype.bind=function(o){
+			/*
+				将this和arguments的值保存至变量中
+				以便在后面嵌套的函数中可以使用它们
+			*/
+			var self=this,boundArgs=arguments;
+			/*
+				bind()方法的返回值是一个函数
+			*/
+			return function(){
+				//创建一个实参列表,将传入bind()的第二个及后续的实参都传入这个函数
+				var args=[],i;
+				for(i=1;i<boundArgs.length;i++) args.push(boundArgs[i]);
+				for(i=0;i<arguments.length;i++) args.push(arguments[i]);
+				//现在将self作为o的方法来调用.传入这些实参
+				return self.apply(o,args);
+			}
+		}
+	}
+	console.info('Function.prototype',Function.__proto__)
+	console.info('Function.__proto__ === Function.prototype',Function.__proto__ === Function.prototype);
+	
+	console.info('------------------------------8.7.6Function()------------------------------');
+	var f=new Function('x','y','return x*y');
+	var fs=function(x,y){return x*y};
+	console.info(f,'和',fs,'基本等价');
+
+	var scope='global';
+	function constructFunction(){
+		var scope='local';
+		return new Function('return scope');//无法捕获局部作用域
+	}
+	/*
+		这一行代码返回global,因为通过function()构造函数
+		所返回的函数使用的不是局部作用域
+	*/
+	console.info('constructFunction()()',constructFunction()());
+	console.info('------------------------------8.7.7可调用的对象------------------------------');
+	function isFunction(x){
+		return Object.prototype.toString.call(x) === '[object Function]'
+	}
+	console.info('isFunction(function(){})',isFunction(function(){}));
 	</script>
 </html>
