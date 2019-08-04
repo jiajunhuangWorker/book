@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>9.3javascript中java式的类继承</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>9.3javascript中java式的类继承</dt>
+			<dd>
+				实例字段<br>
+				它们是基于实例属性或变量,用以保存独立对象的状态<br>
+				实例方法<br>
+				它们是类的所有实例所共享的方法,由每个独立的实例调用<br>
+				类字段<br>
+				这些属性或变量是属于类的,而不是属于类的某个实例的<br>
+				类方法<br>
+				这些方法是属于类的,而不是属于类的某个实例的
+			</dd>
+			<dd>javascript和java区别: <br>	
+			javascript中函数都是以值得形式出现,方法和字段之间并没有太大区别,javascript中的类牵扯三种不同对象
+			</dd>
+			<dd>
+				<table>
+					<thead>
+						<tr>
+							<th>构造函数对象</th>
+							<th>原型对象</th>
+							<th>实例对象</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>之前提到,构造函数为javascript的类定义了名字.任何添加到这个构造函数对象中属性都是类字段和类方法(如果属性值时函数的话就是类方法)</td>
+							<td>原型对象的属性被类的所有实例所继承,如果原型对象的属性时函数的话,这个函数就作为类的实例方法来调用</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------9.3javascript中java式的类继承------------------------------');
+	</script>
+</html>
