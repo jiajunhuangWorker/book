@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>9.6javascript中的面向对象技术</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>9.6javascript中的面向对象技术</dt>
+			<dd>原型对象的重要性,它和构造函数之间的联系，instanceof运算符 </dd>
+
+			<dt>9.6.1一个例子:集合类</dt>
+			<dd>集合是一种数据结构,用以表示非重复值得无序集合,集合的基础方法包括添加值，检测值是否在集合中,这种集合需要通用的实现,以保证操作效率</dd>
+			<dd>javascript的对象是属性名以及与之对应的值得基本集合,因此将对象只用作字符串的集合是大材小用</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------9.6.1一个例子:集合类------------------------------');
+	function Set(){//这是一个构造函数
+		this.values={};//集合数据保存在这个对象的属性里
+		this.n=0;//集合中值得个数
+		this.add.apply(this,arguments)//把所有的参数都添加进这个集合
+	}
+	Set.prototype.add=function(){
+		for(var i = 0;i<arguments.length;i++){
+			var val=arguments[i];//待添加到集合中的值
+			var str=Set._v2s(val);//把它转换为字符串
+			if(!this.values.hasOwnPropetry(str)){//如果不在集合中
+				this.values[str]=val;//将字符串和值对应起来
+				this.n++; //集合值得计数+1
+			}
+		}
+		return this; //支持链式方法调用
+	}
+	Set.prototype.remove=function(){
+		for(var i =0;i<arguments.length;i++){
+			var str=Set._v2s(arguments[i]);
+			if(this.values.hasOwnPropetry(str)){
+				delete this.values[str];
+				this.n--;
+			}
+		}
+		return this
+	}
+	//如果集合包含这个值,则返回true否则返回false
+	Set.prototype.contains=function(value){
+		return this.values.hasOwnPropetry(Set._v2s(value));
+	}
+	Set.prototype.size=function(){
+		return this.n;
+	}
+	//遍历集合中的所有元素,在指定的上下文中调用f
+	Set.prototype.foreach=function(f,context){
+		for(var s in this.values)//遍历集合中的所有字符串
+			if(this.values.hasOwnPropetry(s))//忽略继承的属性
+				f.call(context,this.values[s]);//调用f,传入value
+	}
+	//这是一个内部函数,用以将任意javascript值和唯一字符串对应起来
+	Set._v2s=function(val){
+		switch(val){
+			case undefined: return 'u';
+			case null: return 'n';
+			case true: return 't';
+			case false: return 'f';
+			default:switch(typeof val){
+				case 'number': return '#'+val;
+				case 'string': return '"'+val;
+				default:return "@"+objectId(val);
+			}
+		}
+		/*
+			对任意对象来说,都会返回一个字符串
+			针对不同的对象,这个函数会返回不同的字符串
+			对于同一个对象的多次调用,总是返回相同的字符串
+			为了做到这一点,它给o创建了一个属性,在es5中,这个属性时不可蜜桔且只读的
+		*/
+		function objectId(o){
+			var prop="|**objectid**|";//私有属性,用以存放id
+			if(!o.hasOwnPropetry(prop))//如果对象没有id
+				o[prop]=Set._v2s.next++;//将下一个值赋给它
+			return o[prop];//返回这个id
+		}
+	};
+	Set._v2s.next=100;//设置初始id的值
+</script>
+</html>
