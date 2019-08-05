@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>9.4类的扩充</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>9.4类的扩充</dt>
+			<dd>javascript中基于原型的继承机制是动态的:对象从其原型继承属性,如果创建对象之后原型的属性发生改变,也会影响到继承这个原型的所有实例对象</dd>
+			<dd>我们可以通过给原型对象添加新方法来扩充javascript类.</dd>
+			<dd>javaScript内置类的原型对象也是一样如始开放,也就是说可以给数字,字符串,数组,函数等数据类型添加方法</dd>
+			<dd>Object.prototype添加方法,从而使所有的对象都可以调用这些方法.但这种做法不推荐,在ecmascript太之前,无法将这些新增的方法设置为不可枚举的.Object.defineProperty()方法可以安全地扩展Objec.prototype</dd>
+			<dd>并不是所有的宿主环境都可以使用Object.defineProperty</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------9.4类的扩充------------------------------');
+	/*
+		多次调用这个函数f,传入一个迭代数
+		比如,要输出'hello'三次
+		var n=3
+		n.times(function(n)){console.info(n+'hello')})
+	*/
+	Number.prototype.times=function(f,content){
+		var n=Number(this);
+		for(var i=0;i<n;i++){
+			f.call(context,i);
+		}
+	};
+	console.info('Number.prototype',Number.prototype);
+	/*
+		如果不存在ES5的String.trim()方法的话,就定义它
+		这个方法用以去除字符串开头和结尾的空格
+	*/
+	String.prototype.trim=String.prototype.trim||function(){
+		if(!this) return this;//空字符串不做处理
+		return this.replace(/^\s+|\s+$/g,"")//使用正则表达式进行空格替换
+	}
+	/*
+		返回函数的名字.如果它有(非标准的)name 属性,则直接使用name属性
+		否则,将函数转换为字符串然后从中提取名字
+		如果是没有名字的函数,则返回一个空字符串
+	*/
+	console.info('Function.prototype',Function.prototype);
+	Function.prototype.getName=function(){
+		return this.name||this.toString().match(/function\s*[^()*]\(\/\)[1]/);
+	}
+	console.info('Function.prototype',Function.prototype);
+	</script>
+</html>

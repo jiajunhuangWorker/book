@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>9.5类和类型</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>9.5类和类型</dt>
+			<dd>javascript定义了少量的数据类型:null,undefined,boolean,number,string,function,object</dd>
+			<dd>typeof运算符可以得出值得类型</dd>
+			<dd>我们往往希望将类作为类型来对待,这样就可以根据对象所属的类来区分它们</dd>
+			<dd>javascript语言核心中的内置对象(通常是指客户端javascript的宿主对象)可以根据它们的calss属性来区分彼此</dd>
+			<dd>三种用以检测任意对象的类的技术 instanceof运算符,constructor属性,以及构造函数的名字</dd>
+			<dd>鸭式辩型:这种编程哲学更加关注对象可以完成什么工作而不是对象属于哪个类</dd>
+
+			<dt>9.5.1 instanceof运算符</dt>
+			<dd>左操作数是待检测其类的对象,右操作数是定义类的构造函数</dd>
+			<dd>构造函数是类的公共标识,但原型是唯一的标识,instanceof 在计算过程上是检测对象的继承关系,而不是检测创建对象的构造函数</dd>
+			<dd>检测对象的原型链上是否存在某个特定的原型对象,不适用构造函数作为中介的方法isPrototypeOf()方法</dd>
+			<dd>instanceof和isPrototypeOf()方法的缺点是</dd>
+			<dd>1.我们无法通过对象来获得类名,只有能检测对象是否属于指定的类名</dd>
+			<dd>2.多窗口和多框架子页面的web应用中兼容不佳.每个窗口和子框架子页面都具有单独的执行上下文,每个上下文都包含独有的全局变量和一组构造函数</dd>
+			<dd>3.两个不同框架页面中创建的两个数组继承自两个相同但相互独立的原型对象,其中一个框架页面中的数组不是另一个框架页面的Array()构造函数的实例</dd>
+
+			<dt>9.5.2constructor属性</dt>
+			<dd>识别对象是否属于某个方法使用constructor属性</dd>
+			<dd>使用constructor属性检测对象属于某个类的技术的不足之处和instanceof一样</dd>
+
+			<dt>9.5.3构造函数的名称</dt>
+			<dd>使用instanceof运算符和constructor属性来检测对象所属的类有一个主要的问题,在多个执行上下文中存在构造函数的多个副本的时候,这两个方法检测结果出错</dd>
+			<dd>一种可能的解决方案是使用构造函数的名字而不是构造函数本身作为类标识符</dd>
+			<dd>一个窗口里的Array构造函数和另一个窗口的Array构造函数是不相等的,但是它们的名字是一样的</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------9.5.1 instanceof运算符------------------------------');
+	function Extend(x){
+		this.x=x;
+	}
+	Extend.prototype.say=function(){
+		return console.info(x);
+	}
+	var a=new Extend(1);
+	console.info('a instanceof Extend',a instanceof Extend,'a:',a);
+	var s=a;
+	console.info('s instanceof Extend',s instanceof Extend,'s:',s);
+
+	console.info('------------------------------9.5.1 isPrototypeOf运算符------------------------------');
+	console.info('typeof Extend.prototype',typeof Extend.prototype);
+	console.info('Extend.prototype.isPrototypeOf(s)',Extend.prototype.isPrototypeOf(s));
+
+	console.info('------------------------------9.5.2constructor属性------------------------------');
+	function typeAndValue(x){
+		if(x==null) return '';//null和undefined没有构造函数
+		switch(x.constructor){
+			case Number:return 'Number:'+x;
+			case String:return 'String:'+x;
+			case Date:return 'Date:'+x;
+			case RegExp:return 'RegExp':+x;
+			case Complex:return 'Complex':+x;
+		}
+	}
+
+	</script>
+</html>
