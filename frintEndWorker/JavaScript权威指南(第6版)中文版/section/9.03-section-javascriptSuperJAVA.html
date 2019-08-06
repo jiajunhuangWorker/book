@@ -52,23 +52,36 @@
 	methods:实例的方法,赋值至原型中
 	statics:类属性,复制至构造函数中
 	*/
+	var extend=function extend(o,p){
+		/*
+			工具函数来操控对象的属性extend()函数
+			把P中的可美剧属性赋值到o中并返回o
+			如果o和p中含有同名属性则覆盖o中的属性
+			这个函数并不处理getter和setter以及复制属性
+		*/
+		//弥补了IE中一些bug
+		for(prop in p){
+			o[prop]=p[prop];
+		}
+		return o;
+	}
 	//一个用以定义简单类的函数
 	function defineClass(constructor,methods,statics){
-		// if(methods) extend(constructor.prototype,methods);
-		// if(statics) extend(constructor,statics);
+		if(methods) extend(constructor.prototype,methods);
+		if(statics) extend(constructor,statics);
 		return constructor;
 	}
-		//这是Range的另一个实现
-		var SimpleRange=defineClass(
-			function(f,t){this.f=f;this.t=t;},
-			{
-				includes:function(x){return this.f <= x && x<=this.t},
-				toString:function(){return this.f +"..."+this.t}
-			},
-			{
-				upto:function(t){return new SimpleRange(o,t);}
-			}
-		)
+	//这是Range的另一个实现
+	var SimpleRange=defineClass(
+		function(f,t){this.f=f;this.t=t;},
+		{
+			includes:function(x){return this.f <= x && x<=this.t},
+			toString:function(){return this.f +"..."+this.t}
+		},
+		{
+			upto:function(t){return new SimpleRange(o,t);}
+		}
+	)
 		console.info('java式的类成员');
 		/*
 			类字段(比如常量)和类方法直接定义为构造函数的属性

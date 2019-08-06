@@ -8,13 +8,32 @@
 	<body>
 		<dl>
 			<dt>9.6javascript中的面向对象技术</dt>
-			<dd>原型对象的重要性,它和构造函数之间的联系，instanceof运算符 </dd>
+			<dd>原型对象的重要性,它和构造函数之间的联系,instanceof运算符 </dd>
 
 			<dt>9.6.1一个例子:集合类</dt>
 			<dd>集合是一种数据结构,用以表示非重复值得无序集合,集合的基础方法包括添加值，检测值是否在集合中,这种集合需要通用的实现,以保证操作效率</dd>
 			<dd>javascript的对象是属性名以及与之对应的值得基本集合,因此将对象只用作字符串的集合是大材小用</dd>
+
+			<dt>9.6.2一个例子:枚举类型</dt>
+			<dd>枚举类型是一种类型,它是一种类型,它是值的有限集合,如果值定义为这个类型则该值是可列出(或'可枚举')的</dd>
+			<dd>在C及派生语言中,枚举类型是通过关键字enum声明的,Enum是ECMASCRIPT5的保留字</dd>
+			<dd>demo:enumeartion不是构造函数,它是一个工厂方法,每次调用它都会创建并返回一个新类</dd>
+
+			<dt>9.6.3标准转换方法</dt>
+			<dd>对象类型转换所用的重要方法,有一些方法是在需要做类型转换时由javascript解析器自动调用的.不需要为东一的每个类都实现这些方法,但这些方法的确非常重要,如果没有为自定义的类实现这些语法,也应当是有意为之,而不应当因为疏忽而漏掉了它们</dd>
+			<dd>toLocaleString是以本地敏感性的方式来将对象转换为字符串。默认情况下,对象所继承的toLocaleString方法只是简单的调用toString方法</dd>
+			<dd>valueOf将对象转换为原始值,作用于数字文字表达的对象时会调用</dd>
+			<dd>toJSON(),JSON格式同于序列化良好的数据结构</dd>
+			<dd>extend函数的用法向Set.prototype添加方法</dd>
+
+			<dt>9.6.4比较方法</dt>
+			<dd>javascript的相等运算符比较对象时,比较的是引用而不是值,也就是说,给定两个对象引用,如果要看它们是否指向同一个对象,不是检查这两个对象是否具有相同的属性名和相同的属性值,而使直接比较这两个单独的对象是否相等,或者比较它们顺序(<和>)运算符进行的比较一样.如果定义一个类,并且希望比较类的实例,应该定义合适的方法来执行比较操作</dd>
+
+			<dt>9.6.5方法借用</dt>
+			<dd></dd>
 		</dl>
 	</body>
+	<script type="text/javascript" src="../js/Complex.js"></script>
 	<script type="text/javascript">
 	'user static';
 	console.info('------------------------------9.6.1一个例子:集合类------------------------------');
@@ -27,7 +46,7 @@
 		for(var i = 0;i<arguments.length;i++){
 			var val=arguments[i];//待添加到集合中的值
 			var str=Set._v2s(val);//把它转换为字符串
-			if(!this.values.hasOwnPropetry(str)){//如果不在集合中
+			if(!this.values.hasOwnProperty(str)){//如果不在集合中
 				this.values[str]=val;//将字符串和值对应起来
 				this.n++; //集合值得计数+1
 			}
@@ -37,7 +56,7 @@
 	Set.prototype.remove=function(){
 		for(var i =0;i<arguments.length;i++){
 			var str=Set._v2s(arguments[i]);
-			if(this.values.hasOwnPropetry(str)){
+			if(this.values.hasOwnProperty(str)){
 				delete this.values[str];
 				this.n--;
 			}
@@ -46,7 +65,7 @@
 	}
 	//如果集合包含这个值,则返回true否则返回false
 	Set.prototype.contains=function(value){
-		return this.values.hasOwnPropetry(Set._v2s(value));
+		return this.values.hasOwnProperty(Set._v2s(value));
 	}
 	Set.prototype.size=function(){
 		return this.n;
@@ -54,7 +73,7 @@
 	//遍历集合中的所有元素,在指定的上下文中调用f
 	Set.prototype.foreach=function(f,context){
 		for(var s in this.values)//遍历集合中的所有字符串
-			if(this.values.hasOwnPropetry(s))//忽略继承的属性
+			if(this.values.hasOwnProperty(s))//忽略继承的属性
 				f.call(context,this.values[s]);//调用f,传入value
 	}
 	//这是一个内部函数,用以将任意javascript值和唯一字符串对应起来
@@ -78,11 +97,239 @@
 		*/
 		function objectId(o){
 			var prop="|**objectid**|";//私有属性,用以存放id
-			if(!o.hasOwnPropetry(prop))//如果对象没有id
+			if(!o.hasOwnProperty(prop))//如果对象没有id
 				o[prop]=Set._v2s.next++;//将下一个值赋给它
 			return o[prop];//返回这个id
 		}
 	};
-	Set._v2s.next=100;//设置初始id的值
+	var setObject=new Set();
+	console.info(setObject);
+	console.info('setObject(1,2,3,4,5)',setObject.add(1,2,3,4,5));
+	// console.info('Set._v2s.next=100',Set._v2s.next=100);//设置初始id的值
+
+	console.info('------------------------------9.6.2一个例子:枚举类型------------------------------');
+	/*
+	这个函数创建一个新的枚举类型,实参对象表示类的每个实例的名字和值
+	返回值是一个构造函数,它标识这个新类
+	注意这个构造函数也会抛出异常:不能使用他来创建该类型的新实例
+	返回的构造函数包含名/值对的映射表
+	包括由值组成的数组,以及一个foreach()迭代器函数
+	*/
+	function inherit(obj){
+		if(obj == null) throw TypeError();
+		if(Object.create){
+			return Object.create(obj);
+			var t = typeof obj;
+			if(t !== 'object' && t !== 'fucntion'){
+				function f(){
+					f.prototype=obj;
+					return new f();
+				}
+			}
+		}
+
+	}
+	function enumeration(namesToValues){
+		//这个虚拟的构造函数是返回值
+		var enumeration=function(){
+			throw 'Con"T Instantiate Enumerations';
+		}
+		//枚举值继承自这个对象
+		var proto=enumeration.prototype={
+			constructor:enumeration,//标识类型
+			toString:function(){return this.name;},//返回名字
+			valueOf:function(){return this.value;},//返回值
+			toJSON:function(){return this.name;}//z转换为JSON
+		}
+		/*存放枚举对象的数组*/
+		enumeration.values=[];
+		/*现在创建新类型的实例*/
+		for(name in namesToValues){
+			var e=inherit(proto);//创建一个代表它的对象
+			e.name=name;//给它一个名字
+			e.value=namesToValues[name];//给它一个值
+			enumeration[name]=e;//将它设置为构造函数的属性
+			enumeration.values.push(e);//将它存储到值数组中
+		}
+		//一个类方法,用来对类的实例进行迭代
+		enumeration.foreach=function(f,c){
+			for(var i=0;i<this.values.length;i++){
+				f.call(c,this.values[i]);
+			}
+		}
+		return enumeration;
+	}
+	var Coin=enumeration({Penny:1,Nickel:5,Dime:10,Quarter:25});
+	var c = Coin.Dime;
+	console.info('c instanceof Coin',c instanceof Coin);
+	console.info('c.constructor == Coin)',c.constructor == Coin);
+	console.info('Coin.Quarter +3*Coin.Nickel',Coin.Quarter +3*Coin.Nickel);
+	console.info('Coin.Dime > Coin.Nickel',Coin.Dime > Coin.Nickel);
+	console.info('String(Coin.Dime)+:+Coin.Dime',String(Coin.Dime)+':'+Coin.Dime);//它会调用对应的继承方法
+	/*使用枚举类型来标识一副扑克牌*/
+	function Card(suit,rank){
+		this.suit=suit;//每张牌都有花色
+		this.rank=rank;//以及点数
+	}
+	//使用枚举类型定义花色和点数
+	Card.Suit=enumeration({Clubs:1,Diamond:2,Hearts:3,Spades:4});
+	Card.Rank=enumeration({Two:2,Three:3,Four:4,Five:5,Six:6,Seven:7,Eight:8,Nine:9,Ten:10,Jack:11,Queen:12,King:13,Ace:14});
+	//定义用哪个以描述牌面的文本
+	Card.prototype.toString=function(){
+		return this.rank.toString()+'of'+this.suit.toString();
+	}
+	// 比较扑克牌中的两张牌大小
+	Card.prototype.compareTo=function(that){
+		if(this.rank<that.rank) return -1;
+		if(this.rank>that.rank) return 1;
+		return 0;
+	}
+	// 以扑克牌的玩法规则对牌进行排序的函数
+	Card.orderByRank=function(a,b){return a.compareTo(b);};
+	//以桥牌的玩法规则对扑克牌进行排序的函数
+	Card.orderBySuit=function(a,b){
+		if(a.suit<b.suit) return -1;
+		if(a.suit>b.suit) return 1;
+		if(a.rank<b.rank) return -1;
+		if(a.rank>b.rank) return 1;
+		return 0;
+	}
+	//定义用以表示一副标准扑克牌的类
+	function Deck(){
+		var cards=this.cards=[];//一副牌就是由牌组成的数组
+		Card.Suit.foreach(function(s){//初始化这个数组
+			Card.Rank.foreach(function(r){
+				cards.push(new Card(s,r));
+			})
+		})
+	}
+	//洗牌的方法:重新洗牌并返回喜洗好的牌
+	Deck.prototype.shuffle=function(){
+		//遍历数组中的每个元素,随机找出牌面最小的元素,并与之(当前遍历的元素)交换
+		var deck=this.cards,len=deck.length;
+		for(var i =len - 1;i>0;i--){
+			var r=Math.floor(Math.random()*(i+1)),temp;//随机数
+			temp=deck[i],deck[i]=deck[r],deck[r]=temp;//交换
+		}
+		return this;
+	}
+	// 发牌的方法:返回牌的数组
+	Deck.prototype.deal=function(n){
+		if(this.cards.length<n) throw 'Out of cards';
+		return this.cards.splice(this.cards.length - n ,n);
+	}
+	var extend=function extend(o,p){
+		/*
+			工具函数来操控对象的属性extend()函数
+			把P中的可美剧属性赋值到o中并返回o
+			如果o和p中含有同名属性则覆盖o中的属性
+			这个函数并不处理getter和setter以及复制属性
+		*/
+		//弥补了IE中一些bug
+		for(prop in p){
+			o[prop]=p[prop];
+		}
+		return o;
+	}
+	//创建一副新的扑克牌,洗牌并发牌
+	var deck=(new Deck()).shuffle();
+	var hand=deck.deal(13).sort(Card.orderBySuit);
+	console.info('deck',deck);
+	console.info('hand',hand);
+	console.info('------------------------------9.6.3标准转换方法------------------------------');
+	extend(Set.prototype,{
+		//将集合转换为字符串
+		toString:function(){
+			var s="{",
+			i=0;
+			this.foreach(function(v){s+=((i++>0)?",":"")+v;});
+			return s+"}";
+		},
+		//类似toString,但是对于所有的值都将调用toLocaleString()
+		toLocaleString:function(){
+			var s="{",i=0;
+			this.foreach(function(v){
+				if(i++>0) s+=",";
+				if(v==null) s+=v;//null和undefined
+				else s+=v.toLocaleString();//其他情况
+			});
+			return s+"}";
+		},
+		//将集合转换为值数组
+		toArray:function(){
+			var a=[];
+			this.foreach(function(v){a.push(v)});
+			return a;
+		}
+	})
+
+	//对于要从JSON转换为字符串的集合都被当做数组来对待
+	Set.prototype.toJSON=Set.prototype.toArray;
+	console.info('Set.prototype',Set.prototype);
+	console.info('------------------------------9.6.4比较方法------------------------------');
+	//一个用以定义简单类的函数
+	function defineClass(constructor,methods,statics){
+		if(methods) extend(constructor.prototype,methods);
+		if(statics) extend(constructor,statics);
+		return constructor;
+	}
+	//这是Range的另一个实现
+	var Range=defineClass(
+		function(f,t){this.f=f;this.t=t;},
+		{
+			includes:function(x){return this.f <= x && x<=this.t},
+			toString:function(){return this.f +"..."+this.t}
+		},
+		{
+			upto:function(t){return new Range(o,t);}
+		}
+	)
+	//Range类重写它的constructor属性,现在将它添加进去
+	Range.prototype.constructor=Range;
+	/*
+	一个Range对象和其他不是Range的对象均不相等
+	当且仅当两个范围的端点相等,它们才相等
+	*/
+	Range.prototype.equals=function(that){
+		if(that== null) return false;//处理null和undefined
+		if(that.constructor != Range) return false //处理非Rang对象
+		//当且仅当两个端点相等,才返回true
+		return this.from== that.from && this.to ==that.to;
+	}
+	Set.prototype.equals=function(that){
+		//一些次要情况的快捷处理
+		if(this === that) return true;
+		/*
+			如果that对象不是一个集合,它和this不相等
+			我们用到了instanceof,使得这个方法可以用Set的任何子类
+			如果希望采用鸭式辩型的方法,可以降低检查的严格程度
+			或者可以通过this.constructor == that.constructor 来加强检查的严格程度
+			注意,null和undefined两个值是无法用于instanceof运算的
+		*/
+		if(!(that instanceof Set)) return false;
+		//如果两个集合的大小不一样,则它们不相等
+		if(this.size()!=that.size()) return false;
+		/*
+		现在检查两个集合中的元素是否完全一样
+		如果两个集合不相等,则通过抛出异常来种植foreach循环
+		*/
+		try{
+			this.foreach(function(v){
+				if(!that.contains(v)) throw false;
+			});
+			return true; //所有元素都匹配:兩个集合相等
+		}catch(x){
+			if(x === false) return false;//如果集合中有元素在另外一个集合中存在
+			throw x; //重新抛出异常
+		}
+	}
+	Range.prototype.compareTo=function(that){
+		if(!(that instanceof Range)){
+			throw new Error('Can"t compare a Range with'+that);
+			var diff=this.from-that.from;//比较下边界
+			if(diff == 0) diff=this.to - that.to //如果相等,比较上边界
+			return diff;
+		}
+	}
 </script>
 </html>
