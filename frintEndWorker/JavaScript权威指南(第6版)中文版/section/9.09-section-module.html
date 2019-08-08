@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>9.9模块</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>9.9模块</dt>
+			<dd>将代码组织到类中的一个重要原因是,让代码更加'模块化',也可以在很多不同场景中实现代码的重用</dd>
+			<dd>类不是唯一的模块化代码方式</dd>
+			<dd>模块是一个独立的javascript文件</dd>
+			<dd>模块文件可以包含一个类定义,一组相关的类,一个使用函数库或者是一些待执行的代码</dd>
+			<dd>模块化的目标是支持大规模的程序开发,处理分散中diamante的组装,并且能让代码正确运行,哪怕包含了作者所不期望出现的模块代码,也可以正确的执行代码</dd>
+			<dd>所有模块都不应当定义超过一个全局标识</dd>
+
+			<dt>9.91用做命名空间的对象</dt>
+			<dd>模块创建过程中避免污染全局变量的一种方法是使用一个对象作为命名空间</dd>
+			<dd>将函数和值作为命名空间对象属性存储起来,而不是定义全局函数和变量</dd>
+			<dd>命名空间的用法带来冲突原因是因为不明确要使用什么模块</dd>
+
+			<dt>9.92作为私有命名空间的函数</dt>
+			<dd>模块对外到处一些公用api,这些api提供其他程序员使用的,它包括函数,类，属性和方法</dd>
+			<dd>模块的实现需要额外辅助和函数的方法</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------9.91用做命名空间的对象------------------------------');
+	//集合类定义为一个单独的全局，sets是模块的命名空间并且将每个集合类定义为这个对象的属性
+	
+	function Set(){//这是一个构造函数
+		this.values={};//集合数据保存在这个对象的属性里
+		this.n=0;//集合中值得个数
+		this.add.apply(this,arguments)//把所有的参数都添加进这个集合
+	}
+	Set.prototype.add=function(){
+		for(var i = 0;i<arguments.length;i++){
+			var val=arguments[i];//待添加到集合中的值
+			var str=Set._v2s(val);//把它转换为字符串
+			if(!this.values.hasOwnProperty(str)){//如果不在集合中
+				this.values[str]=val;//将字符串和值对应起来
+				this.n++; //集合值得计数+1
+			}
+		}
+		return this; //支持链式方法调用
+	}
+	Set.prototype.remove=function(){
+		for(var i =0;i<arguments.length;i++){
+			var str=Set._v2s(arguments[i]);
+			if(this.values.hasOwnProperty(str)){
+				delete this.values[str];
+				this.n--;
+			}
+		}
+		return this
+	}
+	//如果集合包含这个值,则返回true否则返回false
+	Set.prototype.contains=function(value){
+		return this.values.hasOwnProperty(Set._v2s(value));
+	}
+	Set.prototype.size=function(){
+		return this.n;
+	}
+	//遍历集合中的所有元素,在指定的上下文中调用f
+	Set.prototype.foreach=function(f,context){
+		for(var s in this.values)//遍历集合中的所有字符串
+			if(this.values.hasOwnProperty(s))//忽略继承的属性
+				f.call(context,this.values[s]);//调用f,传入value
+	}
+	//这是一个内部函数,用以将任意javascript值和唯一字符串对应起来
+	Set._v2s=function(val){
+		switch(val){
+			case undefined: return 'u';
+			case null: return 'n';
+			case true: return 't';
+			case false: return 'f';
+			default:switch(typeof val){
+				case 'number': return '#'+val;
+				case 'string': return '"'+val;
+				default:return "@"+objectId(val);
+			}
+		}
+		/*
+			对任意对象来说,都会返回一个字符串
+			针对不同的对象,这个函数会返回不同的字符串
+			对于同一个对象的多次调用,总是返回相同的字符串
+			为了做到这一点,它给o创建了一个属性,在es5中,这个属性时不可蜜桔且只读的
+		*/
+		function objectId(o){
+			var prop="|**objectid**|";//私有属性,用以存放id
+			if(!o.hasOwnProperty(prop))//如果对象没有id
+				o[prop]=Set._v2s.next++;//将下一个值赋给它
+			return o[prop];//返回这个id
+		}
+	};
+	var sets={};
+	// var Set=sets.Set;//将导入到全局命名空间中
+	var s=new Set(1,2,3);//这样每次使用就不必要加set的前缀了
+	console.info('s',s)
+
+	var collections;
+	if(!collections)
+		collections={};
+	collections.sets={};
+	//collections.sets.add=function(){...}
+
+	console.info('------------------------------9.92作为私有命名空间的函数------------------------------');
+	/*
+		声明	全局变量Set,使用一个函数的返回值给赋值
+		函数结束的时候紧跟的一对圆括号说明这个函数定义立即执行
+		它的返回值将赋值给Set,二部是这个函数的赋值给Set
+		注意它是一个函数表达式,不是一条语句，因此函数并没创建全局变量
+
+		这里使用立即执行的函数匿名,这在javascript中是一种惯用法
+	*/
+	var Set=(function invication(){
+		function Set(){//构造函数时局部变量
+		this.values={};//这个对象的属性用来保存这个集合
+		this.n=0;
+		this.add.apply(this,arguments);	//将所有的参数添加集合中
+		}
+		Set.prototype.contains=function(value){
+			return this.values.hasOwnProperty(_v2s(value));
+		}
+	}())
+
+
+	</script>
+</html>

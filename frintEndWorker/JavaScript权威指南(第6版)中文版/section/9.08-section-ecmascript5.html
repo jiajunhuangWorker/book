@@ -11,11 +11,224 @@
 			<dd>ECMASCRIPT5给属性特性增加了支持(getter,setter,可枚举,可写性和可配置),而且增加了对象可亏扩展性限制</dd>
 
 			<dt>9.8.1让属性不可枚举</dt>
-			<dd></dd>
+			<dd>Set类使用了一个小技巧,将对象存储为集合的成员</dd>
+
+			<dt>9.8.2定义不可变的类</dt>
+			<dd>除了可以设置属性不可枚举的,ECMASCRIPT5还可以设置属性为只读的,当我们希望类的实例都是不可变的,这个特性非常有帮助</dd>
+			<dd>Object.defineProperties()来为类创建原型对象，并将其实例方法设置为不可枚举的,就像内置类的犯法一样,实例方法可以设置只读和不可删除,这样可以防止被修改</dd>
+			<dd>Object.defineProperty()和Object.defineProperties()可以创建新属性,也可以修改已有属性的特性.当用它们创建新属性时,默认的属性特性的值都是false。但当用它们修改已经存在的属性时,默认的属性特性依然保持不变</dd>
+
+			<dt>9.8.3封装对象状态</dt>
+			<dd>构造函数中的变量和参数可以用做它创建爱你的对象的私有状态</dd>
+			<dd>ECMSSCRIPT5可以通过定义的getter和setter方法将状态变更更健壮地封装起来</dd>
+
+			<dt>9.8.4防止类的扩展</dt>
+			<dd>通过给原型对象添加方法可以动态对类进行扩展,这是javascript本身的特性,ECMASCRIPT5也可以加以限制</dd>
+			<dd>Object.preventExtensions()可以将对象设置为不可扩展的.对象不能添加任何新属性</dd>
+			<dd>Object.seal()它除了能阻止用户给对象添加新属性,还可以能当前已有的属性设置为不可配置的</dd>
+
+			<dt>9.8.5子类和ECMASCRIPT5</dt>
+			<dd>原型对象继承自父类的原型,同时给新创建的对象定义属性</dd>
+
+			<dt>9.8.6属性描述符</dt>
+			<dd>ECMASCRIPT5的属性描述符</dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
 	'user static';
-	console.info('------------------------------9.8ecmascript5中的类------------------------------');
+	console.info('------------------------------9.8.1让属性不可枚举------------------------------');
+	//将代码包装在一个匿名函数中,这个定义的变量就在这个函数作用域内
+	(function(){
+		/*
+		定义一个不可枚举的属性objectid,它可以被所有对象机继承
+		当读取这个属性时调用getter函数
+		它没有定义setter,因此它只读的
+		它是不可配置的,因此它是不能删除的
+		*/
+		//取值器,不可枚举,不可删除
+		Object.defineProperty(Object.prototype,"objectId",{get:idGetter,enumerable:false,configurable:false})
+		/*
+		当读取objectId的时候直接调用这个getter函数
+		*/
+		function idGetter(){//getter 函数返回该id
+			if((!idprop in this)){//如果对象不存在id
+				if(!Object.isExtensible(this))//并且对象中不存在id
+					throw Error("Can't define id for nonextensible objects");
+				//给它一个值,就是这个值，只读的,不可枚举的，不可删除的
+				Object.defineProperty(this,idprop,{value:nextid++,writable:false,enumerable:false,configurable:false})
+			}
+			return this[idprop];//返回已有的新的值
+		}
+		var idprop="|**objectId**|";//假设这个属性没有用到
+		var nextid=1;//给它设置初始值
+
+	}())
+	console.info({})
+
+	console.info('------------------------------9.8.2定义不可变的类------------------------------');
+	//这个方法可以使用new 调用,也可以省略new,它可以用构造函数也可以用做工厂函数
+	function Range(from,to){
+		//这些是对from和to只读属性的描述符
+		var props={
+			from:{value:from,enumerable:true,writable:false,configurable:false},
+			to:{value:to,enumerable:true,writable:false,configurable:false}
+		};
+
+		if(this instanceof Range)//如果作为构造函数来调用
+			Object.defineProperties(this,props);//定义属性
+		else//否则,作为工厂方法来调用
+			return Object.create(Range.prototype,props)//创建并返回这个Range对象,属性由props指定
+	}
+	/*
+		如果用同样的方法给Range.prototype对象添加属性
+		那么我们需要给这些属性设置它们的特性
+		因为我们无法识别出它们的可枚举性,可写性和可配置性,这些属性特性默认是false
+	*/
+	Object.defineProperties(Range.prototype,{
+		includes:{
+			value:function(x){return this.from <= x && x <= this.to;}
+		},
+		foreach:{
+			value:function(f){
+				for(var x=Math.ceil(this.from); x<=this.to;x++)
+					f(x);
+			}
+		},
+		toString:{
+			value:function(){
+				return "("+this.from+"..."+this.to+")";
+			}
+		}
+	})
+
+	/*属性描述符工具函数*/
+	//将o指定名字的属性设置不可写和不可配置的
+	function freezeProps(o){
+		//如果只有一个参数？使用所有的属性：传入了指定名字的属性
+		var prop=(arguments.length==1)?Object.getOwnPropertyNames(o):Array.prototype.splice.call(arguments,1);
+		props.forEach(function(n){//将它们都设置为只读的不可变的,忽略不可配置的属性
+			if(!Object.getOwnPropertyDescriptor(o,n).configurable) return;
+			Object.defineProperty(o,n,{writable:false,configurable:false});
+		});
+		return o;//所以我们可以继续使用它
+	}
+	function hideProps(o){
+		var prop=(arguments.length==1)?Object.getOwnPropertyNames(o):Array.prototype.splice.call(arguments,1);
+		props.forEach(function(n){
+			if(!Object.getOwnPropertyDescriptor(o,n).configurable) return;
+			Object.defineProperty(o,n,{enumerable:false});
+		});
+		return o;
+	}
+	function Range(from,to){
+		this.from=from;
+		this.to=to;
+		freezeProps(this)//将属性设置为不可变的
+	}
+	Range.prototype=hideProps({//使用不可枚举的属性来定义原型
+		configurable:Range,
+		includes:function(x){
+			return this.from<=x && x<=this.to
+		},
+		foreach:function(f){
+			for(var x=Math.ceil(this.from); x<=this.to;x++)
+				f(x);
+		},toString:function(){
+			return "("+this.from+"..."+this.to+")";
+		}
+	})
+
+	console.info('------------------------------9.8.3封装对象状态------------------------------');
+	/**这个版本的Range类是可变的，但将端点变量进行了良好的封装
+	但端点大小顺序还是固定的from<=to
+	**/
+	function Range(from,to){
+		//如果from大于to
+		if(from> to) throw new Error("Range:from must be <=to");
+		//定义存取器方法以维持不变
+		function getFrom(){return from;}
+		function getTo(){return to;}
+		function setFrom(f){//设置from的值时，不允许feom大于to
+			if(f<= to) 
+				from=f;
+			else 
+				throw new Error("Range:from must be >=from");
+		}
+		Object.defineProperties(this,{
+			from:{get:getFrom,set:setFrom,enumerable:true,configurable:false},
+			to:{get:getTo,set:setTo,enumerable:true,configurable:false}
+		})
+	}
+	/*
+		和前面的例子相比,原型对象没有做任何修改
+		实例方法可以像读取普通属性一样读取from和to
+	*/
+	Range.prototype=hideProps({
+		configurable:Range,
+		includes:function(x){
+			return this.from<=x && x<=this.to
+		},
+		foreach:function(f){
+			for(var x=Math.ceil(this.from); x<=this.to;x++)
+				f(x);
+		},toString:function(){
+			return "("+this.from+"..."+this.to+")";
+		}
+	})
+	console.info('------------------------------9.8.4防止类的扩展------------------------------');
+	Object.seal(Object.prototype)
+
+	console.info('------------------------------9.8.5子类和ECMASCRIPT5------------------------------');
+	
+	function  StringSet(){
+		this.set=Object.create(null)
+		this.n=0;
+		this.add.apply(this,arguments);
+	}
+	/*
+		注意,使用Object.create()可以继承父类原型
+		而且可以定义单独调用的方法,因为我们没指定属性的可读性,可枚举,可配置性
+		因此这些属性特性的默认都是false
+		只读方法让着类难于子类化
+	*/
+	StringSet.prototype=Object.create(AbstractWritableSet.peototype,{
+		constructor:{
+			value:StringSet
+		},
+		contains:{
+			value:function(x){return x in this.set}
+		},
+		size:{
+			value:function(x){return this.n}
+		},
+		foreac:{
+			value:function(f,c){
+				Object.keys(this.set).forEach(f,c)
+			}
+		},
+		add:{
+			value:function(){
+				for(var i=0;i< arguments.length;i++){
+					if(!arguments[i] in this.set){
+						this.set[arguments[i]]=true;
+						this.n++;
+					}
+				}
+				return this;
+			}
+		},
+		remove:{
+			value:function(){
+				for(var i=0;i< arguments.length;i++){
+					if(arguments[i] in this.set){
+						delete this.set[arguments[i]];
+						this.n--;
+					}
+				}
+				return this;
+			}
+		}
+
+	})
 	</script>
 </html>
