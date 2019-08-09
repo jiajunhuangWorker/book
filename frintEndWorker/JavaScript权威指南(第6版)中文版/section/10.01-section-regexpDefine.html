@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>10.1正则表达式的定义</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>10.1正则表达式的定义</dt>
+			<dd>javascript中的正则表达式用RegExp对象表示,可以使用RegExp()构造函数来创建RegExp对象,不過RegExp對象更多的是通过一种特殊的直接量语法来创建</dd>
+			<dd>正则表达式直接量定义为包含在一对斜杠/之间的字符</dd>
+
+			<dt>RegExp直接量和对象的创建</dt>
+			<dd>就像字符串和数字一样,程序中每个取值相同的原始类型直接量均表示相同的值</dd>
+			<dd>正则表达式直接量则与此不同,一个正则表达式直接量会在执行到它时转换为一个RegExp对象,同一段代码所表示正则表达式直接量的每次运算都返回一个对象,而ecmascript5是会返回一个新对象</dd>
+			<dd>正则表达式的模式是由一个字符序列组成的.包括所有的字母和数字在内,大多数的字符都是按照直接量仅描述带匹配的字符的</dd>
+
+			<dt>10.1.1直接量字符</dt>
+			<dd></dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------10.1正则表达式的定义------------------------------');
+	var pattern=/s$/;
+	var pattern=new RegExp("s$");
+
+	console.info('------------------------------FireFox3.6和FireFox 4+------------------------------');
+	function getRE(){
+		var re=/[a-z]/;
+		re.foo="bar";
+		return re;
+	}
+	var reg=getRE(),reg2=getRE();
+	console.info('reg==reg2',reg==reg2);
+	reg.foo="bazzz";
+	console.info('reg.foo="bazzz"  reg2.foo:',reg2.foo,'reg.foo:',reg.foo);
+	</script>
+</html>
