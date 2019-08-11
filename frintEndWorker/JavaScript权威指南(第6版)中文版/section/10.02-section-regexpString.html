@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>10.2用于模式匹配的String方法</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>10.2用于模式匹配的String方法</dt>
+			<dd>String支持4种使用正则表达式的方法(search,replace,match,split)</dd>
+			<dd>search 它的参数是一个正则表达式返回第一个与之匹配的子串的起始位置,如果找不到匹配的子串,它返回-1</dd>
+			<dd>如果search的参数并不是正则表达式,则首先会通过RegExp构造函数将它转换成正则表达式,search方法不支持全局检索,因为它忽略正则表达式参数中的修饰g</dd>
+			<dd>replace()方法用以执行检索与替换检索,第一个参是正则表达式,第二个参数是替换的内容</dd>
+			<dd>match()它的唯一參數就是正則表達式或通過regexp构造函数将其转换为正则表达式,返回的是一个由匹配结果组成的数组</dd>
+			<dd>match方法传入一个非全局正则表达式,实际上和给这个正则表达式的exec()方法传入的字符串是一模一样的返回的数组带有两个属性:index和input</dd>
+			<dd>split方法用以将调用它的字符串拆分成一个子串组成的数组,使用分隔符是split()的参数</dd>
+		</dl>
+	</body>
+
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------10.2用于模式匹配的String方法------------------------------');
+	console.info("'JavaScript'.search(/scr/i) ",'JavaScript'.search(/scr/i));
+
+	console.info("'ScriptJava222Script'.replace(/scr/gi,'scr被替换了' ",'ScriptJava222Script'.replace(/scr/gi,'scr被替换了'));
+	console.info("'ScriptJava222Script'.replace(/scr/gi) ",'ScriptJava222Script'.replace(/122/));
+	/*
+		一段引用文本起始于引号,结束于引号
+		中间的内容区域不能包含引号
+	*/
+	var quote=/"([^"]*)"/g;
+	console.info("'ScriptJava222Script'.replace(quote,'$1')",'ScriptJava222Script'.replace(quote,'"$1"'));
+
+	console.info('"1 plus 2 equals 3".match(/\d+/g)',"1 plus 2 equals 3".match(/\d+/g));
+
+	var url=/(\w+):\/\/([\w.]+)\/(\S*)/;
+	var urlStr="Visit my blog at http://www.example.com/~david/";
+	var result= urlStr.match(url);
+	if(result!=null){
+		console.info('result[0]',result[0]);
+		console.info('result[1]',result[1]);
+		console.info('result[2]',result[2]);
+		console.info('result[3]',result[3]);
+	}
+
+	console.info('"123,456,789".split(",")',"123,456,789".split(","));
+	console.info('"1,2,3,4,5".split(/\s*,\s*/)',"1,2,3,4,5".split(/\s*,\s*/));
+	</script>
+</html>
