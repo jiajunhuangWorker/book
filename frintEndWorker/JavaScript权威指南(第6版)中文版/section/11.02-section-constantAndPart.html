@@ -7,12 +7,45 @@
 	</head>
 	<body>
 		<dl>
-			<dt></dt>
-			<dd></dd>
+			<dt>11.2常量和局部变量</dt>
+			<dd>语言扩展</dd>
+			<dd>const关键字来定义常量,常量可以看成不可重复赋值的变量,由于javascript中没有块级作用域,因此常量会被提前至函数定义的顶部</dd>
+			<dd>javascript块级作用域是javascript的短板</dd>
+			<dd>关键字let是针对块级作用域问题的</dd>
+			<dd>let使用的方式</dd>
+			<dd>1.可以作为变量声明和var一样 2.在for或for/in循环中,作为var 的替代方案 3. 在语句块中定义一个新变量并显示指定它的作用域 4.定义一个在表达式内部作用域中的变量,这个变量只在表达式内可用</dd>
+			<dd>通过var声明的变量在函数内都是可用的,而通过let声明的变量则只属于就近的花括号括起来的语句块</dd>
+			<dd>声明语句使用let变量初始化表达式是在变量的作用域内计算的,循环初始化使用let变量初始化表达式则在变量作用域之外计算的</dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
 	'user static';
-	console.info('------------------------------11------------------------------');
+	console.info('------------------------------11.2常量和局部变量------------------------------');
+	const pi = 3.14
+		  // pi=4;
+	// const pi=5;
+	// var pi=6;
+		console.info('使用了const声明过的变量将变成常量不能被修改',pi);
+
+	console.info('------------------------------let------------------------------');
+	function oddSums(n){
+		let total=0,result=[];
+		for(let x=1;x<=n;x++){
+			let  odd=2*x-1;
+			total+=odd;
+			result.push(total);
+		}
+		//这里使用x或odd会导致一个引用错误
+		return result;
+	}
+	oddSums(5)
+
+	let x=1;
+	for(x=x+1;x<5;x++)
+		console.info(x);
+	{
+		let z=x+1;
+		console.info(x);
+	}
 	</script>
 </html>
