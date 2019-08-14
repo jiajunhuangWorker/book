@@ -36,7 +36,17 @@
 			<dd>生成器应用场景处理序列化数据,比如元素列表,多行文本,词法分析其中等单词等</dd>
 			<dd>生成器往往是在创建的时候初始化,传入生成器函数的值是生成器所接收的唯一输入</dd>
 
-			<dt>11.4.4数组推导</dt>
+			<dt>11.4.4数组推导(浏览器没标准化)</dt>
+			<dd>它是一种利用另外一个数组或迭代对象来初始化数组元素的技术</dd>
+			<dd>数组推导基于定义元素集合的数学模型,表达式和从句的写法和javascript程序员期望的不一致</dd>
+			<dd>数组推导语法结构:[expression for(variable in object) if(condition)]</dd>
+			<dd>数组推导三部分</dd>
+			<dd>1.一个没有循环体的for/in或for/each循环,在数组推导中的变量在方括号的外部是不可见的,也不会覆盖已有的同名变量</dd>
+			<dd>2.在执行遍历的对象之后,是圆括号中的关键字if和条件表达式,目前,这个条件表达式只是用做过滤迭代的值</dd>
+			<dd>3.在关键字for之前是expression,可以认为这个表达式是循环体</dd>
+
+			<dt>11.4.5生成器表达式</dt>
+			<dd>数组推导中的方括号替换成圆括号,它就成一个生成器表达式</dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
@@ -98,6 +108,13 @@
 	console.log(appleStore.next()); // { value: 3, done: false }
 	console.log(appleStore.next()); // { value: 7, done: false }
 	console.log(appleStore.next()); // { value: 5, done: false }
-	console.log(appleStore.next()); // { value: undefined, done: true 
+	console.log(appleStore.next()); // { value: undefined, done: true
+
+	console.info('------------------------------11.4.4数组推导------------------------------');
+	var years = [ 1954, 1974, 1990, 2006, 2010, 2014 ];
+	// console.info([for (year of years) if (year > 2000) year]);
+
+	console.info('------------------------------11.4.5生成器表达式------------------------------');
+	// let h=(f(x) for(x in year))
 	</script>
 </html>
