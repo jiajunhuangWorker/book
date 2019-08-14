@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>11.4迭代</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>11.4迭代</dt>
+			<dd>mozilla的javascript扩展引入了一些新的迭代机制,for/each和Python风格的迭代器和生成器</dd>
+
+			<dt>11.4.1for/each</dt>
+			<dd>for/each循环是由E4X规范定义的一种新的循环语句.E4X是语言的扩展,它允许javascript程序中直接出现xml标签,并添加了xml数据的语法和api</dd>
+			<dd>forEach是遍历属性的值(数组才有)</dd>
+
+			<dt>11.4.2迭代器</dt>
+			<dd>for/in可以遍历任何可迭代的对象,迭代器是一个对象,迭代器包含next方法</dd>
+			<dd>当遍历完所有的值并且没有多余的值可迭代时在调用next会报StopIteration</dd>
+			<dd>可迭代对象表示一组可迭代处理的值.可迭代对象必须定义一个叫__iterator__()的方法,用以返回这个集合的迭代器对象</dd>
+
+			<dd>我们创建一个可迭代的对象和它的迭代器的时候尽管必须写一个__iterator__()方法并抛出stopIteration异常,但是在正常使用时并不需要我们去手动调用这个方法,for/in会帮忙处理逻辑的</dd>
+			<dd>引用Iterator函数母的是,如果传入的对象或数组没有定义__iterator__()方法,它会返回这个对象一个可迭代的自定义迭代器</dd>
+			<dd>迭代器两个重要特性</dd>
+			<dd>1:它只对自有属性进行便利而忽略继承的属性,通过我们希望是这个样子</dd>
+			<dd>2:如果Iterator传入第二个参数true,返回的迭代器只对属性名进行便利而忽略属性值</dd>
+
+			<dt>11.4.3生成器</dt>
+			<dd>生成器关键字yield,它和return类似,它和return区别在于yield函数产生一个可保持函数内部状态的值,这个值时可以恢复的,这种可恢复性使得yield成为编写迭代器的有力工具</dd>
+			<dd>使用return来终止函数的执行而不带任何返回值,但不能使用return返回一个值</dd>
+			<dd>生成器函数通过关键字function声明,typeof运算符返回function,Function.prototype继承属性和反方</dd>
+			<dd>生成器函数调用不是执行生成器函数的函数体,而是返回一个生成器对象</dd>
+			<dd>生成器定义了一个next方法,如果生成器函数执行return语句或者到达函数尾端继续调用next方法会抛出stopIteration</dd>
+			<dd>生成器迭代器用以区分创建它的生成器函数</dd>
+			<dd>生成器也有close方法,当调用close方法时和它相关的生成器函数会终止执行就像在函数运行挂起的位置执行return语句</dd>
+			<dd>生成器应用场景处理序列化数据,比如元素列表,多行文本,词法分析其中等单词等</dd>
+			<dd>生成器往往是在创建的时候初始化,传入生成器函数的值是生成器所接收的唯一输入</dd>
+
+			<dt>11.4.4数组推导</dt>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------11.4.1for/each------------------------------');
+	let o={'one':1,'two':2,'three':3};
+	console.info("object o",o);
+	for(let p in o){
+		console.info('for/in:',p);
+	}
+
+	console.info('------------------------------11.4.2迭代器------------------------------');
+	function counter(start){
+		let nextValue=Math.round(start);//表示迭代器的一个私有状态
+		return {next:function(){return nextValue++}};//返回迭代器对象
+	}
+	let ser=counter(1000);
+	let sn1=ser.next();
+	let sn2=ser.next();
+	console.info('ser:',ser,'sn1:',sn1,'sn2:',sn2);
+
+	console.info('------------------------------迭代器对象------------------------------');
+	function range(min,max){
+		return {
+			get min(){return min},
+			get max(){return max},
+			includes:function(x){
+				return min<= x && x<=max;
+			},
+			toString:function(){
+				return "["+min+","+max+"]";
+			},
+			_iterator_:function(){
+				let val=Math.ceil(min);
+				return{
+					min:function(){
+						if(val>max)
+							throw StopIteration;
+						return val++;
+					}
+				}
+			}
+		}
+	}
+	for(let i in range(1,10)){
+		console.info(i);
+	}
+	// for(let [k,v] in Iterator({a:1,b:2})){
+	// 	console.info(k+"="+v);
+	// }
+	console.info('------------------------------11.4.3生成器------------------------------');
+	function* countAppleSales () {
+	  var saleList = [3, 7, 5];
+	  for (var i = 0; i < saleList.length; i++) {
+	    yield saleList[i];
+	  }
+	}
+	var appleStore = countAppleSales(); // Generator { }
+	console.log(appleStore.next()); // { value: 3, done: false }
+	console.log(appleStore.next()); // { value: 7, done: false }
+	console.log(appleStore.next()); // { value: 5, done: false }
+	console.log(appleStore.next()); // { value: undefined, done: true 
+	</script>
+</html>

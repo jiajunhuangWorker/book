@@ -10,10 +10,31 @@
 			<dt>11.3解析赋值</dt>
 			<dd>spidermonkey1.7实现了一种混合式赋值,简称解构赋值</dd>
 			<dd>解析赋值中,等号右侧是一个数组或对象,指定左侧一个或多个变量的语法和右侧的数组和对象直接量的语法保持格式一致</dd>
+			<dd>当发生解构赋值时,右则的数组和对象中一个或多个的值就会被提取出来,并赋值给左侧相应的变量名</dd>
+			<dd>当和数组配合使用时解构赋值时一种写法简单但又极其强大的工嗯呢该</dd>
+			<dd>解析赋值右侧可以是一个对象</dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
 	'user static';
-	console.info('------------------------------11------------------------------');
+	console.info('------------------------------11.3解析赋值------------------------------');
+	let [x,y]=[1,2];
+	[x,y]=[x+1,y+1];
+	[x,y]=[y,x];
+	console.info('[x,y]',[x,y]);
+
+	var [z,s]=[111];
+	console.info('demo2:[z,s]',[z,s]);
+	[z,s]=[1,2,3];
+	console.info('demo2:[z,s]',[z,s]);
+	[,x,,y]=[1,2,3,4]
+	console.info('demo2:[,x,,y]',[,x,,y]);
+	let [one,[two,three]]=[1,[2,3],4];
+	console.info('[one,[two,three]]',[one,[two,three]],'[one,[two,three]][0]',[one,[two,three]][0]);
+
+	console.info('------------------------------解析赋对象值------------------------------');
+	let transparent={r:0,g:0,b:0};
+	let {r:red,g:green,b:blue}=transparent;
+	console.info('{r:red,g:green,b:blue}',{r:red,g:green,b:blue},'{r:red,g:green,b:blue}.r',{r:red,g:green,b:blue}.r)
 	</script>
 </html>
