@@ -11,7 +11,26 @@
 			<dd>window对象是所有客户端javascript特性和api的主要接入点</dd>
 			<dd>web浏览器的一个窗口或窗体,并且可以用标识符window来引用它</dd>
 			<dd>location对象的location属性,location对象指定当前显示在窗口中的url,并允许脚本往窗口里载入新的url</dd>
-			<dd>window对象也是全局对象,window对象处于作用域链的顶部,</dd>
+			<dd>window对象也是全局对象,window对象处于作用域链的顶部,它的属性和方法实际上是全局变量和全局函数</dd>
+			<dd>window对象中其中一个最重要的属性是document,它引用Document对象,后者表示显示在窗口中文档</dd>
+			<dd>每个Element对象都有style和className属性,允许脚本指定文档元素的css样式,或修改应用到元素上的css类名</dd>
+			<dd>window,document,element对象上另一个重要的属性集合是事件处理程序相关的属性.</dd>
+			<dd>事件处理程序可以让javascript代码修改窗口,文档和组成文档的元素行为</dd>
+
+			<dt>13.1.1web文档里的javascript</dt>
+			<dd>javascript程序可以通过document对象和它包含的element对象遍历和管理文档内容</dd>
+			<dd>通过注册适当的事件处理程序来定义文档元素的行为,内容,呈现和行为组合叫做动态html和dhtml</dd>
+			<dd>web文档少量使用javascript,因为javascript真正的角色是增强用户的浏览体验,使信息的获取和传递更容易</dd>
+
+			<dt>13.1.2web应用里的javascript</dt>
+			<dd>在web文档中,javascriptDhtml特性在web应用中都会用到,对于web应用来说,除了内容，呈现和操作api之外,还依赖了web浏览器环境提供的更基础的服务</dd>
+			<dd>javascript在web应用里会比在web文档里显得更加重要</dd>
 		</dl>
 	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------13.1客户端javascript------------------------------');
+	console.info('document:',document)
+	console.info('window:',window)
+	</script>
 </html>
