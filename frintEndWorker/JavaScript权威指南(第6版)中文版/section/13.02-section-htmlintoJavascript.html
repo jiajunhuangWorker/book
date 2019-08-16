@@ -8,7 +8,53 @@
 	<body>
 		<dl>
 			<dt>13.2在HTML里嵌入javascript</dt>
-			<dd></dd>
+			<dd>html文档里嵌入javascript代码4种方法</dd>
+			<dd>1.内联,放置在script标签之间</dd>
+			<dd>2.放置在scriot标签的src指定外部文件</dd>
+			<dd>3.放在在html的标签中例如onclick</dd>
+			<dd>放置在url里,达成javascript协议中</dd>
+
+			<dt>13.2.1script元素</dt>
+			<dd>在xhtml中script标签中的内容被当做其他内容一样对待,如果要在xtml使用script</dd>
+
+			<dt>13.2.2外部文件中的脚本</dt>
+			<dd>script标签通过src属性引入javascript</dd>
+			<dd>外部引入js的好处:</dd>
+			<dd>可以把大量javascript代码从html中删除,助于保持内容和行为的分离,从而简化html文件</dd>
+			<dd>多个web页面使用相同的javascript代码,用src属性让你只管理一份js</dd>
+			<dd>如果一个javascript代码文件由多个页面共享,就只性需要下载一次,通过使用它的第一个page-随后页面可以从浏览器缓存索引它</dd>
+			<dd>从其他网站载入脚本的能力,可以让我们更好地利用缓存,GOOGle正在为通用的客户端类库推广标准且好记的URl,可以让浏览器只缓存一份副本,并且网络上的任意站点都可以使用.链接javascript代码到google服务器,减少web页面的启动时间,因为这些类库可能已经在用户浏览器缓存中,但是你必须相信第三方提供的代码服务</dd>
+			<dd>从文档服务器之外的服务器里载入脚本有重要的安全隐患</dd>
+			<dd>同源安全策略会阻止一个域的文档中的javascript和另一个域的内容进行交互但是,要注意和脚本本身的来源并没有关系而是和脚本嵌入的文档来源有关系,因此同源策略并不适用于如下情况,即便代码和文档有着不同的来源,javascript代码也可以和它嵌套入的文档进行交互</dd>
+
+			<dt>13.2.3脚本类型</dt>
+			<dd>language属性代替type属性,这是老的浏览器的写法</dd>
+
+			<dt>13.2.4HTML中的事件处理程序</dt>
+			<dd>JavaScript程序必須定义事件处理程序-web浏览器先注册javascript函數,并在之后调用它作为事件的响应</dd>
+
+			<dt>13.5URL中的javascript</dt>
+			<dd>在url后面跟一个javascript:协议限定符,是另一种嵌入javascript代码到客户端的方式</dd>
+			<dd>这种特殊的协议类型指定url内容为任意字符串,这个字符串是会被javascript解析器运行javascript代码</dd>
+			<dd>javascript:url能识别的资源是转换成字符串的执行代码的返回值</dd>
+			<dd>浏览器会像渲染通常载入的等价html文档一样渲染它们.其他浏览器不允许url像上面一样覆盖当前文档,它们会忽略代码的返回值</dd>
+			<dd>如果要确保javascript:url不会覆盖当前文档,可以用boid操作符强制函数调用或给表达式赋予undefined值</dd>
 		</dl>
+		<input type="checkbox" name="options" value="giftwrap" onchange="console.info(this.checked);">
+		<a href="javascript:new Date().toLocaleTimeString()">what time is it?</a>
+		<a href="javascript:alert(new Date().toLocaleTimeString())">what time is it?</a>
+		<a href="javascript:void window.open('about:blank')">打开新窗口</a>
+		<div>浏览器书签</div>
+		<a href="javascript:var e='',r='';/*需要计算的表达式和结果*/
+		console.info(123);
+		void 0;
+		">javascript Evaluator</a>
 	</body>
+	<script type="text/javascript">
+	'use static';
+	console.info('------------------------------13.2.1xHTML使用script标签------------------------------');
+	console.info('<script><![CDATA[//这里写js代码]]><\/script>')
+	console.info('------------------------------13.2.5url中的javascript------------------------------');
+
+	</script>
 </html>
