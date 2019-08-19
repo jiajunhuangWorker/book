@@ -8,7 +8,36 @@
 	<body>
 		<dl>
 			<dt>13.3javascript程序的执行</dt>
-			<dd></dd>
+			<dd>客户端javascript程序没有严格的定义。我们可以说javascript程序是由web页面中所包含的所有JavaScript代码(内联脚本,HTML事件处理程序和javascript:url)和通过script标签的src属性引用的外部javascript代码组成</dd>
+			<dd>如果一个脚本定义了新的全局变量或函数,那么这个变量或函数会在脚本执行之后对任意javascript代码可见</dd>
+			<dd>如果web页面包含嵌入的窗体(iframe)嵌入文档中的javascript代码和被嵌入的文档里的javascript代码会有不同的全局对象,它可以当做一个单独的javascript程序,没有严格的关于javascript程序范围的定义.如果外面和里面的文档来自同一个服务器,那么两个文档中的代码就可以进行交互,并且如果你愿意,就可以把他们当做是同一个程序的两个相互作用的部分</dd>
+			<dd>url存在文档之外,可以想象成是一种用户扩展或者对于其他程序的修改,访问全局对象和当前文档的内容,以及对它进行操作</dd>
+			<dd>javascript程序的执行有两个阶段.第一阶段:载入文档内容,并执行script元素里的代码(包括内联脚本和外部脚本).脚本通用会按他们在文档里出现顺序执行.第二阶段:异步,而且由事件驱动的.在事件驱动阶段,web浏览器调用事件处理程序函数(由第一阶段里执行的脚本指定html事件处理程序,或之前调用的事件处理程序来定义),来响应异步发生事件.</dd>
+			<dd>网络活动,运行时间或者javascript代码中的错误触发调用事件处理程序</dd>
+			<dd>事件驱动阶段里发生第一个事件load事件,指示文档已经完全载入,并可以操作,正是onload事件会对文档进行操作,并做程序想做的任何事.javascript程序载入阶段是相对短暂的,通常只持续1~2秒.在文档载入完成之后,只要web浏览器显示文档,事件驱动阶段就会一直持续下去.这个阶段是异步的和事件驱动的，所以可能有长事件处于不活动状态。没有javascript被执行,被用户或网络事件触发的活动打断</dd>
+			<dd>核心javascript和客户端JavaScript都有一个单线程执行模型。脚本和事件处理程序在同一个时间只能执行一个，并没有并发性。这保持了javascript编程的简单性</dd>
+
+			<dt>13.3.1同步,异步和延迟的脚本</dt>
+			<dd>JavaScript第一次添加到web浏览器时,还没有api可以用来遍历和操作文档的结构和内容,当文档还在载入时，javascript影响文档内容的唯一方法是快速生成内容</dd>
+			<dd>当脚本把文本传递给document.write()时,这个文本被添加到文档输入流中,html解析器会在当前位置创建一个文本节点,将文本插入这个文本节点后面.当html解析器遇到script元素时,它默认必须先执行脚本,然后再回复文档的解析和渲染,脚本的执行只在默认情况下是同步和阻塞的,script标签可以使用defer和async属性,改变脚本的执行方式,它们要和src属性联合使用才有效</dd>
+			<dd>defer</dd>
 		</dl>
 	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------13.3.1同步,异步和延迟的脚本------------------------------');
+	function factorial(n){
+		if (n<=1)
+			return n;
+		else
+			return n*factorial(n-1);
+	}
+	document.write('<table>');
+	document.write('<tr><th>n</th><th>n!</th></tr>');
+	for(var i=1;i<=10;i++){
+		document.write('<tr><td>'+i+'</td><td>'+factorial(i)+'</td></tr>')
+	}
+	document.write('</table>');
+	document.write('time:'+new Date().valueOf())
+	</script>
 </html>
