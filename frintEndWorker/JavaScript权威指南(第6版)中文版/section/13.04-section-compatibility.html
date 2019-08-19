@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>13.4兼容性和互用性</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>13.4兼容性和互用性</dt>
+			<dd>1.操作系统(window,masOS,Linux，iphone OS,Android)2.厂商:(Microsoft,Mozilla,apple,google,opera)</dd>
+			<dd>客户端javascript兼容性和交互性的问题归纳三类</dd>
+			<dd>1.演化:web平台一直在延边和发展当中.一个标准规范会尝到一个新的特性或api.web开发者必须在使用浏览器的大量用户和使用新式浏览器的少量用户之间做权衡</dd>
+			<dd>2.未实现:浏览器开发商之间对于某一个特性是否足够有用到要实现存在的观点上的差异</dd>
+			<dd>3.bug:每个浏览器都有bug,并且没有按照规范准确地实现所有的客户端javascript api</dd>
+
+			<dd>javascript语言本身是被所有浏览器厂商实现的.它不是兼容性问题的源头.es3和es5之间的转换可能会导致兼容问题,因为一些浏览器会支持严格模式而其他的不支持</dd>
+			<dd>要解决javascript兼容问题要了解问题的根源是什么,html5标准化的努力的目标是最终产生一个测试套件</dd>
+			<dd>一种策略是限制自己使用你选择支持的所有浏览器都普遍支持的特性</dd>
+
+			<dt>13.4.1处理兼容性问题的类库</dt>
+			<dd>处理不兼容问题其中一种罪简单的方法就是使用类库.ie是唯一不支持canvas标签的.它自己封装了图形化语言vml.解决兼容问题需要excanvas.js</dd>
+
+			<dt>13.4.2分级浏览器支持</dt>
+			<dd>分级浏览器是一种测试技术.从某种维度对浏览器厂商/版本/操作西永变体进行分级</dd>
+			
+			<dt>13.4.3功能测试</dt>
+			<dd>功能测试是解决不兼容性能问题的一种强大技术.测试某个功能,但不清楚功能是否在所有浏览器都兼容.则需要在监本添加相对应的代码检测是否浏览器中支持该功能</dd>
+
+			<dt>13.4.4怪异模式和标准模式</dt>
+			<dd>Micosoft在ie6发布时.增加了ie5没有的css标准特性.web内部的后向兼容性.它定义两种不同的渲染模式.标准模式或css兼容模式</dd>
+			<dd>渲染模式的选择依赖html文件的顶部doctype声明.ie6中没有打开doctype的页面和声明了某些权限.doctype的页面都会按照怪异模式进行渲染，定义了严格的doctype的页面会按照标准模式去渲染</dd>
+			<dd>document.compatMode属性如果返回值css1Compat则说明浏览器工作在标准模式.如果是BackCompat或者undefined说明浏览器是怪异模式</dd>
+
+			<dt>13.4.5浏览器测试</dt>
+			<dd>功能测试非常适用于检测大型功能领域的支持.</dd>
+			<dd>在客户端javascript中检测浏览器类型和版本的方法是使用Navigator对象,该对象称为浏览器嗅探器或者客户端嗅探器</dd>
+			<dd>客户端嗅探也可以在服务端完成.web服务器根据user-agent头部可以有选择地返回特定的javascript代码给客户端</dd>
+
+			<dt>13.4.6Intenet Exploer里的条件注释</dt>
+			<dd>IE支持条件注释，ie5引入,尽管这种做法并不符合标准规范,但是在处理不兼容性时非常有用</dd>
+			<!--[if IE 6]>
+				ie6显示
+			<![endif] -->
+			<!--[if lte IE 7]>
+				ie7显示
+			<![endif] -->
+			<!--[if !IE]>
+				不是ie就显示
+			<![endif] -->
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	
+	console.info('------------------------------13.4.4怪异模式和标准模式------------------------------');
+	console.info(document.compatMode)
+
+	console.info('------------------------------13.4.5浏览器测试------------------------------');
+	console.info(Navigator)
+
+	</script>		
+</html>

@@ -20,11 +20,43 @@
 			<dt>13.3.1同步,异步和延迟的脚本</dt>
 			<dd>JavaScript第一次添加到web浏览器时,还没有api可以用来遍历和操作文档的结构和内容,当文档还在载入时，javascript影响文档内容的唯一方法是快速生成内容</dd>
 			<dd>当脚本把文本传递给document.write()时,这个文本被添加到文档输入流中,html解析器会在当前位置创建一个文本节点,将文本插入这个文本节点后面.当html解析器遇到script元素时,它默认必须先执行脚本,然后再回复文档的解析和渲染,脚本的执行只在默认情况下是同步和阻塞的,script标签可以使用defer和async属性,改变脚本的执行方式,它们要和src属性联合使用才有效</dd>
-			<dd>defer</dd>
+			<dd>defer和async属性都像在告诉浏览器连接进来的脚本不会使用document.write(),也不会生成文档内容,因此浏览器可以在下载脚本时继续解析和渲染文档.</dd>
+			<dd>defer属性使得浏览器延迟脚本的执行,直到文档的载入和解析完成,并可以操作</dd>
+			<dd>async属性使得浏览器可以尽快地执行脚本,而不用在下载脚本时阻塞文档解析.</dd>
+			<dd>同时支持两者的浏览器会遵从async属性并忽略defer属性</dd>
+			<dd>文档的文本内容已经载入,但是并未被浏览器引擎解析为dom树,而dom树的生成是受javascript代码执行的影响的,javascript代码会阻塞页面ui的渲染</dd>
+			<dd>延迟的脚本会按它们在文档里的出现顺序执行.而异步脚本在它们载入后执行,这意味着它们可能会无序执行</dd>
+			<dt>13.3.2事件驱动的javascript</dt>
+			<dd>在页面载入时开始执行,生成一些输出,然后结束.这种类型的程序今天已经不常见了.反之,我们通过注册事件来处理程序函数来写程序。之后再注册的事件发生时异步调用这些函数</dd>
+			<dd>click,change,load,mouseover,keypress或readystatechange指示发生的事件的通用类型.事件还有目标,它是一个对象,并且事件就是在它上面发生的</dd>
+			<dd>如果想要程序响应一个事件,写一个函数,叫做'事件处理程序','事件监听器'或'回调'.然后注册这个函数,这样它就会在事件发生时调用它</dd>
+			<dd>对于大部分浏览器来说,会把一个对象传递给事件处理程序作为参数,那个对象的属性提供了事件的详细信息,这些信息被存在全局的event对象里,而不是传递给处理程序函数.事件处理程序返回值时用来指示函数是否充分处理了事件,以及阻止浏览器执行的默认行为</dd>
+			<dd>事件的目标是文档元素,它们会经常往上传递给文档树,这个过程叫冒泡</dd>
+			<dd>如果需要为一个事件注册多个事件处理程序函数/想要写一个安全注册事件处理程序的代码模块,需要使用addEventListaner()方法允许注册多个监听器.在IE9之前是使用attachEvent</dd>
+			<dd>setTimeout()和setInterval()函数这是window方法,传递setTimeout的函数和真实事件处理程序的注册不同,它们通常叫回调逻辑,它们也是异步的</dd>
+
+			<dt>13.3.3客户端javascript线程模型</dt>
+			<dd>javascript语言核心并不包含任何线程.并且客户端javascript传统上也没有定义任何线程机制.html5定义了一种后台线程的'webworker'但是客户端javascript还像严格的单线程一样工作.当可能并发执行的时候,客户端javascript也不会知晓是否真的有并行逻辑的执行.</dd>
+			<dd>编写代码时可以确保两个事件处理程序不会同一时刻运行,操作文档内容时不必担心会有其他线程试图同时修改文档,并且永远不需要在写javascript代码的时候担心锁,死锁和竞态条件</dd>
+			<dd>如果一个脚本执行计算密集的任务,它将会给文档载入带有延迟,而用户无法再脚本完成前看到文档内容.如果事件处理程序执行计算密集的任务,浏览器可能无法响应.可能导致浏览器奔溃</dd>
+			<dd>webworker是一个用来执行计算密集任务而不冻结用户界面的后台线程.运行在web worker线程里的代码不能访问文档内容.不能喝主线程或者其他worker共享状态,只可以和主线程和其他worker通过异步事件进行通信,所以主线程不能检测并发性,并且web worker不能修改javascript程序的基础单线程执行模型</dd>
+
+			<dt>13.3.4客户端javascript时间线</dt>
+			<dd>1.web浏览器创建document对象,并且开始解析web页面,解析html元素和它们的文本内容后添加Element对象和Text节点到文档中.在这个阶段document.readystate属性值是loading</dd>
+			<dd>2.当html解析器遇到没有async和defer属性的script元素时,它把这些元素添加到文档中,然后执行行内和外部脚本.这些脚本会同步执行.并且在脚本下载和执行解析器会暂停.这样脚本就可以用document.write()来把文本插入到输入流中.解析器恢复时这些文本会成为文档一部分.同步脚本经常简单定义函数和注册后面使用注册事件处理程序,但它们可以遍历和操作文档树.因为在它们执行时已经存在.这样,同步脚本可以看到它自己的script元素和它们之前的文档内容</dd>
+			<dd>3.当解析器遇到async属性的script元素时,它开始下载脚本文本,并继续解析文档.脚本会再它下载完成后尽快执行.但是解析器没有停下来等它下载.异步脚本禁止使用document.write()方法.它们可以看到自己的script元素和它之前所有文档元素.并且可以或干脆不可能访问其他的文档内容.</dd>
+			<dd>4.当文档完成解析,document.readyState属性变成interactive</dd>
+			<dd>5.所有有defer属性的脚本.会按它们在文档里的出现顺序执行.异步脚本可能也会再这个时间执行.延迟脚本能访问完整的文档树,禁止使用document.write()方法</dd>
+			<dd>6.浏览器在document对象上触发domContentLoaded事件这标志着程序执行从同步脚本执行阶段转换到异步事件驱动阶段.弹药注意.这时可能还有异步脚本没有执行完成</dd>
+			<dd>7.文档已经完全解析完成.但是浏览器可能还在等待其他内容载入.如图片.当所有这些内容完成载入时.并且所有异步脚本完成载入和执行,document.readyState属性会变成complete.web浏览器触发window对象上的load事件.</dd>
+			<dd>8.从此刻起.会调用异步事件,以异步响应用户输入事件,网络事件,计时器过期等</dd>
+			
+			<dd>DomContentLoaded事件在load事件之前触发.当前所有浏览器都支持这个事件,除了IE之外,document.readyState属性大部分浏览器实现,但是属性的值在浏览器之间有细微的差别</dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
 	'user static';
+	console.info(document.readyState)
 	console.info('------------------------------13.3.1同步,异步和延迟的脚本------------------------------');
 	function factorial(n){
 		if (n<=1)
@@ -39,5 +71,37 @@
 	}
 	document.write('</table>');
 	document.write('time:'+new Date().valueOf())
+
+	function loadasync(url){
+		var head=document.getElementsByTagName('head')[0];
+		var s=document.createElement('script');
+		s.src=url;
+		head.appendChild(s);
+	}
+	console.info('------------------------------13.3.2事件驱动的javascript------------------------------');
+	window.addEventListener('load',function(){console.info('通用浏览器')},false);
+	// window.attachEvent('onload',function(){console.info('兼容ie8浏览器')})
+
+	function onLoad(f){
+		if(onLoad.loader)//如果文档已经载入完成
+			window.setTimeout(f,0);//将f放入异步队列,并尽快执行它
+		else if(window.addEventListener)//注册事件的标准方法
+			window.addEventListener('load',f,false);
+		else if(window.attachEvent)//兼容ie8以及更早的方法
+			window.attachEvent('onload',f);
+	}
+	//设置标识符
+	onLoad.loaded=false;
+	//注册一个函数，当文档载入完成时设置这个标识
+	onLoad(function(){onLoad.loaded=true;console.info(onLoad.loaded)})
+	onLoad(function(){console.info(12222221)});
+
+	console.info('------------------------------13.3.4客户端javascript时间线------------------------------');
+	// window.onready=function(){
+	// 	console.info(document.readyState)
+	// }
+	window.onload=function(){
+			console.info(document.readyState)
+	}
 	</script>
 </html>
