@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>14.01定时器</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>14.01计算器</dt>
+			<dd>setTimeout()和setInterval()可以用来注册在指定的时间之后单词后重复调用的函数</dd>
+			<dd>客户端javascript中重要的全局函数,所以定义为window对象的方法,但作为通用函数,其实不会对窗口做什么事情</dd>
+			<dd>clearTimeout和clearInterval方法是清空定时器方法</dd>
+			<dd>历史:setTimeout和setInterval的第一个参数可以作为字符串传入,这个字符串会在指定的超时时间或间隔之后进行求值</dd>
+			<dd>html5:规范(除ie之外其余浏览器)允许setTimeout和setInterval传入额外的参数,并在调用函数时把这些参数传递过去</dd>
+			<dd>如果以0毫秒的超时时间来调用setTimeout()那么指定的函数不会立刻执行.相反,会把它放到队列中,等到前面处于等待状态的事件处理程序全部执行完成后再立即调用它</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------14.01计算器------------------------------');
+	/*
+		安排函数f()在未来的调用模式
+		在等待了若干毫秒之后调用f（）
+		如果设置了interval并没有设置end参数,则对f（）调用将不会停止
+		如果没有设置interval和end,只在若干毫秒后调用f()一次
+		只有指定了f(),才会从start=0时刻开始
+		注意,調用invoke不会阻塞,它会立即返回
+	*/
+	function invoke(f,start,interval,end){
+		if(!start) start=0;
+		if(arguments.length<=2){
+			setTimeout(f,start);
+		}else{
+			setTimeout(repeat,start);
+			function repeat(){
+				var h=setInterval(f,interval);
+				if(end) setTimeout(function(){clearInterval(h)},end);
+			}
+		}
+	}
+	</script>
+</html>

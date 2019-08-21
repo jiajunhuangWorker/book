@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>14.2浏览器定位和导航</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>14.2浏览器定位和导航</dt>
+			<dd>location属性引用的是Location对象,它表示该窗口中当现实的文档的URL,并定义了方法来使窗口载入新的文档</dd>
+			<dd>Document对象也有一个url属性,是文档首次载入后保存该文档的URL的静态字符串</dd>
+
+			<dt>14.2.1解析URL</dt>
+			<dd>Location对象的toString()方法返回href属性的值,因此在会隐式调用toString()情况下,可以使用location代替localtion.href</dd>
+			<dd>这个对象的其他属性-protocol(协议),host(主机),hostname(主机名),port(端口),pathname(文件路径名),search(?号后面的参数)分别表示URL的各个部分,它们是URL的解析属性</dd>
+			<dd>location对象的hash和search属性</dd>
+			<dd>hash:返回URL中的片段标识符</dd>
+			<dd>search:返回URL中的问号之后的URL,这部分通常是某种类型的查询字符串</dd>
+			<dd>内容是用来参数化URL并在其中嵌入参数的,虽然这些参数通常用于运行在服务器上的脚本,但在启用javascript的页面中当然也可以使用它们</dd>
+
+			<dt>14.2.2载入新的文档</dt>
+			<dd>Location对象的assign()方法可以使窗口载入并显示你指定的URL中的文档.replace()方法也类似,但它在载入新文档之前会从浏览历史中把当前文档删除</dd>
+			<dd>如果检测到用户的浏览器不支持某些特性来显示功能齐全的版本,可以用location.replace()来载入静态的HTML版本</dd>
+			<dd>assgin()和replace()方法,Location对象还定义了reload()方法,后者可以浏览器重新载入当前文档</dd>
+			<dd>片段标识符是相对URL的一种类型,它不会让浏览器载入新文档,但只会使它滚动到文档的某个位置#top标识符是个特殊的例子:如果文档中没有元素的ID是"top",它会让浏览器跳到文档开始处</dd>
+			<dd>Location对象URL分解属性是可写的,对它们重新赋值会改变URL的位置,并且导致浏览器载入一个新的文档(如果改变的是hash属性,则在当前文档中进行跳转)</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------14.2浏览器定位和导航------------------------------');
+	console.info('windo;w.location===document.location',window.location===document.location);
+	console.info('window.location:'+window.location,'Location:',Location);
+	console.info(document.location);
+	console.info('document',document,'document.URL',document.URL);
+	console.info(window);
+	console.info('location.protocol',location.protocol);
+	console.info('location.host',location.host);
+	console.info('location.hostname',location.hostname);
+	console.info('location.port',location.port);
+	console.info('location.pathname',location.pathname);
+	console.info('location.search',location.search);
+	console.info('------------------------------urlArgs------------------------------');
+	/*
+		提取URL的搜索字符串中的參數
+		這個函數用來解析來自URL的查詢串中的name=value參數对象对存储在一个对象的属性中,并返回该对象这样来使用它
+	*/
+	function urlArgs(){
+		var args={};
+		var query=location.search.substring(1);
+		var pairs=query.split("&");
+		for(var i=0;i<pairs.length;i++){
+			var pos=pairs[i].indexOf('=');
+			if(pos == -1) continue;
+			var name=pairs[i].substring(0,pos);
+			var value=pairs[i].substring(pos+1);
+			value=decodeURIComponent(value);
+			args[name]=value;
+		}
+		return args;
+	}
+	var url=urlArgs();
+	console.info(url);
+
+	/*
+		如果浏览器不支持XMLHttpRequest对象
+		则将其重定向到一个不需要Ajax的静态页面
+	*/
+	if(!XMLHttpRequest) location.replace('staticpage.html');
+	// location='http://www.baidu.com';
+	// location="#top";//跳转到文档的顶部
+	location.search="?page="+(pagemum+1);
+	</script>
+</html>
