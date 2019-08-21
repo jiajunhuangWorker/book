@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>14.4浏览器和屏幕信息</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>14.4浏览器和屏幕信息</dt>
+			<dd>脚本有时需要获取和它们所在的web浏览器或浏览器所在的桌面相关信息.</dd>
+			<dd>window对象的navigator和scerrn属性分别是Navigator和Screen对象而这些对象提供的信息允许脚本根据环境定制自己的行为</dd>
+
+			<dt>14.4.1Navigator对象</dt>
+			<dd>window对象的navigator属性引用的是包含浏览器厂商和版本信息的Navigator对象</dd>
+			<dd>Navigator对象的命名是为了纪念Netscape之后Navigator浏览器</dd>
+			<dd>解决存在于某个特定的浏览器的特定版本中的特殊bug时.Navigator对象有4个属性用于提供关于运行中的浏览器的版本信息,并且可以使用这些属性进行浏览器嗅探</dd>
+			<dd>appName:web浏览器的全程,IE输出'Microsoft Internert Explorer'   FireFox输出Netscape</dd>
+			<dd>appVersion:此属性通常以数字开始,并跟着包含浏览器厂商和版本信息的详细字符串</dd>
+			<dd>userAgent:浏览器在它的USER-AGENT Http头部中发送的字符串.这个属性通常包含appVersion中的所有信息,并且常常也可能包含其他细节</dd>
+			<dd>platform:其上运行浏览器的操作系统的字符串</dd>
+			<dd>onLine:navigator.onLine属性表示浏览器当前是否连接网络。应用程序可能希望在离线状态下把状态保存到本地</dd>
+			<dd>geolocation:Geolocation对象定义用于确定用户地理位置信息的接口</dd>
+			<dd>javaEnabled:一个非标准的方法,当浏览器可以运行java小程序时返回true</dd>
+			<dd>cookieEnable:非标准的方法,如果浏览器可以保存永久的cookie时返回true.当cookie配置为视具体情况而定时可能返回不正确的值</dd>
+
+			<dt>14.4.2Screen对象</dt>
+			<dd>window对象的screen属性引用了Screen对象,它提供有关窗口显示大小和可用的颜色数量信息.</dd>
+			<dd>availWidth和availHeight指定的是实际可用的显示大小.它们排除了像桌面任务栏这样的特性所占用的空间</dd>
+			<dd>screen可以判断设备</dd>
+		</dl>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------14.4浏览器和屏幕信息------------------------------');
+	/*
+		name和number都是字符串对于不同浏览器输出的结果也不一样的.
+		webkit:safari或chrome版本号
+		opera:opera版本号
+		mozilla Firebox或其他基于gecko内核的浏览器
+		msie IE版本号
+	*/
+	// var browser=(function(){
+	// 	var s=navigator.userAgent.toLowerCase();
+	// 	var match=/(webkit)[ \/]([\w.]+)/.exec(s)||/(opera)(?:.*version)?[ \/]([\w.]+)/.exec(s)||(msie)([\w.]+)/.exec(s)||/compatible/.test(s)&&/(mozilla)(?:.*?rv:([\w.]+))?/.exec(s)||[];
+	// 	return{name:match[1]||"",version:match[2]||"0"}
+	// }())
+	console.info('navigator',navigator);
+	console.info('screen',screen);
+	</script>
+</html>
