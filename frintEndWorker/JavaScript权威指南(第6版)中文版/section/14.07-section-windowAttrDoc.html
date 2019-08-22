@@ -7,13 +7,30 @@
 	</head>
 	<body>
 		<dl>
-			<dt></dt>
-			<dd></dd>
+			<dt>14.7作为window对象属性和文档元素</dt>
+			<dd>元素ID作为全局变量的隐式应用是web浏览器烟花过程中遗留的怪癖</dd>
+			<dd>这些新属性都会破坏使用了此属性名的隐式定义的代码</dd>
+			<dd>id元素在文档中必须是唯一的:两个元素不能有相同的id但是这对name属性无效</dd>
+			<dd>有name或id属性的iframe元素是个特殊的例子,为它们隐式创建的变量不会引用表示元素自身的Element对象,而是引用表示iframe元素创建的嵌套浏览器窗体的window对象</dd>
 		</dl>
+		<div id="input"></div>
+		<div id="prompt"></div>
+		<div id="heading"></div>
+		<div id="a"></div>
 	</body>
 	<script type="text/javascript">
 	'user static';
-	console.info('------------------------------14------------------------------');
+	console.info('------------------------------14.7作为window对象属性和文档元素------------------------------');
+	var ui=['input','prompt','heading'];
+	ui.forEach(function(id){//用每个id查找对应的元素
+		ui[id]=document.getElementById(id)//将其存放在一个属性中
+	})
+	console.info('window.ui',window.ui,'这种不好的地方在于把id存放在window中沒有隐式定义暴露了id');
 
+	var $=function(id){
+		return document.getElementById(id);
+	};
+	ui.z=$('a');
+	console.info('window.ui',window.ui,'将id变成了属性');
 	</script>
 </html>

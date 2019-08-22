@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>14.8多窗口和窗体</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>14.8多窗口和窗体</dt>
+			<dd>一个web浏览器窗口可能在桌面上包含多个标签页.每一个标签页都是独立的'浏览上下文',每一个上下文都有独立的window对象,而且相互之间互不干扰.</dd>
+			<dd>每个标签页中运行的脚本通常并不知道其他标签的存在,更不用说和其他标签页的window对象进行交互操作或者操作其文档内容了</dd>
+			<dd>窗口并不总是和其他窗口完全没关系。一个窗口或标签页中的脚本可以打开新的窗口或标签页,当一个脚本这样做时,这样多个窗口或窗口与另一个窗口的文档之间就可以互操作</dd>
+			<dd>HTML文档经常使用iframe来嵌套多个文档,由iframe所创建的嵌套浏览器上下文是用它自己的window对象所表示.</dd>
+			<dd>每一个frame都由一个独立的window对象表示,frameset和frame都被废弃了,因为对象交互不方便</dd>
+			<dd>窗口,标签页,iframe和框架都是浏览上下文,对于javascript来说,它们都是window对象</dd>
+			<dd>互相独立的标签不同，嵌套的浏览上下文之间并不是相互独立的</dd>
+			<dd>一个窗体中运行的javascript程序总是可以看到它的祖先和子孙窗体,尽管脚本查看这些窗体追踪的文档受到同源策略的显限制</dd>
+
+			<dt>14.8.1打开和关闭窗口</dt>
+			<dd>使用window对象的open()方法打开一个新的浏览窗口(或标签页,这通常和浏览器的配置选项有关)</dd>
+			<dd>第一个参数是要在新窗口中显示的文档的URL</dd>
+			<dd>第二个参数是新打开的窗口名字.如果指定的是一个已经存在的窗口的名字(并且脚本允许跳转到那个窗口),会直接使用已存在的窗口.否则会打开新的窗口,并将这个指定的名字赋值给它</dd>
+			<dd>脚本是无法通过简单地猜测窗口的名字来操控这个窗口中的web应用的,只有设置了'允许导航'的页面菜可以这样</dd>
+			<dd>如果其中一个窗口是内嵌在另一个窗口里的窗体,name在它们的脚本之间就可以相互导航</dd>
+			<dd>窗口的名字是非常重要的,因为它允许open()方法引用已存在的窗口,并同时作为a和form元素上HTML target属性的值,迎来表示引用的文档应该显示命名的窗口中</dd>
+			<dd>第三个参数是可一个以逗号分隔的列表,包含大小和各种属性,用以表明新窗口是如何打开的</dd>
+			<dd>第三个参数是非标准的,html5规范也主张浏览器应该忽略它,出于各种安全原因,浏览器包含对可能指定的功能限制</dd>
+			<dd>第四个参数只在第二哥参数命名的是一个存在的窗口时菜有用.</dd>
+			<dd>第一个参数指定的URL是应用替换掉窗口浏览历史的当前条目,还是应该在窗口浏览历史中创建一个新的条目,后者默认的设置,open的返回值是代表命名或新创建的窗口的window对象</dd>
+			<dd>opener属性引用的是打开它的脚本的window对象</dd>
+
+			<dt>关闭窗口</dt>
+			<dd>方法close()关闭一个窗口</dd>
+			<dd>要显式地使用标识符window,这样可以避免混淆window对象的close()方法和document对象的close方法</dd>
+			<dd>表示窗体而不是顶级窗口或标签页上window对象上执行close方法不会有任何效果,它不能关闭一个窗体（饭值可以从他包含的文档中删除iframe）</dd>
+			<dd>即使一个窗口关闭了,代表它的window对象仍然存在,已关闭的窗口会有个值为true的cloaseed属性,它的document会是null,它的方法通常也不会再工作</dd>
+
+			<dt>14.8.2窗体之间的关系</dt>
+			<dd>window对象的方法open()返回代表新创建的窗口window对象</dd>
+			<dd>新窗口具有opener属性,该属性可以打开它的原始窗口</dd>
+			<dd>两个窗口就可以相互引用,彼此都可以读取对方的属性或是调用对方的方法</dd>
+			<dd>窗口或窗体中运行的代码都可以通过下面介绍的属性引用到自己的窗口或窗体,以及嵌套的子窗体</dd>
+			<dd>任何窗口或窗体中的javascript代码都可以将自己的窗口或窗体引用为window或self</dd>
+			<dd>窗体可以用parent属性引用包含它的窗口或窗体的window对象</dd>
+			<dd>如果一个窗口是顶级窗口或标签而不是窗体,name其parent属性引用的是这个窗口本身</dd>
+			<dd>如果一个窗体包含在另一个窗体中,而后者又包含在顶级窗口中,name该窗体就可以使用parent.parent来引用顶级窗口top属性是一个通用快捷方式,无论一个窗体被嵌套基层,它的top属性引用的都是指向包含它的顶级窗口</dd>
+			<dd>parent和top属性允许脚本引用它的窗体的祖先</dd>
+			<dd>窗体是通过iframe元素创建的.可以用获取他元素的方法来获取一个表示iframe的元素对象</dd>
+			<dd>从表示窗体的window对象来获取该窗体的iframe元素用window对象的frameElement属性</dd>
+			<dd>表示顶级窗口的window对象的frameElement属性为nul,窗体中的window对象的frameElement属性不是null</dd>
+			<dd>每个window对象都有一个frames属性,它运用自身包含的窗口或窗体的子窗体</dd>
+			<dd>通过window对象的属性引用的iframe是指窗体中的window对象而不是元素对象</dd>
+			<dd>HTML5规范指出frames属性是一个自引用的属性就像window和self一样</dd>
+			<dd>iframe的元素的name或id属性作为javascript代码中的引用标识</dd>
+
+			<dt>14.8.3交互窗口中的jaavscript</dt>
+			<dd>每个窗口和窗体都是它自身的javascript执行上下文,以window作为全局对象.但是如果一个窗口或窗体的代码可以应用到其他窗口或窗体(并且同源策略没有阻止它),那么一个窗口或窗体中的脚本就可以和其他窗口或窗体中的脚本进行交互</dd>
+			<dd>設想一個web页面有两个iframe元素分别叫A和B,并假设这些窗体包含的文档来自于相同的一个服务器,并且包含交互脚本</dd>
+			<dd>函数赋值给窗体A中的一个变量,这样就可以经常使用这个变量来引用窗体中的函数了</dd>
+			<dd>当采用这种方式在窗体或窗口间共享函数时,牢记此法作用域的规则非常重要.函数在定义它的作用域中执行.而不是在调用它的作用域中执行</dd>
+			<dd>用户定义的类不用,内置的类都会在所有窗口中自动预定义</dd>
+			<dd>instanceof操作符不能跨窗口工作</dd>
+			<dd>WindowProxy对象</dd>
+		</dl>
+		<iframe src="2.00-section-lexicalStructure.html" width="1000" height="400" id='f1' name="A"></iframe>
+		<iframe src="2.01-section-characterSet.html" width="1000" height="400" id='f2' name="B"></iframe>
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------14.8多窗口和窗体------------------------------');
+	// window.open('http://www.baidu.com',"baidu","width=100%,height:100%,status=yes,resizable=yes");
+	// var w=window.open();
+	// w.alert('hellow!lucas');
+	// w.location='http://www.baidu.com';
+	// w.opener!==null;
+	// w.open().opener === w
+	console.info('------------------------------14.8.2窗体之间的关系------------------------------');
+	console.info('parent == self',parent == self);//顶级窗口返回true
+	console.info('top',top);
+	console.info('parent.parent',parent.parent);
+	console.info(document.getElementById('f1').contentWindow);
+
+	</script>
+</html>
