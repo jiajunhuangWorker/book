@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>15.3文档结构和遍历</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body>
+		<dl>
+			<dt>15.3文档结构和遍历</dt>
+			<dd>文档从概念上可以看做事一颗节点对象树</dd>
+
+			<dt>15.3.1作为节点树的文档</dt>
+			<dd>document对象,它的Element对象和文档中表示文本的Text对象都是node对象.</dd>
+			<dd>
+				<table>
+					<thead>
+						<tr>
+							<th>节点</th>
+							<th>描述</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>parentNode</td>
+							<td>节点的父节点,或者针对类似Document对象应该是null,因为它没有父节点</td>
+						</tr>
+						<tr>
+							<td>childNodes</td>
+							<td>只读的类数组对象,它是该节点的子节点的实时表示</td>
+						</tr>
+						<tr>
+							<td>firstChild,lastChild</td>
+							<td>该节点的子节点中的第一个和最后一个,如果该节点没有子节点则为null</td>
+						</tr>
+						<tr>
+							<td>nextSibling,previoursSibling</td>
+							<td>该节点的兄弟节点中的前一个和下一个具有相同父节点的两个节点为兄弟节点.节点的顺序反映了它们在文档中出现的顺序这两个属性将节点之间以双向链表的形式连接起来</td>
+						</tr>
+						<tr>
+							<td>nextSibling,previoursSibling</td>
+							<td>该节点的兄弟节点中的前一个和下一个具有相同父节点的两个节点为兄弟节点.节点的顺序反映了它们在文档中出现的顺序这两个属性将节点之间以双向链表的形式连接起来</td>
+						</tr>
+						<tr>
+							<td>nodeType</td>
+							<td>该节点的类型9代码Document节点,1代表Element节点,3代表Text节点,8代表Comment节点,11代表DocumentFragment节点</td>
+						</tr>
+						<tr>
+							<td>nodeValue</td>
+							<td>Text节点Comment节点的文本内容</td>
+						</tr>
+						<tr>
+							<td>nodeName</td>
+							<td>元素的标签名,以大写形式表示</td>
+						</tr>
+
+					</tbody>
+				</table>
+
+			</dd>
+
+			<dt>15.3.2作为元素树的文档</dt>
+			<dd>Text和Comment节点没有children属性.它以为着上述的Node.ParentNode属性不可能返回Text或Comment节点</dd>
+			<dd>IE8支持Element,htmlDocument和Text的可扩展属性,但不支持node,document,htmlElement或htmlElement更具体的子类型的可扩展的属性</dd>
+
+		</dl>
+	</body>
+	<script type="text/javascript"> 
+	'user static';
+	console.info('------------------------------15.3.2可移植的文档遍历函数------------------------------');
+	/*
+		返回元素e的第n个兄弟元素
+		如果n为正,返回后续的第n个兄弟元素
+		如果n为0则返回e本身.如果n为1则返回其父元素
+		如果n为2则返回其祖父元素,依次类推
+	*/
+	function parent(e,n){
+		if(n === undefined) n=1;
+		while(n-- && e) e=e.parentNode;
+		if(!e || e.nodeType!==1) return null;
+		return e;
+	}
+	/*
+		返回元素e的第n个兄弟元素
+		如果n为正,返回后续的第n个兄弟元素
+		如果n为0则返回e本身.如果n为1则返回其父元素
+		如果n为2则返回其祖父元素,依次类推
+	*/
+	function sibling(e,n){
+		while(e && n!== 0){
+			if(n>0){
+				if(e.nextElementSibling) e= e.nextElementSibling;
+				else{
+					for(e=e.nextSibling; e&& e.nodeType!== 1;e=e.nextSibling)
+				}
+				n--;
+			}else{
+				if(e.previousElementSibling e= e.previousElementSibling)
+				else{
+					for(e=e.previousSibling; e&& e.nodeType!== 1;e=e.previousSibling)
+				}
+				n++;
+			}
+		}
+	}
+	</script>
+</html>

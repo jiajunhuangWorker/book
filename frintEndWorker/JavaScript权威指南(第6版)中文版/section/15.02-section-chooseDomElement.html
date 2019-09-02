@@ -9,11 +9,68 @@
 		<dl>
 			<dt>15.2选取文档元素</dt>
 			<dd>大多数客户端javascript程序运行时总是在操作一个或多个文档元素</dd>
+			<dd>之查询文档的一个或对个元素的方法 有</dd>
+			<dd>指定id的属性,指定的name属性,指定的标签名字,指定的css类,指定的css选择器</dd>
 
+			<dt>通过id选取元素</dt>
+			<dd>任何html元素可以有一个id属性,在文档中该值必须唯一,即同一个文档中的两个元素不能相同的id</dd>
+			<dd>document.getElementById(),通过id查找element的对象</dd>
+
+			<dt>15.2.2通过名字选取元素</dt>
+			<dd>html的name属性最初打算为表单元素分配名字,在表单数据提交到服务器时使用该属性的值</dd>
+			<dd>多个元素可能有同样的名字,在表单中单选和复选按钮通常是这种情况</dd>
+			<dd>document.getElementsByName,定义在htmlDocument类中.而不在document类中,所以它只针对html文档可用,在xml文档中不可用.它返回nodelist对象,后者的行为类似一个包含若干element对象的只读数组.在ie中,getElementsByName也返回id属性匹配指定值得元素.</dd>
+			<dd>html元素设置name属性值将自动为window对象中创建对应的属性,对document对象也类似</dd>
+			<dd>如果给定的名字只有一个元素,自动创建的文档属性对应的该值时元素本身.</dd>
+			<dd>文档属性的值时一个nodeList对象,它表现为一个包含这些元素的数组</dd>
+			<dd>窗口对象自动创建的属性,这同样用于为文档对象自动创建的属性</dd>
+
+			<dt>15.2.3通过标签名选取元素</dt>
+			<dd>document.getElementsByTagName('标签'),用来选取指定类型的所有html或xml元素</dd>
+			<dd>getElementsByName和getElementsByTagName返回nodeList对象</dd>
+			<dd>getElementsByTagName传递通配符参数'*'将获得一个代表文档中所有元素的nodeList对象</dd>
+			<dd>htmlDocument类定义一些快捷属性来访问各种各样的节点.htmlCollection对象,它们很像nodeList对象,但是除此之外它们可以用元素的id或名字来索引</dd>
+			<dd>htmldocument定义embeds和plugins属性,它们是同义词,都是htmlCollection类型的embed元素的集合</dd>
+			<dd>htmlDocument对象还定义两个属性,它们只带特殊的单个元素而不是元素的集合,document.body是一个html文档的body元素.</dd>
+			<dd>document类的documentElement属性只带文档的根元素.</dd>
+			<dd>document.images和document.forms的属性为htmlCollection对象</dd>
+			<dd>数字或字符串为参数调用它就如同使用数字或字符串索引它们一般</dd>
+			<dd>nodeList和htmlCollection接口都不是为像javascript这样的动态语言设计的.</dd>
+			<dd>htmlcollection定义了nameditem方法,它返回指定属性名的值,但在javascript程序中可以用数组索引或常规属性来访问</dd>
+			<dd>对象不是历史文档状态的一个静态快照,而通常是实时的,并且当文档变化时它们所包含的元素列表能随之改变,这是其中一个最重要和令人惊讶的特性</dd>
+
+			<dt>15.2.4通过css类选取元素</dt>
+			<dd>html元素的class属性值时一个以空格隔开的列表,可以空或包含多个标签符.它们的class属性中有相同标识符的任何元素属于该组的一部分</dd>
+			<dd>document.getElementsByClassName(),返回值时一个实时的nodeList对象,包含文档或元素所有匹配的后代节点</dd>
+			<dd>除了ie8及较低的版本.getElementByClassName()在所有当前的浏览器都实现了</dd>
+
+			<dt>15.2.5通过css选择器选取元素</dt>
+			<dd>css样式标有一个非常强大的语法.选择器它用来描述的若干或多组元素</dd>
+			<dd>获取匹配一个给定选择器的元素的jaavscript方法.该api关键是document方法querySelectorAll(),它接受包含一个css选择器的字符串参数,返回一个表示文档中匹配选择器的所有元素的nodelist对象</dd>
+			<dd>文档对象还定义了querySelector与querySelectorAll()的工作原理类似,但它只返回第一个匹配元素</dd>
+			<dd>所有当前的浏览器都支持querySelector和querySelectorAll方法</dd>
+
+			<dt>15.2.6document.all[]</dt>
+			<dd>在dom标准化之前,ie4引用了document.all[]集合来表示所有文档中的元素,除了text节点</dd>
+			<dd>document.all[0]</dd>
+			<dd>document.all['navbar']</dd>
+			<dd>document.all.navbar</dd>
+			<dd>document.all.tags('div')</dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
 	'user static';
 	console.info('------------------------------15.2选取文档元素------------------------------');
+	function getElements(){
+		var elements={};
+		for(var i=0 ; i<arguments.length ; i++ ){
+			var id=arguments[i];
+			var elt=document.getElementById(id);
+			if(elt == null)
+				throw new Error('no element with id')
+			elements[id]=elt;
+		}
+		return elemetns;
+	} 
 	</script>
 </html>

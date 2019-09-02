@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>15.4属性</title>
+		<link rel="stylesheet" href="../../../globalBase.css">
+	</head>
+	<body class="bd" style='color:#f40;' onload> 	
+		<dl>
+			<dt>15.4属性</dt>
+			<dd>HTML元素由一个标签和一组称为属性的名/值对组成</dd>
+			<dd>HTML元素的属性值在代表这些元素的HTMLElement对象的属性中是可用的</dd>
+
+			<dt>15.4.1HTML属性作为ELement的属性</dt>
+			<dd>表示HTML文档元素的HTMLElement对象定义了读/写属性,它们映射了元素的HTML属性</dd>
+			<dd>HTML属性名不区分大小写,但javascript属性名则大小写敏感</dd>
+
+			<dt>15.4.2获取和设置非标准HTML属性</dt>
+			<dd>HTMLElement和其子类型定义了一些属性,它们对应于元素的标准HTML属性.</dd>
+			<dd>Element类型还定义了getAttribute()和setAttribute()方法来查询和设置非标准的HTML属性,也可以来查询和设置XML文档中元素上的属性</dd>
+			<dd>属性值都被看做事字符串.getAttribute()不返回数值,布尔值或对象</dd>
+			<dd>Element类型还定义了两个相关的方法,hasAttribute()和removeAttribute(),它们用来检测命名属性是否存在和完全删除属性</dd>
+			<dd>属性在一个元素中是否存在是重点关键,而其值却无关紧要</dd>
+			<dd>getAttributeNS(),setAttributeNS(),hasAttributeNS()和removeAttributeNS(),方法需要两个属性名字符串作为参数,而不是一个.第一个是标识命名空间的URI,第二个参数应该是属性的有效名字,它包含命名空间的前缀.</dd>
+
+			<dt>15.4.3数据集属性</dt>
+			<dd>在HTML5文档中,任意以data-为前缀的小写的属性名字都是合法的.数据集属性将不会对其元素的表现产生影响,它们定义了一种标准的,附加额外数据的方法,并不是在文档合法性上做出让步.</dd>
+			<dd>HTML5还在Elment对象上定义了dataset属性.该属性指代一个对象,它的各个属性对应于去掉前缀的data-属性.</dd>
+			<dd>因此dataset.x应该保存data-x属性的值.带连字符的属性对应于驼峰命名法属性名:data-jquery-test属性就编程dataset.jqueryTest属性</dd>
+			<dd>data-属性的实时,双向接口.设置或删除dataset的一个属性就等同于设置或移除对应元素的data-属性</dd>
+
+			<dt>15.4.4作为Attr节点的属性</dt>
+			<dd>针对非Element对象的任何节点,该属性为null.</dd>
+			<dd>对于Element对象,attributes属性是只读的类数组对象,它代表元素的所有属性</dd>
+			<dd>当索引attributes对象时得到的值时Attr对象.</dd>
+		</dl>
+		<img src="" alt="" id="myImg" style="width:100px;">
+	</body>
+	<script type="text/javascript">
+	'user static';
+	console.info('------------------------------15.4.1HTML属性作为ELement的属性------------------------------');
+	var img=document.getElementById('myImg');
+	var imgurl=img.src;
+	console.info('img.id === myImg',img.id === 'myImg','imgurl',imgurl);
+	console.info('------------------------------15.4.2获取和设置非标准HTML属性------------------------------');
+	var imgs=document.images[0];
+	console.info(imgs)
+	var width=imgs.getAttribute('style');
+	imgs.setAttribute('class','abc');
+	console.info('imageWidth',width);
+	console.info('------------------------------15.4.4作为Attr节点的属性------------------------------');
+	console.info(document.body.attributes[0]);
+	console.info(document.body.attributes.style);
+	console.info(document.body.attributes['onload']);
+	</script>
+</html>
