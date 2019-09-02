@@ -8,11 +8,73 @@
 	<body>
 		<dl>
 			<dt>15.6创建,插入和删除节点</dt>
-			<dd></dd>
+			<dd>html和纯文本字符串可以查询和修改文档内容,通过遍历document来检查每个element和text节点</dd>
+			<dd>node类型定义了在节点树种插入,删除,和替换的方法</dd>
+
+			<dt>15.6.1创建节点</dt>
+			<dd>给方法传递元素的标签名:对HTML文档来说该名字不区分大小写,对xml文档则区分大小写</dd>
+			<dd>在使用XML命名空间的文档中,可以使用createElementNS()来同时指定命名空间的URI和待创建的Element标签名字</dd>
+			<dd>cloneNode()方法来返回该节点的一个全新副本.给方法传递参数true能够传递归地复制所有的后代节点,或传递参数false只是执行一个浅复制.除了IE的其他浏览器中document对象还定义了importantNode()如果给它传递另一个文档的一个节点,它将返回一个适合本文档插入的节点副本.传递true作为第二个参数,该方法将递归地导入所有的后代节点</dd>
+
+			<dt>15.6.2插入节点</dt>
+			<dd>node的方法appendChild()或inserBefore()将它插入到文档中.</dd>
+			<dd>appendChild()是在需要插入的Element节点上调用的,它插入指定的节点使其成为那个节点的最后一个子节点</dd>
+			<dd>insertBefore接受两个参数,第一个参数就是待插入的节点,第二个参数是已存在的节点,新节点将插入该节点的前面</dd>
+			<dd>方法应该是在新节点的父节点上调用,方法的第二个参数必须是该父节点的子节点.如果传递null作为第二个参数,insertBefore的行为类似appendChild,它将节点插入在最后</dd>
+			<dd>如果调用appendChild或inseertBefore将已经存在的文档中的一个节点再次插入,那个节点将自动从它当前的位置删除并在新的位置重新插入:没有必要显式删除该节点.</dd>
+
+			<dt>15.6.3删除和替换节点</dt>
+			<dd>removeChild方法是从文档树种删除一个节点,该方法不是在待删除的节点上调用,而是在其父节点上调用在父节点上调用该方法,并将需要删除的子节点作为方法参数传递给它.在文档中删除n节点</dd>
+
+			<dt>15.6.4使用documentFragment</dt>
+			<dd>documentFragment是一种特殊的Node,它作爲其它節點的一個临时容器</dd>
+			<dd>DocumentFragment是独立的,而不是任何其他文档的一部分.它的parentNpde总是null但类似Element,它可以有任意多的子节点,可以用appendChild，insertBefore等方法来操作它们</dd>
+			<dd>documentFragment的特殊之处在于它使得一组节点被当做一个节点看待:如果给appendChild,insertBefore或replaceChild传递documentFragment其实是该文档片段的所有子节点插入到文档中,而非片段本身</dd>
 		</dl>
 	</body>
 	<script type="text/javascript">
 	'user static';
-	console.info('------------------------------14.8多窗口和窗体------------------------------');
+	console.info('----------------------)--------15.6创建,插入和删除节点------------------------------');
+	function loadasync(url){
+		var head=document.getElementsByTagName('head')[0];
+		var s=document.createElement('script');
+		s.src=url;
+		head.appendChild(s);
+	}
+	loadasync('../js/try.js');
+	var node=document.createTextNode('text node content');
+	document.getElementsByTagName('body')[0].appendChild(node);
+
+	console.info('----------------------)--------15.6.2插入节点------------------------------');
+	//将child节点插入parent中,使其成为第n个子节点
+	function insertAt(parent,child,n){
+		if(n<0||n>parent.childNodes.length) throw new Error('invalid index');
+		else
+		if(n == parent.childNodes.length) parent.appendChild(child);
+		else
+		parent.insertBefore(child,parent.childNodes[n]);
+	}
+	insertAt(document.getElementsByTagName('body')[0],document.createElement('div'),0)
+	insertAt(document.getElementsByTagName('body')[0],document.createElement('div'))
+	insertAt(document.getElementsByTagName('body')[0],document.createElement('span'),1)
+
+
+	console.info('----------------------)--------15.6.3删除节点和替换节点------------------------------');
+	document.getElementsByTagName('body')[0].removeChild(document.getElementsByTagName('div')[0])
+	document.getElementsByTagName('body')[0].replaceChild(document.createTextNode('[replace]'),document.getElementsByTagName('div')[0]);
+	function embolden(n){
+		if(typeof n == 'string') n=document.getElementById(n);
+		var parent=n.parentNode;
+		var b=document.createElment('b');
+		parent.replaceChild(b,n);
+		b.appendChild(n);
+	}
+	console.info('----------------------)--------15.6.4使用documentFragment------------------------------');
+	//倒序排列节点n的子节点
+	function reverse(n){
+		var f=document.createFragment();
+		while(n.lastChild) f.appendChild(n.lastChild);
+		n.appendChild(f);
+	}
 	</script>
 </html>
